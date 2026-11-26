@@ -66,7 +66,7 @@ League, BeamNG Shorts, Pencilmation, Dr. Binocs and Daily Dose of Internet:
 |---|---|---|---|
 | Pocket City | The Drawbridge Won't Close | Tunnel or Bridge? One Ambulance, 40 Seconds | What If Every Traffic Light Turned Green? |
 | Pixel Life | You Are a Hotel Receptionist | You Are a Returns Desk Clerk (Dec 26) | You Are a Barista |
-| Some Crazy Thingzz | see [`some-crazy-thingzz.md`](some-crazy-thingzz.md) | | |
+| Some Crazy Thingzz | Why Do Pen Caps Have a Hole? | Why Is There an Arrow Next to the Fuel Icon? | Why Does a Tape Measure Hook Wobble? |
 
 ## 5. Ranking method in the backlogs
 

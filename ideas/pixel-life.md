@@ -5,7 +5,7 @@ and the last line echoes the first. Characters are pixel sprites, so no realisti
 far: *Fish Seller*, *Pizza Delivery Guy*, *Night Museum Guard*. This list has **no food delivery,
 no museum, no fish stall, no aliens**. Vehicles, town emergencies and fire belong to Pocket City.
 
-The formula with timings is in [`FORMULA.md`](FORMULA.md#pixel-life). The research behind it is in
+The formula with timings is in [`FORMULA.md`](FORMULA.md#3-pixel-life). The research behind it is in
 [`research/pixel-comedy.md`](research/pixel-comedy.md).
 
 ## 1. What the leaders do that we don't yet

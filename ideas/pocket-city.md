@@ -5,7 +5,7 @@ and chain reactions seen from above. People are colour capsules (no realistic hu
 places, no brands. Built so far: *Engine Nine* (fire engine), *Ten Minutes* (pizza scooter), *Not In
 Our Town* (UFO). This list has **no fire, no food delivery, no aliens**.
 
-The formula with timings is in [`FORMULA.md`](FORMULA.md#pocket-city). The research behind it is in
+The formula with timings is in [`FORMULA.md`](FORMULA.md#2-pocket-city). The research behind it is in
 [`research/miniature.md`](research/miniature.md) and [`research/algorithm.md`](research/algorithm.md).
 
 ## 1. What the leaders in this space do that we don't yet
