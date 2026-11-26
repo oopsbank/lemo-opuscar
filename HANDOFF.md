@@ -19,33 +19,44 @@ This branch (`handoff/some-crazy-thingzz` of oopsbank/lemo-opuscar) holds everyt
      - **the topic you'll do next**.
 
      You don't wait for the user's review before pushing.
-  3. Then start the next film right away: take the next idea from the backlog (§8), and tell the user in **one short Vietnamese line** what you picked. Keep films **20–30 s**.
+  3. Then start the next film right away: take the next idea from the backlog (§8), and tell the user in **one short Vietnamese line** what you picked. Keep films **25–35 s** (§2).
   4. Avoid topics the other channels are doing. **Currently off-limits: UFO/aliens/spaceships, and pizza/delivery.** If the manager reports a collision, switch topics.
   5. **Never delete files from the media repo**: the manager removes them after YouTube confirms the upload.
   6. **At most 2 finished films per day (Vietnam time, UTC+7).** After the second, wait until the next Vietnam day before starting another. The user posts to YouTube by hand: the manager passes them your files and texts.
 
 ## 2. The channel format
 
-**Read the research first:** branch `ideas` of oopsbank/lemo-opuscar, files `ideas/README.md` (what Shorts reward now) and `ideas/some-crazy-thingzz.md` (the ranked backlog). It may be revised on the same branch:
+**Read the research first:** branch `ideas` of oopsbank/lemo-opuscar (commit 4fee220 or later; it may be revised on the same branch):
+- `ideas/FORMULA.md` §4 is **the channel's formula**;
+- `ideas/some-crazy-thingzz.md` holds 50 ranked, fact-checked ideas and a gap analysis;
+- `ideas/README.md` is the platform research.
 ```
-git fetch origin ideas && git show origin/ideas:ideas/some-crazy-thingzz.md
+git fetch origin ideas && git show origin/ideas:ideas/FORMULA.md
 ```
-Its findings, applied to this channel:
-- **Frame 1 hooks:** the object, huge, plus the spoken question, the question as on-screen text from the very first frame, and something moving. The wrong theory starts by second 2.
-- **Length:** 20–30 s.
-- **Loop:** the last frame leads back into the first. End on the next silly question, or a fool about to repeat the mistake. Avoid a final cadence in the music that announces the end.
-- **Title:** `Why Do <Objects> Have <Thing>?`, exactly the searched question. Tags: `#whydo #funfacts #animation` (plus `#shorts`).
-- **Facts** must be true and simple: check each against two sources.
 
-Comedy explainer Shorts: "Why do…?" / "What if…?". Each film is 1080×1920 at 24 fps, 25–40 s, in English:
-- a quick narrator plus character voices (Kokoro, offline);
-- bold word-by-word captions burned in;
-- a light comedy score from sampled instruments, with cartoon foley;
-- a true answer.
+**The formula (FORMULA.md §4), which overrides anything older in this file:**
 
-The shape that works: the question as the hook in the first 3 s, a character acting out the wrong idea with a visible consequence, the real answer, then a payoff or button.
+| Time | Beat |
+|---|---|
+| 0–1.5 s | The object in close-up, the odd detail circled or glowing. The voice asks the question from frame 0, and the same question is on screen as text from frame 0, with something moving. No logo card, no calm establishing shot. |
+| 1.5–10 s | The **confidently wrong character** acts out an absurd theory. It ends with a big **❌ WRONG** stamp and a buzzer, so no viewer takes it as fact. |
+| ~10 s | **"Actually…"**: the same sting every episode, and **the one who knows** steps in. |
+| 10–25 s | The true answer, **shown** in one demo (a cut-away or side-by-side), in ≤ 2 sentences of mechanism. Every spoken noun is on screen. The payoff comes before the end. |
+| 25–30 s | A callback gag and the **loop line**: the wrong character tries a new theory on the next object, or asks the question again. **Hard cut** back to frame 0, with no outro and no final cadence in the music. The last frame matches the first. |
 
-The reference the user gave (grammar only, never copy it) is a Short with flat cartoon characters in lit 3D sets. No LEGO or toy-brick look.
+- **Length: 25–35 s**, about 70–95 words of script. Put a new beat every 3–6 s.
+- **Two recurring named characters with fixed roles,** the same voices every episode. They have no names yet; this file proposes:
+  - **Gus**, the confidently wrong one: the round-faced postman from Red Flag, with a mustache, blue shirt and peaked cap, and the `am_puck` voice. He can change hats for a job, but keep his face, mustache and shirt colour.
+  - **Nana**, the one who knows: the grandma from the crackers film, with grey bun, round glasses, plum cardigan and cream apron, and the `bf_isabella` voice at speed 0.85.
+
+  If the manager or user names them differently, use their names.
+- **The channel logo inside every set** (on a mug, a poster, a cereal box, a sign). We have no logo file yet: ask the manager for one. If there is none, ask before inventing a wordmark.
+- **Trust:** check every answer against two reputable sources, and put a source line in the description. Go one layer deeper than the famous fact where you can.
+- **Packaging:**
+  - **Title:** the searched question itself (`Why Do Pencils Have Six Sides?`), ≤ 60 characters, at most one emoji.
+  - **Description:** 2–4 hashtags, most relevant first (`#whydo #funfacts #animation`; `#shorts` optional), the source line, and one honest question tied to the story ("What did YOU think it was for?").
+  - **Cover:** the object huge, the detail circled, the wrong character's shocked face.
+- **Series names to use:** Holes in Things · Sports Balls · Road Stuff · Kitchen Secrets · Myth Busted.
 
 ## 3. The style: Toon on Set (实景卡通)
 
@@ -77,7 +88,7 @@ The reference the user gave (grammar only, never copy it) is a Short with flat c
 | 1 | Red Flag | Why do mailboxes have a red flag? | 22.4 s | `some-crazy-thingzz_red-flag_*` | `my-styles/toon-on-set/demo/` |
 | 2 | No Holes | Why do crackers have holes? | 24.0 s | `some-crazy-thingzz_cracker-holes_*` | `some-crazy-thingzz/films/cracker-holes/` |
 
-Make the next ones 20–30 s, hooked from frame 1 and looping (§2).
+Make the next ones to the formula in §2: 25–35 s, Gus and Nana, the WRONG stamp and the "Actually…" sting, a hard-cut loop.
 
 To rebuild a film:
 ```
@@ -171,7 +182,7 @@ AI notes to send with every film (true for this pipeline):
 
 ## 8. Next ideas
 
-- **In progress:** golf-ball dimples (treatment in `some-crazy-thingzz/films/golf-dimples/TREATMENT.md`). Trim it to 20–30 s with a looping end: the golfer spots a tennis ball, "Why do tennis balls have fuzz?", which also teases the next film.
+- **In progress:** golf-ball dimples (treatment in `some-crazy-thingzz/films/golf-dimples/TREATMENT.md`). Rework it to the formula: Gus is the golfer who sands the ball smooth ("Dimples are just ugly."), the WRONG stamp lands on the plop, Nana says "Actually…" and runs the smoke-trail demo, and Gus's long drive is the payoff. The loop line is Gus picking up a tennis ball: "Why do tennis balls have fuzz?" Hard-cut back to frame 0 on the ball. 25–35 s.
 - **After it:** take the top of `ideas/some-crazy-thingzz.md` on branch `ideas`. At the time of writing:
   1. pen-cap hole;
   2. jeans tiny pocket;
