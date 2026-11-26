@@ -1,0 +1,62 @@
+[
+ {
+  "id": "v1",
+  "text": "One driver hit the brakes.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v2",
+  "text": "Now the ambulance is stuck.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "You're the yellow car.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "Don't rush. Leave a gap.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Up ahead: stop and go.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v6",
+  "text": "Nobody crashed. Nobody's in the way.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v7",
+  "text": "You just never stop.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v8",
+  "text": "It's through!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v9",
+  "text": "That's a phantom jam.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v10",
+  "text": "Did you spot who started it?",
+  "voice": "am_michael",
+  "speed": 0.95
+ }
+]
