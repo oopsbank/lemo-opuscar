@@ -1,0 +1,96 @@
+[
+ {
+  "id": "n1",
+  "text": "Why do crackers have holes?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "at": 0.3,
+  "who": "narr",
+  "groups": [
+   3,
+   2
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "k1",
+  "text": "Holes? Who needs holes!",
+  "voice": "af_sky",
+  "speed": 1.05,
+  "at": 3.7,
+  "who": "kid",
+  "groups": [
+   1,
+   3
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "k2",
+  "text": "Uh oh. It's growing!",
+  "voice": "af_sky",
+  "speed": 1.0,
+  "at": 9.35,
+  "who": "kid",
+  "groups": [
+   2,
+   2
+  ],
+  "hot": [
+   1
+  ],
+  "cap": "Uh oh! It's growing!",
+  "asr": "Uh-oh, it's growing."
+ },
+ {
+  "id": "g1",
+  "text": "Steam needs a way out.",
+  "voice": "bf_isabella",
+  "speed": 0.85,
+  "at": 14.95,
+  "who": "gran",
+  "groups": [
+   2,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "n2",
+  "text": "Holes let the steam escape, so crackers bake flat and crisp.",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "at": 16.9,
+  "who": "narr",
+  "groups": [
+   2,
+   3,
+   2,
+   2,
+   2
+  ],
+  "hot": [
+   3
+  ]
+ },
+ {
+  "id": "k3",
+  "text": "Crunchy!",
+  "voice": "af_sky",
+  "speed": 1.0,
+  "at": 22.6,
+  "who": "kid",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ }
+]
