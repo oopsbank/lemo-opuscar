@@ -1,12 +1,12 @@
 # Handoff: Pocket City (tilt-shift Shorts)
 
-For a new Claude Code session that knows nothing about the earlier work. Written at the end of the first production session (2026-11-26).
+For a new Claude Code session that knows nothing about the earlier work. Written by the first production session (2026-11-26), updated at the end of the second (2026-11-27, 01:50 Vietnam time). Five films so far.
 
 ## The channel
 
 - **Pocket City**: a YouTube Shorts channel of **Tilt-Shift Miniature** films, made with this library (`styles/tilt-shift/STYLE.md`; read `AGENTS.md`, `DIRECTOR.md` and `TECHNIQUE.md` first).
-- Format: **1080×1920 vertical, 24 fps, 35–45 s**, English narration and subtitles, a relaxed male narrator in the second person ("You drive…", "Ten minutes…").
-- One shared world: a whitewashed Mediterranean-style **harbour town** (terracotta roofs, cobalt shutters, palm boulevard, canal with a bascule drawbridge, quay, sea). Both films reuse it; the code lives in each film's `world.js`.
+- Format: **1080×1920 vertical, 24 fps, 30–40 s** (FORMULA; was 35–45), English narration and subtitles, a relaxed male narrator in the second person ("You drive…", "Ten minutes…").
+- One shared world: a whitewashed Mediterranean-style **harbour town** (terracotta roofs, cobalt shutters, palm boulevard, canal with a bascule drawbridge, quay, sea). Every film reuses it; the code lives in each film's `world.js` (use the newest copy, see Render tips).
 - Series idea: the town's people and places recur. The fire station has "ENGINE 9" painted on its roof and appears in both films.
 
 ## Films so far
@@ -20,6 +20,15 @@ For a new Claude Code session that knows nothing about the earlier work. Written
 | `films/phantom-jam` | 36.0 s | A ring-road IDM traffic sim (`jam.js`, 44 cars) on the boulevard: one brake tap grows a stop-and-go wave; the ambulance is stuck; you (yellow car) keep a gap and never stop (jam absorption); the ambulance turns into the hospital at 0:03; another driver brakes (loop). Countdown + route-map inset; yellow cat on the hospital roof. Built to `ideas/FORMULA.md`. | Pushed: `pocket-city_phantom-jam_1080x1920.mp4` + `_thumb.jpg`. Title: "Who Started This Traffic Jam? 🚑" |
 
 Each film folder has `TREATMENT.md` (the plan and the changes made in production), `CREDITS`, `build.sh` (one command: fonts, voice and speech check, events, subtitles, score, mix, picture, mux, poster), `lines.json` (voice), `story.js` (the timeline), `music/score.py` and `mix.py`.
+
+## What was sent to the manager (second session)
+
+For each film: the file names, duration, size, title, description with hashtags, and AI notes, plus the next topic. Titles used:
+- *Not In Our Town*: "A UFO tried to steal our town. Engine 9 said no. 🛸🚒" (#shorts #tiltshift #miniature #ufo #satisfying)
+- *Snow Day*: "2 Hours. 3 Snowploughs. School Opens at 8:00. ❄️" (#shorts #tiltshift #miniature #snow #satisfying)
+- *The Phantom Jam*: "Who Started This Traffic Jam? 🚑" (#traffic #tiltshift #miniature #satisfying). Sources went in the description (Sugiyama et al. 2008, Stern et al. 2018), plus a suggested pinned comment: "Did you spot who started it?"
+
+Day count (Vietnam time): 26 Nov = Not In Our Town + Snow Day (2/2); 27 Nov = The Phantom Jam (1/2). **The next film is film 2 of 27 Nov.**
 
 ## Decisions the user made
 
@@ -49,6 +58,17 @@ Each film folder has `TREATMENT.md` (the plan and the changes made in production
 - Before each film, read `ideas/FORMULA.md` and `ideas/pocket-city.md` on branch `ideas` (fetch fresh): hook in frame 1, loop ending, 30–40 s, one honest question at the end.
 - Never delete files from the media repo. ffmpeg 7: the BtbN build runs from the scratchpad (the user allowed it).
 
+## The formula (ideas/FORMULA.md on branch `ideas`, applied from The Phantom Jam on)
+
+- Frame 0 = the crisis in motion, with the voice and the matching subtitle from frame 0. The first subtitle has `t0 = 0` and no fade-in.
+- Put a countdown in the frame (the HUD plate: big mono clock + speed label + a goal line) and, where it helps, a route-map inset under the HUD (left side, x ≈ 56–152, y ≈ 360–880; keep out of the right 140 px).
+- Then three escalating beats, a new event every 3–6 s; the save at ×1 REAL TIME; a one-line true payoff fact; the loop.
+- Loop: the last shot rises back to the exact opening camera, and the last line leads into the first. Use no fade-out (a 20 ms ramp only) and music with no final cadence.
+- One honest question at the end ("Did you spot who started it?"), and the same question as a pinned comment.
+- Hidden detail: **the yellow cat** (a capsule with ears, `makeCat` in `films/phantom-jam/actors.js`) on some roof in every film.
+- Titles ≤ 60 characters, the key noun first, one emoji at most. 2–4 hashtags. Facts get sources in the description.
+- Series names: Race the Clock · One Rule Changed · Will It Survive? · Pick a Side.
+
 ## Publishing flow
 
 1. Final film `<slug>.mp4` (−14 LUFS) and a clean poster (no HUD, no subtitles).
@@ -69,6 +89,26 @@ Each film folder has `TREATMENT.md` (the plan and the changes made in production
 - File sizes ≈ 41 MB per film (fine for GitHub's 100 MB limit). `mux.sh` gives ≈ −14.1 LUFS, true peak ≈ −1.4 dB.
 - Review loop that worked: a contact sheet at 1 fps from the final mp4 (ffmpeg), `blackdetect`, and whisper on the final mix.
 - `films/` is in `.gitignore` (films are the user's); this branch force-adds the sources. Fonts are fetched by each film's `fonts.sh`.
+
+### Learned in the second session
+- **Use the newest `world.js`** (`films/phantom-jam/world.js` or `films/snow-day/world.js`). It has `buildWorld(scene, { excl, extra })`: `excl` = rectangles where no generic building or tree is placed; `extra(b)` adds your own geometry (school, hospital). It also has the snow uniforms (`U.snow`, plough-map texture, `ROAD` / `NOSNOW` material defines). The copies in `engine-nine` and `not-in-our-town` lack `excl`/`extra`, so a school added through them silently never appears.
+- For snow (`films/snow-day`): set `U.snow = 1`, give road materials `defines = { ROAD: '' }` and a DataTexture plough map (`makeClearMap`: the film time each metre was cleared), give vehicles `defines = { NOSNOW: '' }` (or their roofs turn white), and give water NOSNOW.
+- `still.mjs` needs `--size 1080x1920` (the default is landscape). Write review stills to the scratchpad with `--out`. Removing a whole stills folder with `rm …/*` is blocked by the safety check; overwrite instead.
+- Skip `readcheck.mjs`: it renders every frame (as slow as the film) and competes with the render. Subtitle holds come from the cue rule in `subs.py`.
+- Render speed: ≈ 6.5–8.3 s per frame per worker with `--workers 2`, so **36 s ≈ 47–50 min, 40 s ≈ 50–55 min**. `video.mjs` logs every 60 frames. Wait with a background `until grep -q done render.log` loop.
+- When a voice line's time is computed at load (e.g. "It's through!" when the ambulance arrives), build the subtitle cues from `events.json` (see `films/phantom-jam/subs.py`).
+- ffmpeg 7: download the BtbN build into the scratchpad (curl), extract it, and prefix `PATH` per command. The user allowed running it in the second session; a new session may get a permission prompt the first time.
+- Speech-check failures and the fixes that worked: "Stuck." → "You're stuck."; "Wait. Is that snow?" → "Hold on. Is that snow?"; "Fireboats, too." → "Here come the fire boats!"; "Ahead: stop, go, stop." → "Up ahead: stop and go."; "tapped the brakes" → "hit the brakes". Numbers: "Seven fifty" is heard as "750" (put that in `asr`).
+- Traffic sims: an IDM ring road (`films/phantom-jam/jam.js`) with N = 44 on 626 m, v0 14, T 1.0, a 0.55, b 2.0 is string-unstable. A 1.8 s brake tap grows into stop-and-go within about 20 s of sim time.
+- Media repo: clone it shallow with `--filter=blob:none`; before each push run `git fetch --depth=1 origin main && git reset --hard origin/main` (the manager deletes posted files), then push with `-c push.negotiate=true`.
+
+## Next film: Storm Surge vs the Sea Wall (film 2 of 27 Nov VN, not started)
+
+From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built):
+- Hook, frame 0: a grey surge line on the horizon moving in; the four floodgates along the canal/quay still open; HUD countdown "SURGE 0:45"; VO "A storm surge. Four gates. Forty-five seconds."
+- Build: the sea plane gets a moving surge front (a raised band, or a darker, foamier ring with white sprite spray); floodgates are four red steel leaves on the canal mouth and at three quay openings that swing shut (hinged boxes). Gate order: canal mouth (big) → two quay ramps → the fish-market gap. Capsule people move away from the quay. Grey low-saturation storm grade (STYLE: lower saturation) with gusting rain (Ten Minutes has `makeRain`).
+- Beats: gate 1 closes easily → gate 2 jams (a parked van/boat in the way, tow it, real time) → gate 3 closes with the wave in sight → the last gate shuts at 0:02 at ×1 REAL TIME as the wave hits the wall and spray goes over the top; the water level stays below the quay (the town survives). Payoff fact: storm surge is the sea pushed up by wind and low pressure, not a tsunami. Loop line: "…and the next tide is in twelve hours." Rise back to the opening aerial. Question: "Would you have closed the canal first?"
+- Avoid the drawbridge as a beat (already used twice). Keep the cat on a roof.
 
 ## Open ideas for next films
 
