@@ -1,0 +1,152 @@
+{
+ "title": "Bald Serve",
+ "dur": 26.8,
+ "caps": [
+  {
+   "t0": 0.1,
+   "text": "Why do tennis",
+   "who": "narr",
+   "t1": 0.58
+  },
+  {
+   "t0": 0.58,
+   "text": "balls have fuzz?",
+   "hot": true,
+   "who": "narr",
+   "t1": 2.05
+  },
+  {
+   "t0": 2.05,
+   "text": "Oh, I KNOW this one.",
+   "hot": true,
+   "who": "gus",
+   "t1": 3.3
+  },
+  {
+   "t0": 3.3,
+   "text": "The fuzz is just",
+   "who": "gus",
+   "t1": 3.94
+  },
+  {
+   "t0": 3.94,
+   "text": "for looks!",
+   "hot": true,
+   "who": "gus",
+   "t1": 4.64
+  },
+  {
+   "t0": 4.64,
+   "text": "Bald is faster.",
+   "who": "gus",
+   "t1": 6.069
+  },
+  {
+   "t0": 10.15,
+   "text": "Actually...",
+   "hot": true,
+   "who": "nana",
+   "t1": 11.4
+  },
+  {
+   "t0": 11.4,
+   "text": "The fuzz grabs",
+   "who": "nana",
+   "t1": 11.98
+  },
+  {
+   "t0": 11.98,
+   "text": "the air and",
+   "who": "nana",
+   "t1": 12.68
+  },
+  {
+   "t0": 12.68,
+   "text": "slows the ball down,",
+   "hot": true,
+   "who": "nana",
+   "t1": 14.475
+  },
+  {
+   "t0": 14.6,
+   "text": "so you can",
+   "who": "nana",
+   "t1": 15.0
+  },
+  {
+   "t0": 15.0,
+   "text": "actually hit it back.",
+   "hot": true,
+   "who": "nana",
+   "t1": 16.805
+  },
+  {
+   "t0": 18.0,
+   "text": "It grips the",
+   "who": "nana",
+   "t1": 18.5
+  },
+  {
+   "t0": 18.5,
+   "text": "strings for spin, too.",
+   "hot": true,
+   "who": "nana",
+   "t1": 20.452
+  },
+  {
+   "t0": 21.6,
+   "text": "Poor thing.",
+   "who": "gus",
+   "t1": 22.08
+  },
+  {
+   "t0": 22.08,
+   "text": "It must be freezing!",
+   "hot": true,
+   "who": "gus",
+   "t1": 23.448
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.1,
+   "t1": 2.263,
+   "text": "Why do tennis balls have fuzz?"
+  },
+  {
+   "t0": 2.05,
+   "t1": 3.321,
+   "text": "Oh, I KNOW this one."
+  },
+  {
+   "t0": 3.3,
+   "t1": 6.069,
+   "text": "The fuzz is just for looks! Bald is faster."
+  },
+  {
+   "t0": 10.15,
+   "t1": 11.618,
+   "text": "Actually..."
+  },
+  {
+   "t0": 11.4,
+   "t1": 14.475,
+   "text": "The fuzz grabs the air and slows the ball down,"
+  },
+  {
+   "t0": 14.6,
+   "t1": 16.805,
+   "text": "so you can actually hit it back."
+  },
+  {
+   "t0": 18.0,
+   "t1": 20.452,
+   "text": "It grips the strings for spin, too."
+  },
+  {
+   "t0": 21.6,
+   "t1": 23.448,
+   "text": "Poor thing. It must be freezing!"
+  }
+ ]
+}

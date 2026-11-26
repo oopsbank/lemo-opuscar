@@ -1,0 +1,124 @@
+[
+ {
+  "id": "n1",
+  "text": "Why do tennis balls have fuzz?",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "at": 0.1,
+  "who": "narr",
+  "groups": [
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g1",
+  "text": "Oh, I know this one.",
+  "cap": "Oh, I KNOW this one.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 2.05,
+  "who": "gus",
+  "groups": [
+   5
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "g2",
+  "text": "The fuzz is just for looks! Bald is faster.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 3.3,
+  "who": "gus",
+  "groups": [
+   4,
+   2,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d1",
+  "text": "Actually.",
+  "cap": "Actually...",
+  "voice": "bf_isabella",
+  "speed": 0.85,
+  "at": 10.15,
+  "who": "nana",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "d2",
+  "text": "The fuzz grabs the air and slows the ball down,",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 11.4,
+  "who": "nana",
+  "groups": [
+   3,
+   3,
+   4
+  ],
+  "hot": [
+   2
+  ]
+ },
+ {
+  "id": "d3",
+  "text": "so you can actually hit it back.",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 14.6,
+  "who": "nana",
+  "groups": [
+   3,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d4",
+  "text": "It grips the strings for spin, too.",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 18.0,
+  "who": "nana",
+  "groups": [
+   3,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g3",
+  "text": "Poor thing. It must be freezing!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 21.6,
+  "who": "gus",
+  "groups": [
+   2,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ }
+]
