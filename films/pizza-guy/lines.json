@@ -1,0 +1,13 @@
+[
+ {"id":"n1","text":"You are a pizza delivery guy.","voice":"bm_lewis","speed":0.92},
+ {"id":"n2","text":"One pizza. Number thirty-one. Thirty minutes.","voice":"bm_lewis","speed":0.95},
+ {"id":"y1","text":"Not today, buddy!","voice":"am_puck","speed":1.05},
+ {"id":"n3","text":"You have a fan.","voice":"bm_lewis","speed":0.9},
+ {"id":"n4","text":"The pizza is fine. You are not.","voice":"bm_lewis","speed":0.92},
+ {"id":"h1","text":"We didn't order... anything.","voice":"bf_alice","speed":0.8},
+ {"id":"y2","text":"Wrong house!","voice":"am_puck","speed":1.05},
+ {"id":"b1","text":"You're one second late.","voice":"am_fenrir","speed":0.82},
+ {"id":"b2","text":"So it's free. Keep it.","voice":"am_fenrir","speed":0.82},
+ {"id":"n5","text":"One pizza. Thirty minutes.","voice":"bm_lewis","speed":0.9},
+ {"id":"n6","text":"One very happy customer.","voice":"bm_lewis","speed":0.88}
+]

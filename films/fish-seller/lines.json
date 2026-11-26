@@ -1,0 +1,16 @@
+[
+ {"id":"n1","text":"You are a fish seller.","voice":"bm_lewis","speed":0.9},
+ {"id":"n2","text":"Rule one. Greet your first customer.","voice":"bm_lewis","speed":0.9},
+ {"id":"y1","text":"Good morning, sir!","voice":"am_puck","speed":1.0},
+ {"id":"n3","text":"He did not pay.","voice":"bm_lewis","speed":0.88},
+ {"id":"n4","text":"Rule two. Never haggle with a grandma.","voice":"bm_lewis","speed":0.9},
+ {"id":"g1","text":"Two pounds.","voice":"bf_emma","speed":0.82},
+ {"id":"y2","text":"It's ten!","voice":"am_puck","speed":1.0},
+ {"id":"n5","text":"Somehow, you paid her.","voice":"bm_lewis","speed":0.88},
+ {"id":"n6","text":"Rule three. Make sure the fish is dead.","voice":"bm_lewis","speed":0.9},
+ {"id":"f1","text":"Nope.","voice":"am_onyx","speed":0.85},
+ {"id":"n7","text":"It was not.","voice":"bm_lewis","speed":0.88},
+ {"id":"g2","text":"Keep the change, dear.","voice":"bf_emma","speed":0.85},
+ {"id":"n8","text":"Rule four. Never leave your stall.","voice":"bm_lewis","speed":0.9},
+ {"id":"n9","text":"You were a fish seller.","voice":"bm_lewis","speed":0.86}
+]

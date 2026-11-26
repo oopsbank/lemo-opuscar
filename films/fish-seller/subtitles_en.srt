@@ -1,0 +1,64 @@
+1
+00:00:00,983 --> 00:00:03,357
+You are a fish seller.
+
+2
+00:00:03,983 --> 00:00:07,847
+Rule one. Greet your first customer.
+
+3
+00:00:08,667 --> 00:00:11,293
+YOU: Good morning, sir!
+
+4
+00:00:11,333 --> 00:00:13,610
+GULL: SQUAWK.
+
+5
+00:00:13,650 --> 00:00:15,943
+He did not pay.
+
+6
+00:00:15,983 --> 00:00:19,960
+Rule two. Never haggle with a grandma.
+
+7
+00:00:20,000 --> 00:00:22,627
+GRANDMA: Two pounds.
+
+8
+00:00:22,667 --> 00:00:25,333
+YOU: It’s ten!
+
+9
+00:00:26,983 --> 00:00:29,277
+Somehow, you paid her.
+
+10
+00:00:29,317 --> 00:00:33,086
+Rule three. Make sure the fish is dead.
+
+11
+00:00:34,667 --> 00:00:36,667
+THE FISH: Nope.
+
+12
+00:00:40,317 --> 00:00:42,567
+It was not.
+
+13
+00:00:43,333 --> 00:00:45,293
+GULL: SQUAWK.
+
+14
+00:00:45,333 --> 00:00:47,943
+GRANDMA: Keep the change, dear.
+
+15
+00:00:47,983 --> 00:00:51,458
+Rule four. Never leave your stall.
+
+16
+00:00:51,650 --> 00:00:54,073
+You were a fish seller.
+

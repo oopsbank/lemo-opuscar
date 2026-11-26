@@ -1,0 +1,48 @@
+1
+00:00:00,650 --> 00:00:03,110
+You are a pizza delivery guy.
+
+2
+00:00:03,150 --> 00:00:07,513
+One pizza. Number thirty-one. Thirty minutes.
+
+3
+00:00:08,000 --> 00:00:09,960
+DOG: WOOF!
+
+4
+00:00:10,000 --> 00:00:13,000
+YOU: Not today, buddy!
+
+5
+00:00:13,150 --> 00:00:15,400
+You have a fan.
+
+6
+00:00:19,150 --> 00:00:22,678
+The pizza is fine. You are not.
+
+7
+00:00:28,500 --> 00:00:31,960
+No. 13: We didn’t order... anything.
+
+8
+00:00:32,000 --> 00:00:34,500
+YOU: Wrong house!
+
+9
+00:00:41,000 --> 00:00:43,960
+No. 31: You’re one second late.
+
+10
+00:00:44,000 --> 00:00:47,000
+No. 31: So it’s free. Keep it.
+
+11
+00:00:49,650 --> 00:00:52,610
+One pizza. Thirty minutes.
+
+12
+00:00:52,650 --> 00:00:55,748
+One very happy customer.
+
