@@ -1,0 +1,57 @@
+[
+ {
+  "id": "v1",
+  "text": "Ten minutes. Hot pizza. Let's go!",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v2",
+  "text": "Market day. Of course.",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v3",
+  "text": "Not now, buddy!",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v4",
+  "text": "Road closed. Shortcut.",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v5",
+  "text": "A parade?",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v6",
+  "text": "Come on, come on.",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v7",
+  "text": "Bridge is going up. Hold on!",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v8",
+  "text": "And now it rains.",
+  "voice": "am_michael",
+  "speed": 0.97
+ },
+ {
+  "id": "v9",
+  "text": "Nine fifty-nine. Enjoy your pizza.",
+  "voice": "am_michael",
+  "speed": 0.97,
+  "asr": "959. Enjoy your pizza."
+ }
+]

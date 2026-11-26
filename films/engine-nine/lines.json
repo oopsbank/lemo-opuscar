@@ -1,0 +1,46 @@
+[
+ {
+  "id": "v1",
+  "text": "You drive Engine Nine.",
+  "asr": "You drive Engine Nine.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v2",
+  "text": "Smoke, down by the harbor. Go.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "Gridlock.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "Move, move!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Bridge is up.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v6",
+  "text": "Come on.",
+  "asr": "Come on.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v7",
+  "text": "Fire's out. Nobody's hurt.",
+  "voice": "am_michael",
+  "speed": 0.92
+ }
+]
