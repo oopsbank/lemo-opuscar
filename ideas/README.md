@@ -1,107 +1,77 @@
-# Ideas: research notes for three Shorts channels
+# Ideas: research and backlogs for three Shorts channels
 
-Research done 26 Nov 2026 for **Pocket City** (tilt-shift miniature town, `styles/tilt-shift`),
-**Pixel Life** (2.5D pixel dioramas, `styles/hd-2d`) and **Some Crazy Thingzz** (2D cartoon
-characters in 3D sets, "Why do …?" questions). All three: English, vertical 1080×1920, made in code,
-synthetic TTS, no image/video generators.
+Research done on 26 Nov 2026 for three English, vertical, code-made Shorts channels with
+synthetic narration:
+- **Pocket City** (tilt-shift miniature town, `styles/tilt-shift`);
+- **Pixel Life** (2.5D pixel job comedies, `styles/hd-2d`);
+- **Some Crazy Thingzz** (2D cartoon characters in 3D sets, "Why do …?" questions).
 
-Backlogs: [`pocket-city.md`](pocket-city.md) · [`pixel-life.md`](pixel-life.md) ·
-[`some-crazy-thingzz.md`](some-crazy-thingzz.md).
+| File | What's in it |
+|---|---|
+| [`FORMULA.md`](FORMULA.md) | **The formula**: the shared engine, a beat sheet with timings per channel, title and cover rules, the test plan, a pre-publish checklist |
+| [`pocket-city.md`](pocket-city.md) | Gap analysis against niche leaders, format changes, 50 ranked ideas |
+| [`pixel-life.md`](pixel-life.md) | Same, for Pixel Life |
+| [`some-crazy-thingzz.md`](some-crazy-thingzz.md) | Same, for Some Crazy Thingzz, with every answer fact-checked |
+| [`research/`](research/) | Raw research notes with every URL: [algorithm](research/algorithm.md), [miniature niche](research/miniature.md), [pixel / job comedy](research/pixel-comedy.md), [why-explainers](research/why-explainers.md), [claim checks](research/verify-claims.md), [object fact-checks](research/verify-objects.md) |
 
-**How sure is this?** Most published "Shorts strategy" writing is vendor blogs with thin evidence.
-Below, *fact* means reported by press or YouTube itself; *practice* means repeated across many
-creator guides but unproven; *my read* is inference. The real test is each channel's own 2-second
-and 3-second retention in YouTube Studio.
+**Method.** Six research passes, run in parallel, with more than 170 web searches in total:
+- the Shorts algorithm and policy;
+- each of the three niches;
+- an adversarial re-check of the 16 claims the formula rests on;
+- a fact-check of 60 "why" answers.
 
-## 1. What the platform rewards now
+Every claim in `research/` carries a source and a strength tag: **fact** (YouTube or major press),
+**data** (a study with a sample size), **practice** (creator consensus, unproven) or **unverified**.
 
-| Finding | Strength | Source |
+**Limits.** Most "Shorts strategy" writing is vendor blogs. YouTube publishes its signals but not
+their weights. Subscriber counts come from third-party trackers that disagree. The formula is the
+best-supported hypothesis; our own Studio numbers decide it (FORMULA §5).
+
+## 1. How Shorts get distributed (best-supported findings)
+
+| Finding | Strength | Sources |
 |---|---|---|
-| Since 31 Mar 2025 a Short's public view counts every start **and every replay**; revenue and YPP still use "engaged views". A clean loop therefore inflates views directly. | fact | [TechCrunch](https://techcrunch.com/2025/03/26/youtube-is-changing-how-youtube-shorts-views-are-counted), [Digital Music News](https://www.digitalmusicnews.com/2025/03/27/how-does-youtube-shorts-count-views-2025/), [Search Engine Journal](https://www.searchenginejournal.com/youtube-changes-shorts-view-counts-no-change-to-monetization/543005/) |
-| YouTube tracks how many viewers swipe away in the **first ~2 seconds**; this is the first filter. Advice ranges from "hook in the first second" (vidIQ) to "first 2–3 s". | practice | [Blitzcut](https://blitzcutai.com/blog/best-youtube-shorts-hooks-2026), [GoFaceless](https://www.gofaceless.ai/en/blog/mastering-first-impressions-two-second-rule), [Prepublish](https://prepublish.ai/guides/youtube-shorts-retention) |
-| Completion/retention outweighs likes and comments (comments act as a multiplier). | practice | [vidIQ algorithm guide](https://vidiq.com/blog/post/youtube-shorts-algorithm/), [DEV/clamper](https://dev.to/clamper_ai/how-the-youtube-shorts-algorithm-works-in-2026-and-how-to-beat-it-4b2h) |
-| Length: the newest large scan (Virlo, Oct 2026, 10,827 Shorts) found **under 15 s** and **90 s–3 min** slightly over-perform, **30–90 s slightly under-perform** (0.95–0.96×). Older 2023 studies favoured 50–60 s. Median Short ≈ 25 s; top channels' median 40 s. Average view duration ≈ 16 s (Metricool 2026). | mixed data | [Virlo](https://virlo.ai/data/how-long-should-a-youtube-short-be), [Mark Studios](https://www.markstudios.com/research/youtube-shorts-length-study), [CreateSocial](https://createsocial.ai/blog/youtube-shorts-length), [Riverside](https://riverside.com/blog/how-long-can-youtube-shorts-be) |
-| Shorts can run 3 min; YouTube announced **Shorts Series** (23 Sep 2026), so numbered recurring formats get first-class support. | fact (reported) | [Async](https://async.com/blog/youtube-trends) |
-| Animation memes and short explainers that answer **one specific searchable question** keep earning views; 66 % of young animation fans watch animation memes weekly. | practice / survey | [Async](https://async.com/blog/youtube-trends), [Cartoon Brew on YouTube's animation report](https://www.cartoonbrew.com/distribution/youtube-animation-report-259897.html), [Anijam](https://www.anijam.ai/blog/youtube-shorts-trends/) |
+| **Views.** Since 31 Mar 2025 a Shorts view counts on every start or replay; YPP and pay use "engaged views". Since 24 Aug 2026 the same counting applies to every format. Loops therefore lift public views directly | fact | [YouTube Help 2991785](https://support.google.com/youtube/answer/2991785), [TechCrunch](https://techcrunch.com/2025/03/26/youtube-is-changing-how-youtube-shorts-views-are-counted), [eMarketer](https://emarketer.com/content/youtube-shorts-changes-view-count-rules-match-tiktok--instagram) |
+| **Test, then widen.** A new Short is shown to a small audience, often non-subscribers and possibly within the first hour; watch vs swipe, % viewed, replays, engagement and **satisfaction surveys** decide what happens next. The weights are not published | fact (via press write-ups of the YouTube team) | [PPC Land on Todd Beaupré](https://ppc.land/subscribers-skip-90-of-uploads-in-their-feed-youtube-director-says/), [Search Engine Journal](https://www.searchenginejournal.com/youtube-algorithm-myths-debunked-insights-from-the-growth-team/510091/) |
+| **Frame 0 is the thumbnail.** The swipe feed autoplays; covers appear only on the channel grid, in search and on Home shelves. Custom covers reached all creators around 25 Nov 2026 | fact | [PPC Land](https://ppc.land/youtube-ends-2-year-wait-for-shorts-thumbnails-but-blocks-a-b-testing/), [vidIQ](https://vidiq.com/blog/post/youtube-shorts-custom-thumbnails/), [research/verify-claims.md](research/verify-claims.md) |
+| **Length is close to neutral; holding attention is not.** Virlo (10,827 Shorts posted 13–31 Oct 2026) measured views against similar Shorts: under 15 s did 1.08×, 30–60 s did 0.96×. The median Short got 4.94× its channel's subscriber count in views, so small channels aren't capped. Metricool (~800K videos): the average watch is about 16 s | data | [Virlo](https://virlo.ai/data/how-long-should-a-youtube-short-be), [Virlo algorithm](https://virlo.ai/data/youtube-shorts-algorithm), [Metricool](https://metricool.com/youtube-trends/) |
+| **Discovery** comes mostly from the feed. Search brings a small but steady share; hashtags almost none (Metricool) | data | [Metricool](https://metricool.com/youtube-trends/) |
+| **"Inauthentic content."** On 15 Jul 2025 YPP's "repetitious content" became "inauthentic content": mass-produced or templated videos can't earn money. 2026 added an AI-slop push: Neal Mohan's letter, a "Does this feel like AI slop?" survey test, a few large slop channels removed, and on 1 Oct 2026 less Shorts reach for re-uploaders | fact | [YouTube Help 1311392](https://support.google.com/youtube/answer/1311392?hl=en), [CNBC](https://www.cnbc.com/2026/01/21/youtube-chief-says-managing-ai-slop-is-a-priority-for-2026-.html), [Daily Dot](https://dailydot.com/youtube-prompt-asking-does-this-feel-like-ai-slop), [PPC Land](https://ppc.land/re-uploaded-shorts-lose-reach-as-youtube-favours-original-clips/) |
+| **AI disclosure** is required only for realistic content; clearly unrealistic animation is exempt | fact | [YouTube blog](https://blog.youtube/news-and-events/disclosing-ai-generated-content/), [YouTube Help 14328491](https://support.google.com/youtube/answer/14328491) |
+| **Made for Kids** turns off comments, the notification bell and personalised ads. Animated characters are one factor YouTube weighs | fact | [YouTube Help 9528076](https://support.google.com/youtube/answer/9528076) |
+| **Cadence.** Per-Short results are best at about 2–4 a week; total views rise with volume. Best times: late afternoon or evening, Friday strongest | data / practice | [Metricool](https://metricool.com/youtube-shorts-tips/), [Buffer](https://buffer.com/resources/best-time-to-post-on-youtube/) |
+| **Tools for small channels:** related-video links on Shorts, Shorts series (announced 23 Sep 2026, rollout date not firm), Collaborations (up to 5–10 co-creators). Testing 3 versions of a Short is announced for 2027 | fact | [YouTube Help 14075157](https://support.google.com/youtube/answer/14075157), [Gigazine](https://gigazine.net/gsc_news/en/20260924-made-on-youtube-2026-new-function/) |
+| **Hooks, captions, loops:** open on motion with text and voice at frame 0, burned-in captions, a last frame that flows into the first. Consistent creator practice, no controlled study | practice | [research/algorithm.md §3–4](research/algorithm.md) |
 
-## 2. Hooks (first 2 seconds)
+## 2. What every niche leader shares
 
-- **Show the result or the danger first, explain after**: the outcome frame, a visible problem, a bold
-  claim, a question. Never "In this video…", never a slow zoom on a still with no sound or text.
-  ([BannerBoo](https://bannerboo.com/blog/youtube-shorts-length/), [Conthunt](https://conthunt.app/blog/youtube-shorts-best-practices), [Virvid](https://virvid.ai/blog/first-3-seconds-hook-faceless-shorts-2026))
-- **Burned-in captions** from frame 1 (many watch muted). ([Socialync](https://www.socialync.io/blog/youtube-shorts-algorithm-2026))
-- **A visual or audio change every 2–3 s.** ([Prepublish](https://prepublish.ai/guides/youtube-shorts-retention))
-- *My read for our three formats:* the hook is **spoken line + on-screen text + one moving thing in
-  frame 1**, all at once. Pocket City: a timer or a threat already visible. Pixel Life: "You are a …"
-  plus the first thing already going wrong. Crazy Thingzz: the object, huge, with the question as text,
-  and the wrong answer starting within 2 s.
+Five things recur across Zack D. Films (~30M subscribers), Alan's Universe (~104M), Viva La Dirt
+League, BeamNG Shorts, Pencilmation, Dr. Binocs and Daily Dose of Internet:
 
-## 3. Rewatch and comments
+1. **The problem or payoff in the first frame.** No intro, no greeting.
+2. **A recurring identity:** the same hero, cast, voice, music sting and catchphrase, or a logo inside the scene.
+3. **Repeatable series** that swap one variable (#65), with numbers and parts.
+4. **A loop or abrupt ending:** the last line hands back to the first.
+5. **Comments that come from the content:** workers recognising their job, corrections, picking a side, "I always thought…".
 
-- **Seamless loop**: last frame matches the first (angle, light, subject position); avoid music with
-  a final cadence that announces the reset; a final line that leads back into the first.
-  ([Virvid](https://virvid.ai/blog/looping-structure-shorts-retention-2026), [FreeViralKit](https://freeviralkit.com/blog/youtube-shorts-loop-strategy))
-  Pixel Life already does this (last line echoes the first); Pocket City can loop on the same aerial;
-  Crazy Thingzz can end on the question being asked again by the next fool.
-- **Satisfying cause-and-effect**: chain reactions work as one long open loop resolved at the end;
-  each event causes the next, a "simple sequential story". Popular hypotheses, not proven science.
-  ([CU Independent](https://www.cuindependent.com/why-internet-cant-stop-watching-things-fall-strange-psychology-satisfying-cascade-videos/), [Vice](https://thump.vice.com/en/article/jpd35g/a-gravity-defying-rube-goldberg-machine), [Live Science](https://www.livescience.com/62091-oddlysatisfying-videos-satisfying.html), [Discover](https://www.discovermagazine.com/mind/why-are-oddly-satisfying-videos-sosatisfying))
-  → Pocket City's whole engine.
-- **Hidden details reward rewatching**: *my read* — a gag in the blur band, a background sprite
-  doing something, a sign joke. People rewatch to catch it and comment "did anyone see…".
-- **Comments come from curiosity or disagreement, not from asking.** A specific question tied to the
-  content (spoken + on screen) helps; blunt "comment for the algorithm" may be demoted. Median ≈
-  0.5 comments per 1,000 views. ([Fluxnote](https://fluxnote.io/guides/youtube-comment-section-strategy-2026), [SaturaAI](https://saturaai.com/blog/how-to-get-more-comments-youtube-shorts), [Overseeros](https://www.overseeros.com/blog/good-comment-to-view-ratio-youtube-shorts), [DEV/ytzolo](https://dev.to/ytzoloai/youtube-shorts-algorithm-hacks-what-actually-works-in-2026-439b))
-  Good comment-bait that isn't bait: "what job should he try next?", "which one would you have
-  picked?", a fact viewers want to correct or top.
+## 3. The gaps our channels can own
 
-## 4. Titles and hashtags
+- **Pocket City:** no one combines **second person, a countdown and a miniature town**, and there is no animated harbour channel. The miniature look itself is being commoditised by AI "tiny world" clips and TikTok's built-in tilt-shift effect, so our edge is **real simulation and story**.
+- **Pixel Life:** **no animated job-comedy channel with a distinctive look** owns the niche (the existing ones are small and generic). Live-action job comedy proves the demand; pixel art + one hero + game grammar is free.
+- **Some Crazy Thingzz:** the single-object "why" niche is full of **tiny, faceless AI channels with no breakout brand**. Nobody has a **cast with a comic wrong theory**; Zack D. Films proves the 3D-fact format at scale. Accuracy and character are the moat.
 
-- Title: short, says what happens, opens a curiosity gap, contains the searchable noun.
-  ([vidIQ](https://vidiq.com/blog/post/youtube-shorts-titles/))
-- Hashtags are weak signals: 1–3 relevant ones, most relevant first; #Shorts optional.
-  ([Influencer Marketing Hub](https://influencermarketinghub.com/most-popular-hashtags-youtube/), [Fliki](https://fliki.ai/blog/youtube-shorts-hashtags), [Hollyland](https://www.hollyland.com/blog/topics/youtube-shorts-tags))
-- Patterns that fit us:
-  - Pocket City: `<Number> <Unit>. <Stakes>.` ("90 Seconds. One Drawbridge.") or a dare
-    ("Can One Tow Truck Save Rush Hour?"). Tags: `#miniature #tiltshift #satisfying`.
-  - Pixel Life: `You Are a <Job>. <Twist>.` — searchable job noun up front. Tags: `#pixelart #pov #animation`.
-  - Crazy Thingzz: `Why Do <Objects> Have <Thing>?` — exactly the searched question. Tags: `#whydo #funfacts #animation`.
+## 4. Top 3 per channel
 
-## 5. Niche notes
+| Channel | 1 | 2 | 3 |
+|---|---|---|---|
+| Pocket City | The Drawbridge Won't Close | Tunnel or Bridge? One Ambulance, 40 Seconds | What If Every Traffic Light Turned Green? |
+| Pixel Life | You Are a Hotel Receptionist | You Are a Returns Desk Clerk (Dec 26) | You Are a Barista |
+| Some Crazy Thingzz | see [`some-crazy-thingzz.md`](some-crazy-thingzz.md) | | |
 
-- **"Why" facts.** One surprising fact per video, hook with the oddest detail, scale with an everyday
-  comparison; works as a series with one object each time.
-  ([Fluxnote facts](https://fluxnote.io/guides/facts-youtube-shorts-ideas), [Fluxnote science](https://fluxnote.io/guides/science-youtube-shorts-ideas), [filmmusic.io](https://filmmusic.io/en/magazine/video-concepts/5))
-  "Talking object" explainers are a rising format ([Opus](https://www.opus.pro/blog/ai-talking-object-videos)) — our cartoon characters
-  misunderstanding an object is a hand-made cousin. Pick questions people actually type: the
-  answer must be **true, simple, checkable** (wrong facts get corrected in comments, which helps
-  reach but hurts trust — get them right).
-- **Miniature / tilt-shift.** "Is it real or a toy?" is the evergreen reaction; game-world tilt-shift
-  remixes and tiny inhabitants "going about their lives" are popular. Miniatures already have a big
-  YouTube audience (dioramas, miniature transport).
-  ([YouTube blog: miniatures](https://blog.youtube/culture-and-trends/miniatures-on-youtube/), [Shorts example](https://www.youtube.com/shorts/g5factBjbPw), [Shorts example](https://www.youtube.com/shorts/BxCncO1w8v0))
-  Kids/family audiences like town-scale "how a community works" stories and calmer pacing.
-  ([Current: PBS Kids City Island](https://current.org/?p=5608103), [Whizzy Studios](https://www.whizzystudios.com/post/kids-animation-trends-2026-whats-growing-on-youtube))
-- **Pixel art / POV job comedy.** I found no single dominant "POV: you are a …" pixel channel —
-  the slot looks open. Job-skit humour is a proven TikTok/Shorts genre; pixel art carries
-  service-job satire well (*Beantown: Trial by Fire*); "POV: You …" is listed as a trending framing;
-  cozy pixel scenes exist but are calm, not comic.
-  ([Cartoon Brew: Beantown](https://cartoonbrew.com/cartoon-brew-pick/beantown-trial-by-fire-is-a-twisted-comic-take-on-the-minimum-wage-service-industry-243103.html), [Tiny Little Cartoons](https://www.cartoonbrew.com/shorts/tiny-little-cartoons-wrestling-shorts-tyler-march-eric-paperth-260080.html), [HuffPost job TikToks](https://huffingtonpost.co.uk/entry/25-of-the-funniest-tiktoks-about-work_uk_624c66e3e4b0587dee6f3189), [InReels](https://www.inreels.ai/blog/how-to-make-animated-videos), [Cozy pixel Short](https://www.youtube.com/shorts/__ouIbNYlBE))
+## 5. Ranking method in the backlogs
 
-## 6. Recommendations
+**Score = Viral × Feasible**, each scored 1–5:
+- **Viral:** readable in frame 1, broad relatability, a series fit, loop and comment potential.
+- **Feasible:** buildable in the style's code with procedural sets, no realistic humans, no brands, no real places or people.
 
-1. **Lengths.** Crazy Thingzz: aim 20–30 s (sits in the strong short end). Pocket City: 35–45 s is
-   fine if the clock/threat holds every second; test one 25 s cut. Pixel Life: 55–61 s is in the
-   weakest band by Virlo's data — keep it only while retention holds, and try one ~40 s episode.
-2. **Loops on every film**: last shot = first shot's framing; music without a final cadence.
-3. **Series labels** (Shorts Series): "Pocket City #4", "You Are a … (Pixel Life)", "Why Do …? #3".
-4. **One hidden gag per film** for rewatches; **one honest question** at the end for comments.
-5. Keep topics apart: Pocket City = vehicles, machines and town systems racing a clock; Pixel Life =
-   one person's job going wrong; Crazy Thingzz = one object's design question.
-
-## Ranking method in the backlogs
-
-Score = **Viral** (1–5: clear stakes, broad relatability, loop/rewatch potential, searchable title)
-× **Feasible** (1–5: buildable in the style's code with procedural sets, no realistic humans, no
-brands, places or real people). Ties go to the stronger hook. Excluded per brief: pizza/delivery,
-aliens/UFOs, and any repeat of the films already made.
+Each backlog row says why it ranks where it does. Excluded per brief: pizza and delivery, aliens, and anything already made.
