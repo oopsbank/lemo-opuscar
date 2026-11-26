@@ -1,0 +1,126 @@
+[
+ {
+  "id": "n1",
+  "text": "Why do golf balls have dimples?",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "at": 0.1,
+  "who": "narr",
+  "groups": [
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g1",
+  "text": "Oh, I know this one.",
+  "cap": "Oh, I KNOW this one.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 2.05,
+  "who": "gus",
+  "groups": [
+   5
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "g2",
+  "text": "The dimples are just ugly! Smooth flies better.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 3.4,
+  "who": "gus",
+  "groups": [
+   3,
+   2,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d1",
+  "text": "Actually.",
+  "cap": "Actually...",
+  "voice": "bf_isabella",
+  "speed": 0.85,
+  "at": 10.15,
+  "who": "nana",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "d2",
+  "text": "Dimples make the air hug the ball,",
+  "voice": "bf_isabella",
+  "speed": 0.9,
+  "at": 11.4,
+  "who": "nana",
+  "groups": [
+   2,
+   2,
+   3
+  ],
+  "hot": [
+   2
+  ]
+ },
+ {
+  "id": "d3",
+  "text": "so the wake behind it shrinks.",
+  "voice": "bf_isabella",
+  "speed": 0.9,
+  "at": 14.0,
+  "who": "nana",
+  "groups": [
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d4",
+  "text": "Less drag. It flies twice as far.",
+  "voice": "bf_isabella",
+  "speed": 0.9,
+  "at": 16.55,
+  "who": "nana",
+  "groups": [
+   2,
+   2,
+   3
+  ],
+  "hot": [
+   0,
+   2
+  ]
+ },
+ {
+  "id": "g3",
+  "text": "Wait. Why do tennis balls have fuzz?",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 22.3,
+  "who": "gus",
+  "groups": [
+   4,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ }
+]

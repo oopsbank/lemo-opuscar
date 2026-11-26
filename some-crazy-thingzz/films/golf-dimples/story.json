@@ -1,0 +1,159 @@
+{
+ "title": "Sand Trap",
+ "dur": 26.5,
+ "caps": [
+  {
+   "t0": 0.1,
+   "text": "Why do golf",
+   "who": "narr",
+   "t1": 0.66
+  },
+  {
+   "t0": 0.66,
+   "text": "balls have dimples?",
+   "hot": true,
+   "who": "narr",
+   "t1": 2.05
+  },
+  {
+   "t0": 2.05,
+   "text": "Oh, I KNOW this one.",
+   "hot": true,
+   "who": "gus",
+   "t1": 3.321
+  },
+  {
+   "t0": 3.4,
+   "text": "The dimples are",
+   "who": "gus",
+   "t1": 3.84
+  },
+  {
+   "t0": 3.84,
+   "text": "just ugly!",
+   "hot": true,
+   "who": "gus",
+   "t1": 4.6
+  },
+  {
+   "t0": 4.6,
+   "text": "Smooth flies better.",
+   "who": "gus",
+   "t1": 6.196
+  },
+  {
+   "t0": 10.15,
+   "text": "Actually...",
+   "hot": true,
+   "who": "nana",
+   "t1": 11.4
+  },
+  {
+   "t0": 11.4,
+   "text": "Dimples make",
+   "who": "nana",
+   "t1": 12.02
+  },
+  {
+   "t0": 12.02,
+   "text": "the air",
+   "who": "nana",
+   "t1": 12.46
+  },
+  {
+   "t0": 12.46,
+   "text": "hug the ball,",
+   "hot": true,
+   "who": "nana",
+   "t1": 13.894
+  },
+  {
+   "t0": 14.0,
+   "text": "so the wake",
+   "who": "nana",
+   "t1": 14.5
+  },
+  {
+   "t0": 14.5,
+   "text": "behind it shrinks.",
+   "hot": true,
+   "who": "nana",
+   "t1": 16.322
+  },
+  {
+   "t0": 16.55,
+   "text": "Less drag.",
+   "hot": true,
+   "who": "nana",
+   "t1": 17.35
+  },
+  {
+   "t0": 17.35,
+   "text": "It flies",
+   "who": "nana",
+   "t1": 17.61
+  },
+  {
+   "t0": 17.61,
+   "text": "twice as far.",
+   "hot": true,
+   "who": "nana",
+   "t1": 19.214
+  },
+  {
+   "t0": 22.3,
+   "text": "Wait. Why do tennis",
+   "who": "gus",
+   "t1": 22.96
+  },
+  {
+   "t0": 22.96,
+   "text": "balls have fuzz?",
+   "hot": true,
+   "who": "gus",
+   "t1": 24.457
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.1,
+   "t1": 2.487,
+   "text": "Why do golf balls have dimples?"
+  },
+  {
+   "t0": 2.05,
+   "t1": 3.321,
+   "text": "Oh, I KNOW this one."
+  },
+  {
+   "t0": 3.4,
+   "t1": 6.196,
+   "text": "The dimples are just ugly! Smooth flies better."
+  },
+  {
+   "t0": 10.15,
+   "t1": 11.618,
+   "text": "Actually..."
+  },
+  {
+   "t0": 11.4,
+   "t1": 13.894,
+   "text": "Dimples make the air hug the ball,"
+  },
+  {
+   "t0": 14.0,
+   "t1": 16.322,
+   "text": "so the wake behind it shrinks."
+  },
+  {
+   "t0": 16.55,
+   "t1": 19.214,
+   "text": "Less drag. It flies twice as far."
+  },
+  {
+   "t0": 22.3,
+   "t1": 24.457,
+   "text": "Wait. Why do tennis balls have fuzz?"
+  }
+ ]
+}
