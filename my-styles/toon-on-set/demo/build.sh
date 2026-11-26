@@ -9,6 +9,11 @@ OUT=${OUT:-$HOME/toon-on-set-build}; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
 export LIB OUT
 PY="$LIB/.venv/bin/python"; SZ=1080x1920; Q=${Q:-ssaa=1.5}
 cd "$LIB"
+echo "== 0. voices (Kokoro, offline) and a speech-to-text check of every line"
+$PY core/tts/tts.py "$D/lines.json" "$OUT/voices"
+$PY core/tts/asr_check.py "$D/lines.json" "$OUT/voices" --lang en
+# story.json (caption groups) and voices.json (lip-sync envelopes) in this folder were made from these voices by timing.py;
+# after changing lines.json, run:  $PY "$D/timing.py" "$OUT/voices"   (it rewrites those two files)
 echo "== 1. sound events from the page"
 node core/render/events.mjs "$D" --size $SZ --q fast --out "$OUT/events.json"
 echo "== 2. score (sampled comedy band) and mix (foley + bed)"

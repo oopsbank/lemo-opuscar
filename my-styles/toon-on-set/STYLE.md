@@ -72,7 +72,7 @@ Transitions: hard cuts on the beat; a whip-pan blur between two places; no disso
 - **Light comedy score**: pizzicato strings, ukulele or nylon guitar, marimba or xylophone, a bassoon or tuba bass line, clarinet for the melody; a bouncy 100–120 BPM groove that stops dead for the punchline.
 - **Cartoon foley, cut on the action**: boing, pop, whoosh, slide whistle, wood block, cartoon footsteps, a ratchet for turning, a bonk; plus a few **real set sounds** for weight (metal clang, gravel crunch, a train horn, a door).
 - **Silence before the punchline**: the music drops out for half a beat to a beat, then a sting (a bassoon "bwomp", a rimshot, a cymbal splash).
-- **Voice**: a quick, friendly narrator, close-mic'd and dry; characters' lines pitched to their size. Music ducked ~8 dB under the voice. Captions are built from the voice's word timestamps (`core/tts/asr_check.py` writes `words.json`). Master −14 LUFS.
+- **Voice**: a quick, friendly narrator, close-mic'd and dry; each character gets their own voice (English offline: Kokoro, e.g. `am_michael` narrator, `am_puck` for a jumpy lead, `bf_emma` for a deadpan one). Mouths open with the voice's loudness on the 12 fps drawing time. Split a line where the joke needs a pause: TTS ignores an ellipsis. Music ducked ~8 dB under the voice. Captions are built from the voice's word timestamps (`core/tts/asr_check.py` writes `words.json`). Master −14 LUFS.
 
 ## 8. Native moves
 

@@ -7,6 +7,9 @@ Music samples (rendered with Lemo-Opuscar core/audio/sampler.py)
 - VS Chamber Orchestra: Community Edition by Versilian Studios / Sam Gossner, CC0 1.0: violins_pizz, violas_pizz, cellos_pizz, contrabass_pizz, bassoon, bassoon_stac, clarinet_stac.
 - Versilian Community Sample Library (VCSL), CC0 1.0: marimba, xylophone, woodblock.
 
+Voices
+- Kokoro-82M (hexgrad, Apache License 2.0) through kokoro-onnx (MIT), offline: voices am_michael (narrator), am_puck (postman), bf_emma (homeowner). Checked with faster-whisper (MIT).
+
 Sound effects: synthesised in code (mix.py, Lemo-Opuscar core/audio/sfx.py). Everything in the picture is drawn by code.
 
 Code

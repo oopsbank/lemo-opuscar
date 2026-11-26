@@ -12,7 +12,25 @@ rng = np.random.default_rng(5)
 N = int((DUR + .3) * SR); buf = np.zeros((N, 2), np.float32)
 
 score, sr = sf.read(os.path.join(OUT, 'score.wav'), dtype='float32'); assert sr == SR
-add(buf, score[:, 0], 0, .9, -1); add(buf, score[:, 1], 0, .9, 1)
+# —— voices: compressed, RMS-matched, placed at their `at`; the music ducks ~8 dB under them ——
+from scipy.signal import resample_poly
+from scipy.ndimage import uniform_filter1d
+from core.audio.sfx import compress
+LINES = json.load(open(os.path.join(D, 'lines.json'))); VDIR = os.path.join(OUT, 'voices')
+vox = np.zeros(N, np.float32); duck = np.zeros(N, np.float32)
+PAN = {'narr': 0, 'postie': -.12, 'lady': .15}
+vbuf = np.zeros((N, 2), np.float32)
+for L in LINES:
+    v, vsr = sf.read(os.path.join(VDIR, L['id'] + '.wav'), dtype='float32')
+    if v.ndim > 1: v = v.mean(1)
+    if vsr != SR: v = resample_poly(v, SR, vsr).astype(np.float32)
+    v = hp(v, 90); v = compress(v / (np.abs(v).max() + 1e-9) * .9, thr=.22, ratio=3.2)
+    v = v / (np.sqrt(np.mean(v[np.abs(v) > .02] ** 2)) + 1e-9) * .16                    # same speech RMS for every line
+    add(vbuf, v, L['at'], 1.0, PAN.get(L['who'], 0))
+    s0 = int(L['at'] * SR); duck[s0:s0 + len(v)] = 1
+duck = np.clip(uniform_filter1d(duck, int(.25 * SR)) * 1.6, 0, 1)                      # soft attack and release
+mg = 10 ** (-8 * duck / 20)
+add(buf, score[:, 0] * mg[:len(score)], 0, .9, -1); add(buf, score[:, 1] * mg[:len(score)], 0, .9, 1)
 
 # —— foley ——
 def gravel_step(v=1.):
@@ -67,6 +85,7 @@ def cricket(d=1.6):
 add(buf, cricket(1.6), 18.4, .035, .5); add(buf, cricket(1.5)[::-1].copy(), 18.45, .025, -.5)
 add(buf, bird(2900), 19.3, .03, -.6)
 
+buf += vbuf
 for c in range(2): buf[:, c] = limit(buf[:, c], .9)
 sf.write(os.path.join(OUT, 'mix.wav'), buf, SR)
 print('mix →', os.path.join(OUT, 'mix.wav'), f'{len(buf) / SR:.1f}s, peak {np.abs(buf).max():.2f}')

@@ -1,0 +1,121 @@
+[
+ {
+  "id": "n1",
+  "text": "Why do mailboxes have a red flag?",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "at": 0.3,
+  "who": "narr",
+  "groups": [
+   3,
+   2,
+   2
+  ],
+  "hot": [
+   2
+  ]
+ },
+ {
+  "id": "p1",
+  "text": "Mail time!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 4.1,
+  "who": "postie",
+  "groups": [
+   2
+  ],
+  "asr": "Male time!"
+ },
+ {
+  "id": "p2",
+  "text": "Red flag?!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 6.78,
+  "who": "postie",
+  "groups": [
+   2
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "p3a",
+  "text": "Is it...",
+  "voice": "am_puck",
+  "speed": 0.82,
+  "at": 8.75,
+  "who": "postie",
+  "groups": [
+   2
+  ]
+ },
+ {
+  "id": "p3b",
+  "text": "danger?",
+  "cap": "DANGER?",
+  "voice": "am_puck",
+  "speed": 0.9,
+  "at": 9.55,
+  "who": "postie",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "p4",
+  "text": "Should I run?",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 10.95,
+  "who": "postie",
+  "groups": [
+   3
+  ]
+ },
+ {
+  "id": "l1",
+  "text": "It means there's mail to pick up.",
+  "voice": "bf_emma",
+  "speed": 0.88,
+  "at": 14.0,
+  "who": "lady",
+  "groups": [
+   3,
+   1,
+   3
+  ]
+ },
+ {
+  "id": "n2",
+  "text": "Flag up means outgoing mail.",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "at": 16.7,
+  "who": "narr",
+  "groups": [
+   3,
+   2
+  ],
+  "hot": [
+   1
+  ],
+  "asr": "Flag up means outgoing male."
+ },
+ {
+  "id": "p5",
+  "text": "Oh.",
+  "voice": "am_puck",
+  "speed": 0.9,
+  "at": 19.2,
+  "who": "postie",
+  "groups": [
+   1
+  ]
+ }
+]

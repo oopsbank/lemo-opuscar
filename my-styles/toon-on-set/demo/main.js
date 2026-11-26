@@ -58,8 +58,13 @@ function walk(ph, dir = 1) {
   return { lf: [-11 + s * 15, -3 - Math.max(0, -c) * 8], rf: [11 - s * 15, -3 - Math.max(0, c) * 8], lh: [-30 - s * 12, -70], rh: [30 + s * 12, -70], bendL: 7, bendR: -7, bob: -Math.abs(c) * 3.5, turn: .5 * dir, look: [dir * .7, 0] };
 }
 const crouch = () => ({ bob: 42, lf: [-27, -42], rf: [27, -42], legBend: 20 });
-// mouth flaps while a caption of this speaker is up (no voice in this cut: a syllable pattern)
-function talk(who, t) { const c = capAt(STORY.caps, t); if (!c || c.who !== who) return null; const k = Math.floor((t - c.t0) * 8); return hash(k * 3.7 + c.t0) > .45 ? { mouth: 'o', open: .2 + hash(k) * .5 } : { mouth: 'flat' }; }
+// lip sync: the mouth opens with the voice's loudness (voices.json, 24 Hz envelopes from timing.py), sampled on the 12 fps drawing time
+const VOX = await (await fetch('voices.json')).json();
+function talk(who, t) {
+  for (const k in VOX) { const e = VOX[k]; if (e.who !== who) continue; const i = Math.floor((t - e.at) * e.rate);
+    if (i >= 0 && i < e.v.length) { const v = e.v[i]; return v > .12 ? { mouth: 'o', open: Math.min(1, v * 1.1) } : { mouth: 'flat' }; } }
+  return null;
+}
 const blink = (t, seed) => ((t + seed * 1.7) % 3.1) < .1 ? 1 : 0;
 const shock = tc => ({ rh: [62, -150], bendR: -14, lh: [-28, -72], bendL: 8, brows: 'shock', mouth: 'o', open: .5, look: [1, -.4], turn: .35, lean: .03, tilt: -.05 });
 
@@ -97,7 +102,7 @@ const SHOTS = [
       postie.visible = true; lady.visible = false;
       const j = (hash(Math.floor(tc * 12) * 1.3) - .5) * .02;
       postie.pos.set(.36 + j, 0, -3.75);
-      postie.pose = { ...crouch(), lh: [-34, -130], rh: [34, -130], bendL: -10, bendR: 10, brows: 'worried', mouth: 'teeth', look: [.6 + j * 20, -.5 + j * 10], turn: .3 };
+      postie.pose = { ...crouch(), lh: [-34, -130], rh: [34, -130], bendL: -10, bendR: 10, brows: 'worried', mouth: 'teeth', look: [.6 + j * 20, -.5 + j * 10], turn: .3, ...(talk('postie', tc) ?? {}) };
     } },
   { t0: 13, t1: 16.4, name: 'two-shot rack',   // she walks into the foreground; focus racks from him to her
     cam: u => ({ pos: V(.05, 1.4, .95), look: V(.42, 1.12, -2.7), fov: 42, focus: lerp(4.75, 3.05, ss(seg(u, .7, 1.15))), aper: 60 }),
