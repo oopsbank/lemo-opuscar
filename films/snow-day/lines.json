@@ -1,0 +1,61 @@
+[
+ {
+  "id": "v1",
+  "text": "Two hours. Three ploughs.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Two hours. Three plows."
+ },
+ {
+  "id": "v2",
+  "text": "You take the boulevard.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "Every street. Every lane.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "You're stuck.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Back up, and ram it!",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Back up, and ram it!"
+ },
+ {
+  "id": "v6",
+  "text": "Seven fifty. One road left.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "750. One road left."
+ },
+ {
+  "id": "v7",
+  "text": "Come on, come on.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Come on, come on."
+ },
+ {
+  "id": "v8",
+  "text": "Eight o'clock. School's open!",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Eight o'clock. School's open!"
+ },
+ {
+  "id": "v9",
+  "text": "Hold on. Is that snow?",
+  "voice": "am_michael",
+  "speed": 0.95
+ }
+]

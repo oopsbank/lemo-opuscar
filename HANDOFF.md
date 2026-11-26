@@ -16,6 +16,7 @@ For a new Claude Code session that knows nothing about the earlier work. Written
 | `films/engine-nine` | 37.0 s | You drive fire engine 9 from the station to a warehouse fire by the harbour. Obstacles: gridlock that parts, then a raised drawbridge with a sailboat passing (real-time wait). The ladder goes up, the water hits, and the last flame dies in real time. Last line: "Fire's out. Nobody's hurt." | Posted (v3 smooth): `pocket-city_engine-nine_1080x1920.mp4` + `pocket-city_engine-nine_thumb.jpg` in `oopsbank/some-crazy-things-media`. Title used: "The bridge went up. The fire didn't wait. 🚒" |
 | `films/ten-minutes` | 45.0 s | A pizza scooter with a 10:00 countdown in the HUD. Obstacles: market (crate of oranges spills), a dog chase, roadworks with a U-turn into an alley, a marching band (real time, the clock ticks second by second), a jump over the rising drawbridge in ×¼ slow motion, then rain. Delivered to a customer on a moored boat at 9:59 (00:01 left). The camera tilts up to a rainbow. | Posted: `pocket-city_ten-minutes_1080x1920.mp4` + `pocket-city_ten-minutes_thumb.jpg`. Title used: "10 minutes to deliver a pizza. The whole town said no. 🍕" |
 | `films/not-in-our-town` | 40.0 s | A flying saucer's shadow crosses the boulevard; reveal over the harbour; its beam takes a car, a palm tree and a sailboat; Engine 9 rolls, fireboats sail; ladder jet + fireboat arcs hit its rim lights in ×¼ slow-mo; in real time it drops everything back and flees; rise over the cheering quay. Last line: "Not in our town." | Pushed (second session, user OK'd auto-push from now on): `pocket-city_not-in-our-town_1080x1920.mp4` + `_thumb.jpg`. Title: "A UFO tried to steal our town. Engine 9 said no. 🛸🚒" |
+| `films/snow-day` | 36.0 s | Overnight snow; three ploughs, 6:00→8:00, every road before the school bell. Snow shader (upward faces) + a plough map texture (film time each metre of road was cleared) in world.js; the blue plough sticks in a drift (real time, backs up, rams); the last pile pushed to the school gate at 7:59:59; bell; it snows again, roads re-whiten, camera back on the opening aerial (loop). | Pushed: `pocket-city_snow-day_1080x1920.mp4` + `_thumb.jpg`. Title: "2 Hours. 3 Snowploughs. School Opens at 8:00. ❄️" |
 
 Each film folder has `TREATMENT.md` (the plan and the changes made in production), `CREDITS`, `build.sh` (one command: fonts, voice and speech check, events, subtitles, score, mix, picture, mux, poster), `lines.json` (voice), `story.js` (the timeline), `music/score.py` and `mix.py`.
 
@@ -39,6 +40,13 @@ Each film folder has `TREATMENT.md` (the plan and the changes made in production
 - The user gives short answers and expects sensible defaults; ask once, up front, with options (AskUserQuestion worked well), then produce.
 - Report progress during long renders; the user checks in.
 - Publishing to the public media repo requires the user's OK. In the first session, pushes to `oopsbank/some-crazy-things-media` were made after the user confirmed. Get your own confirmation in a new session.
+
+## Pipeline rules (from the manager session, second session)
+
+- The user approved auto-pushing finished films to the media repo (no review). The manager passes them to the user, who posts by hand.
+- At most 2 finished films per day (Vietnam time); then wait for the next day.
+- Before each film, read `ideas/FORMULA.md` and `ideas/pocket-city.md` on branch `ideas` (fetch fresh): hook in frame 1, loop ending, 30–40 s, one honest question at the end.
+- Never delete files from the media repo. ffmpeg 7: the BtbN build runs from the scratchpad (the user allowed it).
 
 ## Publishing flow
 
