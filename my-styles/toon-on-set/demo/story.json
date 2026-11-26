@@ -1,0 +1,32 @@
+{
+  "dur": 22.4,
+  "bpm": 120,
+  "caps": [
+    { "t0": 0.25, "t1": 0.85, "text": "Why do" },
+    { "t0": 0.85, "t1": 1.6, "text": "mailboxes" },
+    { "t0": 1.6, "t1": 2.1, "text": "have a" },
+    { "t0": 2.1, "t1": 3.0, "text": "red flag?", "hot": true },
+    { "t0": 4.1, "t1": 5.3, "text": "Mail time!", "who": "postie" },
+    { "t0": 6.75, "t1": 8.4, "text": "Red flag?!", "hot": true, "who": "postie" },
+    { "t0": 8.75, "t1": 9.55, "text": "Is it..." },
+    { "t0": 9.55, "t1": 10.5, "text": "DANGER?", "hot": true },
+    { "t0": 10.9, "t1": 11.7, "text": "Should I" },
+    { "t0": 11.7, "t1": 12.9, "text": "run?" },
+    { "t0": 14.0, "t1": 14.75, "text": "It means", "who": "lady" },
+    { "t0": 14.75, "t1": 15.5, "text": "there's mail", "who": "lady" },
+    { "t0": 15.5, "t1": 16.4, "text": "to pick up.", "who": "lady" },
+    { "t0": 16.7, "t1": 17.4, "text": "Flag up =" },
+    { "t0": 17.4, "t1": 18.4, "text": "outgoing mail", "hot": true },
+    { "t0": 19.2, "t1": 20.2, "text": "Oh.", "who": "postie" }
+  ],
+  "lines": [
+    { "t0": 0.25, "t1": 3.0, "text": "Why do mailboxes have a red flag?" },
+    { "t0": 4.1, "t1": 5.3, "text": "Mail time!" },
+    { "t0": 6.75, "t1": 8.4, "text": "Red flag?!" },
+    { "t0": 8.75, "t1": 10.5, "text": "Is it... DANGER?" },
+    { "t0": 10.9, "t1": 12.9, "text": "Should I run?" },
+    { "t0": 14.0, "t1": 16.4, "text": "It means there's mail to pick up." },
+    { "t0": 16.7, "t1": 18.4, "text": "Flag up = outgoing mail" },
+    { "t0": 19.2, "t1": 20.2, "text": "Oh." }
+  ]
+}

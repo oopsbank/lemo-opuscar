@@ -1,0 +1,14 @@
+Red Flag — Toon on Set demo film: third-party material
+
+Font
+- Baloo 2 (variable, used at weight 800) by Ek Type, SIL Open Font License 1.1. File: fonts/baloo2.ttf, from github.com/google/fonts (commit 86aced91de05cd4f96a06838124cca45be337b2b, ofl/baloo2).
+
+Music samples (rendered with Lemo-Opuscar core/audio/sampler.py)
+- VS Chamber Orchestra: Community Edition by Versilian Studios / Sam Gossner, CC0 1.0: violins_pizz, violas_pizz, cellos_pizz, contrabass_pizz, bassoon, bassoon_stac, clarinet_stac.
+- Versilian Community Sample Library (VCSL), CC0 1.0: marimba, xylophone, woodblock.
+
+Sound effects: synthesised in code (mix.py, Lemo-Opuscar core/audio/sfx.py). Everything in the picture is drawn by code.
+
+Code
+- toon.js is adapted from Lemo-Opuscar styles/scifi-toon/demo/toon.js; the renderer uses Lemo-Opuscar core/ (core/three/post.js, core/lib.js, core/render, core/audio) and three.js (MIT).
+  That code is under the MIT License: Lemo-Opuscar, Copyright (c) 2026 SecondFirst Pty Ltd, trading as LemoLab, https://github.com/lemomo-ai/lemo-opuscar (full text: LICENSES/MIT.txt in the library).

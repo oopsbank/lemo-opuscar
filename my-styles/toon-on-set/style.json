@@ -1,0 +1,12 @@
+{
+ "slug": "toon-on-set",
+ "en": "Toon on Set",
+ "cn": "实景卡通",
+ "based_on": "tilt-shift",
+ "borrows": ["scifi-toon", "hd-2d"],
+ "size": "1080x1920",
+ "library_version": "8ca0dd8",
+ "created": "2026-11-26",
+ "line": "Flat cartoon people acting in a sunlit 3D set, eye-level camera, word-by-word captions: vertical comedy shorts.",
+ "line_cn": "扁平卡通人物在阳光下的三维实景里表演，平视镜头，逐词字幕：竖屏搞笑短片。"
+}
