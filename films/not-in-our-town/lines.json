@@ -1,0 +1,57 @@
+[
+ {
+  "id": "v1",
+  "text": "That's not a cloud.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v2",
+  "text": "Pocket City has a visitor.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "It's taking the cars.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "And the boats!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Engine Nine. Roll out!",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Engine Nine. Roll out!"
+ },
+ {
+  "id": "v6",
+  "text": "Here come the fire boats!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v7",
+  "text": "Aim for the lights!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v8",
+  "text": "Put it all back.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v9",
+  "text": "Not in our town.",
+  "voice": "am_michael",
+  "speed": 0.95
+ }
+]
