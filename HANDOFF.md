@@ -1,5 +1,7 @@
 # Handoff: Pocket City (tilt-shift Shorts)
 
+> **READ THIS FIRST (third session's handoff, 27 Nov 2026 ~05:10 UTC).** The section "Current state and rules (third handoff)" at the end supersedes older notes where they differ.
+
 For a new Claude Code session that knows nothing about the earlier work. Written by the first production session (2026-11-26), updated at the end of the second (2026-11-27, 01:50 Vietnam time). Five films so far.
 
 ## The channel
@@ -148,3 +150,72 @@ Rules applied: HUD fades in at 1.0 s, map/meters ≥ 1.8 s; first 2 s nearly sha
 | All Green | One rule changed | (weak: the untangle runs backwards) | "Gridlock starts with one car stuck in a junction." | question (playbook applied only to the opening; render was under way) |
 | Two Tugs | Pick a side | blue's line snaps (37%), then the sailboat forces red to let go (45–60%) | "It stopped two metres out. Each tug pulls sixty tonnes." | "Red or blue? Next: tunnel or bridge." |
 Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick a Side if possible, e.g. "Result first" or "Chain reaction".
+
+
+## Current state and rules (third handoff)
+
+**Films**
+- *Storm Surge vs the Sea Wall*: delivered and pushed to the media repo (`pocket-city_storm-surge_*`).
+- *All Green* (`films/all-green`, 32.3 s, One Rule Changed #1): being rendered at handoff. When the render is done, finish it (or re-run `sh films/all-green/build.sh` with `FFMPEG_DIR=<BtbN bin>`): mux, self-check, the poster (t = 29.0, nohud, or pick a better frame), push `pocket-city_all-green_1080x1920.mp4` + `_thumb.jpg` plus `pocket-city_compare.jpg` (side by side: Storm Surge frame 0 | All Green frame 0), then message the manager. (If the third session delivered it, skip.)
+  - Suggested title: "What If Every Traffic Light Turned Green? 🚦"; hashtags #tiltshift #miniature #traffic #gridlock; pinned: "Which junction would you have fixed first?"
+  - Sources: UK Highway Code rule 174 (box junctions); NYC DOT "Don't Block the Box"; US DOT FHWA, traffic signal preemption for emergency vehicles.
+- *Two Tugs, One Giant Ship* (`films/two-tugs`, 32.4 s, Pick a Side #1): fully built. Voices checked, events, score, mix and stills are done, with the playbooks applied. **Not rendered.** The manager asked that the successor decide: render it next, or put Tunnel or Bridge? first (re-ranked #2).
+- Next ideas in order (CONTENT_PLAYBOOK re-rank): **Tunnel or Bridge? One Ambulance** (#2), **Can 1 Tow Truck Clear 200 Cars?** (#13), Bridge Weight Test (#15), The Day Every Car Left at Once (#19), Runaway Shopping Trolley (#7). Dropped: Drawbridge, Fog Bank, Causeway, Dam.
+
+**Rules from the user (via the manager `session_01CUE842B4KiVEBKEUhstDsx`)**
+- No daily cap. Deliver as soon as a film is rendered and checked: push it to the root of `oopsbank/some-crazy-things-media` (main), check the Pages URLs return 200, SendUserFile the mp4 + thumb to the user, then message the manager with:
+  - file names, duration and size;
+  - title (≤ 60 characters, key noun first, one emoji at most);
+  - a 2–3 line description with sources and 2–4 hashtags;
+  - the pinned comment;
+  - AI notes: procedural imagery; synthetic Kokoro voice, so turn on the disclosure; original music from CC0 samples; synthesized sound effects;
+  - the next topic.
+  Reply to the user in Vietnamese, short; the films are in English.
+- **Media repo access must be added in the new session**: `add_repo oopsbank/some-crazy-things-media` (push). The classifier blocked it once until the user asked for it, so if it is refused, ask the user. Clone with `--depth 1 --filter=blob:none`; before each push run `git fetch --depth=1 origin main && git rebase origin/main`; push with `-c push.negotiate=true`. Never delete files there.
+- **ffmpeg 7**: the BtbN static build in the scratchpad (`curl -L github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz`). The classifier asked for the user's OK the first time it ran (AskUserQuestion worked).
+- **Retention playbook** (`ideas/RETENTION_PLAYBOOK.md` on branch `ideas`):
+  - frame 0 is a CLOSE, sharp shot of the hero machine in action (35–50% of the frame height), with a fast pull-out to the aerial by ~1.5–1.9 s;
+  - a 2–5 word headline tile at y ≈ 370–670 for ~2 s;
+  - the first line is ≤ 8 words with the stake, starts by 0.2 s, speed ≈ 1.05–1.1;
+  - a sound hit on frame 0, and the music comes in after 0.4 s;
+  - the HUD fades in at 1.0 s and maps or meters from 1.8 s;
+  - the first 2 s stay nearly sharp (the `sharp(t)` band, aperture ≈ 700), then the full band;
+  - the last 0.55 s dives back to the frame-0 shot (loop);
+  - rotate the opening type (log in the table above).
+- **Content playbook** (`ideas/CONTENT_PLAYBOOK.md`):
+  - the stake in words by 1 s;
+  - no gap > 2.5 s without a line and an event;
+  - a new, bigger beat every 3–5 s;
+  - a twist at 50–60%;
+  - show the causes;
+  - the payoff is a win/fail image plus one surprising line of ≤ 12 words;
+  - plant a "spot it" detail at frame 0 and pay it off at the end;
+  - the last line names the next episode (the question goes in the pinned comment);
+  - rotate the skeletons (checklist race, chain reaction, pick a side, one rule changed, result first);
+  - run the pre-render checklist (§5) on the script and the stills;
+  - log the skeleton (table above).
+- **Visual upgrade:**
+  - golden hour: sun `#ffc58c` at elevation 22–24°, warm fog `#efd6bd`, a sky warm at the horizon, `U.lit = 1` for lit windows;
+  - bloom .6/.9/.5; saturation 1.5, warm .42; GTAO on (`ao` default; `?noao` for quick stills);
+  - a lighter blur band than before (amp ≈ 26–28, maxCoc 26: blur reads as low quality on phones);
+  - **density**: `films/all-green/dressing.js` (town: parked cars, lamps, benches, planters, café terraces, corner crowds, rooftop laundry/flags/pots, pigeons, gulls) and `films/two-tugs/harbour.js` (marina, anchored boats, buoys, movers, foam, floating gulls, quay crates/barrels/bikes/kiosks/flags, roof AC units/antennas/solar/tanks, horizon sails), plus water ripples and glints in `films/two-tugs/world.js`.
+- **Density grid check** (required before rendering): render stills every 2 s with `--q 'noao&nohud'`, then run the empty-cell script:
+  - 6×10 grid; a cell is "empty" if < 1.2% of its pixels have a Sobel gradient > 40;
+  - target ≤ 20–25%;
+  - report before and after (Two Tugs: 58% → 24%).
+  - The script (copy into the film or the scratchpad):
+    ```python
+    import sys, numpy as np; from PIL import Image; from scipy.ndimage import sobel
+    tot = emp = 0
+    for f in sys.argv[1:]:
+        Y = np.asarray(Image.open(f).convert('L'), np.float32); g = np.hypot(sobel(Y, 0), sobel(Y, 1)); H, W = Y.shape; ch, cw = H // 10, W // 6
+        e = sum((g[r*ch:(r+1)*ch, c*cw:(c+1)*cw] > 40).mean() < .012 for r in range(10) for c in range(6)); tot += 60; emp += e
+    print(f'empty {emp}/{tot} = {emp/tot*100:.0f}%')
+    ```
+- **Comparison metrics** (frame 0 of the final mp4 at 270×480: brightness, luma sd, mean HSV S, mean |frame(1 s) − frame(0)|, blurred share = local Laplacian energy < 5% of its 95th percentile at 540×960): Storm Surge 107 / 39 / 70 / 6.6 / 62%. Prop count via `window.SCENE` (exposed in main.js): Storm Surge 139 meshes + 2,676 instances; All Green 65 meshes + 12,384 instances.
+
+**Render pipeline and gotchas**
+- `setup.sh deps voice music`, `fonts.sh`, then per film: tts + asr_check, `events.mjs`, `subs.py`, `music/score.py`, `mix.py`, `video.mjs --workers 2` (SwiftShader; with GTAO ≈ 11 s per frame per worker, so a 32 s film ≈ 75 min), `mux.sh` with BtbN ffmpeg on PATH. Each film's `build.sh` does all of it.
+- Start long renders with the Bash tool's `run_in_background`, never inside a `a && b && (render) &` chain: if an earlier step fails, the render silently never starts.
+- Stills during a render slow it a lot; keep them few.
+- A voice line's duration changes the timing: re-check the line overlaps after each TTS change. Speech-check fixes: "quay" → asr "key"; "metres" → asr "meters"; "Engine Nine" in the text, "Engine 9" in asr; "Tow it" → "Told it", so use "Call a tow truck".
