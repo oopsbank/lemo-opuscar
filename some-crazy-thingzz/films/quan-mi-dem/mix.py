@@ -56,7 +56,7 @@ def steps(d):
     for k in range(int(d / .62)): s = int(k * .62 * SR); f = stomp(.6 * (1 - k / (d / .62)) + .1); x[s:s + len(f)] += f[:len(x) - s]
     return x
 
-for e in E['events']:
+for e in E.get('events', E.get('ev', [])):
     ty, t, d, v = e['type'], e['t'], e.get('dur', .5), e.get('v', 1)
     if ty == 'boil': add(buf, boil(d), t, .16, -.2)
     elif ty == 'wind': add(buf, wind(d), t, .1, -.5); add(buf, wind(d)[::-1].copy(), t, .1, .5)
