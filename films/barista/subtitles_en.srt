@@ -3,54 +3,46 @@
 THE CUSTOMER: Is my latte ready?
 
 2
-00:00:01,250 --> 00:00:03,567
+00:00:01,250 --> 00:00:02,560
 You are a barista.
 
 3
-00:00:04,000 --> 00:00:06,550
+00:00:02,600 --> 00:00:05,050
 THE REGULAR: Name’s Siobhan.
 
 4
-00:00:06,600 --> 00:00:09,500
+00:00:05,100 --> 00:00:07,850
 YOU: Latte for… Bird? Eye?
 
 5
-00:00:09,600 --> 00:00:12,700
+00:00:07,900 --> 00:00:10,750
 YOU: Oat! Soy! Almond! Next!
 
 6
-00:00:13,500 --> 00:00:17,060
+00:00:10,800 --> 00:00:14,360
 THE CUSTOMER: Oat latte. Half-caf. Extra hot.
 
 7
-00:00:17,100 --> 00:00:19,950
+00:00:14,400 --> 00:00:17,250
 THE CUSTOMER: No foam. Extra foam.
 
 8
-00:00:20,000 --> 00:00:22,950
-YOU: No foam… extra… Sure!
-
-9
-00:00:24,400 --> 00:00:27,150
-THE CUSTOMER: Is my latte ready?
-
-10
-00:00:27,200 --> 00:00:30,450
+00:00:19,000 --> 00:00:21,960
 YOU: One oat latte! Extra foam!
 
-11
-00:00:30,500 --> 00:00:32,660
+9
+00:00:22,000 --> 00:00:24,110
 THE CUSTOMER: Too foamy.
 
-12
-00:00:32,700 --> 00:00:36,200
+10
+00:00:24,150 --> 00:00:27,500
 THE MANAGER: Why is my café a bubble bath?
 
-13
-00:00:39,700 --> 00:00:43,660
-THE MANAGER: Sold out! Tomorrow, you fix the computers.
+11
+00:00:30,550 --> 00:00:34,210
+THE MANAGER: Sold out! Tomorrow: IT help desk.
 
-14
-00:00:43,700 --> 00:00:44,400
+12
+00:00:34,250 --> 00:00:34,950
 THE CUSTOMER: Same again!
 

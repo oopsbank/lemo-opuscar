@@ -1,5 +1,5 @@
 #!/bin/sh
-# One command: "You Are a Barista" (Job #7; 2.5D Pixel Art, vertical 1080×1920, 60 fps, 44.4 s)
+# One command: "You Are a Barista" (Job #7; 2.5D Pixel Art, vertical 1080×1920, 60 fps, 34.95 s)
 #   sh films/barista/build.sh            fonts → voices → score → events → mix → subtitles → picture → master → poster
 # Needs the library's core, voice and music tiers (setup.sh deps voice music), and network once for the Google Fonts slices.
 set -e
@@ -22,8 +22,8 @@ node core/render/events.mjs "$HERE" --size $SIZE --q "$Q&textonly=1"
 node core/render/readcheck.mjs "$HERE" --size $SIZE --q "$Q&textonly=1"
 "$PY" "$HERE/mix.py"
 "$PY" "$HERE/tools/srt.py" "$HERE/subtitles_en.srt"
-# 3. picture: tilt-shift diorama, 2664 frames. With software WebGL (LEMO_ANGLE=swiftshader) this takes hours: render in parts
-#    with tools/render_range.mjs and join them, e.g. for p in '0 11.1' '11.1 22.2' '22.2 33.3' '33.3 44.4'; do …; done
+# 3. picture: tilt-shift diorama, 2097 frames. With software WebGL (LEMO_ANGLE=swiftshader) this takes hours: render in parts
+#    with tools/render_range.mjs and join them, e.g. for p in '0 8.75' '8.75 17.5' '17.5 26.25' '26.25 34.95'; do …; done
 node core/render/video.mjs "$HERE" --fps $FPS --workers 3 --size $SIZE --q "$Q" --out "$HERE/out/video.mp4"
 # 4. master: mix.py already sets −14 LUFS / −1.2 dBTP; mux.sh needs ffmpeg 7+, otherwise mux directly
 if sh core/render/mux.sh "$HERE/out/video.mp4" "$HERE/out/mix.wav" "$HERE/$NAME.mp4" $FPS 0; then :; else

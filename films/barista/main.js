@@ -21,7 +21,7 @@ const post = makePost(renderer, set.scene, camera, W, H, { ssaa: SS });
 const V = post.vig.uniforms;
 
 // the grade: a warm morning → hotter and harsher from MAX through the flood → red at GAME OVER → warm again for the loop; a cold blue rewind
-const KEYS = [[0, [.08, .28, 1.12, 1.02]], [21.5, [.08, .28, 1.12, 1.02]], [24.0, [.14, .34, 1.18, 1.04]], [36.1, [.14, .34, 1.18, 1.04]], [36.5, [.3, .36, .8, .9]], [39.3, [.3, .36, .8, .9]], [39.7, [.08, .28, 1.12, 1.02]], [DUR, [.08, .28, 1.12, 1.02]]];
+const KEYS = [[0, [.08, .28, 1.12, 1.02]], [17.0, [.08, .28, 1.12, 1.02]], [18.5, [.14, .34, 1.18, 1.04]], [27.3, [.14, .34, 1.18, 1.04]], [27.5, [.3, .36, .8, .9]], [30.2, [.3, .36, .8, .9]], [30.55, [.08, .28, 1.12, 1.02]], [DUR, [.08, .28, 1.12, 1.02]]];
 const grade = t => { let i = 0; while (i < KEYS.length - 2 && t >= KEYS[i + 1][0]) i++; const [a, A] = KEYS[i], [b, Bv] = KEYS[i + 1], u = ss(seg(t, a, b)); return A.map((v, k) => lerp(v, Bv[k], u)); };
 
 const _v = new THREE.Vector3();

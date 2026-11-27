@@ -339,15 +339,15 @@ export function buildCafe() {
     if (id === 'cup') { const u = ss(seg(t, T.cup, T.read)); return { p: L3([.4, 1.3, -.16], [.39, 1.28, -.22], u), l: [.3, 1.14, -.72] }; }
     if (id === 'read') { const u = ss(seg(t, T.read, T.rush)); return { p: L3([.25, 1.8, 1.6], [.15, 1.75, 1.35], u), l: L3([-.5, 1.6, -1.4], [-.5, 1.62, -1.4], u) }; }
     if (id === 'rush') { const u = ss(seg(t, T.rush, T.cust)); return { p: [lerp(-.4, .6, u), 2.1, 3.7], l: [lerp(-.4, .4, u), 1.2, -1.0] }; }
-    if (id === 'order') { const u = ss(seg(t, T.cust, 16.0)); return { p: L3([-1.0, 1.9, 3.4], [-.9, 1.85, 3.1], u), l: L3([-.35, 1.35, -.7], [-.35, 1.35, -.7], u) }; }
-    if (id === 'ticket') { const u = ss(seg(t, 16.0, T.knob)); return { p: L3([1.5, 1.45, 3.0], [1.9, 1.7, 3.4], u), l: L3([1.2, .6, -.6], [1.9, .4, -1.0], u) }; }
+    if (id === 'order') { const u = ss(seg(t, T.cust, T.tk)); return { p: L3([-1.0, 1.9, 3.4], [-.9, 1.85, 3.1], u), l: L3([-.35, 1.35, -.7], [-.35, 1.35, -.7], u) }; }
+    if (id === 'ticket') { const u = ss(seg(t, T.tk, T.knob)); return { p: L3([1.5, 1.45, 3.0], [1.9, 1.7, 3.4], u), l: L3([1.2, .6, -.6], [1.9, .4, -1.0], u) }; }
     if (id === 'knob') { const u = ss(seg(t, T.knob, T.shake)); return { p: L3([-2.2, 1.55, .9], [-2.05, 1.5, .7], u), l: [-.95, 1.45, -1.0] }; }
     if (id === 'shake') { const u = ss(seg(t, T.shake, T.twist)); return { p: L3([-.6, 1.9, 2.8], [-.8, 1.8, 2.2], u), l: [-1.3, 1.45, -1.0] }; }
     if (id === 'catch') return { p: [.9, 2.7, 2.6], l: [-.8, 1.55, -1.2] };
     if (id === 'flood') { const u = ss(seg(t, T.flood, T.sip)); return { p: L3([.2, 2.6, 7.0], [-.3, 4.0, 9.6], u), l: L3([-.7, 1.3, -1.4], [-.6, 1.6, -1.4], u) }; }
     if (id === 'sip') return { p: [.9, 1.8, 2.4], l: [-.1, 1.4, -.5] };
     if (id === 'burst') return { p: [2.6, 2.9, 2.4], l: [5.3, 1.1, -4.0] };
-    if (id === 'boss') { const u = ss(seg(t, 32.7, T.fired)); return { p: L3([3.5, 1.85, -.2], [3.7, 1.8, -.6], u), l: [5.4, 1.3, -4.6] }; }
+    if (id === 'boss') { const u = ss(seg(t, T.bossShot, T.fired)); return { p: L3([3.5, 1.85, -.2], [3.7, 1.8, -.6], u), l: [5.4, 1.3, -4.6] }; }
     const u = ss(seg(t, T.hired, T.k2)); return { p: L3([2.6, 2.6, 7.2], [2.2, 2.4, 6.4], u), l: L3([2.6, 1.5, -2.4], [2.4, 1.5, -2.4], u) };
   }
 
@@ -397,12 +397,12 @@ export function buildCafe() {
     { let f = 'stand', x = P.hero[0], y = 0, z = P.hero[1], flip = false, sq = 0;
       const atWand = () => { x = -.62; z = -1.42; flip = true; f = pick(t, 9) ? 'wand' : 'wand1'; y = .03 + .05 * Math.abs(Math.sin(t * 18)); sq = .05 * Math.sin(t * 30); };
       if (t < T.wide || t >= T.k2) atWand();
-      else if (t < T.reg) f = t < 2.4 ? 'stare' : (Math.floor(t * 8) % 19 === 0 ? 'blink' : 'smile');
+      else if (t < T.reg) f = t < 2.1 ? 'stare' : (Math.floor(t * 8) % 19 === 0 ? 'blink' : 'smile');
       else if (t < T.cup) { f = t < T.write ? (says(t, 'r1') ? 'smile' : 'talkS') : pick(t, 5) ? 'write0' : 'write1'; if (t < T.write) f = 'smile'; }
-      else if (t < T.rush) { f = says(t, 'y1') ? 'readTalk' : t > 8.4 ? 'readQ' : 'read'; sq = t < T.read + .15 ? .1 * Math.sin((t - T.read) * 30) : 0; }
+      else if (t < T.rush) { f = says(t, 'y1') ? 'readTalk' : t > 7.0 ? 'readQ' : 'read'; sq = t < T.read + .15 ? .1 * Math.sin((t - T.read) * 30) : 0; }
       else if (t < T.cust) { const k = Math.floor((t - T.rush) / .5) % 3, u = ((t - T.rush) % .5) / .5; x = [-1.0, -.3, .3][k]; f = ['lever', 'pour', says(t, 'y2') ? 'slide' : 'slideQ'][k]; sq = u < .2 ? -.15 * (1 - u * 5) : 0; flip = k === 0; }
-      else if (t < T.knob) f = t < T.ticket ? 'smile' : t < 16.5 ? 'stare' : pick(t, 2) ? 'sweat' : 'worry';
-      else if (t < T.twist) { x = -.55; z = -1.5; flip = true; f = t < T.shake ? (says(t, 'y3') ? 'knobTalk' : t < T.max + .2 ? 'knob' : 'knobS') : t < 23.5 ? 'worry' : 'shock'; sq = t >= T.max && t < T.max + .3 ? .12 * Math.sin((t - T.max) * 30) : 0; }
+      else if (t < T.knob) f = t < T.ticket ? 'smile' : t < 13.5 ? 'stare' : pick(t, 2) ? 'sweat' : 'worry';
+      else if (t < T.twist) { x = -.55; z = -1.5; flip = true; f = t < T.shake ? (t < T.max + .2 ? 'knob' : 'knobS') : t < 18.3 ? 'worry' : 'shock'; sq = t >= T.max && t < T.max + .3 ? .12 * Math.sin((t - T.max) * 30) : 0; }
       else if (t < T.flood) atWand();
       else if (t < T.sip) { x = lerp(-.62, -.3, seg(t, T.flood, T.serve)); z = -1.4; y = F * .45 + .04 * Math.sin(t * 3); flip = false; f = t < T.serve ? (pick(t, 5) ? 'swim' : 'swim1') : says(t, 'y4') ? 'offerFoam' : 'offerFoamQ'; }
       else if (t < T.hired) { x = -.3; z = -1.4; y = F * .45; f = t < T.burst ? 'offerFoamQ' : 'sadFoam'; }
@@ -411,11 +411,11 @@ export function buildCafe() {
     // —— THE CUSTOMER ——
     { let f = 'tap', x = .15, y = 0, z = -.2, vis = false, flip = true, sq = 0;
       if (t < T.wide || t >= T.k2) { vis = true; f = says(t, t < T.wide ? 'c0' : 'c4') ? 'tapTalk' : 'tap'; }
-      else if (t >= 12.2 && t < T.hired) { vis = true; x = .15; z = .2;
-        if (t < T.cust + .3) { const u = seg(t, 12.2, T.cust + .3); x = lerp(4.4, .15, u); z = lerp(1.0, .2, u); f = `w${walkStep(t, true)}`; f = 'w' + walkStep(t, true); }
+      else if (t >= 9.7 && t < T.hired) { vis = true; x = .15; z = .2;
+        if (t < T.cust + .3) { const u = seg(t, 9.7, T.cust + .3); x = lerp(4.4, .15, u); z = lerp(1.0, .2, u); f = `w${walkStep(t, true)}`; f = 'w' + walkStep(t, true); }
         else if (t < T.knob) f = says(t, 'c1') || says(t, 'c2') ? 'tapTalk' : 'tap';
         else if (t < T.twist) f = 'cross';
-        else if (t < T.flood) f = says(t, 'c0b') ? 'tapTalk' : 'tap';
+        else if (t < T.flood) f = pick(t, 4) ? 'tapTalk' : 'tap';
         else if (t < T.sip) f = t < T.serve + .8 ? 'cross' : 'tap';
         else if (t < T.too) f = 'sip';
         else f = says(t, 'c3') ? 'moustTalk' : 'moust';
@@ -427,7 +427,7 @@ export function buildCafe() {
     { const vis = t >= T.burst && t < T.k2; boss.root.visible = vis;
       if (vis) { let x = 5.45, z = -4.6, f = 'foam', flip = true;
         if (t < T.boss) { const u = seg(t, T.burst, T.boss); x = lerp(6.8, 5.45, u); z = -4.7; f = `w${walkStep(t, true)}`; }
-        else if (t < T.hired) f = says(t, 'm1') ? 'foamTalk' : t > 35.0 ? 'foamNod' : 'foam';
+        else if (t < T.hired) f = says(t, 'm1') ? 'foamTalk' : t > 26.6 ? 'foamNod' : 'foam';
         else { x = 1.9; z = .9; f = says(t, 'm2') ? 'foamNodTalk' : 'foamNod'; }
         place(boss, x, 0, z); boss.frame(f); boss.face(cam, flip); } }
     // —— THE REGULAR (Siobhan) ——
@@ -462,7 +462,7 @@ export function buildCafe() {
     else if (id === 'wide' || id === 'flood') subj = v3(-.6, 1.2, -1.0);
     else if (id === 'cup') subj = v3(.3, 1.14, -.72);
     else if (id === 'rush') subj = v3(lerp(-1.1, 1.2, ss(seg(t, T.rush, T.cust))), 1.2, -.8);
-    else if (id === 'ticket') subj = v3(lerp(1.2, 3.4, ss(seg(t, 16.0, T.knob))), .6, lerp(-.6, -1.6, ss(seg(t, 16.0, T.knob))));
+    else if (id === 'ticket') subj = v3(lerp(1.2, 3.4, ss(seg(t, T.tk, T.knob))), .6, lerp(-.6, -1.6, ss(seg(t, T.tk, T.knob))));
     else if (id === 'knob' || id === 'shake') subj = v3(-1.4, 1.4, -.8);
     else if (id === 'sip') subj = v3(.15, 1.45, .2);
     else if (id === 'burst' || id === 'boss') subj = v3(5.45, 1.3, -4.4);

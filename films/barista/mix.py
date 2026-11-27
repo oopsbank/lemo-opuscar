@@ -18,11 +18,11 @@ T = lambda kind: next(e['t'] for e in EV if e['type'] == kind)
 
 # —— ambience: café chatter, cups and spoons, the machine's hum, the street muffled; quieter under GAME OVER ——
 tone = lp(brown(DUR), 300) * .5 + hp(lp(noise(DUR), 3000), 300) * .03
-toneG = curve([(0, 1), (36.5, 1), (36.6, .25), (39.6, .25), (39.7, 1), (DUR, 1)])
+toneG = curve([(0, 1), (27.5, 1), (27.6, .25), (30.45, .25), (30.55, 1), (DUR, 1)])
 crowd = np.zeros(N)
 for k in range(10):
     f0 = rng.uniform(250, 750); crowd += bp(noise(DUR), f0, f0 * 2.2) * (.5 + .5 * np.sin(2 * np.pi * rng.uniform(3, 6) * tt + rng.uniform(0, 6))) ** 2
-crowd *= curve([(0, .5), (9.5, .5), (10.0, .8), (13.0, .6), (24.0, .6), (24.5, 1.0), (30.5, 1.0), (31.0, .4), (36.5, .4), (36.6, 0), (39.6, 0), (39.7, .7), (DUR, .7)])
+crowd *= curve([(0, .5), (8.0, .5), (8.5, .8), (10.5, .6), (18.5, .6), (19.0, 1.0), (22.0, 1.0), (22.5, .4), (27.5, .4), (27.6, 0), (30.45, 0), (30.55, .7), (DUR, .7)])
 clinks = np.zeros(N)
 for k in range(60):
     at = rng.uniform(0, DUR - .3); x = t_(.25); f = rng.uniform(2500, 5200); z = np.sin(2 * np.pi * f * x) * np.exp(-x / .04) * rng.uniform(.2, .6); s0 = int(at * SR); clinks[s0:s0 + len(z)] += z[:N - s0]

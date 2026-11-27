@@ -42,18 +42,6 @@
   "speed": 1.0
  },
  {
-  "id": "y3",
-  "text": "No foam... extra... Sure!",
-  "voice": "am_puck",
-  "speed": 1.1
- },
- {
-  "id": "c0b",
-  "text": "Is my latte ready?",
-  "voice": "bf_isabella",
-  "speed": 1.08
- },
- {
   "id": "y4",
   "text": "One oat latte! Extra foam!",
   "voice": "am_puck",
@@ -73,7 +61,7 @@
  },
  {
   "id": "m2",
-  "text": "Sold out! Tomorrow, you fix the computers.",
+  "text": "Sold out! Tomorrow: I.T. help desk.",
   "voice": "bm_george",
   "speed": 1.02
  },

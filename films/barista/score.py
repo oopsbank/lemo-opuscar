@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(LIB, 'core/audio'))
 from sfx import SR, lp, hp, bp, noise, norm, t_
 import pluck as PL
 
-DUR = 44.4; N = int(DUR * SR); E8 = .25
+DUR = 34.95; N = int(DUR * SR); E8 = .25
 rng = np.random.default_rng(9)
 mus = np.zeros((N, 2)); cues = []
 def place(x, at, g=1.0, pan=0.0):
@@ -107,33 +107,33 @@ def stab(at, ms=(65, 69, 72, 77), v=.5):
 
 # 0.0–1.2: the eruption: frantic, a horn stab on frame 0 (the hiss is in the mix); the tape stop at the rewind
 stab(0.0, (65, 69, 72, 77), .5); groove(0.0, 1, 0, frantic=True, stop=1.2, v=.9)
-# 1.5–9.5: the easy morning (the cup insert gets a vibes sting)
-groove(1.5, 4, 0, v=.85)
-place(vibes(84, .6, .5), 6.0, .5)
-# 9.5–13.0: the rush: double time
-groove(9.5, 2, 0, frantic=True, stop=13.0)
-for t in [10.0, 11.0, 12.0, 12.5]: place(horn(77, .14, .35), t, .4, -.2)
-# 13.5–19.5: the Customer: a pompous walking bass and a single horn per bar
-for k in range(13): place(pizz([41, 45, 48, 50, 48, 45, 43, 41, 45, 48, 52, 53, 52][k], .45, .75), 13.5 + k * .5, .9)
-for t, m in [(13.5, 65), (15.5, 64), (17.5, 62)]: place(horn(m, .8, .32), t, .4); cues.append(t)
-# 20.0–24.0: tension: a drone that rises, a ticking clock on the beat; MAX at 21.5 is a stab
-place(drone(29, 4.0, .3), 20.0, .55)
-for k in range(8): place(rim(.25), 20.0 + k * .5, .4, .3)
-stab(21.5, (60, 63, 66, 69), .45); cues.append(21.5)
-for k in range(4): place(square(64 + k, .2, .18), 22.0 + k * .5, .4, .2)
-# 24.0–30.5: the flood: frantic minor, horns
-stab(24.0, (53, 60, 65, 68), .55)
-groove(24.0, 3, 0, frantic=True, stop=30.5, minor=True)
-for t in [25.0, 26.0, 27.0, 28.0, 29.0, 29.5, 30.0]: place(horn(72 if t % 1 == 0 else 77, .14, .35), t, .4, -.2)
-# 32.0: SPLASH, a falling horn; a drone under the Manager
-stab(32.0, (41, 48, 51, 54), .55); place(horn(60, .8, .4, bend=-.5), 32.1, .45); cues.append(32.0)
-place(drone(29, 3.8, .33), 32.6, .6)
-# 36.5: the game-over jingle
-for k, (m, d) in enumerate([(72, .4), (71, .4), (70, .4), (69, 1.2)]): place(square(m, d, .4), 36.5 + k * .5, .55)
-place(pizz(29, 2.0, .8), 38.0, .8); place(square(53, 1.0, .25), 38.0, .4); place(square(57, 1.0, .2), 38.0, .35)
-cues += [36.5, 38.5]
-# 39.5 → the end: the groove again (warm), cut mid-phrase so it loops into the eruption
-groove(39.5, 3, 0, v=.85)
+# 1.5–8.0: the easy morning (the cup insert gets a vibes sting)
+groove(1.5, 4, 0, v=.85, stop=8.0)
+place(vibes(84, .6, .5), 4.6, .5)
+# 8.0–10.5: the rush: double time
+groove(8.0, 2, 0, frantic=True, stop=10.5)
+for t in [8.5, 9.0, 9.5, 10.0]: place(horn(77, .14, .35), t, .4, -.2)
+# 10.5–17.0: the Customer: a pompous walking bass and a horn per bar
+for k in range(13): place(pizz([41, 45, 48, 50, 48, 45, 43, 41, 45, 48, 52, 53, 52][k], .45, .75), 10.5 + k * .5, .9)
+for t, m in [(10.5, 65), (12.5, 64), (14.5, 62)]: place(horn(m, .8, .32), t, .4); cues.append(t)
+# 17.0–18.5: the knob to MAX: a rising drone, a ticking clock, a stab at MAX
+place(drone(29, 1.6, .3), 17.0, .55)
+for k in range(3): place(rim(.25), 17.0 + k * .5, .4, .3)
+stab(17.5, (60, 63, 66, 69), .45); cues.append(17.5)
+place(square(66, .2, .18), 18.0, .4, .2)
+# 18.5–22.0: the flood: frantic minor, horns
+stab(18.5, (53, 60, 65, 68), .55)
+groove(18.5, 2, 0, frantic=True, stop=22.0, minor=True)
+for t in [19.5, 20.0, 20.5, 21.0, 21.5]: place(horn(72 if t % 1 == 0 else 77, .14, .35), t, .4, -.2)
+# 24.0: SPLASH, a falling horn; a drone under the Manager
+stab(24.0, (41, 48, 51, 54), .55); place(horn(60, .8, .4, bend=-.5), 24.1, .45); cues.append(24.0)
+place(drone(29, 3.0, .33), 24.5, .6)
+# 27.5: the game-over jingle
+for k, (m, d) in enumerate([(72, .4), (71, .4), (70, .4), (69, 1.2)]): place(square(m, d, .4), 27.5 + k * .5, .55)
+place(pizz(29, 1.5, .8), 29.0, .8); place(square(53, 1.0, .25), 29.0, .4); place(square(57, 1.0, .2), 29.0, .35)
+cues += [27.5, 29.0]
+# 30.5 → the end: the groove again (warm), cut mid-phrase so it loops into the eruption
+groove(30.5, 3, 0, v=.85)
 # —— small room reverb ——
 L = int(1.0 * SR); ir = rng.standard_normal((L, 2)) * np.exp(-np.arange(L) / SR / .28)[:, None]; ir[:int(.01 * SR)] = 0; ir /= np.sqrt((ir ** 2).sum(0))
 from scipy.signal import fftconvolve

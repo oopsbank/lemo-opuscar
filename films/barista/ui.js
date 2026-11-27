@@ -141,7 +141,7 @@ function rewind(t) {
     for (let k = 0; k < 4; k++) { const y = ((k * 520 + u * 4200) % (H + 200)) - 100; g.fillStyle = k % 2 ? '#e8f0ff' : '#203040'; g.fillRect(0, y, W, 18 + k * 6); }
     g.globalAlpha = 1; g.textAlign = 'left'; g.textBaseline = 'middle'; outlined('◀◀ REWIND', 70, 200, `700 92px ${SK}`, '#fbf6ea', INK, 12); g.restore(); }
   if (t >= T.wide && t < 3.9) { const a = 1 - ss(seg(t, 3.7, 3.9)); g.save(); g.globalAlpha = a; g.textBaseline = 'middle'; g.textAlign = 'left';
-    pbox(40, 210, 520, 84, { fill: '#17142a', b: 5, n: 5 }); g.font = `700 34px ${SK}`; g.fillStyle = '#9ad0ff'; g.fillText('◀◀ 30 MIN EARLIER', 72, 253); g.restore(); }
+    pbox(40, 520, 520, 84, { fill: '#17142a', b: 5, n: 5 }); g.font = `700 34px ${SK}`; g.fillStyle = '#9ad0ff'; g.fillText('◀◀ 30 MIN EARLIER', 72, 563); g.restore(); }
 }
 // —— emotes over heads ——
 function bubble(t, at, a0, a1, kind, big = 1) {
@@ -227,16 +227,16 @@ export function drawOverlay(t) {
   hud(t);
   bubble(t, HUD.you, -.12, 1.15, '!!', .9);   // frame 0: the hero's "!!" is already popping
   bubble(t, HUD.cat, T.wide + .3, T.rush, 'zzz', .8);
-  bubble(t, HUD.reg, 7.3, 8.9, 'q', .9);
-  bubble(t, HUD.you, 16.6, T.knob, 'sweat');
+  bubble(t, HUD.reg, 5.9, 7.7, 'q', .9);
+  bubble(t, HUD.you, 13.6, T.knob, 'sweat');
   bubble(t, HUD.you, T.max, T.max + 1.0, '!', .9);
   bubble(t, HUD.mach, T.twist, T.twist + 1.1, '!!', 1.1);
-  bubble(t, HUD.boss, 33.1, 35.2, 'vein', .9);
+  bubble(t, HUD.boss, 24.6, 26.7, 'vein', .9);
   bubble(t, HUD.you, T.k2, DUR + .1, '!!', .9);
-  popup(t, HUD.cup, T.cup + .05, 'NAILED IT!', '#9cf06a', 80);
+  popup(t, [540, 1060], T.cup + .05, 'NAILED IT!', '#9cf06a', 96);
   popup(t, HUD.cust, T.too + .9, 'TOO FOAMY: -1 STAR', '#ff7a6a', 56);
   popup(t, HUD.queue, T.hired + .4, 'SOLD OUT!', '#ffd23a', 96);
-  stamp(t, T.rush + .05, 11.7, 'RUSH HOUR');
+  stamp(t, T.rush + .05, T.rush + 2.2, 'RUSH HOUR');
   stamp(t, T.burst + .05, T.burst + 2.2, 'SPLASH!');
   mods(t);
   for (const v of VO) { if (v.dlg) dialog(t, v.who, v.sub, v.box, v.t, DURS[v.id] || 1); else subtitle(t, v); }
@@ -253,9 +253,9 @@ export function texts(t) {
   for (const b of BANNERS) if (banA(b, t) > 0) out.push({ id: b.id, text: b.kicker + ' ' + b.text, x0: 70, y0: CARD_Y - 112, x1: 1010, y1: CARD_Y + 90 });
   if (t >= CAPTION.a && t < CAPTION.b) out.push({ id: 'caption', text: CAPTION.text, x0: 80, y0: 290, x1: 1000, y1: 470, pass: true });
   if (t >= GO.a && t < GO.b - .25) out.push({ id: 'fired', text: 'GAME OVER YOU’RE FIRED', x0: 70, y0: 440, x1: 1010, y1: 840 });
-  if (t >= T.rush + .05 && t < 11.7) out.push({ id: 'rush', text: 'RUSH HOUR', x0: 200, y0: 500, x1: 880, y1: 760 });
+  if (t >= T.rush + .05 && t < T.rush + 2.2) out.push({ id: 'rush', text: 'RUSH HOUR', x0: 200, y0: 500, x1: 880, y1: 760 });
   if (t >= T.burst + .05 && t < T.burst + 2.2) out.push({ id: 'splash', text: 'SPLASH!', x0: 200, y0: 500, x1: 880, y1: 760 });
-  if (t >= T.wide && t < 3.9) out.push({ id: 'earlier', text: '30 MIN EARLIER', x0: 40, y0: 210, x1: 560, y1: 294 });
+  if (t >= T.wide && t < 3.9) out.push({ id: 'earlier', text: '30 MIN EARLIER', x0: 40, y0: 520, x1: 560, y1: 604 });
   if (t >= T.ticket && t < T.max) out.push({ id: 'mods', text: 'MODS', x0: W - 360, y0: 470, x1: W - 30, y1: 1260, pass: true });   // a growing list read as it lands
   return out;
 }

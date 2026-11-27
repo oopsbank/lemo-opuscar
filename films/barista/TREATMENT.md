@@ -1,6 +1,6 @@
 # You Are a Barista — Pixel Life, Job #7
 
-2.5D pixel art (styles/hd-2d), vertical 1080×1920, 60 fps, **41.7 s**, English. The recurring hero (his face, his lime colour, here
+2.5D pixel art (styles/hd-2d), vertical 1080×1920, 60 fps, **34.95 s** (cut from a 44.4 s first timing at the manager's request: keep films ≤ 35 s, cut set-up not gags), English. The recurring hero (his face, his lime colour, here
 a lime apron) behind the counter of a busy little café on a snowy December morning, next to a huge brass espresso machine. A name
 he can't spell, the morning rush, then The Customer orders "No foam. Extra foam.", he turns the steam to MAX to obey, and the
 machine floods the café with milk foam. Fired. But the "flood latte" sells out.
@@ -30,7 +30,7 @@ machine floods the café with milk foam. Fired. But the "flood latte" sells out.
   catch-up laugh.
 - **C. A countdown to 9 am (100 orders).** Kept only as the HUD quest; as a skeleton it repeats Pizza Guy's clock.
 
-## Beat sheet (B = 0.5 s, 120 bpm)
+## Beat sheet (B = 0.5 s, 120 bpm) — first timing; the 35 s cut is in story.js (T): rewind 1.2, quest 2.0, name 2.6, cup 4.6, rush 8.0, Customer 10.5, knob 17.0, MAX 17.5, twist 18.5, sip 22.0, splash 24.0, fired 27.5, payoff 30.55, loop 34.25. Dropped: the catch-up repeat line and the hero's "Sure!" line
 | t (s) | Beat | Picture | Sound / line |
 |---|---|---|---|
 | 0.0 | **Eruption** (frame 0) | Close: the hero hangs on to the steam wand while a foam geyser hits the ceiling; the Customer in the foreground. Headline FOAM OVERLOAD | hiss; Customer: "Is my latte ready?" |
