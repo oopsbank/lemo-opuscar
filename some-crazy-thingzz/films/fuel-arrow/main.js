@@ -145,7 +145,9 @@ function title(t) {   // the question, slammed in big at the top in the first se
   const k = 1, s = t < .09 ? lerp(1.08, 1, ei(clamp(t / .09))) : 1 + .02 * Math.exp(-(t - .18) * 8) * Math.cos((t - .18) * 30), out = clamp((1.5 - t) / .12);
   og.save(); og.translate(W / 2, H * .24); og.scale(s, s); og.globalAlpha = Math.min(k * 2, out); og.rotate(-.03);
   og.font = '800 96px Baloo2'; og.textAlign = 'center'; og.textBaseline = 'middle'; og.lineJoin = 'round';
-  for (const [txt, y] of [['WHY IS THERE AN ARROW', -64], ['BY THE FUEL ICON?', 64]]) { og.lineWidth = 30; og.strokeStyle = '#000'; og.save(); og.translate(0, 10); og.fillStyle = '#000'; og.strokeText(txt, 0, y); og.fillText(txt, 0, y); og.restore(); og.strokeText(txt, 0, y); og.fillStyle = y > 0 ? '#ffd84a' : '#ffffff'; og.fillText(txt, 0, y); }
+  const L = [['WHY IS THERE', -112], ['AN ARROW BY', 0], ['THE FUEL ICON?', 112]], fit = Math.min(1, 880 / Math.max(...L.map(([x]) => og.measureText(x).width)));
+  og.scale(fit, fit);   // the widest line stays inside the 1080 frame with margin (the first cut ran off both edges)
+  for (const [txt, y] of L) { og.lineWidth = 30; og.strokeStyle = '#000'; og.save(); og.translate(0, 10); og.fillStyle = '#000'; og.strokeText(txt, 0, y); og.fillText(txt, 0, y); og.restore(); og.strokeText(txt, 0, y); og.fillStyle = y >= 0 ? '#ffd84a' : '#ffffff'; og.fillText(txt, 0, y); }
   og.restore();
 }
 function burst(cx, cy, t, t0, col = '#ffffff') {   // impact: a 2-frame flash and radial burst lines

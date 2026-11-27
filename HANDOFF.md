@@ -289,8 +289,9 @@ Content rules in force:
 |---|---|---|---|
 | Golf, Tennis | delivered and pushed | (c) macro | Gus test (identical, pre-playbook) |
 | **Pen Caps** (`films/pen-cap`) | **delivered and pushed** (25.0 s, 17.7 MB, −14.0 LUFS; thumb = frame 0.6 with the headline) | (a) Gus mid-wrong-action | Gus test, retimed with a WARP table |
-| **Pen Hole** (`films/pen-hole`) | **ready to render, not rendered**: voices in `lines.json`; `story.json`/`voices.json` already timed; score/mix scripts done | (d) result first | result first, WARP-retimed |
-| **Fuel-Icon Arrow** (`films/fuel-arrow`) | **built, stills checked for most shots, not rendered**. To do: a density check, a gauge-shot check, a thumbnail | (b) Nana stops him | Nana stops him + myth layer |
+| **Pen Hole** (`films/pen-hole`) | **delivered via SendUserFile, not pushed** (media-repo push blocked) — 25.0 s, 17.1 MB, −13.7 LUFS, empty 4.7% | (d) result first | result first, WARP-retimed |
+| **Fuel-Icon Arrow** (`films/fuel-arrow`) | **delivered via SendUserFile, not pushed** — 26.6 s, 26.4 MB, −13.8 LUFS, empty 4.8%; headline re-fit to 3 lines, captions shrink to fit | (b) Nana stops him | Nana stops him + myth layer |
+| **Tape-Measure Hook** (`films/tape-hook`) | **rendering** (chunked); score/mix on the retimed clock | (c) macro | myth vs real (cookie bet) |
 | next | Tape-Measure Hook (backlog #3, ranked 3rd in the content playbook), then F/J bumps, toothpaste squares | rotate: next should be (c) or (a) | not "Gus test" right after Fuel |
 
 **How to render a film from its source here** (each folder is self-contained):
@@ -341,6 +342,7 @@ Measured frame-0 numbers, Tennis → Pen Caps (270×480):
 | FX/reaction beats | ~3 | 14 |
 
 **Next for the successor:**
-1. Render and deliver **Pen Hole** (`some-crazy-thingzz/films/pen-hole`, ready).
-2. Finish and deliver **Fuel-Icon Arrow** (`films/fuel-arrow`: density check, review the stills, render).
-3. Then **Tape-Measure Hook**.
+1. Finish and deliver **Tape-Measure Hook** (events, score, mix, subs, master6, self-check, thumb).
+2. Push Pen Hole, Fuel, Tape to oopsbank/some-crazy-things-media once the user grants access (all three only sent with SendUserFile so far).
+3. Next idea: F/J bumps (opening (a) or (d), not (c); skeleton not "myth vs real").
+4. **Render with `some-crazy-thingzz/tools/render_chunks.mjs`**, not core/render/video.mjs: the 3-worker video.mjs died twice on screenshot timeouts with no resume. The chunk tool keeps finished 24-frame chunks, so delete a chunk file to re-render just that part. Never run two renders or stills at once: 5 browsers on 4 cores lost the WebGL context.

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Rebuild "No Holes" (why do crackers have holes?) from this folder: sh build.sh
+# Rebuild "Lap Two" (why is there an arrow by the fuel icon?) from this folder: sh build.sh
 # LIB = the Lemo-Opuscar library (core tools, three.js, sample libraries); OUT = where everything is written (nothing is written into this folder).
 # Without a GPU (cloud Linux), run with LEMO_ANGLE=swiftshader: about 20 s a frame per worker at ssaa=1.5.
 set -e
