@@ -1,0 +1,86 @@
+[
+ {
+  "id": "c0",
+  "text": "Is my latte ready?",
+  "voice": "bf_isabella",
+  "speed": 1.08
+ },
+ {
+  "id": "n1",
+  "text": "You are a barista.",
+  "voice": "bm_lewis",
+  "speed": 1.05
+ },
+ {
+  "id": "r1",
+  "text": "Name's Shivawn.",
+  "voice": "af_heart",
+  "speed": 1.05
+ },
+ {
+  "id": "y1",
+  "text": "Latte for... Bird? Eye?",
+  "voice": "am_puck",
+  "speed": 1.1
+ },
+ {
+  "id": "y2",
+  "text": "Oat! Soy! Almond! Next!",
+  "voice": "am_puck",
+  "speed": 1.2
+ },
+ {
+  "id": "c1",
+  "text": "Oat latte. Half-caf. Extra hot.",
+  "voice": "bf_isabella",
+  "speed": 1.05
+ },
+ {
+  "id": "c2",
+  "text": "No foam. Extra foam.",
+  "voice": "bf_isabella",
+  "speed": 1.0
+ },
+ {
+  "id": "y3",
+  "text": "No foam... extra... Sure!",
+  "voice": "am_puck",
+  "speed": 1.1
+ },
+ {
+  "id": "c0b",
+  "text": "Is my latte ready?",
+  "voice": "bf_isabella",
+  "speed": 1.08
+ },
+ {
+  "id": "y4",
+  "text": "One oat latte! Extra foam!",
+  "voice": "am_puck",
+  "speed": 1.15
+ },
+ {
+  "id": "c3",
+  "text": "Too foamy.",
+  "voice": "bf_isabella",
+  "speed": 1.0
+ },
+ {
+  "id": "m1",
+  "text": "Why is my caf\u00e9 a bubble bath?",
+  "voice": "bm_george",
+  "speed": 1.0
+ },
+ {
+  "id": "m2",
+  "text": "Sold out! Tomorrow, you fix the computers.",
+  "voice": "bm_george",
+  "speed": 1.02
+ },
+ {
+  "id": "c4",
+  "text": "Same again!",
+  "voice": "bf_isabella",
+  "speed": 1.1
+ }
+]

@@ -1,0 +1,16 @@
+You Are a Barista (Job #7) — credits for third-party material
+
+Picture: everything drawn in code (three.js scenes, procedural pixel textures and sprites); no images, footage or generated images.
+  three.js r170 — MIT licence — https://threejs.org
+  Engine pieces adapted from the library's 2.5D Pixel Art style (px.js, kit.js, fx.js, post_ts.js).
+
+Type (SIL Open Font License 1.1, files in fonts/ with their licence texts):
+  Pixelify Sans — Stefie Justprince — https://fonts.google.com/specimen/Pixelify+Sans
+  Silkscreen — Jason Kottke — https://fonts.google.com/specimen/Silkscreen
+
+Voices: Kokoro TTS (kokoro-onnx, model Kokoro-82M, Apache 2.0) — voices bf_isabella, bm_lewis, af_heart, am_puck, bm_george — synthetic speech.
+  https://github.com/thewh1teagle/kokoro-onnx · https://huggingface.co/hexgrad/Kokoro-82M
+
+Music: original score written for this film (score.py) — a café bossa in F: physically modelled upright bass, nylon guitar and vibes from
+  the library's core/audio/pluck.py; synthesized shaker, rim, drums, horn stabs, drones and a square-wave jingle. No samples.
+Sound effects and ambience: synthesized in mix.py with the library's core/audio/sfx.py. No recordings.
