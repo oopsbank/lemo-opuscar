@@ -1,0 +1,139 @@
+{
+ "title": "Cap Solo",
+ "dur": 31.4,
+ "caps": [
+  {
+   "t0": 1.6,
+   "t1": 3.25,
+   "text": "so they're whistles!",
+   "who": "gus"
+  },
+  {
+   "t0": 3.3,
+   "t1": 4.45,
+   "text": "Nope, Gus.",
+   "who": "nana"
+  },
+  {
+   "t0": 4.5,
+   "t1": 6.3,
+   "text": "Then what's it for?",
+   "who": "gus"
+  },
+  {
+   "t0": 6.4,
+   "t1": 8.75,
+   "text": "Pretend this tube is a throat.",
+   "who": "nana"
+  },
+  {
+   "t0": 11.1,
+   "t1": 13.4,
+   "text": "If you breathe a cap in,",
+   "who": "nana"
+  },
+  {
+   "t0": 13.45,
+   "t1": 15.45,
+   "text": "it can get stuck here.",
+   "who": "nana"
+  },
+  {
+   "t0": 15.5,
+   "t1": 17.5,
+   "text": "But thanks to the hole,",
+   "who": "nana"
+  },
+  {
+   "t0": 23.4,
+   "t1": 25.05,
+   "text": "So no more chewing",
+   "who": "gus"
+  },
+  {
+   "t0": 25.1,
+   "t1": 26.75,
+   "text": "pen caps for me.",
+   "who": "gus"
+  },
+  {
+   "t0": 26.8,
+   "t1": 29.1,
+   "text": "Right. The hole lowers the danger.",
+   "who": "nana"
+  },
+  {
+   "t0": 29.15,
+   "t1": 31.15,
+   "text": "It doesn't make it safe.",
+   "who": "nana"
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.35,
+   "t1": 2.609,
+   "text": "Pen caps have a hole so they're whistles!"
+  },
+  {
+   "t0": 3.3,
+   "t1": 4.616,
+   "text": "Nope, Gus."
+  },
+  {
+   "t0": 4.5,
+   "t1": 5.809,
+   "text": "Then what's it for?"
+  },
+  {
+   "t0": 6.4,
+   "t1": 8.641,
+   "text": "Pretend this tube is a throat."
+  },
+  {
+   "t0": 11.1,
+   "t1": 12.888,
+   "text": "If you breathe a cap in,"
+  },
+  {
+   "t0": 13.45,
+   "t1": 15.085,
+   "text": "it can get stuck here."
+  },
+  {
+   "t0": 15.5,
+   "t1": 17.184,
+   "text": "But thanks to the hole,"
+  },
+  {
+   "t0": 17.55,
+   "t1": 19.631,
+   "text": "a little air still gets through."
+  },
+  {
+   "t0": 20.35,
+   "t1": 23.488,
+   "text": "The hole is there to help you breathe, not to whistle."
+  },
+  {
+   "t0": 23.4,
+   "t1": 24.765,
+   "text": "So no more chewing"
+  },
+  {
+   "t0": 25.1,
+   "t1": 26.495,
+   "text": "pen caps for me."
+  },
+  {
+   "t0": 26.8,
+   "t1": 29.075,
+   "text": "Right. The hole lowers the danger."
+  },
+  {
+   "t0": 29.15,
+   "t1": 31.04,
+   "text": "It doesn't make it safe."
+  }
+ ]
+}

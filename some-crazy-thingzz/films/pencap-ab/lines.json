@@ -1,0 +1,147 @@
+[
+ {
+  "id": "g0",
+  "text": "Pen caps have a hole so they're whistles!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 0.35,
+  "who": "gus",
+  "groups": [
+   5,
+   3
+  ]
+ },
+ {
+  "id": "n0",
+  "text": "Nope, Gus.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 3.3,
+  "who": "nana",
+  "groups": [
+   2
+  ]
+ },
+ {
+  "id": "g1",
+  "text": "Then what's it for?",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 4.5,
+  "who": "gus",
+  "groups": [
+   4
+  ]
+ },
+ {
+  "id": "n1",
+  "text": "Pretend this tube is a throat.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 6.4,
+  "who": "nana",
+  "groups": [
+   6
+  ]
+ },
+ {
+  "id": "n2a",
+  "text": "If you breathe a cap in,",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 11.1,
+  "who": "nana",
+  "groups": [
+   6
+  ]
+ },
+ {
+  "id": "n2b",
+  "text": "it can get stuck here.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 13.45,
+  "who": "nana",
+  "groups": [
+   5
+  ]
+ },
+ {
+  "id": "n3a",
+  "text": "But thanks to the hole,",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 15.5,
+  "who": "nana",
+  "groups": [
+   5
+  ]
+ },
+ {
+  "id": "n3b",
+  "text": "a little air still gets through.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 17.55,
+  "who": "nana",
+  "groups": [
+   6
+  ]
+ },
+ {
+  "id": "n4",
+  "text": "The hole is there to help you breathe, not to whistle.",
+  "voice": "bf_isabella",
+  "speed": 0.9,
+  "at": 20.35,
+  "who": "nana",
+  "groups": [
+   6,
+   4
+  ]
+ },
+ {
+  "id": "g2a",
+  "text": "So no more chewing",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 23.4,
+  "who": "gus",
+  "groups": [
+   4
+  ]
+ },
+ {
+  "id": "g2b",
+  "text": "pen caps for me.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 25.1,
+  "who": "gus",
+  "groups": [
+   4
+  ]
+ },
+ {
+  "id": "n5a",
+  "text": "Right. The hole lowers the danger.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 26.8,
+  "who": "nana",
+  "groups": [
+   6
+  ]
+ },
+ {
+  "id": "n5b",
+  "text": "It doesn't make it safe.",
+  "voice": "bf_isabella",
+  "speed": 1.0,
+  "at": 29.15,
+  "who": "nana",
+  "groups": [
+   5
+  ]
+ }
+]
