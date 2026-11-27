@@ -29,6 +29,6 @@ node core/render/video.mjs "$HERE" --fps $FPS --workers 3 --size $SIZE --q "$Q" 
 if sh core/render/mux.sh "$HERE/out/video.mp4" "$HERE/out/mix.wav" "$HERE/$NAME.mp4" $FPS 0; then :; else
   ffmpeg -v error -y -i "$HERE/out/video.mp4" -i "$HERE/out/mix.wav" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -ar 48000 -shortest -movflags +faststart "$HERE/$NAME.mp4"
 fi
-# 5. cover: the hero in the foam flood (26.6 s), caption FOAM: OVERLOAD (?cover=1 draws the caption instead of the HUD)
-node core/render/still.mjs "$HERE" 26.6 --size $SIZE --q "$Q&cover=1" && cp "$HERE/stills/t_26.6.jpg" "$HERE/cover.jpg"
+# 5. cover: the hero in the foam flood (20.6 s), caption FOAM: OVERLOAD (?cover=1 draws the caption instead of the HUD)
+node core/render/still.mjs "$HERE" 20.6 --size $SIZE --q "$Q&cover=1" && cp "$HERE/stills/t_20.6.jpg" "$HERE/cover.jpg"
 echo "done: $HERE/$NAME.mp4"
