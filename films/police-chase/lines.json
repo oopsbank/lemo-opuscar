@@ -1,0 +1,81 @@
+[
+ {
+  "id": "v1",
+  "text": "Stop that car!",
+  "voice": "am_michael",
+  "speed": 1.05
+ },
+ {
+  "id": "v2",
+  "text": "He's a thief!",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v3",
+  "text": "He's racing for the ferry.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v4",
+  "text": "The police are right behind.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v5",
+  "text": "He speeds through a crossing!",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v6",
+  "text": "Everyone jumps clear.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v7",
+  "text": "So police raise the bridge.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v7b",
+  "text": "Up goes the bridge!",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v7c",
+  "text": "He slams on the brakes!",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v8",
+  "text": "He has nowhere to go.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v9",
+  "text": "Police cars block him in.",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v10",
+  "text": "Hands up. He's caught!",
+  "voice": "am_michael",
+  "speed": 1.0
+ },
+ {
+  "id": "v11",
+  "text": "The ferry leaves without him.",
+  "voice": "am_michael",
+  "speed": 1.0,
+  "asr": "The fairy leaves without him."
+ }
+]
