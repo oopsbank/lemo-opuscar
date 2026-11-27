@@ -59,7 +59,7 @@ if T1('bgo') is not None: d = 1.2; t = t_(d); rev = lp(np.sign(np.sin(np.cumsum(
 # the finish: a whoosh into slow-mo, the crowd cheering at A's line, a second whoosh as B crosses
 add(fx, whoosh(.6, .06)[::-1], (T1('slow') or 27.8) - .6, 1, 0)
 fa = T1('finA') or 29.2
-d = 3.2; t = t_(d); cheer = bp(noise(d), 300, 3000) * (.5 + .5 * np.abs(np.sin(2 * np.pi * 3.1 * t))) * np.minimum(1, t / .15) * np.exp(-t / 1.6) * .18
+d = 3.2; t = t_(d); cheer = bp(noise(d), 300, 3000) * (.5 + .5 * np.abs(np.sin(2 * np.pi * 3.1 * t))) * np.minimum(1, t / .15) * np.exp(-t / 1.2) * .12
 add(fx, cheer, fa, 1, 0); add(fx, thump(.5, 80), fa, 1, 0)
 for e in Tv('cut'): add(fx, whoosh(.25, .03), e['t'] - .12, 1, 0)
 # narration
@@ -76,7 +76,8 @@ mus, _ = sf.read(os.path.join(HERE, 'out/score.wav'), dtype='float32')
 mus = mus[:N] if len(mus) >= N else np.pad(mus, ((0, N - len(mus)), (0, 0)))
 mus *= np.clip((tt - .4) / .4, 0, 1)[:, None]
 duck = 1 - .72 * np.clip(uniform_filter1d(vo_env, int(.15 * SR)), 0, 1)
-mix = mus * .95 * duck[:, None] + amb + fx * .9 + vo
+fduck = 1 - .55 * np.clip(uniform_filter1d(vo_env, int(.15 * SR)), 0, 1)   # sirens and the cheer step back under the voice
+mix = mus * .95 * duck[:, None] + amb + fx * .9 * fduck[:, None] + vo
 r = int(.02 * SR); mix[-r:] *= np.linspace(1, 0, r)[:, None]
 mix = limit(mix * (.85 / max(1e-6, np.abs(mix).max())), .95)
 sf.write(os.path.join(HERE, 'out/mix.wav'), mix.astype(np.float32), SR)

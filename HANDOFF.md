@@ -1,6 +1,6 @@
 # Handoff: Pocket City (tilt-shift Shorts)
 
-> **READ THIS FIRST (third session's handoff, 27 Nov 2026 ~05:10 UTC).** The section "Current state and rules (third handoff)" at the end supersedes older notes where they differ.
+> **READ THIS FIRST (fourth session, 27 Nov 2026 ~13:10 UTC). PRODUCTION IS STOPPED by the user (via the manager). Do not start a new film until the manager says so.** See "Fourth session: final state" at the very end; it supersedes older notes where they differ.
 
 For a new Claude Code session that knows nothing about the earlier work. Written by the first production session (2026-11-26), updated at the end of the second (2026-11-27, 01:50 Vietnam time). Five films so far.
 
@@ -227,3 +227,21 @@ Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick 
 - A fresh container needs `setup.sh deps voice music` (≈ 10 min) and a full rebuild of voices/events/score/mix before the render (build.sh does it).
 - Don't name sources in the description unless verified (I had to correct a message to the manager).
 - *Tunnel or Bridge?* (`films/tunnel-bridge`, 34.8 s, Pick a Side #2): built by the fourth session. Two ambulances on physical speed profiles (`story.js`: accel/brake limits, corners, the camper zone, B's barrier stop); A's top speed and B's barrier-lift time are solved so A crosses the bay line at race 39.95 s and B at 40.05 s. Film time maps to race time with a rewind at 1.6–2.6 s and a rewind dive at the seam (34.25 s → end). New: tunnel portals at x −130, hospital bay with a finish line, camper at a height bar, quay market (`makeQuayDressing`), paving joints and roof stripes in world.js. Density 36% → 27% (blur reduced to amp 15–16 in mid shots; the camper shot and the bay close stay ~45%). Frame 0 (still): brightness 114, sd 77, sat 124, motion 29.8. Render started ~12:40 UTC.
+
+## Fourth session: final state (27 Nov 2026, ~13:10 UTC)
+
+**Production is stopped** (the user, via the manager `session_01CUE842B4KiVEBKEUhstDsx`). Wait for the manager before making anything.
+
+Delivered this session (both pushed to the root of `oopsbank/some-crazy-things-media`, Pages 200, sent to the user with SendUserFile, manager messaged):
+| Film | File | Length | Opening / skeleton | Final checks |
+|---|---|---|---|---|
+| Two Tugs, One Giant Ship (Pick a Side #1) | `pocket-city_two-tugs_*` (commit 267b010) | 32.4 s | Chase → Reveal / Pick a side | density 21%; frame 0 128/58/159/15.9; speech clean |
+| Tunnel or Bridge? (Pick a Side #2) | `pocket-city_tunnel-or-bridge_*` (commit 10ce2b3) | 34.8 s | Result first / Result first | density 20% (final mp4); frame 0 111/77/131/30.0; speech 13/14 (last line "cars" → "calls" under music) |
+
+Lessons:
+- The density check punishes the tilt-shift blur: lowering mid-shot blur to amp 15–16, w .15–.17, and framing facades/markets rather than roofs and empty pavement did more than adding props. Stills (noao) read ~7 points worse than the final mp4.
+- Sirens and crowd cheers mask the voice: duck the effects under narration too (`fduck` in `films/tunnel-bridge/mix.py`), and re-run whisper on the final mix.
+- A wide portrait frame can't hold two converging vehicles; use a whip-pan between them, or a side-on view where the finish line runs across the frame.
+- `films/tunnel-bridge/story.js` has a reusable race kit: rounded paths, speed profiles with accel/brake limits and stops, and solving top speeds so a finish lands on a chosen time.
+
+Next ideas (in order, for when production resumes): **Can 1 Tow Truck Clear 200 Cars?** (teased at the end of Tunnel or Bridge?, #13), Bridge Weight Test (#15), The Day Every Car Left at Once (#19), Runaway Shopping Trolley (#7). Rotate away from "Result first" (use Checklist race or Chain reaction) and from the whip-pan opening.
