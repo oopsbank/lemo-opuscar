@@ -70,6 +70,31 @@ Older offers not yet made: night-shift baker, tiny-inn receptionist, mail carrie
 
 Series: keep the recurring hero, the Customer, the Manager and the Cat; the last line of each film names the next job; rotate the opening type and the skeleton (log them in §8).
 
+### 2× sprites (design test, 27 Nov 2026; the user asked for more pixels)
+`films/hires-test/` redraws the hero (the Job #8 IT outfit) and the Customer at twice the resolution: the hero 76×100 instead of 38×50, the Customer 68×92 instead of 34×46. The pixels are half the size in the world (`SPX2 = 1/54` m instead of 1/27), so the characters stand exactly as tall. The drawing code is `chars_hd.js` (`makeCharHD`, the same API as `makeChar`). Its helpers are `limb()` for thick shaded arms and legs and `hand()` for hands with a thumb and fingers. The extra pixels go to:
+- eye whites, tall pupils with a shine, and two-pixel brows;
+- the nose, ear, mouth shapes, hair strands and a shine;
+- the collar, placket, badge, folds and shoes.
+The test page is `main.js` (`?mode=old|new&still=1` for the comparison, `?mode=new` for the 4 s loop, `?sheet=1` for the atlas).
+- Render cost: none measurable. A still takes about 7 s with either set of sprites, and the atlases are tiny textures.
+- The set's textures are still 24 px per metre. For a fully consistent look, a film in this style would also redraw the key props at the finer grid.
+- To use the 2× sprites in a film, port each recurring character's draw function to `chars_hd.js` style (on the doubled grid, add detail rather than scaling up). Use `makeCharHD` for them.
+- The Manager, the Cat and the per-job outfits still need redrawing.
+
+### Clarity rules (`ideas/CLARITY_AUDIT.md` on `ideas`, commit 16114f3): these win any conflict with the other playbooks
+For every future film:
+- **The logline.** Write it first: who wants what, and what's in the way, in ≤20 plain words.
+- **The premise by 3 s.** It is said in plain words and shown on screen.
+- **Show what you name.** Everything named is on screen at phone size.
+- **No channel lore, no jargon.** Drop "Job #8" unless it is explained.
+- **One text layer** in 0–3 s, at most two later. The HUD shows one number.
+- **Short cues.** Cues ≤6 words, held ≥ words/3 + 0.3 s. Speech ≤2.6 words/s, at speed 1.0 (≤1.05 for the hook only).
+- **Fewer beats.** A beat every 5–8 s, each caused by the last; three beats beat six.
+- **One camera scale for the hero.**
+- **A plain payoff.** One sentence, held 1.5–2 s.
+- **A resolved ending.** Twists and second laughs are optional.
+- **Run the grandma test** (§5 of the audit) before rendering. It includes a cold-viewer check by a fresh subagent that sees only the stills and the transcript.
+
 ## 7. Rules added on 27 Nov 2026 (from the manager, for the user)
 - **Length (27 Nov, from the manager): 35 s or less** (target 32–35 s). Cut set-up, not gags. This overrides the 40–45 s in the content playbook.
 
