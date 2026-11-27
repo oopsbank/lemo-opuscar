@@ -1,0 +1,56 @@
+[
+ {
+  "id": "k1",
+  "text": "Is your beard real?",
+  "voice": "af_sky",
+  "speed": 1.1
+ },
+ {
+  "id": "n1",
+  "text": "You are a mall Santa.",
+  "voice": "bm_lewis",
+  "speed": 1.05
+ },
+ {
+  "id": "y1",
+  "text": "Say cheese!",
+  "voice": "am_puck",
+  "speed": 1.05
+ },
+ {
+  "id": "y2",
+  "text": "Who wants a present?",
+  "voice": "am_puck",
+  "speed": 1.1
+ },
+ {
+  "id": "c1",
+  "text": "One photo. For my followers.",
+  "voice": "bf_isabella",
+  "speed": 1.05
+ },
+ {
+  "id": "y3",
+  "text": "Whoa! Stop!",
+  "voice": "am_puck",
+  "speed": 1.15
+ },
+ {
+  "id": "m1",
+  "text": "Who plugged in the reindeer?",
+  "voice": "bm_george",
+  "speed": 1.0
+ },
+ {
+  "id": "m2",
+  "text": "Fifty five-star reviews. You're on coffee tomorrow.",
+  "voice": "bm_george",
+  "speed": 1.0
+ },
+ {
+  "id": "k2",
+  "text": "Santa!",
+  "voice": "af_sky",
+  "speed": 1.1
+ }
+]
