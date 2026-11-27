@@ -207,7 +207,7 @@ Rotate the opening types and never use the previous film's type:
 | Tennis Fuzz | (c) object macro (pre-playbook) | ball ECU + shaver, narrator | narrator: "Why do tennis balls have fuzz?" |
 | Pen Caps | **(a) mid-wrong-action** | Gus CU tooting the cap, hole ringed, headline | "Why do pen caps have a hole?" |
 | Pen Hole (side hole) | **(d) result first** | Gus CU with a blue ink ring, shocked, pen ringed, headline | "Why does my pen have a side hole?" |
-| next | (b) or (c) | | |
+| Fuel-Icon Arrow (planned) | **(b) Nana stops him** | Nana CU in the passenger seat, "Gus, NO.", Gus already steering round the pump | "Why is there an arrow by the fuel icon?" |
 
 Playbook rules now built into every film:
 - **Headline:** one bold line on frame 0 (Baloo 800, ~112 px, y ≈ 380–460), gone by 1.5 s.
@@ -216,3 +216,20 @@ Playbook rules now built into every film:
 - **Sound:** a hit on frame 0; the music enters at 0.5 s.
 - **Length:** about 25 s.
 - **Retiming:** the films are blocked on an older clock and retimed with a WARP table in main.js.
+
+### Skeleton log (ideas/CONTENT_PLAYBOOK.md §1; never the same twice in a row)
+
+| Film | Skeleton | Twist (~55%) | Second laugh | Last line (series tease) |
+|---|---|---|---|---|
+| Golf / Tennis | Gus test (pre-playbook, identical timings) | none | none | Tennis tease / sweater gag |
+| Pen Caps | **Gus test** | "safety rules ask for it" (the reveal at 52%) | Gus sneaks a spare cap into his mouth; Nana catches him | "Wait. Why does the pen have a hole?" |
+| Pen Hole | **Result first** (ring at frame 0) | "Add a second hole, and it flows" (the side-by-side cans at ~50%) | "Fine. I'll check with the other eye." | (the loop gag itself) |
+| Fuel-Icon Arrow | **Nana stops him** + myth layer | "The hose on the icon? Means nothing." | planned | "Why does a tape measure hook wobble?" |
+
+Content rules in force:
+- the oddity in words by 1 s;
+- no gap over 2.5 s without a line or on-screen text (comic sound words: SQUEEEE!, CRACK!, PFFFT!);
+- no pure set-up lines;
+- one fact, shown;
+- a second laugh after the payoff;
+- the last line names the next episode where it fits.
