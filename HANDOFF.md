@@ -18,6 +18,7 @@ For a new Claude Code session that knows nothing about the earlier work. Written
 | `films/not-in-our-town` | 40.0 s | A flying saucer's shadow crosses the boulevard; reveal over the harbour; its beam takes a car, a palm tree and a sailboat; Engine 9 rolls, fireboats sail; ladder jet + fireboat arcs hit its rim lights in ×¼ slow-mo; in real time it drops everything back and flees; rise over the cheering quay. Last line: "Not in our town." | Pushed (second session, user OK'd auto-push from now on): `pocket-city_not-in-our-town_1080x1920.mp4` + `_thumb.jpg`. Title: "A UFO tried to steal our town. Engine 9 said no. 🛸🚒" |
 | `films/snow-day` | 36.0 s | Overnight snow; three ploughs, 6:00→8:00, every road before the school bell. Snow shader (upward faces) + a plough map texture (film time each metre of road was cleared) in world.js; the blue plough sticks in a drift (real time, backs up, rams); the last pile pushed to the school gate at 7:59:59; bell; it snows again, roads re-whiten, camera back on the opening aerial (loop). | Pushed: `pocket-city_snow-day_1080x1920.mp4` + `_thumb.jpg`. Title: "2 Hours. 3 Snowploughs. School Opens at 8:00. ❄️" |
 | `films/phantom-jam` | 36.0 s | A ring-road IDM traffic sim (`jam.js`, 44 cars) on the boulevard: one brake tap grows a stop-and-go wave; the ambulance is stuck; you (yellow car) keep a gap and never stop (jam absorption); the ambulance turns into the hospital at 0:03; another driver brakes (loop). Countdown + route-map inset; yellow cat on the hospital roof. Built to `ideas/FORMULA.md`. | Pushed: `pocket-city_phantom-jam_1080x1920.mp4` + `_thumb.jpg`. Title: "Who Started This Traffic Jam? 🚑" |
+| `films/storm-surge` | 39.3 s | Will It Survive? #1. A storm surge comes in (45:00 surge clock, time-lapse ×150/×120, ramp to ×1); four red flood gates in a new sea wall: canal mouth (twin mitre leaves, sluice channel cut through the quay), ferry ramp (a parked van blocks it, real-time clunk, a tow truck drags it out), boat ramp, fish market (closes at 0:02 in real time; the front hits at 0:00, spray over the top). "It held." Payoff: surge = the sea pushed in by wind. Rise back to the opening; the sea goes back out (loop). Cat on the harbour office roof. | Sent to the user by SendUserFile (third session), not pushed. Title: "Storm Surge vs the Sea Wall: 4 Gates, 45 Minutes 🌊". Pinned: "Would you have closed the canal first?" |
 
 Each film folder has `TREATMENT.md` (the plan and the changes made in production), `CREDITS`, `build.sh` (one command: fonts, voice and speech check, events, subtitles, score, mix, picture, mux, poster), `lines.json` (voice), `story.js` (the timeline), `music/score.py` and `mix.py`.
 
@@ -28,7 +29,7 @@ For each film: the file names, duration, size, title, description with hashtags,
 - *Snow Day*: "2 Hours. 3 Snowploughs. School Opens at 8:00. ❄️" (#shorts #tiltshift #miniature #snow #satisfying)
 - *The Phantom Jam*: "Who Started This Traffic Jam? 🚑" (#traffic #tiltshift #miniature #satisfying). Sources went in the description (Sugiyama et al. 2008, Stern et al. 2018), plus a suggested pinned comment: "Did you spot who started it?"
 
-Day count (Vietnam time): 26 Nov = Not In Our Town + Snow Day (2/2); 27 Nov = The Phantom Jam (1/2). **The next film is film 2 of 27 Nov.**
+Day count (Vietnam time): 26 Nov = Not In Our Town + Snow Day (2/2); 27 Nov = The Phantom Jam + Storm Surge (2/2). **The next film is for 28 Nov VN (deliver after 17:00 UTC 27 Nov).** Next pick: idea #3 "What If Every Traffic Light Turned Green?" (One Rule Changed #1).
 
 ## Decisions the user made
 
@@ -102,7 +103,7 @@ Day count (Vietnam time): 26 Nov = Not In Our Town + Snow Day (2/2); 27 Nov = Th
 - Traffic sims: an IDM ring road (`films/phantom-jam/jam.js`) with N = 44 on 626 m, v0 14, T 1.0, a 0.55, b 2.0 is string-unstable. A 1.8 s brake tap grows into stop-and-go within about 20 s of sim time.
 - Media repo: clone it shallow with `--filter=blob:none`; before each push run `git fetch --depth=1 origin main && git reset --hard origin/main` (the manager deletes posted files), then push with `-c push.negotiate=true`.
 
-## Next film: Storm Surge vs the Sea Wall (film 2 of 27 Nov VN, not started)
+## Storm Surge (done; the plan as it was, kept for reference)
 
 From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built):
 - Hook, frame 0: a grey surge line on the horizon moving in; the four floodgates along the canal/quay still open; HUD countdown "SURGE 0:45"; VO "A storm surge. Four gates. Forty-five seconds."
@@ -117,3 +118,9 @@ From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built
 - **"Sudden Rain"**: a cloud shadow crosses the town, umbrellas pop like confetti, everyone runs; a child dances in the rain in real time.
 - **Vietnam-set cities** (new town needed, more work, strong channel identity): a Saigon crossroads at rush hour (a swarm of motorbikes, red and green waves); a floating market at dawn; a Tết flower market leading to midnight fireworks.
 - Series continuity: a pizza for the Engine 9 crew, the ferry from the quay, the same dog.
+
+### Learned in the third session
+- Storm Surge renders faster than expected: 943 frames in 33 min with `--workers 2`.
+- `films/storm-surge/world.js` is the newest world: a sluice channel through the quay (`CHAN`), the sea removed from the world (the film builds its own displaced storm sea, `makeSea` in `actors.js`: a world-space grid with `seaH()` in the vertex shader and analytic normals), `U.storm` for heavier cloud shadows, and `buildWorld` returns `canal`, `chanW`, `waterMat`.
+- Running the BtbN ffmpeg from the scratchpad was blocked by the auto-mode classifier until the user OK'd it (AskUserQuestion). Ask up front next time.
+- Speech check: "Tow it. Fast." → "Told it fast"; "Get the tow truck" → "toll truck"; "Call a tow truck. Hurry!" passed. "The surge is in sight" → "inside" (use "Here comes the wave."). "quay" is heard as "key": put "key" in `asr`.

@@ -1,0 +1,70 @@
+[
+ {
+  "id": "v1",
+  "text": "Storm surge. Four gates. Forty-five minutes.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Storm surge. Four gates. 45 minutes."
+ },
+ {
+  "id": "v2",
+  "text": "Gate one: the canal. The big one.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "Gate two. Someone parked in it!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "Call a tow truck. Hurry!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Gate three. Here comes the wave.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v6",
+  "text": "Last gate: the fish market.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v7",
+  "text": "Everybody off the quay!",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Everybody off the key."
+ },
+ {
+  "id": "v8",
+  "text": "Come on. Close!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v9",
+  "text": "It held.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v10",
+  "text": "Storm surge: the sea, pushed in by wind.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v11",
+  "text": "Would you close the canal first?",
+  "voice": "am_michael",
+  "speed": 0.95
+ }
+]
