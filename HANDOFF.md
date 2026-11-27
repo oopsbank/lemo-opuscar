@@ -81,6 +81,17 @@ The test page is `main.js` (`?mode=old|new&still=1` for the comparison, `?mode=n
 - To use the 2× sprites in a film, port each recurring character's draw function to `chars_hd.js` style (on the doubled grid, add detail rather than scaling up). Use `makeCharHD` for them.
 - The Manager, the Cat and the per-job outfits still need redrawing.
 
+### 3× sprites (27 Nov 2026, the user asked for more after seeing 2×)
+- `films/hires-test/chars_3x.js` (`makeChar3`) redraws the hero at 114×150 and the Customer at 102×138, at 1/81 m per pixel.
+- What the extra pixels add:
+  - faces: shading, irises with pupils and shines, lashes;
+  - hands: fingers;
+  - clothes: knit texture and folds;
+  - accessories.
+- `props3x.js` (`buildProps3x`) draws the help desk, a monitor, a keyboard and a mug at the same 81 px per metre.
+- The test page mode is `?mode=3x`.
+- Comparison image: media `pixel-life_hires3x_compare.jpg` (old | 2× | 3×). The 2× one is `pixel-life_hires_compare.jpg`.
+
 ### Clarity rules (`ideas/CLARITY_AUDIT.md` on `ideas`, commit 16114f3): these win any conflict with the other playbooks
 For every future film:
 - **The logline.** Write it first: who wants what, and what's in the way, in ≤20 plain words.
