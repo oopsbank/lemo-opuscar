@@ -159,7 +159,7 @@ Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick 
 - *All Green* (`films/all-green`, 32.3 s, One Rule Changed #1): **delivered** by the third session (media repo commit e233c19, with `pocket-city_compare.jpg`). Frame-0 metrics: brightness 86, sd 74, sat 135, motion 28.3 (Storm Surge 107/39/70/6.6). The text below was the plan. When the render is done, finish it (or re-run `sh films/all-green/build.sh` with `FFMPEG_DIR=<BtbN bin>`): mux, self-check, the poster (t = 29.0, nohud, or pick a better frame), push `pocket-city_all-green_1080x1920.mp4` + `_thumb.jpg` plus `pocket-city_compare.jpg` (side by side: Storm Surge frame 0 | All Green frame 0), then message the manager. (If the third session delivered it, skip.)
   - Suggested title: "What If Every Traffic Light Turned Green? 🚦"; hashtags #tiltshift #miniature #traffic #gridlock; pinned: "Which junction would you have fixed first?"
   - Sources: UK Highway Code rule 174 (box junctions); NYC DOT "Don't Block the Box"; US DOT FHWA, traffic signal preemption for emergency vehicles.
-- *Two Tugs, One Giant Ship* (`films/two-tugs`, 32.4 s, Pick a Side #1): fully built. Voices checked, events, score, mix and stills are done, with the playbooks applied. **Not rendered.** The manager asked that the successor decide: render it next, or put Tunnel or Bridge? first (re-ranked #2).
+- *Two Tugs, One Giant Ship* (`films/two-tugs`, 32.4 s, 46.7 MB, Pick a Side #1): **delivered** by the fourth session (media repo commit 267b010, Pages 200, SendUserFile, manager messaged). Render 778 frames in 62 min (`--workers 2`, GTAO). Checks: density 21% empty on the final mp4; frame 0 brightness 128 / sd 58 / sat 159 / motion 15.9; whisper on the final mix clean; -14.3 LUFS. Thumb = t 0.3 nohud (red tug close, ship ahead). Opening Chase → Reveal; skeleton Pick a side.
 - Next ideas in order (CONTENT_PLAYBOOK re-rank): **Tunnel or Bridge? One Ambulance** (#2), **Can 1 Tow Truck Clear 200 Cars?** (#13), Bridge Weight Test (#15), The Day Every Car Left at Once (#19), Runaway Shopping Trolley (#7). Dropped: Drawbridge, Fog Bank, Causeway, Dam.
 
 **Rules from the user (via the manager `session_01CUE842B4KiVEBKEUhstDsx`)**
@@ -219,3 +219,8 @@ Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick 
 - Start long renders with the Bash tool's `run_in_background`, never inside a `a && b && (render) &` chain: if an earlier step fails, the render silently never starts.
 - Stills during a render slow it a lot; keep them few.
 - A voice line's duration changes the timing: re-check the line overlaps after each TTS change. Speech-check fixes: "quay" → asr "key"; "metres" → asr "meters"; "Engine Nine" in the text, "Engine 9" in asr; "Tow it" → "Told it", so use "Call a tow truck".
+
+### Fourth session (27 Nov UTC)
+- The user approved (AskUserQuestion) both the BtbN ffmpeg download and `add_repo` for the media repo with push access; both were blocked by the classifier until then. Ask both in one question up front.
+- A fresh container needs `setup.sh deps voice music` (≈ 10 min) and a full rebuild of voices/events/score/mix before the render (build.sh does it).
+- Don't name sources in the description unless verified (I had to correct a message to the manager).
