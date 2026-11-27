@@ -1,0 +1,36 @@
+1
+00:00:00,000 --> 00:00:02,060
+THE CUSTOMER: I’d like to return this. It’s unopened.
+
+2
+00:00:02,100 --> 00:00:04,260
+You are a returns desk clerk.
+
+3
+00:00:04,300 --> 00:00:07,360
+YOU: There’s a slice missing.
+
+4
+00:00:07,400 --> 00:00:10,150
+THE CUSTOMER: It came like that.
+
+5
+00:00:10,300 --> 00:00:13,100
+THE DAD: I kept the receipt!
+
+6
+00:00:14,200 --> 00:00:16,750
+YOU: It’s from 1998.
+
+7
+00:00:22,200 --> 00:00:25,950
+THE MANAGER: Why is the queue in the car park?
+
+8
+00:00:30,500 --> 00:00:33,350
+THE MANAGER: Nobody else applied.
+
+9
+00:00:33,400 --> 00:00:34,500
+THE CUSTOMER: Excuse me!
+

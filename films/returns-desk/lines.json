@@ -1,0 +1,11 @@
+[
+ {"id":"c1","text":"I'd like to return this. It's unopened.","voice":"bf_isabella","speed":1.08},
+ {"id":"n1","text":"You are a returns desk clerk.","voice":"bm_lewis","speed":1.0},
+ {"id":"y1","text":"There's a slice missing.","voice":"am_puck","speed":1.0},
+ {"id":"c2","text":"It came like that.","voice":"bf_isabella","speed":0.95},
+ {"id":"d1","text":"I kept the receipt!","voice":"am_onyx","speed":1.05},
+ {"id":"y2","text":"It's from nineteen ninety-eight.","voice":"am_puck","speed":1.05},
+ {"id":"m1","text":"Why is the queue in the car park?","voice":"bm_george","speed":1.0},
+ {"id":"m2","text":"Nobody else applied.","voice":"bm_george","speed":0.92},
+ {"id":"c3","text":"Excuse me!","voice":"bf_isabella","speed":1.05}
+]

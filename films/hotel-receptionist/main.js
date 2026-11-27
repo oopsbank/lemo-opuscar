@@ -21,6 +21,7 @@ const V = post.vig.uniforms;
 await overlayReady();
 
 const _v = new THREE.Vector3();
+window.SCENE = set.scene;   // for the set-density count (tools)
 window.DUR = DUR;
 window.EV = events();
 window.TEXTS = t => texts(t);
