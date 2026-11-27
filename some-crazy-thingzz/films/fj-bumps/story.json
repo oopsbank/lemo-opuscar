@@ -1,0 +1,205 @@
+{
+ "dur": 24.9,
+ "caps": [
+  {
+   "t0": 0.1,
+   "text": "Why do F",
+   "who": "gus",
+   "t1": 0.4
+  },
+  {
+   "t0": 0.4,
+   "text": "and J have bumps?",
+   "hot": true,
+   "who": "gus",
+   "t1": 1.75
+  },
+  {
+   "t0": 1.75,
+   "text": "Factory mistake.",
+   "who": "gus",
+   "t1": 2.53
+  },
+  {
+   "t0": 2.53,
+   "text": "I'm fixing it!",
+   "hot": true,
+   "who": "gus",
+   "t1": 3.6
+  },
+  {
+   "t0": 3.6,
+   "text": "Then type your name.",
+   "who": "nana",
+   "t1": 4.62
+  },
+  {
+   "t0": 4.62,
+   "text": "Eyes shut.",
+   "hot": true,
+   "who": "nana",
+   "t1": 5.85
+  },
+  {
+   "t0": 5.85,
+   "text": "Easy!",
+   "hot": true,
+   "who": "gus",
+   "t1": 6.744
+  },
+  {
+   "t0": 7.3,
+   "text": "Actually.",
+   "hot": true,
+   "who": "nana",
+   "t1": 8.4
+  },
+  {
+   "t0": 8.4,
+   "text": "The bumps are",
+   "who": "nana",
+   "t1": 8.96
+  },
+  {
+   "t0": 8.96,
+   "text": "for your index fingers.",
+   "hot": true,
+   "who": "nana",
+   "t1": 10.7
+  },
+  {
+   "t0": 10.7,
+   "text": "Feel them,",
+   "who": "nana",
+   "t1": 11.08
+  },
+  {
+   "t0": 11.08,
+   "text": "and you're home.",
+   "hot": true,
+   "who": "nana",
+   "t1": 12.12
+  },
+  {
+   "t0": 12.12,
+   "text": "No looking.",
+   "who": "nana",
+   "t1": 13.393
+  },
+  {
+   "t0": 13.4,
+   "text": "That's touch typing.",
+   "hot": true,
+   "who": "nana",
+   "t1": 15.097
+  },
+  {
+   "t0": 15.9,
+   "text": "Look!",
+   "who": "gus",
+   "t1": 16.08
+  },
+  {
+   "t0": 16.08,
+   "text": "It says GUS!",
+   "hot": true,
+   "who": "gus",
+   "t1": 17.393
+  },
+  {
+   "t0": 17.4,
+   "text": "Even the five has one.",
+   "hot": true,
+   "who": "nana",
+   "t1": 19.305
+  },
+  {
+   "t0": 19.9,
+   "text": "Then that one's",
+   "who": "gus",
+   "t1": 20.36
+  },
+  {
+   "t0": 20.36,
+   "text": "a mistake too!",
+   "hot": true,
+   "who": "gus",
+   "t1": 21.674
+  },
+  {
+   "t0": 23.0,
+   "text": "Hold still,",
+   "who": "gus",
+   "t1": 23.38
+  },
+  {
+   "t0": 23.38,
+   "text": "little bump.",
+   "hot": true,
+   "who": "gus",
+   "t1": 24.436
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.1,
+   "t1": 1.844,
+   "text": "Why do F and J have bumps?"
+  },
+  {
+   "t0": 1.75,
+   "t1": 3.683,
+   "text": "Factory mistake. I'm fixing it!"
+  },
+  {
+   "t0": 3.6,
+   "t1": 5.971,
+   "text": "Then type your name. Eyes shut."
+  },
+  {
+   "t0": 5.85,
+   "t1": 6.744,
+   "text": "Easy!"
+  },
+  {
+   "t0": 7.3,
+   "t1": 8.577,
+   "text": "Actually."
+  },
+  {
+   "t0": 8.4,
+   "t1": 10.799,
+   "text": "The bumps are for your index fingers."
+  },
+  {
+   "t0": 10.7,
+   "t1": 13.393,
+   "text": "Feel them, and you're home. No looking."
+  },
+  {
+   "t0": 13.4,
+   "t1": 15.097,
+   "text": "That's touch typing."
+  },
+  {
+   "t0": 15.9,
+   "t1": 17.393,
+   "text": "Look! It says GUS!"
+  },
+  {
+   "t0": 17.4,
+   "t1": 19.305,
+   "text": "Even the five has one."
+  },
+  {
+   "t0": 19.9,
+   "t1": 21.674,
+   "text": "Then that one's a mistake too!"
+  },
+  {
+   "t0": 23.0,
+   "t1": 24.436,
+   "text": "Hold still, little bump."
+  }
+ ]
+}
