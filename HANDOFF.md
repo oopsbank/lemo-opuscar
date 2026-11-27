@@ -81,6 +81,43 @@ The test page is `main.js` (`?mode=old|new&still=1` for the comparison, `?mode=n
 - To use the 2× sprites in a film, port each recurring character's draw function to `chars_hd.js` style (on the doubled grid, add detail rather than scaling up). Use `makeCharHD` for them.
 - The Manager, the Cat and the per-job outfits still need redrawing.
 
+### STANDARD from 27 Nov 2026: the 3× pixel grid (the user chose it)
+Every future Pixel Life film draws at **3× the original density: 81 px per metre** (`SPX3 = 1/81`).
+
+**Sprite sizes**
+- Hero: **114×150** (was 38×50).
+- The Customer: **102×138** (was 34×46).
+- New characters: 3× their old 1×-grid size. A grown-up is about 150 px tall; the Manager would be about 102×180 and the Cat about 84×60.
+
+**What gets redrawn**
+- Props and set pieces next to the characters use the same 81 px/m: desks, monitors, mugs, counters, anything in a close shot.
+- The main sets are redrawn at the same density over time. Until then, keep the coarse set out of close shots or behind the depth of field.
+
+**Where the sprite sources live**
+- `films/hires-test/chars_3x.js`:
+  - `drawHero3`, `heroHead3`, `drawCustomer3`;
+  - the helpers `limb()` (thick shaded limbs with a texture hook), `hand()` (fingers, open hand, pointing) and `ellC()`;
+  - `makeChar3(kind)` and `atlas3(kind)`.
+- `films/hires-test/props3x.js` (`buildProps3x`): the desk, monitor, keyboard and mug.
+- Copy both into a new film and add that film's job outfit as a new draw function. Draw on the 3× grid; never scale a smaller sprite up.
+
+**Palette rules**
+- Hero: the lime ramp (`#143808 → #c8f478`) is his alone; no other character wears green.
+- Skin and hair use `COLS.skin` and `COLS.hair` from `chars.js`.
+- Customer: purple coat (`COLS.purple`), pink fur and handbag (`COLS.pink`), lilac hair (`COLS.lilac`), gold-rimmed black glasses, red lips (`#b0243a`).
+- Outlines: the selout pass in `atlas()` (neighbour colour darkened, `.3`).
+- Faces:
+  - eye whites `#eceef2`;
+  - irises from the brown ramp;
+  - a 1 px white shine;
+  - lids and lashes in INK `#1a1016`;
+  - blush `#e88a74`.
+- Shading: lit from the upper left (shade value = .64 − dx·.12 − dy·.24 on the face). Fabric gets light dithered texture and 1–2 px fold lines; no blur and no smooth gradients.
+
+**What it costs and how to check it**
+- No measurable render cost: a still takes about 6–7 s at 1×, 2× and 3× alike.
+- Check new sprites with `?sheet=1&mode=3x` (the atlas) before using them.
+
 ### 3× sprites (27 Nov 2026, the user asked for more after seeing 2×)
 - `films/hires-test/chars_3x.js` (`makeChar3`) redraws the hero at 114×150 and the Customer at 102×138, at 1/81 m per pixel.
 - What the extra pixels add:
