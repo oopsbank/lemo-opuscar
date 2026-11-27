@@ -19,8 +19,8 @@ export const flipAt = J => FLIP0 + Math.hypot(J.x - 120, J.z - 260) * .004;
 export const TOW = { t0: 60, at: 66, hook: 68, go: 70 };
 
 export const VO = [
-  { id: 'v1', t: 0.0, text: 'Every traffic light just turned green.' },
-  { id: 'v2', t: 2.4, text: 'Engine 9 rolls in two minutes.' },
+  { id: 'v1', t: 0.05, text: 'Every light turned green. Engine 9 is trapped.' },
+  { id: 'v2', t: 3.3, text: 'It has to roll in two minutes.' },
   { id: 'v3', t: 4.9, text: 'The queue fills the next junction. Then the next.' },
   { id: 'v4', t: 8.2, text: 'Now Engine 9 is boxed in.' },
   { id: 'v5', t: 11.0, text: "You're the tow truck. Take the pavement." },

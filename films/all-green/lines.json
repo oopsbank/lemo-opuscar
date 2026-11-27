@@ -1,16 +1,16 @@
 [
  {
   "id": "v1",
-  "text": "Every traffic light just turned green.",
+  "text": "Every light turned green. Engine Nine is trapped.",
   "voice": "am_michael",
-  "speed": 0.95
+  "speed": 1.08,
+  "asr": "Every light turned green. Engine 9 is trapped."
  },
  {
   "id": "v2",
-  "text": "Engine Nine rolls in two minutes.",
+  "text": "It has to roll in two minutes.",
   "voice": "am_michael",
-  "speed": 0.95,
-  "asr": "Engine 9 rolls in two minutes."
+  "speed": 0.95
  },
  {
   "id": "v3",

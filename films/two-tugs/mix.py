@@ -58,6 +58,7 @@ for e in Tv('vo'):
     i0, i1 = int(e['t'] * SR), min(N, int(e['t'] * SR) + len(x)); vo_env[max(0, i0 - int(.12 * SR)):min(N, i1 + int(.2 * SR))] = 1
 mus, _ = sf.read(os.path.join(HERE, 'out/score.wav'), dtype='float32')
 mus = mus[:N] if len(mus) >= N else np.pad(mus, ((0, N - len(mus)), (0, 0)))
+mus *= np.clip((tt - .4) / .4, 0, 1)[:, None] * .7 + .3 * np.clip(tt / .4, 0, 1)[:, None]
 duck = 1 - .74 * np.clip(uniform_filter1d(vo_env, int(.15 * SR)), 0, 1)
 mix = mus * .95 * duck[:, None] + amb + fx * .9 + vo
 r = int(.02 * SR); mix[-r:] *= np.linspace(1, 0, r)[:, None]

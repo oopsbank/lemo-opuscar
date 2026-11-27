@@ -1,7 +1,7 @@
 // Two Tugs, One Giant Ship — Tilt-Shift Miniature, YouTube Short (1080×1920, 24 fps, smooth motion); the last frame matches the first
 import * as THREE from 'three';
 import { makePost } from './post.js';
-import { clamp, lerp, seg, ss, eio, eo } from '/core/lib.js';
+import { clamp, lerp, seg, ss, eio, eo, ei } from '/core/lib.js';
 import { buildWorld, U } from './world.js';
 import { DUR, T, VO, shotAt, speedAt, dBow, dStern, pullRed, pullBlue, workShare, SHIP, QZ } from './story.js';
 import { makeDressing } from './dressing.js';
@@ -60,6 +60,8 @@ function orbit(target, azDeg, pitchDeg, dist) { const az = azDeg * Math.PI / 180
 const P = (look, az, pitch, dist, fov) => ({ look, az, pitch, dist, fov });
 const mixP = (a, b, k) => P(a.look.clone().lerp(b.look, k), lerp(a.az, b.az, k), lerp(a.pitch, b.pitch, k), Math.exp(lerp(Math.log(a.dist), Math.log(b.dist), k)), lerp(a.fov, b.fov, k));
 const OPEN = P(V(60, 4, 828), 352, 27, 175, 34);
+const sharp = t => { const k = ss(seg(t, 1.6, 2.4)); return { w: lerp(.34, .07, k), amp: lerp(10, 36, k), mix: lerp(.25, .68, k) }; };
+const OPEN2 = P(V(95, 0, 880), 190, 46, 330, 36);
 const RACE = P(V(40, 0, 900), 335, 50, 360, 36);
 const PULL = P(V(140, 0, 875), 20, 40, 150, 34);
 const SNAP = P(V(-16, 0, 884), 20, 42, 130, 34);
@@ -69,14 +71,14 @@ const REAL = P(V(66, 0, 797), 282, 30, 115, 33);
 function shotCam(t) {
   const sh = shotAt(t), u = seg(t, sh.t0, sh.t1);
   let p, subj, band = { w: .07, amp: 36, mix: .68 }, aper = 5600, sunEl = 22, span = 220;
-  if (sh.id === 'open') { p = P(OPEN.look, OPEN.az, OPEN.pitch, OPEN.dist - 12 * eio(u), OPEN.fov); subj = shipPoint(t, 20, 6, -SHIP.half); span = 200; }
-  else if (sh.id === 'race') { p = mixP(OPEN, RACE, eio(seg(t, 2.5, 4.5))); subj = shipPoint(t, 0, 2, SHIP.half + 30); span = 320; band = { w: .1, amp: 30, mix: .6 }; }
+  if (sh.id === 'open') { const tp = tugs.pose.red.pos, CL = P(tp.clone().setY(2), 192, 20, 46, 32); const k = eio(seg(t, 1.15, 1.9)); p = mixP(CL, OPEN2, k); subj = tp.clone().setY(2).lerp(shipPoint(t, 40, 4, SHIP.half), k); span = lerp(60, 200, k); band = sharp(t); aper = lerp(700, 5600, ss(seg(t, 1.6, 2.4))); }
+  else if (sh.id === 'race') { p = mixP(OPEN2, RACE, eio(seg(t, 2.5, 4.5))); subj = shipPoint(t, 0, 2, SHIP.half + 30); span = 320; band = { w: .1, amp: 30, mix: .6 }; }
   else if (sh.id === 'pull') { p = mixP(RACE, PULL, eio(seg(t, 8, 9.4))); subj = tugs.pose.red ? tugs.pose.red.pos.clone().setY(1) : V(140, 1, 900); span = 180; }
   else if (sh.id === 'snap') { p = P(SNAP.look, SNAP.az, SNAP.pitch, SNAP.dist - 10 * eio(u), SNAP.fov); subj = shipPoint(t, -78, 4, SHIP.half + 4); span = 160; band = { w: .065, amp: 38, mix: .7 }; }
   else if (sh.id === 'sail') { p = P(SAIL.look, SAIL.az, SAIL.pitch, SAIL.dist, SAIL.fov); subj = sail.pos().clone().setY(2); span = 200; }
   else if (sh.id === 'both') { p = mixP(SAIL, BOTH, eio(seg(t, 19, 20.6))); subj = shipPoint(t, 0, 2, SHIP.half + 20); span = 320; band = { w: .1, amp: 30, mix: .6 }; }
   else if (sh.id === 'real') { p = mixP(BOTH, REAL, eio(seg(t, 21.5, 23))); p.dist *= 1 - .05 * eio(seg(t, 23, 26)); subj = V(66, 1, QZ + 2); span = 160; band = { w: .065, amp: 38, mix: .7 }; aper = 6200; }
-  else { p = mixP(REAL, OPEN, eio(seg(t, 27, DUR))); subj = V(66, 1, QZ + 2).lerp(shipPoint(t, 20, 6, -SHIP.half), eio(seg(t, 27, DUR))); }
+  else { p = mixP(REAL, OPEN, eio(seg(t, 27, DUR - .55))); { const d = ei(seg(t, DUR - .55, DUR)); if (d > 0) { const tp = tugs.pose.red.pos; p = mixP(p, P(tp.clone().setY(2), 192, 20, 46, 32), d); } } subj = V(66, 1, QZ + 2).lerp(shipPoint(t, 20, 6, -SHIP.half), eio(seg(t, 27, DUR))); }
   return { pos: orbit(p.look, p.az, p.pitch, p.dist), look: p.look, fov: p.fov, up: V(0, 1, 0), band, aper, sunAz: p.az + 25, sunEl, span, subj };
 }
 
@@ -92,6 +94,7 @@ const speedLabel = t => speedAt(t).x === 'real' ? '×1 REAL TIME' : `×${speedAt
 function drawOverlay(t) {
   g.clearRect(0, 0, W, H);
   if (QS.has('nohud')) return;
+  g.save(); g.globalAlpha = seg(t, 1.0, 1.3);
   const d = gap(t), stopped = t >= T.stop, low = d < 10 && !stopped;
   g.save(); rr(HUD.x, HUD.y, 430, 196, 18); g.fillStyle = 'rgba(14,22,34,.8)'; g.fill(); g.restore();
   g.save(); g.translate(HUD.x + 52, HUD.y + 60); g.fillStyle = '#fbfaf6'; g.beginPath(); g.moveTo(-28, -6); g.lineTo(22, -6); g.lineTo(30, 4); g.lineTo(-24, 10); g.closePath(); g.fill(); g.fillStyle = '#c8322a'; g.fillRect(-14, -16, 8, 10); g.restore();
@@ -114,8 +117,9 @@ function drawOverlay(t) {
     }
     g.restore();
   }
-  if (t < 2.1) {   // the hook
-    const al = 1 - seg(t, 1.8, 2.1), y0 = 640;
+  g.restore();
+  if (t < 2.2) {   // the hook
+    const al = 1 - seg(t, 1.9, 2.2), y0 = 520;
     g.save(); g.globalAlpha = al; g.textAlign = 'center'; g.textBaseline = 'middle';
     g.shadowColor = 'rgba(0,0,0,.35)'; g.shadowBlur = 24; g.shadowOffsetY = 8; rr(W / 2 - 420, y0 - 150, 840, 300, 26); g.fillStyle = '#f7f4ec'; g.fill(); g.shadowColor = 'transparent';
     g.lineWidth = 10; g.strokeStyle = '#1d4c9e'; rr(W / 2 - 406, y0 - 136, 812, 272, 18); g.stroke();

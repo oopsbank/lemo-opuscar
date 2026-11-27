@@ -1,7 +1,7 @@
 // Two Tugs — the cruise ship, the red and blue tugs on lines, the sailboat, prop wash and wakes, the crowd on the quay, the cat
 import * as THREE from 'three';
 import { patchCloud, QUAY, STATION } from './world.js';
-import { clamp, lerp, seg, ss, eio, mulberry } from '/core/lib.js';
+import { clamp, lerp, seg, ss, eio, eo, mulberry } from '/core/lib.js';
 import { SHIP, QZ, dBow, dStern, pullRed, pullBlue, T } from './story.js';
 import { makeSprites, dotTex, puffTex, canvasTex } from './sprites.js';
 
@@ -78,8 +78,8 @@ function tugPose(t, which) {
   const slack = which === 'red' ? 1 - ss(seg(t, T.sail0 + .9, T.sail0 + 1.4)) * (1 - ss(seg(t, T.sail1 - .8, T.sail1))) : 1;
   const Lline = 34 + 6 * (pull / 100) * slack;
   const hold = bitt.clone().add(V((which === 'red' ? 6 : -6) + Math.sin(t * .9 + (which === 'red' ? 0 : 2)) * 1.5, 0, Lline + 7));
-  const start = V(which === 'red' ? 330 : -260, 0, 1150);
-  const u = eio(seg(t, tArr - 4, tArr + .4));
+  const start = V(which === 'red' ? 300 : -260, 0, which === 'red' ? 1060 : 1150);
+  const u = which === 'red' ? eo(seg(t, tArr - 7.5, tArr + .4)) : eio(seg(t, tArr - 4, tArr + .4));
   let pos = start.clone().lerp(hold, u), yaw;
   // heading: toward the ship while arriving (facing north/−z), then turned to face the open sea (+z) to pull
   const turn = ss(seg(t, tArr - .6, tArr + .9));

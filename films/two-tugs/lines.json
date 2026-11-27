@@ -1,15 +1,15 @@
 [
  {
   "id": "v1",
-  "text": "This ship won't stop.",
+  "text": "This giant ship won't stop. Pick a tug!",
   "voice": "am_michael",
-  "speed": 0.95
+  "speed": 1.08
  },
  {
   "id": "v2",
-  "text": "Two tugs. Pick one: red or blue.",
+  "text": "Red or blue?",
   "voice": "am_michael",
-  "speed": 0.95
+  "speed": 1.0
  },
  {
   "id": "v3",

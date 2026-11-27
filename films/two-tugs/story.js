@@ -22,8 +22,8 @@ export const SPEED = [
 export const speedAt = t => SPEED.find(s => t >= s.t0 && t < s.t1) || SPEED[SPEED.length - 1];
 
 export const VO = [
-  { id: 'v1', t: 0.0, text: "This ship won't stop." },
-  { id: 'v2', t: 1.9, text: 'Two tugs. Pick one: red or blue.' },
+  { id: 'v1', t: 0.05, text: "This giant ship won't stop. Pick a tug!" },
+  { id: 'v2', t: 2.9, text: 'Red or blue?' },
   { id: 'v3', t: 5.0, text: "Red takes the front. Blue takes the back." },
   { id: 'v4', t: 8.4, text: "This slow, a ship's rudder barely works." },
   { id: 'v5', t: 12.0, text: "Blue's line snapped!" },

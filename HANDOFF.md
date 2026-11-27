@@ -132,3 +132,11 @@ From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built
 - `films/all-green` (One Rule Changed #1, 32.3 s): grid IDM sim `grid.js` with scripted box "locks"; tow truck; Engine 9 rolls at 0:00.
 - `films/two-tugs` (Pick a Side #1, 30.5 s): keyframed ship drift (dBow/dStern), red/blue tugs on lines, pull meters and work share, line snap, sailboat; built, voices checked, score+mix done, stills checked; needs the full render.
 - Gotcha: a `cmd && cmd && (render) &` chain backgrounds the whole chain; if an earlier step fails the render never starts. Start renders with the Bash tool's run_in_background instead.
+
+### Opening types (retention playbook, ideas/RETENTION_PLAYBOOK.md on branch `ideas`; never repeat the previous film's)
+| Film | Opening type | Frame 0 | Headline | First line |
+|---|---|---|---|---|
+| Storm Surge | (old) wide aerial | grey sea, tiny gates | none (pill only) | "Storm surge. Four gates. Forty-five minutes." |
+| All Green | Close → Pull-out (car at the lens) | the pink car racing into the junction under a green light, ~40% of height, sharp; pull-up 1.15–1.85 s | EVERY LIGHT / IS GREEN | "Every light turned green. Engine 9 is trapped." (horn on frame 0) |
+| Two Tugs | Chase → Reveal (hero from behind) | the red tug from behind and low, bow wash, the giant ship ahead; pull-out 1.15–1.9 s to the high view of ship + quay | THIS SHIP / WON'T STOP | "This giant ship won't stop. Pick a tug!" (ship horn on frame 0) |
+Rules applied: HUD fades in at 1.0 s, map/meters ≥ 1.8 s; first 2 s nearly sharp (`sharp(t)` band + low aperture), music enters after 0.4 s, loop seam dives back to the frame-0 shot in the last 0.55 s.

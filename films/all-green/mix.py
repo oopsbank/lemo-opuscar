@@ -32,6 +32,8 @@ for t0 in np.cumsum(rng.uniform(.15, .9, 120)):
     j = float(np.interp(t0, jt, jn / max(1, jn.max())))
     if rng.random() < j * 1.3 and not (21.5 <= t0 < 26): add(fx, horn(rng.choice([360, 400, 440, 480]), rng.uniform(.15, .5), .02 + .03 * j), t0, 1, rng.uniform(-.7, .7))
 for t0 in (22.3, 23.9): add(fx, horn(410, .6, .04), t0, 1, .3)
+# the hit on frame 0: a long horn blast right at the lens
+add(fx, horn(430, .7, .09), 0.0, 1, .1); add(fx, horn(470, .5, .06), .05, 1, -.2)
 # the lights flip (relay clicks rippling), the crash, locks
 for k in range(6): add(fx, clack(1.6, .05), Tv('flip')[0]['t'] + k * .07, 1, -.5 + k * .2)
 c0 = Tv('crash')[0]['t']; add(fx, thump(.5, 80), c0, 1, .2); add(fx, hp(noise(.4), 1500) * np.exp(-t_(.4) / .06) * .2, c0, 1, .2); add(fx, horn(430, .9, .05), c0 + .4, 1, .2)
@@ -63,6 +65,7 @@ for e in Tv('vo'):
     i0, i1 = int(e['t'] * SR), min(N, int(e['t'] * SR) + len(x)); vo_env[max(0, i0 - int(.12 * SR)):min(N, i1 + int(.2 * SR))] = 1
 mus, _ = sf.read(os.path.join(HERE, 'out/score.wav'), dtype='float32')
 mus = mus[:N] if len(mus) >= N else np.pad(mus, ((0, N - len(mus)), (0, 0)))
+mus *= np.clip((tt - .4) / .4, 0, 1)[:, None] * .7 + .3 * np.clip(tt / .4, 0, 1)[:, None]
 duck = 1 - .74 * np.clip(uniform_filter1d(vo_env, int(.15 * SR)), 0, 1)
 mix = mus * .95 * duck[:, None] + amb + fx * .9 + vo
 r = int(.02 * SR); mix[-r:] *= np.linspace(1, 0, r)[:, None]

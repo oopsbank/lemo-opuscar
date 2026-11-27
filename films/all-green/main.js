@@ -1,7 +1,7 @@
 // All Green — Tilt-Shift Miniature, YouTube Short (1080×1920, 24 fps, smooth motion); the last frame matches the first
 import * as THREE from 'three';
 import { makePost } from './post.js';
-import { clamp, lerp, seg, ss, eio, eo } from '/core/lib.js';
+import { clamp, lerp, seg, ss, eio, eo, ei } from '/core/lib.js';
 import { buildWorld, U } from './world.js';
 import { JUNCS, JUNC, LANE, LEN, world } from './grid.js';
 import { DUR, T_ROLL, sim, rate, remaining, VO, shotAt, SIM, FIXED, flipAt, TOW, invSim } from './story.js';
@@ -62,6 +62,9 @@ function orbit(target, azDeg, pitchDeg, dist) { const az = azDeg * Math.PI / 180
 const P = (look, az, pitch, dist, fov) => ({ look, az, pitch, dist, fov });
 const mixP = (a, b, k) => P(a.look.clone().lerp(b.look, k), lerp(a.az, b.az, k), lerp(a.pitch, b.pitch, k), Math.exp(lerp(Math.log(a.dist), Math.log(b.dist), k)), lerp(a.fov, b.fov, k));
 const OPEN = P(V(116, 0, 255), 205, 46, 125, 34);
+const CLOSE = P(V(117.5, 1.2, 254), 196, 32, 24, 32);
+// the first 2 s stay sharp (only the outer edges blur), then the full tilt-shift band returns
+const sharp = t => { const k = ss(seg(t, 1.6, 2.4)); return { w: lerp(.34, .07, k), amp: lerp(10, 34, k), mix: lerp(.25, .68, k) }; };
 const CRASH = P(V(116, 0, 255), 205, 44, 110, 34);
 const SPREAD = P(V(60, 0, 185), 180, 64, 380, 38);
 const ENG = P(V(0, 0, 52), 180, 42, 165, 34);
@@ -69,7 +72,7 @@ const REAL = P(V(0, 0, 62), 180, 34, 190, 33);
 function shotCam(t) {
   const sh = shotAt(t), u = seg(t, sh.t0, sh.t1), s = sim(t);
   let p, subj, band = { w: .07, amp: 34, mix: .68 }, aper = 5600, sunAz = 35, sunEl = 24, span = 220;
-  if (sh.id === 'open') { p = P(OPEN.look, OPEN.az, OPEN.pitch, OPEN.dist - 25 * eio(u), OPEN.fov); subj = V(116, 1, 260); span = 300; band = { w: .1, amp: 26, mix: .55 }; sunAz = OPEN.az + 40; }
+  if (sh.id === 'open') { const k = eio(seg(t, 1.15, 1.85)); p = mixP(P(CLOSE.look, CLOSE.az, CLOSE.pitch, CLOSE.dist - 2.5 * seg(t, 0, 1.15), CLOSE.fov), OPEN, k); subj = V(117, 1.2, 256).lerp(V(116, 1, 260), k); span = lerp(60, 200, k); sunAz = p.az + 40; band = sharp(t); aper = lerp(700, 5600, ss(seg(t, 1.6, 2.4))); }
   else if (sh.id === 'crash') { p = mixP(P(OPEN.look, OPEN.az, OPEN.pitch, OPEN.dist - 25, OPEN.fov), CRASH, eio(seg(t, 2.5, 3.9))); p.dist *= 1 - .06 * eio(seg(t, 3.9, 5.5)); subj = V(116, 1, 260).lerp(V(116, 1, 225), seg(t, 4, 5.5) * .6); span = 160; sunAz = CRASH.az + 40; }
   else if (sh.id === 'spread') { p = mixP(CRASH, SPREAD, eio(seg(t, 5.5, 7.5))); subj = V(116, 1, 260).lerp(V(0, 1, 120), seg(t, 6.5, 9)); span = 320; band = { w: .12, amp: 24, mix: .5 }; sunAz = 30; }
   else if (sh.id === 'engine') { p = P(ENG.look, ENG.az, ENG.pitch, ENG.dist - 10 * eio(u), ENG.fov); subj = V(0, 1.5, 30); band = { w: .07, amp: 38, mix: .7 }; aper = 6500; span = 140; sunAz = ENG.az + 40; }
@@ -77,7 +80,7 @@ function shotCam(t) {
   else if (sh.id === 'release') { const look = V(55, 0, lerp(225, 165, eio(u))); const rot = lerp(Math.PI * .45, .02, eio(u)); p = { look, top: true, rot, h: 310, fov: 40 }; subj = look.clone(); span = 300; band = { w: .12, amp: 24, mix: .85 }; sunAz = 160; }
   else if (sh.id === 'real') { p = P(REAL.look, REAL.az, REAL.pitch, REAL.dist - 12 * eio(u), REAL.fov); subj = V(0, 1, 120); band = { w: .065, amp: 38, mix: .7 }; aper = 6200; span = 160; sunAz = 40; }
   else if (sh.id === 'roll') { const e = engine.pos(s); const look = V(0, 0, Math.max(62, e.z + 12)); p = P(look, 180, lerp(34, 40, eio(u)), lerp(190, 140, eio(u)), 33); subj = e; band = { w: .065, amp: 38, mix: .7 }; aper = 6200; span = 170; sunAz = 40; }
-  else { const k = eio(seg(t, 29, DUR)); const e = engine.pos(sim(29)); const from = P(V(0, 0, Math.max(62, e.z + 12)), 180, 40, 140, 33); p = mixP(from, OPEN, k); subj = e.clone().lerp(V(116, 1, 260), k); span = lerp(170, 300, k); sunAz = lerp(40, OPEN.az + 40, k); band = { w: lerp(.065, .1, k), amp: lerp(32, 26, k), mix: lerp(.64, .55, k) }; }
+  else { const k = eio(seg(t, 29, DUR - .55)); const e = engine.pos(sim(29)); const from = P(V(0, 0, Math.max(62, e.z + 12)), 180, 40, 140, 33); p = mixP(from, OPEN, k); const d = ei(seg(t, DUR - .55, DUR)); if (d > 0) p = mixP(p, CLOSE, d); subj = e.clone().lerp(V(116, 1, 260), k); span = lerp(170, 300, k); sunAz = lerp(40, OPEN.az + 40, k); band = { w: lerp(.065, .1, k), amp: lerp(32, 26, k), mix: lerp(.64, .55, k) }; }
   let pos, up = V(0, 1, 0);
   if (p.top) { pos = p.look.clone().add(V(0, p.h, 0)); up = V(Math.sin(p.rot), 0, -Math.cos(p.rot)); }
   else pos = orbit(p.look, p.az, p.pitch, p.dist);
@@ -107,6 +110,7 @@ const lockedAt = (J, s) => { const k = J.id + '|' + Math.round(s * 4); if (!LOCK
 function drawOverlay(t) {
   g.clearRect(0, 0, W, H);
   if (QS.has('nohud')) return;
+  g.save(); g.globalAlpha = seg(t, 1.0, 1.3);
   const s = sim(t), rem = remaining(t), rolled = s >= T_ROLL, low = rem < 20 && !rolled;
   const nFixed = JUNCS.filter(J => s >= FIXED[J.id]).length;
   g.save(); rr(HUD.x, HUD.y, 430, 196, 18); g.fillStyle = 'rgba(14,22,34,.8)'; g.fill(); g.restore();
@@ -135,8 +139,9 @@ function drawOverlay(t) {
   const e = engine.pos(s); g.fillStyle = '#d8342a'; g.beginPath(); g.arc(X(0), Z(Math.min(e.z, 300)), 10, 0, Math.PI * 2); g.fill(); g.fillStyle = Math.floor(t * 6) % 2 ? '#fff' : '#3d7bff'; g.beginPath(); g.arc(X(0), Z(Math.min(e.z, 300)), 4, 0, Math.PI * 2); g.fill();
   const tp = tow.pose(s); if (tp && tp.x < 200) { g.fillStyle = '#f2a51a'; g.beginPath(); g.arc(X(tp.x), Z(tp.z), 8, 0, Math.PI * 2); g.fill(); }
   g.restore();
-  if (t < 2.1) {   // the hook: the problem in big letters from frame 0
-    const a = 1 - seg(t, 1.8, 2.1), y0 = 640;
+  g.restore();
+  if (t < 2.2) {   // the hook: the problem in big letters from frame 0
+    const a = 1 - seg(t, 1.9, 2.2), y0 = 520;
     g.save(); g.globalAlpha = a; g.textAlign = 'center'; g.textBaseline = 'middle';
     g.shadowColor = 'rgba(0,0,0,.35)'; g.shadowBlur = 24; g.shadowOffsetY = 8; rr(W / 2 - 400, y0 - 150, 800, 300, 26); g.fillStyle = '#f7f4ec'; g.fill(); g.shadowColor = 'transparent';
     g.lineWidth = 10; g.strokeStyle = '#1d4c9e'; rr(W / 2 - 386, y0 - 136, 772, 272, 18); g.stroke();
