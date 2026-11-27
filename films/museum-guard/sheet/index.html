@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#3a3f4a}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+import { makeChar, makePortrait } from '../chars.js';
+const g = document.getElementById('c').getContext('2d'); g.imageSmoothingEnabled = false; g.fillStyle='#fff'; g.font='20px sans-serif';
+let y = 10;
+const row = (name, cv, n, fw, fh, k) => { const per = Math.max(1, Math.floor(1060 / (fw * k + 6))); for (let i = 0; i < n; i++) { const c = i % per, r = Math.floor(i / per); g.drawImage(cv, i * fw, 0, fw, fh, 10 + c * (fw * k + 6), y + 24 + r * (fh * k + 6), fw * k, fh * k); } g.fillText(name, 10, y + 18); y += 30 + Math.ceil(n / per) * (fh * k + 6); };
+for (const [k, fw, fh, s] of [['guard', 34, 50, 4], ['dino', 132, 100, 2], ['mummySit', 36, 30, 4], ['mummy', 36, 52, 4]]) { const c = makeChar(k); row(k + ': ' + c.atlas.names.join(' '), c.atlas.canvas, c.atlas.n, fw, fh, s); }
+window.DUR = 1; window.render = () => {}; window.READY = true;
+</script></body></html>

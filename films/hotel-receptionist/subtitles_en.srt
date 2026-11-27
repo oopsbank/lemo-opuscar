@@ -1,0 +1,40 @@
+1
+00:00:00,000 --> 00:00:02,110
+THE CUSTOMER: I want a room with a sea view.
+
+2
+00:00:02,150 --> 00:00:05,367
+You are a hotel receptionist.
+
+3
+00:00:08,500 --> 00:00:10,460
+YOU: Sea view!
+
+4
+00:00:10,500 --> 00:00:12,900
+THE CUSTOMER: Acceptable.
+
+5
+00:00:13,000 --> 00:00:16,900
+ROOM 7: There’s a goat in our honeymoon suite.
+
+6
+00:00:17,500 --> 00:00:20,200
+YOU: We don’t have a goat.
+
+7
+00:00:27,500 --> 00:00:30,200
+THE GUIDE: Forty rooms, please!
+
+8
+00:00:31,500 --> 00:00:34,200
+THE MANAGER: Who checked a goat in?
+
+9
+00:00:38,500 --> 00:00:40,900
+THE MANAGER: You’re hired.
+
+10
+00:00:41,000 --> 00:00:42,500
+THE CUSTOMER: Excuse me! I want a ro—
+

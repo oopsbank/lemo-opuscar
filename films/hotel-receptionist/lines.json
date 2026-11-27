@@ -1,0 +1,12 @@
+[
+ {"id":"c1","text":"I want a room with a sea view.","voice":"bf_isabella","speed":1.0},
+ {"id":"n1","text":"You are a hotel receptionist.","voice":"bm_lewis","speed":0.95},
+ {"id":"y1","text":"Sea view!","voice":"am_puck","speed":1.0},
+ {"id":"c2","text":"Acceptable.","voice":"bf_isabella","speed":0.85},
+ {"id":"r1","text":"There's a goat in our honeymoon suite.","voice":"af_bella","speed":1.05},
+ {"id":"y2","text":"We don't have a goat.","voice":"am_puck","speed":1.0},
+ {"id":"g1","text":"Forty rooms, please!","voice":"am_michael","speed":1.0},
+ {"id":"m1","text":"Who checked a goat in?","voice":"bm_george","speed":0.9},
+ {"id":"m2","text":"You're hired.","voice":"bm_george","speed":0.9},
+ {"id":"c3","text":"Excuse me! I want a room with a sea view.","voice":"bf_isabella","speed":1.1}
+]

@@ -1,0 +1,18 @@
+[
+ {"id":"n1","text":"You are a night museum guard.","voice":"bm_lewis","speed":0.9},
+ {"id":"n2","text":"Nothing ever happens here.","voice":"bm_lewis","speed":0.88},
+ {"id":"n3","text":"Sixty-six million years dead. Mostly.","voice":"bm_lewis","speed":0.9},
+ {"id":"d1","text":"Lower that light, dear.","voice":"bf_emma","speed":0.84},
+ {"id":"y1","text":"Paintings don't talk!","voice":"am_puck","speed":1.05},
+ {"id":"d2","text":"And guards don't nap. Yet here we are.","voice":"bf_emma","speed":0.9},
+ {"id":"m1","text":"Is it morning?","voice":"am_onyx","speed":0.78},
+ {"id":"y2","text":"No?","voice":"am_puck","speed":0.95},
+ {"id":"m2","text":"Five more centuries.","voice":"am_onyx","speed":0.78},
+ {"id":"y3","text":"H... hello?","voice":"am_puck","speed":0.9},
+ {"id":"s1a","text":"Surprise!","voice":"bf_emma","speed":1.0},
+ {"id":"s1b","text":"Surprise!","voice":"am_onyx","speed":1.0},
+ {"id":"s1c","text":"Surprise!","voice":"bf_alice","speed":1.05},
+ {"id":"n4","text":"Nobody remembered your birthday.","voice":"bm_lewis","speed":0.88},
+ {"id":"n5","text":"Except the museum.","voice":"bm_lewis","speed":0.86},
+ {"id":"n6","text":"Nothing ever happens here.","voice":"bm_lewis","speed":0.86}
+]

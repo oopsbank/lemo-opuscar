@@ -17,6 +17,9 @@ This branch carries what a new session needs to keep making films for the user's
 |---|---|---|---|
 | `films/fish-seller` | 60.0 s | *You Are a Fish Seller*: four "rules of the fish seller" (RPG cards), each broken at once. A seagull steals a fish, a grandma out-haggles you, the "dead" fish says "Nope." and escapes into the sea, and while you chase it the gull takes over your stall wearing your cap. Ends at sunrise: "You were a fish seller." | `oopsbank/some-crazy-things-media` main, commit 6547674: `pixel-life_fish-seller_1080x1920.mp4` + `pixel-life_fish-seller_thumb.jpg`. Five logo frames on branch `logo-frames-fish` of this repo. |
 | `films/pizza-guy` | 61.0 s | *You Are a Pizza Delivery Guy*: one pizza, No. 31, thirty minutes (a pocket-watch gauge drains on screen). A dog chases the scooter, a gust slaps the pizza onto your face, you knock at No. 13 (lightning, a ghost), and at No. 31 a bear in a bathrobe opens just as the watch hits LATE. "It's free. Keep it." You share the pizza with the dog as the rain stops. | `oopsbank/some-crazy-things-media` main, commit 60f7b19: `pixel-life_pizza-guy_1080x1920.mp4` + `pixel-life_pizza-guy_thumb.jpg`. |
+| `films/museum-guard` | 61.0 s | *You Are a Night Museum Guard* (Job #3): the exhibits come alive on your shift. | media repo commit e37aafa: `pixel-life_museum-guard_1080x1920.mp4` + `_thumb.jpg`. |
+| `films/hotel-receptionist` | 42.5 s | *You Are a Hotel Receptionist* (Job #4): a sea view with no sea (a painting on the window), a goat in the honeymoon suite (on the phone), a 40-person tour group; the goat eats the last key; YOU'RE FIRED; "You're hired." to the goat. First film with the FORMULA (recurring hero, Customer/Manager/Cat, HUD, quest banner, loop). | media repo commit 43e6372. |
+| `films/returns-desk` | 34.5 s | *You Are a Returns Desk Clerk* (Job #5): a cake "unopened" with a slice missing (the Cat eats another), a receipt from 1998 unrolled across the floor, a 300-person queue out into the snowy car park, the returns cage buries the hero; YOU'RE FIRED; "Nobody else applied."; the Customer comes back. First film with the visual upgrade, the retention playbook's slam open and pixel fonts. | see the log below |
 
 Each folder holds `TREATMENT.md` (structure, shot list, beat sheet, cue map, sound table), `CREDITS`, `build.sh`, the page and engine (`index.html`, `main.js`, `ui.js`, `story.js` = the timeline, a set file `pier.js`/`street.js`, `chars.js`, plus `px.js kit.js fx.js post_ts.js` copied from the style demo), `score.py`, `mix.py`, `lines.json`, `voices/dur.json`, `events.json`, `subtitles_en.srt`, `fonts/` (OFL) and `tools/` (`render_range.mjs`, `cuecheck.py`, `srt.py`). Renders, voices (`*.wav`), music and mixes are not committed; `build.sh` regenerates them.
 
@@ -58,3 +61,18 @@ Topics offered to the user and not yet made:
 - **Campsite ranger**: a pine forest and campfire, a bear steals the marshmallows, the tent blows away, fireflies taken for ghosts, and in the morning the bear is sitting in your chair.
 
 Series ideas: recurring cameos (the grandma, the seagull, the dog, the bear) and a "Pixel Life" end-card line; vary the structure each time (the rule book was film 1, the countdown film 2; next could be a day cycle, a party of three, or an overworld map).
+
+## 7. Rules added on 27 Nov 2026 (from the manager, for the user)
+
+- **Retention playbook** (`ideas/RETENTION_PLAYBOOK.md` on branch `ideas`): frame 0 is a tight, sharp, bright shot (luma 110–160, sd ≥ 50) with the subject ≥ 35% of the height and a face ≥ 25% of the width, already moving; a 2–5 word headline in a chunky pixel font (Pixelify Sans / Silkscreen, OFL) at y≈300–700; first line ≤ 8 words by 0.2 s, spoken by an on-screen character, speed ≥ 1.0; a sound hit on frame 0; a second shot by 1.5 s; no HUD before 1 s; tilt-shift only at the edges for 0–2 s; the last 0.5 s matches frame 0. Rotate the opening type: (a) customer line close-up / slam open, (b) disaster-first flash-forward, (c) the hero's face in panic, (d) a game-over card cold open.
+- **Content playbook** (`ideas/CONTENT_PLAYBOOK.md`): stake or oddity in words by 1 s; no dead air > 2.5 s without a line *and* on-screen text; a new, bigger beat every 3–5 s; a twist at 50–60%; show causes, don't tell them; no question card mid-story (the question goes in the pinned comment); payoff = a clear image + a line ≤ 12 words + a second laugh; rotate the skeleton; name the next job in the last line; run its pre-render checklist.
+- **Density**: no empty areas. `films/returns-desk/tools/emptycheck.py film.mp4 2 --sheet out.jpg` scans a 6×10 grid every 2 s and flags flat cells (mean Sobel edge < 3.0 at 540×960). Hotel: 46.2% empty.
+- **No daily cap** any more (removed by the user): deliver each film as soon as it is checked, then start the next.
+- Reports go to the manager session `session_01CUE842B4KiVEBKEUhstDsx` (not "@parent").
+
+## 8. Log: opening type and skeleton per film
+
+| Job | Film | Opening type | Skeleton |
+|---|---|---|---|
+| #4 | Hotel Receptionist | customer line, wide (the playbook's "before") | three gags + game over + "you're hired" twist + loop |
+| #5 | Returns Desk Clerk | **slam open** (a): tight two-shot, the cake slammed at frame 0, "UNOPENED?" | three returns, each bigger (cake → 1998 receipt → 300-person queue), collapse at 59%, game over, "Nobody else applied.", the Customer returns (loop) |

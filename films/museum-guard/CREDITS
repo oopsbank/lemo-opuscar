@@ -1,0 +1,16 @@
+You Are a Night Museum Guard — credits for third-party material
+
+Picture: everything drawn in code (three.js scenes, procedural pixel textures and sprites); no images, footage or generated images.
+  three.js r170 — MIT licence — https://threejs.org
+  Engine pieces adapted from the library's 2.5D Pixel Art style (px.js, kit.js, fx.js, post_ts.js).
+
+Type (SIL Open Font License 1.1, files in fonts/ with their licence texts):
+  Cinzel — Natanael Gama — https://fonts.google.com/specimen/Cinzel
+  Cormorant Garamond — Christian Thalmann — https://fonts.google.com/specimen/Cormorant+Garamond
+
+Voices: Kokoro TTS (kokoro-onnx, model Kokoro-82M, Apache 2.0) — voices bm_lewis, am_puck, bf_emma, am_onyx, bf_alice — synthetic speech.
+  https://github.com/thewh1teagle/kokoro-onnx · https://huggingface.co/hexgrad/Kokoro-82M
+
+Music: original score written for this film (score.py) — synthesized reed (bassoon-like), recorder, horn, hand drum, tambourine,
+  drones and pads, and physically modelled plucked strings (pizzicato bass and strings, guitar, harp, music box) from the library's core/audio/pluck.py. No samples.
+Sound effects and ambience: synthesized in mix.py with the library's core/audio/sfx.py. No recordings.
