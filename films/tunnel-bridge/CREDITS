@@ -1,0 +1,20 @@
+Tunnel or Bridge? — a Tilt-Shift Miniature short for Pocket City (YouTube Shorts, 1080×1920)
+
+Picture
+- Everything is procedural three.js code in this folder (town, hospital, tunnel portals, drawbridge, two ambulances, camper, sailboat, traffic, set dressing in dressing.js, harbour.js and actors.js, race plate and route map, the yellow cat). No image assets, no footage, no image or video generator.
+- Post-processing adapted from an MIT-licensed tilt-shift pass (post.js); geometry helper geo.js (MIT).
+
+Fonts
+- Overpass & Overpass Mono — Delve Withrington, Dave Bailey, Thomas Jockin (Red Hat) — SIL Open Font License 1.1 (fonts/OFL-Overpass.txt)
+
+Voice
+- Kokoro-82M text-to-speech (voice am_michael), Apache-2.0, via kokoro-onnx (synthetic voice). Lines checked with faster-whisper (MIT).
+
+Music (original composition, music/score.py)
+- Samples (CC0): VS Chamber Orchestra: Community Edition (Versilian Studios), Versilian Community Sample Library (Versilian Studios)
+
+Sound effects
+- All synthesized in mix.py (no recorded samples).
+
+Software
+- three.js (MIT), playwright-core (Apache-2.0), FFmpeg (LGPL/GPL), numpy/scipy (BSD), soundfile (BSD), soxr (LGPL)

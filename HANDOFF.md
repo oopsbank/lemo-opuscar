@@ -141,6 +141,7 @@ From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built
 | Storm Surge | (old) wide aerial | grey sea, tiny gates | none (pill only) | "Storm surge. Four gates. Forty-five minutes." |
 | All Green | Close → Pull-out (car at the lens) | the pink car racing into the junction under a green light, ~40% of height, sharp; pull-up 1.15–1.85 s | EVERY LIGHT / IS GREEN | "Every light turned green. Engine 9 is trapped." (horn on frame 0) |
 | Two Tugs | Chase → Reveal (hero from behind) | the red tug from behind and low, bow wash, the giant ship ahead; pull-out 1.15–1.9 s to the high view of ship + quay | THIS SHIP / WON'T STOP | "This giant ship won't stop. Pick a tug!" (ship horn on frame 0) |
+| Tunnel or Bridge? | Result first (the finish at frame 0, then "40 seconds earlier") | ambulance A side-on at the hospital bay (≈ 40% of height), whip-pan to B at 0.55–1.05 s, rewind rise to the aerial 1.6–2.7 s | WHO GETS / THERE FIRST? | "Tunnel or bridge? Pick one. Now!" (air horn on frame 0) |
 Rules applied: HUD fades in at 1.0 s, map/meters ≥ 1.8 s; first 2 s nearly sharp (`sharp(t)` band + low aperture), music enters after 0.4 s, loop seam dives back to the frame-0 shot in the last 0.55 s.
 
 ### Skeletons (CONTENT_PLAYBOOK.md on `ideas`; rotate, never twice in a row)
@@ -149,6 +150,7 @@ Rules applied: HUD fades in at 1.0 s, map/meters ≥ 1.8 s; first 2 s nearly sha
 | Storm Surge | Checklist race | (none) | "It held." | question |
 | All Green | One rule changed | (weak: the untangle runs backwards) | "Gridlock starts with one car stuck in a junction." | question (playbook applied only to the opening; render was under way) |
 | Two Tugs | Pick a side | blue's line snaps (37%), then the sailboat forces red to let go (45–60%) | "It stopped two metres out. Each tug pulls sixty tonnes." | "Red or blue? Next: tunnel or bridge." |
+| Tunnel or Bridge? | Result first | the drawbridge goes up for a sailboat (48%) while blue is under the canal | "Tunnel, by a nose! Tunnels never stop for boats." | "Next: one tow truck, two hundred cars." |
 Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick a Side if possible, e.g. "Result first" or "Chain reaction".
 
 
@@ -224,3 +226,4 @@ Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick 
 - The user approved (AskUserQuestion) both the BtbN ffmpeg download and `add_repo` for the media repo with push access; both were blocked by the classifier until then. Ask both in one question up front.
 - A fresh container needs `setup.sh deps voice music` (≈ 10 min) and a full rebuild of voices/events/score/mix before the render (build.sh does it).
 - Don't name sources in the description unless verified (I had to correct a message to the manager).
+- *Tunnel or Bridge?* (`films/tunnel-bridge`, 34.8 s, Pick a Side #2): built by the fourth session. Two ambulances on physical speed profiles (`story.js`: accel/brake limits, corners, the camper zone, B's barrier stop); A's top speed and B's barrier-lift time are solved so A crosses the bay line at race 39.95 s and B at 40.05 s. Film time maps to race time with a rewind at 1.6–2.6 s and a rewind dive at the seam (34.25 s → end). New: tunnel portals at x −130, hospital bay with a finish line, camper at a height bar, quay market (`makeQuayDressing`), paving joints and roof stripes in world.js. Density 36% → 27% (blur reduced to amp 15–16 in mid shots; the camper shot and the bay close stay ~45%). Frame 0 (still): brightness 114, sd 77, sat 124, motion 29.8. Render started ~12:40 UTC.

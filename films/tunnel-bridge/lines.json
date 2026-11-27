@@ -1,0 +1,89 @@
+[
+ {
+  "id": "v1",
+  "text": "Tunnel or bridge? Pick one. Now!",
+  "voice": "am_michael",
+  "speed": 1.08
+ },
+ {
+  "id": "v2",
+  "text": "Forty seconds earlier.",
+  "voice": "am_michael",
+  "speed": 1.08,
+  "asr": "40 seconds earlier."
+ },
+ {
+  "id": "v3",
+  "text": "Blue takes the tunnel. Orange takes the bridge.",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v4",
+  "text": "The bridge way is a hundred metres shorter.",
+  "voice": "am_michael",
+  "speed": 1.02,
+  "asr": "The bridge way is a hundred meters shorter."
+ },
+ {
+  "id": "v5",
+  "text": "A camper is stuck at the tunnel!",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v6",
+  "text": "Squeeze past. Into the tunnel!",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v7",
+  "text": "Blue's under the canal now.",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v8",
+  "text": "Oh no. The bridge is going up!",
+  "voice": "am_michael",
+  "speed": 1.08
+ },
+ {
+  "id": "v9",
+  "text": "A sailboat. Orange has to wait.",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v10",
+  "text": "It's down! Go, orange!",
+  "voice": "am_michael",
+  "speed": 1.08
+ },
+ {
+  "id": "v11",
+  "text": "Here they both come!",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v12",
+  "text": "It's going to be close!",
+  "voice": "am_michael",
+  "speed": 1.02
+ },
+ {
+  "id": "v13",
+  "text": "Tunnel, by a nose! Tunnels never stop for boats.",
+  "voice": "am_michael",
+  "speed": 1.12
+ },
+ {
+  "id": "v14",
+  "text": "Next: one tow truck, two hundred cars.",
+  "voice": "am_michael",
+  "speed": 1.12,
+  "asr": "Next, one tow truck, 200 cars."
+ }
+]
