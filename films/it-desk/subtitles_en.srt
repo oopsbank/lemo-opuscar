@@ -1,0 +1,44 @@
+1
+00:00:00,000 --> 00:00:01,360
+THE CEO: You rebooted the whole building?
+
+2
+00:00:01,400 --> 00:00:03,410
+You are the IT help desk.
+
+3
+00:00:03,450 --> 00:00:06,060
+A COLLEAGUE: My screen’s dead!
+
+4
+00:00:06,100 --> 00:00:08,960
+YOU: Turned it off and on?
+
+5
+00:00:09,000 --> 00:00:12,000
+YOU: Off. On. Fixed! Next!
+
+6
+00:00:12,400 --> 00:00:15,900
+THE CEO: My internet is broken. Fix it!
+
+7
+00:00:16,200 --> 00:00:18,500
+YOU: Off… and on.
+
+8
+00:00:19,300 --> 00:00:22,060
+YOU: It’s all rebooting!
+
+9
+00:00:22,100 --> 00:00:24,600
+THE CEO: Internet fixed?
+
+10
+00:00:27,800 --> 00:00:30,660
+THE CEO: Oh. It was unplugged.
+
+11
+00:00:30,700 --> 00:00:34,350
+THE CEO: Fired. Go be a flight attendant.
+

@@ -1,0 +1,68 @@
+[
+ {
+  "id": "c0",
+  "text": "You rebooted the whole building?",
+  "voice": "bm_george",
+  "speed": 1.25
+ },
+ {
+  "id": "n1",
+  "text": "You are the I.T. help desk.",
+  "voice": "bm_lewis",
+  "speed": 1.2
+ },
+ {
+  "id": "w1",
+  "text": "My screen's dead!",
+  "voice": "af_heart",
+  "speed": 1.08
+ },
+ {
+  "id": "y1",
+  "text": "Turned it off and on?",
+  "voice": "am_puck",
+  "speed": 1.08
+ },
+ {
+  "id": "y2",
+  "text": "Off. On. Fixed! Next!",
+  "voice": "am_puck",
+  "speed": 1.1
+ },
+ {
+  "id": "c1",
+  "text": "My internet is broken. Fix it!",
+  "voice": "bm_george",
+  "speed": 1.08
+ },
+ {
+  "id": "y3",
+  "text": "Off... and on.",
+  "voice": "am_puck",
+  "speed": 1.0
+ },
+ {
+  "id": "y4",
+  "text": "It's all rebooting!",
+  "voice": "am_puck",
+  "speed": 1.1
+ },
+ {
+  "id": "c3",
+  "text": "Internet fixed?",
+  "voice": "bm_george",
+  "speed": 1.05
+ },
+ {
+  "id": "c4",
+  "text": "Oh. It was unplugged.",
+  "voice": "bm_george",
+  "speed": 1.0
+ },
+ {
+  "id": "m2",
+  "text": "Fired. Go be a flight attendant.",
+  "voice": "bm_george",
+  "speed": 1.08
+ }
+]
