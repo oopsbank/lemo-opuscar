@@ -89,7 +89,7 @@ git fetch origin ideas && git show origin/ideas:ideas/FORMULA.md
 | 2 | No Holes | Why do crackers have holes? | 24.0 s | `some-crazy-thingzz_cracker-holes_*` | `some-crazy-thingzz/films/cracker-holes/` |
 | 3 | Sand Trap | Why do golf balls have dimples? | 26.5 s | `some-crazy-thingzz_golf-dimples_*` (pushed) | `some-crazy-thingzz/films/golf-dimples/` |
 | 4 | Bald Serve | Why do tennis balls have fuzz? | 26.8 s | `some-crazy-thingzz_tennis-fuzz_*` (pushed) | `some-crazy-thingzz/films/tennis-fuzz/` |
-| 5 | Cap Solo | Why do pen caps have a hole? | 25.0 s | `some-crazy-thingzz_pen-cap_*` (see §10) | `some-crazy-thingzz/films/pen-cap/` |
+| 5 | Cap Solo | Why do pen caps have a hole? | 25.0 s | `some-crazy-thingzz_pen-cap_*` (pushed 27 Nov 06:10 UTC, media commit 367da5e) | `some-crazy-thingzz/films/pen-cap/` |
 
 Make the next ones to the formula in §2: 25–35 s, Gus and Nana, the WRONG stamp and the "Actually…" sting, a hard-cut loop.
 
@@ -286,7 +286,7 @@ Content rules in force:
 | Film | Status | Opening type | Skeleton |
 |---|---|---|---|
 | Golf, Tennis | delivered and pushed | (c) macro | Gus test (identical, pre-playbook) |
-| **Pen Caps** (`films/pen-cap`) | delivered by this session if §11 says so; otherwise rebuild with `build.sh` | (a) Gus mid-wrong-action | Gus test, retimed with a WARP table |
+| **Pen Caps** (`films/pen-cap`) | **delivered and pushed** (25.0 s, 17.7 MB, −14.0 LUFS; thumb = frame 0.6 with the headline) | (a) Gus mid-wrong-action | Gus test, retimed with a WARP table |
 | **Pen Hole** (`films/pen-hole`) | **ready to render, not rendered**: voices in `lines.json`; `story.json`/`voices.json` already timed; score/mix scripts done | (d) result first | result first, WARP-retimed |
 | **Fuel-Icon Arrow** (`films/fuel-arrow`) | **built, stills checked for most shots, not rendered**. To do: a density check, a gauge-shot check, a thumbnail | (b) Nana stops him | Nana stops him + myth layer |
 | next | Tape-Measure Hook (backlog #3, ranked 3rd in the content playbook), then F/J bumps, toothpaste squares | rotate: next should be (c) or (a) | not "Gus test" right after Fuel |
@@ -320,3 +320,25 @@ import subprocess, numpy as np; from PIL import Image
 def fr(mp4, t): subprocess.run(['ffmpeg','-loglevel','error','-y','-ss',str(t),'-i',mp4,'-frames:v','1','-s','270x480','/tmp/f.png']); return Image.open('/tmp/f.png').convert('RGB')
 X
 ```
+
+## 11. Delivered at the end of session 2
+
+Pen Caps is delivered: the mp4, the thumb and `some-crazy-thingzz_compare.jpg` (old frame 0 | new) are in the media repo; all return 200.
+
+Measured frame-0 numbers, Tennis → Pen Caps (270×480):
+
+| Measure | Tennis | Pen Caps |
+|---|---|---|
+| Brightness | 123 | 146 |
+| Contrast sd | 42 | 75 |
+| Saturation | 186 | 118 |
+| Motion 0–1 s | 11.5 | 32.2 |
+| Empty cells (frames every 2 s) | 20.2% | 4.1% |
+| Top-level set objects | 94 (incl. 26 trees) | 156 |
+| Face at frame 0 | none | ~80% of the frame width |
+| FX/reaction beats | ~3 | 14 |
+
+**Next for the successor:**
+1. Render and deliver **Pen Hole** (`some-crazy-thingzz/films/pen-hole`, ready).
+2. Finish and deliver **Fuel-Icon Arrow** (`films/fuel-arrow`: density check, review the stills, render).
+3. Then **Tape-Measure Hook**.
