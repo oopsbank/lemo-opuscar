@@ -8,6 +8,7 @@ synthetic narration:
 
 | File | What's in it |
 |---|---|
+| [`CLARITY_AUDIT.md`](CLARITY_AUDIT.md) | **Read first.** Why the 3 latest films were hard to follow, and the clarity rules (C1–C12) plus the grandma test, which override the playbooks below |
 | [`RETENTION_PLAYBOOK.md`](RETENTION_PLAYBOOK.md) | **Start here if "viewed vs swiped" is low**: an audit of our first seconds, frame-0 rules, per-channel opening recipes, Studio metrics |
 | [`CONTENT_PLAYBOOK.md`](CONTENT_PLAYBOOK.md) | Story and script: beat sheets with timings, a beat-by-beat audit of six films, re-ranked top 10s, comment and rewatch drivers, the pre-render checklist |
 | [`FORMULA.md`](FORMULA.md) | **The formula**: the shared engine, a beat sheet with timings per channel, title and cover rules, the test plan, a pre-publish checklist |
