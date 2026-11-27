@@ -1,0 +1,71 @@
+[
+ {
+  "id": "v1",
+  "text": "This ship won't stop.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v2",
+  "text": "Two tugs. Pick one: red or blue.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v3",
+  "text": "Red takes the front. Blue takes the back.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v4",
+  "text": "This slow, a ship's rudder barely works.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v5",
+  "text": "Blue's line snapped!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v6",
+  "text": "Sailboat! Red has to let go.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "Sale boat, red has to let go."
+ },
+ {
+  "id": "v7",
+  "text": "Blue is back on.",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v8",
+  "text": "Both of you. Full power!",
+  "voice": "am_michael",
+  "speed": 0.95
+ },
+ {
+  "id": "v9",
+  "text": "Four metres... three...",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "4 meters, 3."
+ },
+ {
+  "id": "v10",
+  "text": "Two metres. Stopped.",
+  "voice": "am_michael",
+  "speed": 0.95,
+  "asr": "2 meters stopped."
+ },
+ {
+  "id": "v11",
+  "text": "Red or blue: who did more?",
+  "voice": "am_michael",
+  "speed": 0.95
+ }
+]
