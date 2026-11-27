@@ -21,7 +21,15 @@ function asphalt() { const W = 256, s = 73; return paint(W, W, (x, y) => { const
 export function gaugeCanvas(o = {}) {
   const c = document.createElement('canvas'); c.width = 512; c.height = 512; const g = c.getContext('2d');
   const draw = (o2 = {}) => {
-    g.clearRect(0, 0, 512, 512); g.fillStyle = '#101418'; g.beginPath(); g.arc(256, 256, 250, 0, 7); g.fill();
+    g.clearRect(0, 0, 512, 512); g.save(); g.beginPath(); g.arc(256, 256, 250, 0, 7); g.clip();
+    for (let y = 0; y < 512; y += 16) for (let x = 0; x < 512; x += 16) { const k = ((x + y) / 16) % 2; g.fillStyle = k ? '#1a2028' : '#0e1216'; g.fillRect(x, y, 16, 16); g.fillStyle = k ? '#232b35' : '#151a20'; g.fillRect(x + (k ? 2 : 8), y + 2, 6, 12); }
+    const rg = g.createRadialGradient(256, 200, 20, 256, 256, 260); rg.addColorStop(0, 'rgba(90,140,200,.28)'); rg.addColorStop(1, 'rgba(0,0,0,.35)'); g.fillStyle = rg; g.fillRect(0, 0, 512, 512);
+    g.strokeStyle = 'rgba(140,200,255,.55)'; g.lineWidth = 3; for (const r of [236, 222]) { g.beginPath(); g.arc(256, 256, r, 0, 7); g.stroke(); }
+    g.strokeStyle = 'rgba(232,244,255,.5)'; g.lineWidth = 3; for (let i = 0; i <= 32; i++) { const a = Math.PI * (1.15 + i / 32 * .7); g.beginPath(); g.moveTo(256 + Math.cos(a) * 205, 300 + Math.sin(a) * 205); g.lineTo(256 + Math.cos(a) * 192, 300 + Math.sin(a) * 192); g.stroke(); }
+    g.fillStyle = '#e8f4ff'; g.font = '800 30px Baloo2'; g.textAlign = 'center'; g.fillText('½', 256, 150);
+    g.fillStyle = '#0a0c0e'; g.fillRect(176, 430, 160, 40); g.fillStyle = '#7be0ff'; g.font = '800 30px Baloo2'; g.fillText('023417 km', 256, 460);
+    const wl = [['#ffb02e', 120, 400], ['#ff3b30', 392, 400], ['#7be07b', 150, 470], ['#4ad0ff', 362, 470]]; for (const [c, x, y] of wl) { g.fillStyle = c; g.beginPath(); g.arc(x, y, 13, 0, 7); g.fill(); g.fillStyle = 'rgba(255,255,255,.6)'; g.beginPath(); g.arc(x - 4, y - 4, 4, 0, 7); g.fill(); }
+    g.restore(); g.fillStyle = 'rgba(0,0,0,0)';
     g.strokeStyle = '#3a4048'; g.lineWidth = 10; g.stroke();
     g.strokeStyle = '#e8f4ff'; g.lineCap = 'round';
     for (let i = 0; i <= 8; i++) { const a = Math.PI * (1.15 + i / 8 * .7); g.lineWidth = i % 4 ? 6 : 12; g.beginPath(); g.moveTo(256 + Math.cos(a) * 200, 300 + Math.sin(a) * 200); g.lineTo(256 + Math.cos(a) * (i % 4 ? 175 : 160), 300 + Math.sin(a) * (i % 4 ? 175 : 160)); g.stroke(); }
@@ -143,14 +151,23 @@ export function buildStation(scene) {
 // —— the cockpit rig (placed away from the forecourt): dashboard with the gauge, steering wheel, windscreen frame, seats ——
 export function buildCockpit(scene, at) {
   const C = new THREE.Group(); C.position.copy(at); scene.add(C);
-  const dashM = M('#2a2e34', .6), trim = M('#2fa39a', .35, .2);
+  const grain = (c0, c1, seed, stitch) => paint(256, 256, (x, y) => { const u = x / 256, v = y / 256, n = fbm(u * 14, v * 14, seed, 4, 14), f = h2(x, y, seed); let c = mix3(hex(c0), hex(c1), n).map(k => k * (.9 + f * .14));
+    if (stitch && (Math.abs(v - .18) < .006 || Math.abs(v - .82) < .006) && (x % 12) < 7) c = hex('#ffb02e'); return { c, r: .8, h: n }; });
+  const dashM = mat(grain('#2c3440', '#3c4656', 81, true), [3, 1], { bump: .6 }), trim = M('#2fa39a', .35, .2);
+  const seatM = mat(paint(256, 256, (x, y) => { const u = x / 256, band = Math.floor(u * 8) % 4, n = h2(x, y, 82); let c = hex(['#e8762e', '#2fa39a', '#f2c335', '#3a3e44'][band]).map(k => k * (.8 + n * .3)); if ((x + y) % 8 < 2) c = c.map(k => k * .8); return { c, r: .95, h: n }; }), [1, 1], { bump: .8 });
   const dash = rbox(1.7, .32, .55, .12, dashM); dash.position.set(0, 1.0, -.5); C.add(dash);
-  const top = rbox(1.72, .06, .6, .03, M('#1e2228', .7)); top.position.set(0, 1.17, -.55); C.add(top);
-  const cluster = rbox(.5, .26, .12, .06, M('#15181c', .5)); cluster.position.set(-.38, 1.13, -.25); cluster.rotation.x = -.25; C.add(cluster);
+  const top = rbox(1.72, .06, .6, .03, dashM); top.position.set(0, 1.17, -.55); C.add(top);
+  const cluster = rbox(.5, .26, .12, .06, mat(grain('#1c2430', '#2a3442', 83, false), [2, 1], { bump: .4 })); cluster.position.set(-.38, 1.13, -.25); cluster.rotation.x = -.25; C.add(cluster);
   C.gauge = gaugeCanvas();
   const gface = new THREE.Mesh(new THREE.CircleGeometry(.1, 48), new THREE.MeshBasicMaterial({ map: C.gauge })); gface.position.set(-.28, 1.14, -.185); gface.rotation.x = -.25; C.add(gface);
   const spdT = cv(256, 256, (g) => { g.fillStyle = '#101418'; g.beginPath(); g.arc(128, 128, 124, 0, 7); g.fill(); g.strokeStyle = '#e8f4ff'; g.lineWidth = 4; for (let i = 0; i <= 12; i++) { const a = Math.PI * (.75 + i / 12 * 1.5); g.beginPath(); g.moveTo(128 + Math.cos(a) * 110, 128 + Math.sin(a) * 110); g.lineTo(128 + Math.cos(a) * 95, 128 + Math.sin(a) * 95); g.stroke(); } g.strokeStyle = '#ff3b30'; g.lineWidth = 6; g.beginPath(); g.moveTo(128, 128); g.lineTo(60, 170); g.stroke(); });
   const sface = new THREE.Mesh(new THREE.CircleGeometry(.1, 48), new THREE.MeshBasicMaterial({ map: spdT })); sface.position.set(-.5, 1.14, -.185); sface.rotation.x = -.25; C.add(sface);
+  for (const x of [-.28, -.5]) { const bz = new THREE.Mesh(new THREE.TorusGeometry(.102, .008, 10, 48), M('#d8dde4', .2, 1)); bz.position.set(x, 1.14, -.184); bz.rotation.x = -.25; C.add(bz); }
+  // a strip of warning lights under the dials, a clock and a little screen to the right of them
+  const strip = cv(512, 64, (g) => { g.fillStyle = '#0c0f12'; g.fillRect(0, 0, 512, 64); ['#ffb02e', '#ff3b30', '#7be07b', '#4ad0ff', '#ffb02e', '#ff6a8a', '#7be07b'].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(40 + i * 72, 32, 14, 0, 7); g.fill(); g.fillStyle = '#0c0f12'; g.fillRect(34 + i * 72, 28, 12, 8); }); });
+  const st = new THREE.Mesh(new THREE.PlaneGeometry(.42, .05), new THREE.MeshBasicMaterial({ map: strip })); st.position.set(-.39, 1.01, -.16); st.rotation.x = -.25; C.add(st);
+  const scr = cv(256, 160, (g) => { g.fillStyle = '#0c1a24'; g.fillRect(0, 0, 256, 160); g.fillStyle = '#7be0ff'; g.font = '800 44px Baloo2'; g.textAlign = 'center'; g.fillText('12:42', 128, 60); g.fillStyle = '#ffd84a'; g.font = '800 26px Baloo2'; g.fillText('♪ ROAD TUNES', 128, 104); g.fillStyle = '#ff6a8a'; g.fillRect(30, 124, 140, 10); g.fillStyle = '#334'; g.fillRect(170, 124, 56, 10); });
+  const sc = new THREE.Mesh(new THREE.PlaneGeometry(.2, .125), new THREE.MeshBasicMaterial({ map: scr })); sc.position.set(-.04, 1.12, -.2); sc.rotation.x = -.25; C.add(sc);
   C.GAUGE = new THREE.Vector3(-.28, 1.14, -.18).add(at);
   const wheel = C.wheelMesh = new THREE.Mesh(new THREE.TorusGeometry(.19, .025, 12, 40), M('#1a1a1c', .5)); wheel.position.set(-.38, 1.02, -.05); wheel.rotation.x = -.45; C.add(wheel); C.wheel = wheel;
   const hub = C.hub = cyl(.05, .05, .06, M('#2fa39a', .4), 16); hub.rotation.x = Math.PI / 2 - .45; hub.position.copy(wheel.position); C.add(hub);
@@ -163,8 +180,15 @@ export function buildCockpit(scene, at) {
   const bag = rbox(.16, .08, .22, .04, M('#ffd84a', .5)); bag.position.set(.5, 1.22, -.6); bag.rotation.y = .4; C.add(bag);
   const map = rbox(.3, .01, .2, .002, M('#9cc8f0', .7)); map.position.set(.15, 1.205, -.62); map.rotation.y = -.2; C.add(map);
   for (const [x, c] of [[-.03, '#ff6a8a'], [.03, '#ffffff']]) { const d = rbox(.035, .035, .035, .008, M(c, .5)); d.position.set(x, 1.6, -.5); d.rotation.set(.4, .6, .2); C.add(d); }
+  // more dash clutter: sticky notes, sunglasses, coins, a bobble-head, a parking ticket, a toy duck
+  [['#ffe66d', -.62, -.42, .3], ['#9be0ff', .3, -.42, -.2], ['#ffb3c7', .66, -.38, .5], ['#7be07b', -.05, -.38, .1]].forEach(([c, x, z, r]) => { const n = rbox(.08, .004, .08, .001, M(c, .8)); n.position.set(x, 1.203, z); n.rotation.y = r; C.add(n); });
+  const sg = new THREE.Group(); for (const x of [-.035, .035]) { const l = new THREE.Mesh(new THREE.CircleGeometry(.03, 20), M('#101418', .1, .5)); l.rotation.x = -Math.PI / 2 + .3; l.position.set(x, .01, 0); sg.add(l); } const br = rbox(.13, .008, .01, .003, M('#c8231a', .4)); br.position.y = .012; sg.add(br); sg.position.set(-.25, 1.2, -.42); sg.rotation.y = .3; C.add(sg);
+  for (let i = 0; i < 6; i++) { const c = cyl(.012, .012, .003, M('#d8b04a', .3, 1), 16); c.position.set(.05 + h2(i, 1, 6) * .12, 1.203 + i * .001, -.32 - h2(i, 2, 6) * .08); C.add(c); }
+  const bob = new THREE.Group(); { const b = cyl(.025, .03, .06, M('#5b93d3', .5), 16); b.position.y = .03; const hd = new THREE.Mesh(new THREE.SphereGeometry(.035, 16, 12), M('#fbf7ef', .5)); hd.position.y = .1; const hat = cyl(.03, .036, .02, M('#2456c8', .5), 16); hat.position.y = .135; bob.add(b, hd, hat); } bob.position.set(.62, 1.2, -.5); C.add(bob); C.bob = hd => 0;
+  const tk = rbox(.12, .003, .07, .001, M('#ffffff', .8)); tk.position.set(.42, 1.204, -.36); tk.rotation.y = -.4; C.add(tk); const tk2 = rbox(.1, .004, .015, .001, M('#ff3b30', .6)); tk2.position.set(.42, 1.206, -.37); tk2.rotation.y = -.4; C.add(tk2);
+  const duck = new THREE.Group(); { const b = new THREE.Mesh(new THREE.SphereGeometry(.035, 16, 12), M('#ffd84a', .4)); b.scale.set(1.2, .9, 1); b.position.y = .03; const hd = new THREE.Mesh(new THREE.SphereGeometry(.022, 12, 10), M('#ffd84a', .4)); hd.position.set(.025, .07, 0); const bk = new THREE.Mesh(new THREE.ConeGeometry(.01, .025, 8), M('#e8762e', .4)); bk.rotation.z = -Math.PI / 2; bk.position.set(.05, .068, 0); duck.add(b, hd, bk); } duck.position.set(-.5, 1.2, -.45); duck.rotation.y = -1.2; C.add(duck);
   // seats behind the cast (tops visible), the view through the windscreen is the forecourt itself
-  for (const x of [-.4, .4]) { const s = rbox(.5, .7, .14, .08, M('#3a3e44', .8)); s.position.set(x, 1.25, .62); C.add(s); const h = rbox(.3, .2, .12, .06, M('#3a3e44', .8)); h.position.set(x, 1.72, .62); C.add(h); }
+  for (const x of [-.4, .4]) { const s = rbox(.5, .7, .14, .08, seatM); s.position.set(x, 1.25, .62); C.add(s); const h = rbox(.3, .2, .12, .06, seatM); h.position.set(x, 1.72, .62); C.add(h); }
   C.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   return C;
 }

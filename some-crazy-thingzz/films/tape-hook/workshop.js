@@ -194,6 +194,14 @@ export function buildWorkshop(scene) {
   put(cub, -.74, DY, -.2);
   // the boards: Gus's (too long, jams) and Nana's (fits), small shelves for the empty cell
   K.boardG = put(R(K.CUB.w + .012, .012, .2, .002, '#e2bc88', .7), 0, -5, 0); K.boardN = put(R(K.CUB.w - .002, .012, .2, .002, '#c99056', .7), 0, -5, 0);
+  // a green self-healing cutting mat under the demo area (grid, inch numbers, angle lines): every macro has texture behind it
+  const cm = cvTex(2048, 1536, (g, w, h) => { g.fillStyle = '#2f7a4e'; g.fillRect(0, 0, w, h); const px = w / 24;
+    g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 2; for (let i = 0; i <= 96; i++) { g.beginPath(); g.moveTo(i * px / 4, 0); g.lineTo(i * px / 4, h); g.stroke(); } for (let i = 0; i <= 72; i++) { g.beginPath(); g.moveTo(0, i * px / 4); g.lineTo(w, i * px / 4); g.stroke(); }
+    g.strokeStyle = 'rgba(255,255,255,.85)'; g.lineWidth = 5; for (let i = 0; i <= 24; i++) { g.beginPath(); g.moveTo(i * px, 0); g.lineTo(i * px, h); g.stroke(); } for (let i = 0; i <= 18; i++) { g.beginPath(); g.moveTo(0, i * px); g.lineTo(w, i * px); g.stroke(); }
+    g.strokeStyle = 'rgba(255,230,120,.7)'; g.lineWidth = 4; for (const a of [Math.PI / 4, Math.PI / 6]) { g.beginPath(); g.moveTo(0, h); g.lineTo(Math.cos(a) * 3000, h - Math.sin(a) * 3000); g.stroke(); }
+    g.fillStyle = '#ffffff'; g.font = '800 40px Baloo2'; g.textAlign = 'center'; for (let i = 1; i < 24; i++) { g.fillText(String(i), i * px, 44); g.fillText(String(i), i * px, h - 14); } for (let i = 1; i < 18; i++) { g.fillText(String(i), 30, i * px + 14); }
+    g.fillStyle = 'rgba(255,255,255,.5)'; g.font = '800 70px Baloo2'; g.fillText('MEASURE TWICE · CUT ONCE', w / 2, h / 2); });
+  const cmat = new THREE.Mesh(new THREE.PlaneGeometry(.64, .48), new THREE.MeshStandardMaterial({ map: cm, roughness: .7 })); cmat.rotation.x = -Math.PI / 2; cmat.position.set(.0, DY + .0008, .04); cmat.receiveShadow = true; scene.add(cmat);
   // —— the hero tape (Gus's, in hand / on the bench) and Nana's tape (red), and the spare on the pegboard ——
   K.tapeG = makeTape({ len: .12 }); scene.add(K.tapeG);
   K.tapeN = makeTape({ len: .12, col: '#c8231a' }); scene.add(K.tapeN); K.tapeN.visible = false;

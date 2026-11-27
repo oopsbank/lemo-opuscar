@@ -72,9 +72,10 @@ function handWorld(card, h, fwd = .05) {
 // —— shots ——
 const SUN = V(.7, .6, .45).normalize();
 const G0 = V(-.25, 0, -.62), N0 = V(.32, 0, -.62);
-const HOLD = [30, -128];   // Gus's right hand holding the tape up beside his face (frame 0 and the loop)
+const HOLD = [24, -96];   // the drawn hand sits just under the 3D tape held out toward us
+const TAPE0 = V(-.07, 1.29, .5);   // Gus's right hand holding the tape up beside his face (frame 0 and the loop)
 const RATTLE = t => Math.sign(Math.sin(t * 34)) * .9;   // the hook clacking in and out
-const OPEN = { pos: V(-.06, 1.37, .5), look: V(-.12, 1.33, -.62), fov: 40, focus: .62, aper: 10 };   // frame 0 and the last shot share this
+const OPEN = { pos: V(-.08, 1.36, 1.25), look: V(-.12, 1.3, -.62), fov: 40, focus: 1.1, aper: 10 };   // frame 0 and the last shot share this
 const BENCH = V(-.25, DY, .06);
 const SHOTS = [
   { t0: 0, t1: 1.4, name: 'macro0',   // (c) the hook clacking in Gus's hand, glue closing in, his face right behind
@@ -83,27 +84,27 @@ const SHOTS = [
       const g = ei(seg(tc, .2, 1.3));
       gus.pose = { armsFront: true, rh: HOLD, bendR: -12, lh: [lerp(-46, -18, g), lerp(-118, -128, g)], bendL: 12, lprop: { kind: 'glue', ang: lerp(-.2, .9, g) }, brows: 'angry', mouth: 'grin', open: .3, look: [1, .5], turn: .15,
         sq: 1 + .06 * Math.exp(-tc * 7) * Math.cos(tc * 28), ...(talk('gus') ?? {}) };
-      tapeInHand(K.tapeG, HOLD, .07, RATTLE(tc), false); } },
+      tapeAt(K.tapeG, TAPE0, .07, RATTLE(tc)); } },
   { t0: 1.4, t1: 3.1, name: 'glue',   // "Easy! It's broken. Glue time!" — SQUIRT on the hook; Nana behind, skeptical
-    cam: u => ({ pos: LV(V(-.05, 1.3, 1.05), V(-.05, 1.28, .95), ss(u / 1.7)), look: V(-.08, 1.02, -.3), fov: 44, focus: 1.1, aper: 18 }),
+    cam: u => ({ pos: LV(V(.02, 1.42, 1.95), V(.02, 1.4, 1.8), ss(u / 1.7)), look: V(.02, 1.1, -.4), fov: 42, focus: 1.8, aper: 20 }),
     set(u, tc) { gus.visible = nana.visible = true; gus.pos.copy(G0); nana.pos.copy(N0);
       const sq = ei(seg(tc, 2.45, 2.65));
       gus.pose = { lh: [-6, -78], bendL: 10, lprop: { kind: 'glue', ang: Math.PI, squeeze: sq * 2, drop: sq }, rh: [36, -86], brows: tc < 2.4 ? 'up' : 'angry', mouth: 'grin', open: .3, look: [.2, .9], turn: .1, lean: .05, ...(talk('gus') ?? {}) };
       nana.pose = { lh: [16, -86], rh: [-16, -84], bendL: 14, bendR: -14, brows: 'skeptic', mouth: 'flat', look: [-.9, .2], turn: -.3, blink: blink(tc, 2) };
       tapeOnBench(K.tapeG, BENCH, .14, 1); K.tapeG.setGlue(tc > 2.6); } },
   { t0: 3.1, t1: 4.7, name: 'bet',   // "It's loose on purpose. Bet a cookie?"
-    cam: u => ({ pos: LV(V(.34, 1.27, .55), V(.34, 1.27, .45), ss(u / 1.6)), look: V(.32, 1.16, -.62), fov: 38, focus: 1.1, aper: 30 }),
+    cam: u => ({ pos: LV(V(.36, 1.3, 1.05), V(.36, 1.3, .95), ss(u / 1.6)), look: V(.33, 1.18, -.62), fov: 40, focus: 1.6, aper: 30 }),
     set(u, tc) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
       const up = ei(seg(tc, 3.7, 4.0));
       nana.pose = { lh: [-26, -80], rh: [lerp(30, 44, up), lerp(-84, -132, up)], bendR: -14, rprop: up > .2 ? { kind: 'cookie' } : null, brows: tc < 3.7 ? 'skeptic' : 'up', mouth: tc < 4.3 ? 'flat' : 'smile', look: [-.4, -.1], turn: -.15, ...(talk('nana') ?? {}) }; } },
   { t0: 4.7, t1: 5.45, name: 'measure',   // "Deal! Watch this." — the glued hook jammed into the empty cubby, stuck OUT
-    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.02, .09, .28 - .04 * ss(u / .75))), look: c.clone().add(V(0, -.01, -.06)), fov: 40, focus: .3, aper: 8 }; },
+    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.02, .05, .55 - .05 * ss(u / .75))), look: c.clone().add(V(0, -.025, 0)), fov: 36, focus: .55, aper: 8 }; },
     set(u, tc) { gus.visible = nana.visible = false; const c = cubby();
-      K.tapeG.visible = true; K.tapeG.setGlue(true); K.tapeG.set(.08 + .02 * ei(seg(tc, 4.7, 4.95)), 1);
+      K.tapeG.visible = true; K.tapeG.setGlue(true); K.tapeG.set(.04 + .02 * ei(seg(tc, 4.7, 4.95)), 1);
       K.tapeG.position.copy(c.clone().add(V(-K.CUB.w / 2 + .085 + .1 - .1, -K.CUB.h / 2 + .002, .02))); K.tapeG.rotation.set(0, 0, 0);
       K.tapeG.position.x = c.x + K.CUB.w / 2 - .0016 - (.006 + K.tapeG.len) - .0008; } },
   { t0: 5.45, t1: 6.05, name: 'jam',   // the board is too long: CLUNK, crooked
-    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.04, .12, .42)), look: c.clone().add(V(0, 0, -.04)), fov: 42, focus: .44, aper: 8 }; },
+    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.08, .12, .78)), look: c.clone().add(V(0, .03, -.04)), fov: 40, focus: .78, aper: 8 }; },
     set(u, tc) { gus.visible = nana.visible = false; const c = cubby(); K.tapeG.visible = false;
       const k = ei(seg(tc, 5.45, 5.65)), b = K.boardG; b.visible = true;
       b.position.copy(c.clone().add(V(0, .015 + .025 * k, lerp(.25, .02, k)))); b.rotation.set(0, 0, k * .12 + (tc > 5.65 ? .02 * Math.sin((tc - 5.65) * 40) * Math.exp(-(tc - 5.65) * 6) : 0)); } },
@@ -132,16 +133,16 @@ const SHOTS = [
       b.position.set(-.13 + .0028 * push, DY, .1); b.rotation.set(0, 0, 0); b.set(.16, -push);
       K.blockIn.visible = true; K.blockIn.position.set(.0568, DY + .045, .1); } },
   { t0: 14.75, t1: 15.75, name: 'ha',   // "Ha! The first inch is short!"
-    cam: u => ({ pos: LV(V(-.24, 1.38, .36), V(-.24, 1.38, .3), ss(u)), look: V(-.25, 1.3, -.62), fov: 38, focus: .95, aper: 30 }),
+    cam: u => ({ pos: LV(V(-.12, 1.36, 1.15), V(-.12, 1.36, 1.05), ss(u)), look: V(-.14, 1.28, -.62), fov: 40, focus: 1.6, aper: 20 }),
     set(u, tc) { gus.visible = true; nana.visible = false; gus.pos.copy(G0);
       gus.pose = { armsFront: true, rh: [34, -112], bendR: -12, lh: [-40, -86], brows: 'up', mouth: 'grin', open: .4, look: [.8, .6], turn: .2, sq: 1 + .05 * Math.exp(-(tc - 14.8) * 8) * Math.cos((tc - 14.8) * 30), ...(talk('gus') ?? {}) };
-      tapeInHand(K.tapeG, [34, -112], .1, .9, true); } },
+      tapeInHand(K.tapeG, [34, -112], .1, .9, true, .55); } },
   { t0: 15.75, t1: 18.2, name: 'inch',   // "On purpose. The hook fills the gap." — the first inch, measured from the hook's outer face
     cam: u => { const k = ss(u / 2.45), h = DEMO_A; return { pos: h.clone().add(V(-.018 - .004 * k, .085 - .008 * k, .07)), look: h.clone().add(V(-.014, 0, 0)), fov: 34, focus: .11, aper: 4 }; },
     set(u, tc) { gus.visible = nana.visible = false; const tp = K.tapeDemo[0]; tp.visible = true; tp.gain = 3.5;
       tp.position.copy(DEMO_A).add(V(-(.006 + .16), 0, 0)); tp.rotation.set(0, 0, 0); tp.set(.16, 1); } },
   { t0: 18.2, t1: 20.1, name: 'fit',   // Nana's board slides in: PERFECT FIT
-    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.05, .13, .48 - .04 * ss(u / 1.9))), look: c.clone().add(V(0, 0, -.04)), fov: 42, focus: .5, aper: 8 }; },
+    cam: u => { const c = cubby(); return { pos: c.clone().add(V(.08, .12, .85 - .06 * ss(u / 1.9))), look: c.clone().add(V(0, .03, -.04)), fov: 40, focus: .85, aper: 8 }; },
     set(u, tc) { gus.visible = nana.visible = false; const c = cubby(); K.boardG.visible = false;
       const k = ei(seg(tc, 18.35, 18.9)), b = K.boardN; b.visible = true; b.position.copy(c.clone().add(V(0, .03, lerp(.3, -.005, k)))); b.rotation.set(0, 0, 0); } },
   { t0: 20.1, t1: 22.85, name: 'unglue',   // "Fine. I'll unglue it." — he yanks, the blade whips back: THWACK
@@ -151,23 +152,24 @@ const SHOTS = [
       gus.pose = { armsFront: true, rh: [30, -112], bendR: -12, lh: hit ? [-30, -84] : [lerp(10, -60, pull), lerp(-112, -106, pull)], bendL: 8, brows: hit ? 'shock' : 'angry', mouth: hit ? 'o' : 'teeth', open: .7,
         look: hit ? [Math.sin(k * 14) * .6, Math.cos(k * 11) * .4] : [.4, .3], turn: .1, tilt: hit ? -.22 * Math.exp(-k * 3) * Math.cos(k * 9) - .05 : 0, sq: hit ? 1 - .08 * Math.exp(-k * 6) : 1,
         stache: hit ? [6, -2, .35] : null, ...(hit ? {} : (talk('gus') ?? {})) };
-      nana.pose = { armsFront: true, lh: [-12, -142], rh: [20, -84], lprop: { kind: 'cookie' }, brows: hit ? 'up' : 'skeptic', mouth: hit ? 'teeth' : 'flat', look: [-.9, -.1], turn: -.3, crumbs: tc > 20.6 ? 3 : 0 };
+      nana.pose = { armsFront: true, lh: [-8, -126], rh: [20, -84], lprop: { kind: 'cookie' }, brows: hit ? 'up' : 'skeptic', mouth: hit ? 'teeth' : 'flat', look: [-.9, -.1], turn: -.3, crumbs: tc > 20.6 ? 3 : 0 };
       // the tape in his right hand; the blade pulled out by the left hand, then snapping back
       const lhx = lerp(10, -60, pull), len = hit ? .02 : Math.max(.06, (30 - lhx) / 100 - .07); tapeInHand(K.tapeG, [30, -112], len, 1, true); K.tapeG.rotation.y = Math.PI; } },
   { t0: 22.85, t1: 25.8, name: 'loop',   // dazed, a new tape off the pegboard: "This one's broken too!" → framed like frame 0 → the cut
-    cam: u => { const k = ss(clamp((u - 1.9) / .9)); return { ...OPEN, pos: LV(V(-.08, 1.38, .62), OPEN.pos.clone().add(V(0, 0, -.0)), k), fov: lerp(42, 40, k) }; },
+    cam: u => { const k = ss(clamp((u - 1.9) / .9)); return { ...OPEN, pos: LV(V(-.1, 1.38, 1.45), OPEN.pos, k), fov: lerp(42, 40, k) }; },
     set(u, tc) { gus.visible = true; nana.visible = false; gus.pos.copy(G0);
-      const up = ei(seg(tc, 22.9, 23.3)), g = ei(seg(tc, 24.8, 25.75));
+      const up = ei(seg(tc, 22.9, 23.3)), g = 0;   // ends exactly on frame 0's pose (the seam)
       gus.pose = { armsFront: true, rh: [lerp(46, HOLD[0], up), lerp(-84, HOLD[1], up)], bendR: -12, lh: [lerp(-46, -18, g), lerp(-118, -128, g)], bendL: 12, lprop: { kind: 'glue', ang: lerp(-.2, .9, g) },
         brows: tc < 24.6 ? 'up' : 'angry', mouth: tc < 24.6 ? 'grin' : 'grin', open: .3, look: [1, .5], turn: .15, stache: tc < 23.4 ? [6, -2, .35] : null, ...(talk('gus') ?? {}) };
-      tapeInHand(K.tapeG, HOLD, .07, tc > 23.3 ? RATTLE(tc) : 0, false); K.tapeG.setGlue(false); } },
+      tapeAt(K.tapeG, LV(handWorld(gus, [46, -84], .3), TAPE0, up), .07, tc > 23.3 ? RATTLE(tc) : 0); } },
 ];
 const shotAt = t => SHOTS.find(s => t >= s.t0 && t < s.t1) ?? SHOTS[SHOTS.length - 1];
 const DEMO_A = V(.03, DY + .002, .02);
 function cubby() { return K.cubby.position.clone().add(V(K.CUB.x, K.CUB.y, .0)); }
-function tapeInHand(tp, h, len, slide, glue) {
-  tp.visible = true; tp.position.copy(handWorld(gus, h, .07)).add(V(.0, -.03, 0)); tp.rotation.set(.15, -.25, .05); tp.gain = 3; tp.set(len, slide); tp.setGlue(glue);
+function tapeInHand(tp, h, len, slide, glue, fwd = .07) {
+  tp.visible = true; tp.position.copy(handWorld(gus, h, fwd)).add(V(.0, -.03, 0)); tp.rotation.set(.15, -.25, .05); tp.gain = 3; tp.set(len, slide); tp.setGlue(glue);
 }
+function tapeAt(tp, p, len, slide) { tp.visible = true; tp.position.copy(p); tp.rotation.set(.3, Math.PI + .4, 0); tp.gain = 3; tp.set(len, slide); tp.setGlue(false); }
 function tapeOnBench(tp, p, len, slide) { tp.visible = true; tp.position.copy(p); tp.rotation.set(0, .25, 0); tp.gain = 1; tp.set(len, slide); }
 
 function setProps(t, S) {
@@ -251,9 +253,13 @@ function bracket(xa, xb, y, col, txt, a = 1) {   // a dimension bracket with a l
   og.restore(); label(txt, (xa + xb) / 2, y - 54, col, 70, a);
 }
 
+// retime: shots are blocked on the first clock; WARP maps the final clock (voices, captions) to it, shot by shot
+const WARP = [[0, 1.4, 0, 1.4], [1.4, 3.35, 1.4, 3.1], [3.35, 5.35, 3.1, 4.7], [5.35, 6.1, 4.7, 5.45], [6.1, 6.7, 5.45, 6.05], [6.7, 7.25, 6.05, 6.6], [7.25, 8.4, 6.6, 7.75], [8.4, 10.85, 7.75, 10.2], [10.85, 15.95, 10.2, 14.75], [15.95, 17.0, 14.75, 15.75], [17.0, 19.6, 15.75, 18.2], [19.6, 21.4, 18.2, 20.1], [21.4, 24.0, 20.1, 22.85], [24.0, 26.61, 22.85, 25.8]];
+const warp = t => { for (const [n0, n1, o0, o1] of WARP) if (t < n1) return o0 + (Math.max(t, n0) - n0) / (n1 - n0) * (o1 - o0); return 25.8; };
+const warpInv = o => { for (const [n0, n1, o0, o1] of WARP) if (o < o1) return +(n0 + (o - o0) / (o1 - o0) * (n1 - n0)).toFixed(3); return 26.6; };
 let texts = [];
-function render(t) {
-  TNEW = t;
+function render(tn) {
+  TNEW = tn; const t = warp(tn);
   const S = shotAt(t), u = t - S.t0, tc = on12(t);
   setProps(t, S);
   const C = S.cam(u);
@@ -291,7 +297,7 @@ function render(t) {
     arrow(pa[0] - 60, pa[1] - 100, pa[0] + 60, pa[1] - 100, '#ffd84a', k1); label('OUT', pa[0] + 140, pa[1] - 100, '#ffd84a', 70, k1);
     label('PUSH', W * .24, pb[1] + 150, '#9be0ff', 84, k2);
     arrow(pb[0] + 60, pb[1] + 110, pb[0] - 60, pb[1] + 110, '#9be0ff', k2); label('IN', pb[0] + 120, pb[1] + 110, '#9be0ff', 70, k2);
-    if (t > 13.3) { const k3 = clamp((t - 13.3) / .3); label('✓ TRUE ZERO', W * .5, H * .2, '#7be07b', 92, k3); }
+    if (t > 13.3) { const k3 = clamp((t - 13.3) / .3); label('✓ TRUE ZERO', W * .5, (pa[1] + pb[1]) / 2, '#7be07b', 92, k3); }
   }
   if (N === 'ha') pow('HA!', W * .72, H * .3, t, 14.8, .6, '#ffd84a', .12);
   if (N === 'inch') {   // the first inch: from the hook's outer face to the 1" mark
@@ -304,7 +310,7 @@ function render(t) {
   if (N === 'fit') { const c = proj(cubby()); if (t > 18.9) { pow('PERFECT FIT!', W * .5, c[1] - 360, t, 18.9, 1.2, '#7be07b', -.06, 108); pow('DING!', W * .75, c[1] - 520, t, 18.9, .7, '#ffd84a', .1, 96); } confetti(t, 18.9); }
   if (N === 'unglue') { if (t > 20.9 && t < 21.75) pow('YANK!', W * .3, H * .32, t, 20.9, .7, '#ffffff', -.12, 100); speed(t, 21.6, .2); burst(W * .42, H * .3, t, 21.75, '#ffd84a'); pow('THWACK!', W * .5, H * .22, t, 21.75, .9, '#ff6a50', -.08, 130); }
   if (N === 'loop') { if (t > 25.0) ring(hookTip(K.tapeG), t, 25.0, 80); if (t > 23.4 && t < 24.9) pow('CLACK!', W * .78, H * .5, t, 23.4, .5, '#ffffff', .12, 96); }
-  if (!QS.has('nocap')) drawCaps(og, STORY.caps, Math.max(t, STORY.caps[0]?.t0 ?? 0), W, H);
+  if (!QS.has('nocap')) drawCaps(og, STORY.caps, Math.max(tn, STORY.caps[0]?.t0 ?? 0), W, H);
 }
 const EV = [
   { t: 0, type: 'clack' }, { t: .3, type: 'clack' }, { t: .6, type: 'clack' }, { t: .9, type: 'clack' }, { t: 1.4, type: 'whoosh' }, { t: 2.5, type: 'squirt' }, { t: 4.1, type: 'pop' },
@@ -312,6 +318,7 @@ const EV = [
   { t: 14.8, type: 'pop' }, { t: 15.9, type: 'tick' }, { t: 18.35, type: 'slide' }, { t: 18.9, type: 'ding' }, { t: 18.9, type: 'cheer' }, { t: 20.9, type: 'zip', dur: .65 }, { t: 21.6, type: 'zipback' }, { t: 21.75, type: 'thwack' },
   { t: 23.4, type: 'clack' }, { t: 23.7, type: 'clack' }, { t: 24.0, type: 'clack' }, { t: 24.3, type: 'clack' }, { t: 24.6, type: 'clack' },
 ];
+EV.forEach(e => { e.t = warpInv(e.t); });
 window.render = render; window.DUR = QS.has('dur') ? +QS.get('dur') : STORY.dur; window.TEXTS = () => texts; window.EV = EV;
 window.DBG = { scene, camera, post, K, cards, L, SHOTS };
 render(0);

@@ -1,17 +1,18 @@
 [
  {
   "id": "g0",
-  "text": "Why does my tape hook wobble?",
+  "text": "Why does my tape measure hook wobble?",
   "voice": "am_puck",
   "speed": 1.05,
   "at": 0.12,
   "who": "gus",
   "groups": [
    3,
-   3
+   2,
+   2
   ],
   "hot": [
-   1
+   2
   ]
  },
  {
@@ -19,7 +20,7 @@
   "text": "Easy! It's broken. Glue time!",
   "voice": "am_puck",
   "speed": 1.05,
-  "at": 1.55,
+  "at": 1.8,
   "who": "gus",
   "groups": [
    1,
@@ -32,18 +33,17 @@
  },
  {
   "id": "n1",
-  "text": "It's loose on purpose. Bet a cookie?",
+  "text": "It's on purpose. Want to bet?",
   "voice": "bf_isabella",
   "speed": 0.95,
-  "at": 3.15,
+  "at": 3.4,
   "who": "nana",
   "groups": [
-   2,
-   2,
+   3,
    3
   ],
   "hot": [
-   1
+   0
   ]
  },
  {
@@ -51,7 +51,7 @@
   "text": "Deal! Watch this.",
   "voice": "am_puck",
   "speed": 1.05,
-  "at": 4.75,
+  "at": 5.4,
   "who": "gus",
   "groups": [
    1,
@@ -66,7 +66,7 @@
   "text": "Actually.",
   "voice": "bf_isabella",
   "speed": 0.85,
-  "at": 6.45,
+  "at": 7.25,
   "who": "nana",
   "groups": [
    1
@@ -81,7 +81,7 @@
   "text": "The hook slides by its own thickness.",
   "voice": "bf_isabella",
   "speed": 0.92,
-  "at": 7.6,
+  "at": 8.45,
   "who": "nana",
   "groups": [
    3,
@@ -96,7 +96,7 @@
   "text": "Pull it, it slides out. Push it, it slides in.",
   "voice": "bf_isabella",
   "speed": 0.95,
-  "at": 10.2,
+  "at": 10.9,
   "who": "nana",
   "groups": [
    2,
@@ -114,7 +114,7 @@
   "text": "So it reads true, inside or out.",
   "voice": "bf_isabella",
   "speed": 0.95,
-  "at": 13.2,
+  "at": 13.85,
   "who": "nana",
   "groups": [
    4,
@@ -126,10 +126,10 @@
  },
  {
   "id": "g3",
-  "text": "Ha! The first inch is short!",
+  "text": "Aha! The first inch is short!",
   "voice": "am_puck",
   "speed": 1.05,
-  "at": 14.8,
+  "at": 16.05,
   "who": "gus",
   "groups": [
    1,
@@ -145,7 +145,7 @@
   "text": "On purpose. The hook fills the gap.",
   "voice": "bf_isabella",
   "speed": 0.95,
-  "at": 16.5,
+  "at": 17.5,
   "who": "nana",
   "groups": [
    2,
@@ -161,7 +161,7 @@
   "text": "Fine. I'll unglue it.",
   "voice": "am_puck",
   "speed": 1.0,
-  "at": 20.2,
+  "at": 21.5,
   "who": "gus",
   "groups": [
    1,
@@ -173,14 +173,14 @@
  },
  {
   "id": "g5",
-  "text": "This one's broken too!",
+  "text": "This one's broken as well!",
   "voice": "am_puck",
   "speed": 1.05,
-  "at": 23.6,
+  "at": 24.6,
   "who": "gus",
   "groups": [
    2,
-   2
+   3
   ],
   "hot": [
    1
