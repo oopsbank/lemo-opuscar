@@ -1,0 +1,6 @@
+[
+ {"id": "c1", "text": "My computer is broken!", "voice": "bf_isabella", "speed": 1.0},
+ {"id": "h1", "text": "Let me see.", "voice": "am_puck", "speed": 1.0},
+ {"id": "h2", "text": "It was facing the wall.", "voice": "am_puck", "speed": 1.0},
+ {"id": "c2", "text": "Wow. You're a genius.", "voice": "bf_isabella", "speed": 1.0}
+]
