@@ -230,6 +230,15 @@ export function buildDesk(scene) {
     for (const [y, h] of [[DY - .2, .12], [DY - .34, .12], [DY - .48, .12]]) { put(R(w, h, .02, .006, '#8a5a32', .55), x, y, .3); put(R(.08, .015, .02, .006, '#d8c08a', .3), x, y, .315); }
   }
   const stk = (x, y, c, t) => { const c2 = document.createElement('canvas'); c2.width = 128; c2.height = 128; const g = c2.getContext('2d'); g.fillStyle = c; g.beginPath(); g.arc(64, 64, 60, 0, 7); g.fill(); g.fillStyle = '#fff'; g.font = '800 34px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(t, 64, 66); const tt = new THREE.CanvasTexture(c2); tt.colorSpace = THREE.SRGBColorSpace; const m = new THREE.Mesh(new THREE.CircleGeometry(.04, 24), new THREE.MeshBasicMaterial({ map: tt, transparent: true })); m.position.set(x, y, .312); scene.add(m); };
+  // the desk-top apron: a strip of name-label tape and stickers (fills the band seen in the low demo shots)
+  { const ac = document.createElement('canvas'); ac.width = 2048; ac.height = 150; const ag = ac.getContext('2d'); ag.fillStyle = '#6e4426'; ag.fillRect(0, 0, 2048, 150);
+    ag.strokeStyle = 'rgba(40,22,10,.35)'; ag.lineWidth = 3; for (let y = 12; y < 150; y += 17) { ag.beginPath(); ag.moveTo(0, y); for (let x = 0; x <= 2048; x += 64) ag.lineTo(x, y + Math.sin(x * .01 + y) * 3); ag.stroke(); }
+    const tags = [['#ffd84a', '#1f4d32', 'INK LAB'], ['#ff8fa8', '#7a1630', 'NO PEEPING'], ['#4ad0ff', '#123a5a', 'AIR IN!'], ['#7be07b', '#1f4d32', 'GUS ⇄ NANA'], ['#f2f2ee', '#c23a2e', 'TEST #2'], ['#e8a33a', '#3a2008', 'HOLES: 2'], ['#c9b6ff', '#3a2a7a', 'WHY??']];
+    ag.font = '800 44px Baloo2'; ag.textBaseline = 'middle';
+    tags.forEach(([bg, fg, tx], i) => { const w = ag.measureText(tx).width + 40, x = 124 + i * 300 - w / 2; ag.save(); ag.translate(x + w / 2, 75); ag.rotate(((i % 3) - 1) * .05); ag.fillStyle = bg; ag.fillRect(-w / 2, -34, w, 68); ag.fillStyle = fg; ag.textAlign = 'center'; ag.fillText(tx, 0, 4); ag.restore(); });
+    for (let i = 0; i < 26; i++) { ag.fillStyle = ['#c23a2e', '#2456c8', '#ffd84a', '#3f8a5a'][i % 4]; ag.beginPath(); ag.arc(20 + i * 79, i % 2 ? 14 : 136, 7, 0, 7); ag.fill(); }
+    const at = new THREE.CanvasTexture(ac); at.colorSpace = THREE.SRGBColorSpace; at.anisotropy = 8;
+    const ap = new THREE.Mesh(new THREE.PlaneGeometry(1.9, .139), new THREE.MeshStandardMaterial({ map: at, roughness: .6 })); ap.position.set(0, DY - .12, .3012); ap.receiveShadow = true; scene.add(ap); }
   stk(-.75, DY - .17, '#c23a2e', 'WOW'); stk(.42, DY - .32, '#2456c8', '?!'); stk(.8, DY - .46, '#3f8a5a', 'A+');
   // under the desk: a rug, a waste bin full of paper, a backpack, cables
   const rug = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.6), mat(rugPaint(), [1, 1], { bump: .5 })); rug.rotation.x = -Math.PI / 2; rug.position.set(0, .004, -.2); rug.receiveShadow = true; scene.add(rug);

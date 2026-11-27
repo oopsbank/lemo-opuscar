@@ -210,7 +210,8 @@ Rotate the opening types and never use the previous film's type:
 | Tennis Fuzz | (c) object macro (pre-playbook) | ball ECU + shaver, narrator | narrator: "Why do tennis balls have fuzz?" |
 | Pen Caps | **(a) mid-wrong-action** | Gus CU tooting the cap, hole ringed, headline | "Why do pen caps have a hole?" |
 | Pen Hole (side hole) | **(d) result first** | Gus CU with a blue ink ring, shocked, pen ringed, headline | "Why does my pen have a side hole?" |
-| Fuel-Icon Arrow (planned) | **(b) Nana stops him** | Nana CU in the passenger seat, "Gus, NO.", Gus already steering round the pump | "Why is there an arrow by the fuel icon?" |
+| Fuel-Icon Arrow | **(b) Nana stops him** | Nana CU in the passenger seat, "Gus! No, no, no!", Gus already steering round the pump | Nana first (0.1 s); Gus asks at 1.05 s: "Why is there an arrow by the fuel icon?" |
+| Tape-Measure Hook | **(c) macro of the odd detail** | the hook clacking in Gus's hand (ringed), glue bottle closing in, Gus's face right behind, headline WHY DOES THE HOOK WOBBLE? | "Why does my tape hook wobble?" |
 
 Playbook rules now built into every film:
 - **Headline:** one bold line on frame 0 (Baloo 800, ~112 px, y ≈ 380–460), gone by 1.5 s.
@@ -227,7 +228,8 @@ Playbook rules now built into every film:
 | Golf / Tennis | Gus test (pre-playbook, identical timings) | none | none | Tennis tease / sweater gag |
 | Pen Caps | **Gus test** | "safety rules ask for it" (the reveal at 52%) | Gus sneaks a spare cap into his mouth; Nana catches him | "Wait. Why does the pen have a hole?" |
 | Pen Hole | **Result first** (ring at frame 0) | "Add a second hole, and it flows" (the side-by-side cans at ~50%) | "Fine. I'll check with the other eye." | (the loop gag itself) |
-| Fuel-Icon Arrow | **Nana stops him** + myth layer | "The hose on the icon? Means nothing." | planned | "Why does a tape measure hook wobble?" |
+| Fuel-Icon Arrow | **Nana stops him** + myth layer | "The hose on the icon? Means nothing." (51%) | "Fine! Then I'll make my own arrow." (SNACKS → sticker) | "Wait. Why does a tape measure hook wobble?" |
+| Tape-Measure Hook | **Myth vs real** (a cookie bet) | "Ha! The first inch is short!" → "On purpose. The hook fills the gap." (57%) | "Fine. I'll unglue it." → the blade whips back, THWACK, mustache askew | pure loop: "This one's broken too!" (tease F/J bumps in the pinned comment) |
 
 Content rules in force:
 - the oddity in words by 1 s;

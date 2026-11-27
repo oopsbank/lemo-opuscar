@@ -118,7 +118,7 @@ const SHOTS = [
     cam: u => { const k = ss(u / 7.2); return { pos: V(-.02, DY + .27 - .02 * k, 1.3 - .08 * k), look: V(-.02, DY + .1, -.02), fov: 40, focus: 1.3 - .08 * k, aper: 22 }; },
     set(u, tc) { gus.visible = nana.visible = false; } },
   { t0: 18.4, t1: 21.8, name: 'cutaway',   // the clear pen: ink moves down, air comes in through the side hole
-    cam: u => { const k = ss(u / 3.4); return { pos: V(-.02, DY + .4, .58 - .06 * k), look: V(-.02, DY + .33, 0), fov: 40, focus: .85 - .08 * k, aper: 18 }; },
+    cam: u => { const k = ss(u / 3.4); return { pos: V(-.02, DY + .4, .58 - .06 * k), look: V(-.02, DY + .33, 0), fov: 40, focus: .85 - .08 * k, aper: 8 }; },
     set(u, tc) { gus.visible = nana.visible = false; } },
   { t0: 21.8, t1: 25.2, name: 'rub CU',   // "Fine. I'll check with the other eye."
     cam: u => ({ pos: LV(V(-.27, 1.42, 1.25), V(-.27, 1.42, 1.13), ss(u / 3.4)), look: V(-.27, 1.34, -.55), fov: 34, focus: 1.75, aper: 45 }),

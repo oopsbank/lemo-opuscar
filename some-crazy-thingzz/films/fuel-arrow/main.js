@@ -69,13 +69,13 @@ function carAt(t) {   // where the car is, and which way it faces
 }
 const COCK = (look, d = 1.6, y = 1.36) => ({ pos: look.clone().add(V(-.05, .04, -d)), look, fov: 34, focus: d, aper: 20 });
 const SHOTS = [
-  { t0: 0, t1: 1.6, name: 'nana stop',   // frame 0: Nana's face, "Gus! No, no, no!", Gus already cranking the wheel
-    cam: u => ({ pos: LV(V(RIG.x + .22, 1.52, -.95), V(RIG.x + .22, 1.5, -.85), ss(u / 1.6)), look: V(RIG.x + .22, 1.28, .42), fov: 42, focus: 1.35, aper: 18 }),
+  { t0: 0, t1: 1.45, name: 'nana stop',   // frame 0: Nana's face, "Gus! No, no, no!", Gus already cranking the wheel
+    cam: u => ({ pos: LV(V(RIG.x + .22, 1.52, -.95), V(RIG.x + .22, 1.5, -.85), ss(u / 1.45)), look: V(RIG.x + .22, 1.28, .42), fov: 42, focus: 1.35, aper: 18 }),
     set(u, tc) { gus.visible = nana.visible = true; gus.pos.copy(GUS); nana.pos.copy(NANA);
       nana.pose = { lh: [-36, -150], rh: [36, -150], bendL: 14, bendR: -14, brows: 'shock', mouth: 'o', open: .8, look: [-1, 0], turn: -.4, sq: 1 + .05 * Math.sin(tc * 14), ...(talk('nana') ?? {}) };
       const steer = Math.sin(tc * 9); gus.pose = { lh: [-20 + steer * 10, -96 - steer * 8], rh: [24 + steer * 10, -96 + steer * 8], brows: 'angry', mouth: 'grin', open: .4, look: [1, .2], turn: .3, ...(TNEW > 1.0 ? (talk('gus') ?? {}) : {}) };
       CK.wheel.rotation.z = steer * 1.2; } },
-  { t0: 1.6, t1: 2.9, name: 'gauge',   // the gauge: the arrow ringed
+  { t0: 1.45, t1: 2.9, name: 'gauge',   // the gauge: the arrow ringed
     cam: u => { const g = CK.GAUGE; return { pos: g.clone().add(V(.01, .12 - .01 * ss(u / 1.3), .44 - .05 * ss(u / 1.3))), look: g.clone().add(V(0, -.045, 0)), fov: 34, focus: .45, aper: 12 }; },
     set(u, tc) { gus.visible = nana.visible = false; } },
   { t0: 2.9, t1: 4.4, name: 'gus snacks',   // "Easy! It points to the snacks!"
@@ -127,7 +127,7 @@ function setProps(t) {
   K.car.fuelDoor.rotation.y = -1.8 * open;
   CK.gauge.set({ icon: S.name === 'gauge' || (S.name === 'gauge twist'), arrow: (S.name === 'gauge twist' && t > 15.5) || S.name === 'door side', hoseX: S.name === 'gauge twist' && t > 14.0, sticker: t > 21.2, needle: t > 18 ? .95 : .08 });
   K.skid.visible = t > 4.9; K.skid.material.opacity = clamp((t - 4.9) / 1.0);
-  CK.fresh.rotation.z = Math.PI + Math.sin(t * 6) * (t < 1.6 ? .5 : .1);
+  CK.fresh.rotation.z = Math.PI + Math.sin(t * 6) * (t < 1.45 ? .5 : .1);
   CK.wheelMesh.visible = CK.hub.visible = !(S.name === 'gauge' || S.name === 'gauge twist');
 }
 
@@ -175,7 +175,7 @@ function pow(txt, x, y, t, t0, dur, col = '#ffd84a', rot = -.12) {   // comic so
   og.restore();
 }
 function stamp(t) {
-  const k = t - 9.2; if (k < 0) return;
+  const k = t - 6.0; if (k < 0) return;
   const s = k < .12 ? lerp(1.9, .95, ei(k / .12)) : .95 + .05 * Math.exp(-(k - .12) * 9) * Math.cos((k - .12) * 30);
   og.save(); og.translate(W / 2, H * .22); og.rotate(-.18); og.scale(s, s); og.globalAlpha = clamp(k / .06);
   const w = 860, h = 250; og.lineJoin = 'round';
@@ -204,7 +204,7 @@ function inset(t) {   // a picture-in-picture of the gauge with its arrow, and a
 }
 function gaugeRing(t) {   // ring the arrow on the gauge close-up
   const g = proj(CK.GAUGE.clone().add(V(.035, -.014, .0)));
-  og.save(); og.strokeStyle = '#ff3b30'; og.lineWidth = 16; og.lineCap = 'round'; og.beginPath(); og.ellipse(g[0] + 40, g[1] + 40, 120, 100, 0, -2.2, -2.2 + Math.PI * 2.1 * ss(clamp((t - 1.6) / .3))); og.stroke(); og.restore();
+  og.save(); og.strokeStyle = '#ff3b30'; og.lineWidth = 16; og.lineCap = 'round'; og.beginPath(); og.ellipse(g[0] + 40, g[1] + 40, 120, 100, 0, -2.2, -2.2 + Math.PI * 2.1 * ss(clamp((t - 1.45) / .3))); og.stroke(); og.restore();
 }
 function confetti(t, t0) {
   const k = t - t0; if (k < 0 || k > 1.6) return;
