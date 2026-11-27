@@ -23,6 +23,6 @@ node core/render/video.mjs "$HERE" --size $SIZE --fps 24 --workers 2 --out "$HER
 echo "== 5. mux (-14 LUFS, light grain)"
 sh core/render/mux.sh "$HERE/out/video.mp4" "$HERE/out/mix.wav" "$HERE/all-green.mp4" 24 1
 echo "== 6. poster"
-node core/render/still.mjs "$HERE" 29.0 --size $SIZE --q nohud --out "$HERE/out"
-cp "$HERE/out/t_29.0.jpg" "$HERE/poster.jpg"
+node core/render/still.mjs "$HERE" 4.0 --size $SIZE --q nohud --out "$HERE/out"
+cp "$HERE/out/t_4.0.jpg" "$HERE/poster.jpg"
 echo "done: $HERE/all-green.mp4"
