@@ -8,11 +8,12 @@ synthetic narration:
 
 | File | What's in it |
 |---|---|
+| [`RETENTION_PLAYBOOK.md`](RETENTION_PLAYBOOK.md) | **Start here if "viewed vs swiped" is low**: an audit of our first seconds, frame-0 rules, per-channel opening recipes, Studio metrics |
 | [`FORMULA.md`](FORMULA.md) | **The formula**: the shared engine, a beat sheet with timings per channel, title and cover rules, the test plan, a pre-publish checklist |
 | [`pocket-city.md`](pocket-city.md) | Gap analysis against niche leaders, format changes, 50 ranked ideas |
 | [`pixel-life.md`](pixel-life.md) | Same, for Pixel Life |
 | [`some-crazy-thingzz.md`](some-crazy-thingzz.md) | Same, for Some Crazy Thingzz, with every answer fact-checked |
-| [`research/`](research/) | Raw research notes with every URL: [algorithm](research/algorithm.md), [miniature niche](research/miniature.md), [pixel / job comedy](research/pixel-comedy.md), [why-explainers](research/why-explainers.md), [claim checks](research/verify-claims.md), [object fact-checks](research/verify-objects.md) |
+| [`research/`](research/) | Raw research notes with every URL: [algorithm](research/algorithm.md), [miniature niche](research/miniature.md), [pixel / job comedy](research/pixel-comedy.md), [why-explainers](research/why-explainers.md), [swipe / first second](research/swipe.md), [film audit images](research/audit/), [claim checks](research/verify-claims.md), [object fact-checks](research/verify-objects.md) |
 
 **Method.** Six research passes, run in parallel, with more than 170 web searches in total:
 - the Shorts algorithm and policy;
