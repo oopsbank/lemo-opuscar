@@ -1,0 +1,153 @@
+[
+ {
+  "id": "n0",
+  "text": "Gus! No, no, no!",
+  "voice": "bf_isabella",
+  "speed": 1.1,
+  "at": 0.1,
+  "who": "nana",
+  "groups": [
+   4
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "g0",
+  "text": "Why is there an arrow by the fuel icon?",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 1.05,
+  "who": "gus",
+  "groups": [
+   4,
+   5
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g1",
+  "text": "Easy! It points to the snacks!",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 2.9,
+  "who": "gus",
+  "groups": [
+   1,
+   5
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d1",
+  "text": "Actually.",
+  "cap": "Actually...",
+  "voice": "bf_isabella",
+  "speed": 0.85,
+  "at": 7.0,
+  "who": "nana",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "d2",
+  "text": "It shows which side your fuel door is on.",
+  "voice": "bf_isabella",
+  "speed": 0.95,
+  "at": 8.3,
+  "who": "nana",
+  "groups": [
+   3,
+   3,
+   3
+  ],
+  "hot": [
+   2
+  ]
+ },
+ {
+  "id": "g2",
+  "text": "So the little hose shows it too!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 11.7,
+  "who": "gus",
+  "groups": [
+   3,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d3",
+  "text": "Nope. The hose means nothing. Only the arrow.",
+  "voice": "bf_isabella",
+  "speed": 0.95,
+  "at": 13.5,
+  "who": "nana",
+  "groups": [
+   1,
+   4,
+   3
+  ],
+  "hot": [
+   2
+  ]
+ },
+ {
+  "id": "g3",
+  "text": "Got it on the first try!",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 17.6,
+  "who": "gus",
+  "groups": [
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g4",
+  "text": "Fine! Then I'll make my own arrow.",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 19.8,
+  "who": "gus",
+  "groups": [
+   2,
+   5
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g5",
+  "text": "Wait. Why does a tape measure hook wobble?",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 23.4,
+  "who": "gus",
+  "groups": [
+   4,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ }
+]

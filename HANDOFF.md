@@ -87,6 +87,9 @@ git fetch origin ideas && git show origin/ideas:ideas/FORMULA.md
 |---|---|---|---|---|---|
 | 1 | Red Flag | Why do mailboxes have a red flag? | 22.4 s | `some-crazy-thingzz_red-flag_*` | `my-styles/toon-on-set/demo/` |
 | 2 | No Holes | Why do crackers have holes? | 24.0 s | `some-crazy-thingzz_cracker-holes_*` | `some-crazy-thingzz/films/cracker-holes/` |
+| 3 | Sand Trap | Why do golf balls have dimples? | 26.5 s | `some-crazy-thingzz_golf-dimples_*` (pushed) | `some-crazy-thingzz/films/golf-dimples/` |
+| 4 | Bald Serve | Why do tennis balls have fuzz? | 26.8 s | `some-crazy-thingzz_tennis-fuzz_*` (pushed) | `some-crazy-thingzz/films/tennis-fuzz/` |
+| 5 | Cap Solo | Why do pen caps have a hole? | 25.0 s | `some-crazy-thingzz_pen-cap_*` (see §10) | `some-crazy-thingzz/films/pen-cap/` |
 
 Make the next ones to the formula in §2: 25–35 s, Gus and Nana, the WRONG stamp and the "Actually…" sting, a hard-cut loop.
 
@@ -233,3 +236,87 @@ Content rules in force:
 - one fact, shown;
 - a second laugh after the payoff;
 - the last line names the next episode where it fits.
+
+## 10. State at the second handoff (27 Nov, ~05:30 UTC) — READ THIS FIRST
+
+**Rules changed since §1** (from the manager, `session_01CUE842B4KiVEBKEUhstDsx`; send reports there, not to `@parent`):
+- **The 2-films-per-day cap is removed.** Deliver each film as soon as it is rendered and self-checked: push it to the media repo, message the manager, then go straight on to the next film.
+- **Delivery:**
+  - push the mp4 + thumb to `oopsbank/some-crazy-things-media` (main, root);
+  - wait for the Pages URLs to return 200;
+  - `send_message` to the manager with the file names, duration, size, title, description (sources + hashtags), AI notes and the next topic;
+  - also `SendUserFile` the mp4 + thumb to the user.
+- **Media-repo access must be added in the new session.** `add_repo` push access was denied by the permission classifier until the user explicitly said "Clone the repository oopsbank/some-crazy-things-media into this session". Ask the user for the same message if `add_repo` is refused.
+- **Characters:**
+  - **Gus** (`am_puck`, speed 1.0–1.05): the Red Flag postman's face, mustache and blue shirt `#5b93d3`; hats change per job.
+  - **Nana** (`bf_isabella`, 0.85–0.95): the grandma from crackers: grey bun, round glasses, plum cardigan, cream apron.
+  - No narrator any more: Gus asks the question himself.
+- **Playbooks** on branch `ideas` (read both):
+  - `ideas/RETENTION_PLAYBOOK.md` covers the first second. Rules:
+    - Gus's face plus the object at frame 0;
+    - one headline (Baloo 800, ~96–112 px, y ≈ 380–460), gone by 1.5 s;
+    - Gus's question by 0.2 s, ≤ 8 words;
+    - a second shot by 1.5 s;
+    - WRONG by ~5–6 s;
+    - a sound hit at frame 0, music from 0.5 s;
+    - no heavy blur in the first 2 s;
+    - rotate the opening types.
+  - `ideas/CONTENT_PLAYBOOK.md` covers the story; its §5 is a **pre-render pass/fail checklist**. Rules:
+    - the oddity in words by 1 s;
+    - no gap over 2.5 s without a line or on-screen text (comic sound words: `pow()`);
+    - no pure set-up lines;
+    - a twist at 50–60%;
+    - one fact, shown;
+    - a second laugh after the payoff;
+    - the last line names the next episode;
+    - rotate the skeletons.
+- **Visual upgrade:**
+  - rich set dressing; a cool rim light; a warmer, contrasty grade;
+  - squash/stretch takes, sweat drops, anger puffs, impact frames (`burst()`), speed lines on whip pans;
+  - a gentle handheld drift on every shot;
+  - DOF aperture scaled ×0.45 so the dressed set stays readable.
+- **Density rule (user):** no empty areas.
+  - Before rendering, render `nocap` stills every 2 s and run `some-crazy-thingzz/emptycells.py <jpgs>`: the % of flat cells on a 6×10 grid. `markcells.py out.jpg <jpgs>` draws the flagged cells.
+  - Target ≤ 5%; Cap Solo went from 8.8–13% to 4.0%.
+  - Flat cartoon clothing gets flagged too; ignore those cells.
+  - Never let clutter cover a face or the key object (a per-shot `K.backRow` visibility cheat is fine).
+
+**Films in this session:**
+
+| Film | Status | Opening type | Skeleton |
+|---|---|---|---|
+| Golf, Tennis | delivered and pushed | (c) macro | Gus test (identical, pre-playbook) |
+| **Pen Caps** (`films/pen-cap`) | delivered by this session if §11 says so; otherwise rebuild with `build.sh` | (a) Gus mid-wrong-action | Gus test, retimed with a WARP table |
+| **Pen Hole** (`films/pen-hole`) | **ready to render, not rendered**: voices in `lines.json`; `story.json`/`voices.json` already timed; score/mix scripts done | (d) result first | result first, WARP-retimed |
+| **Fuel-Icon Arrow** (`films/fuel-arrow`) | **built, stills checked for most shots, not rendered**. To do: a density check, a gauge-shot check, a thumbnail | (b) Nana stops him | Nana stops him + myth layer |
+| next | Tape-Measure Hook (backlog #3, ranked 3rd in the content playbook), then F/J bumps, toothpaste squares | rotate: next should be (c) or (a) | not "Gus test" right after Fuel |
+
+**How to render a film from its source here** (each folder is self-contained):
+```
+cp -r some-crazy-thingzz/films/<name> films/<name>
+.venv/bin/python core/tts/tts.py films/<name>/lines.json ~/<name>-build/voices     # then asr_check; timing.py rewrites story.json/voices.json
+LIB=$PWD OUT=~/<name>-build; node core/render/events.mjs films/<name> --size 1080x1920 --q fast --out $OUT/events.json
+.venv/bin/python films/<name>/music/score.py && .venv/bin/python films/<name>/mix.py && .venv/bin/python films/<name>/subs.py
+LEMO_ANGLE=swiftshader node core/render/video.mjs films/<name> --fps 24 --workers 3 --size 1080x1920 --q "ssaa=1.5" --out $OUT/video24.mp4   # ~55–65 min for 25 s on 4 cores
+sh films/<name>/master6.sh $OUT/video24.mp4 $OUT/mix.wav $OUT/<name>.mp4
+```
+Every film's `story.json` holds `dur`. Pen Cap/Pen Hole keep `"WARP"` in main.js: shots are written in old time, and the WARP maps new time → old. Voices, captions and `EV` are in new time; `talk()` reads the global `TNEW`.
+
+**Gotchas met in this session:**
+- **Black rectangles after bloom/DOF = NaN normals:**
+  - a `BufferGeometry` built from points needs `computeVertexNormals()`;
+  - UV-sphere poles give zero normals when displaced (fixed in `GolfBall.sand`).
+- **Card props behind the face:** `armsFront: true` for anything at the mouth or eye.
+- **Cockpit shots:** the camera sits in front of the dash looking +z, so screen-left is +x. Hide the steering wheel for gauge close-ups.
+- **Canopy columns** must clear any car path; the high shot must stay under the canopy roof (y < 4.35).
+- **Whisper mishears:** "dents"→"dense", "Fuzz is"→"Fuzzy's", "flute"→"fluid", "Why do pens"→"Whitey pens". Rephrase until `asr_check` passes; caption word counts must match Whisper's.
+- **Each `still.mjs` run while a render is going** slows the render a lot; batch stills.
+- **Changing a film after its render has started means restarting the render.** Settle the playbook passes first.
+
+**Comparison numbers asked for by the manager (Tennis → Pen Caps):** measure with `emptycells.py` and the frame-0 luma/saturation/motion script below (fill in when Pen Caps is final).
+```
+python3 - <<'X'
+import subprocess, numpy as np; from PIL import Image
+def fr(mp4, t): subprocess.run(['ffmpeg','-loglevel','error','-y','-ss',str(t),'-i',mp4,'-frames:v','1','-s','270x480','/tmp/f.png']); return Image.open('/tmp/f.png').convert('RGB')
+X
+```

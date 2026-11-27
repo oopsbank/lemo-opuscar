@@ -5,7 +5,7 @@
 set -e
 LIB=${LIB:-/home/user/lemo-opuscar}
 D="$(cd "$(dirname "$0")" && pwd)"
-OUT=${OUT:-$HOME/cracker-holes-build}; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
+OUT=${OUT:-$HOME/tennis-fuzz-build}; mkdir -p "$OUT"; OUT="$(cd "$OUT" && pwd)"
 export LIB OUT
 PY="$LIB/.venv/bin/python"; SZ=1080x1920; Q=${Q:-ssaa=1.5}
 cd "$LIB"
@@ -21,13 +21,13 @@ $PY "$D/music/score.py"
 $PY "$D/mix.py"
 echo "== 3. subtitles file (the captions are also burned in)"
 $PY "$D/subs.py"
-echo "== 4. picture: 576 frames at 24 fps (QUICK=1: the first second only, unsupersampled: a pipeline check)"
+echo "== 4. picture: all frames at 24 fps (QUICK=1: the first second only, unsupersampled: a pipeline check)"
 [ -n "$QUICK" ] && Q="fast&dur=1"
 node core/render/video.mjs "$D" --fps 24 --workers ${WORKERS:-2} --size $SZ --q "$Q" --out "$OUT/video24.mp4"
 echo "== 5. mux and master (−14 LUFS, no grain)"
-sh core/render/mux.sh "$OUT/video24.mp4" "$OUT/mix.wav" "$OUT/cracker-holes.mp4" 24 0 || sh "$D/master6.sh" "$OUT/video24.mp4" "$OUT/mix.wav" "$OUT/cracker-holes.mp4"
+sh core/render/mux.sh "$OUT/video24.mp4" "$OUT/mix.wav" "$OUT/tennis-fuzz.mp4" 24 0 || sh "$D/master6.sh" "$OUT/video24.mp4" "$OUT/mix.wav" "$OUT/tennis-fuzz.mp4"
 echo "== 6. poster"
 [ -n "$QUICK" ] && SQ="fast" || SQ="ssaa=2"
 node core/render/still.mjs "$D" 11.3 --size $SZ --q "$SQ" --prefix poster_ --out "$OUT"
 cp "$OUT/poster_11.3.jpg" "$OUT/poster.jpg"
-echo "done: $OUT/cracker-holes.mp4"
+echo "done: $OUT/tennis-fuzz.mp4"

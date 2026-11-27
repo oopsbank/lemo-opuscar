@@ -1,0 +1,124 @@
+[
+ {
+  "id": "g0",
+  "text": "Why do pen caps have a hole?",
+  "voice": "am_puck",
+  "speed": 1.0,
+  "at": 0.12,
+  "who": "gus",
+  "groups": [
+   3,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g1",
+  "text": "Easy! It's a tiny flute! Listen!",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 1.7,
+  "who": "gus",
+  "groups": [
+   1,
+   4,
+   1
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d1",
+  "text": "Actually.",
+  "cap": "Actually...",
+  "voice": "bf_isabella",
+  "speed": 0.85,
+  "at": 6.3,
+  "who": "nana",
+  "groups": [
+   1
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "d2",
+  "text": "If someone breathes a cap in by accident,",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 7.6,
+  "who": "nana",
+  "groups": [
+   2,
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d3",
+  "text": "the hole lets some air through.",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 10.5,
+  "who": "nana",
+  "groups": [
+   3,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "d4",
+  "text": "That's why safety rules ask for it.",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 12.9,
+  "who": "nana",
+  "groups": [
+   3,
+   4
+  ],
+  "hot": [
+   0
+  ]
+ },
+ {
+  "id": "d5",
+  "text": "So please, stop chewing caps.",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "at": 16.6,
+  "who": "nana",
+  "groups": [
+   2,
+   3
+  ],
+  "hot": [
+   1
+  ]
+ },
+ {
+  "id": "g3",
+  "text": "Wait. Why does the pen have a hole?",
+  "voice": "am_puck",
+  "speed": 1.05,
+  "at": 20.0,
+  "who": "gus",
+  "groups": [
+   4,
+   4
+  ],
+  "hot": [
+   1
+  ]
+ }
+]

@@ -1,0 +1,188 @@
+{
+ "title": "Wrong Side",
+ "dur": 26.6,
+ "caps": [
+  {
+   "t0": 0.1,
+   "text": "Gus! No, no, no!",
+   "hot": true,
+   "who": "nana",
+   "t1": 1.05
+  },
+  {
+   "t0": 1.05,
+   "text": "Why is there an",
+   "who": "gus",
+   "t1": 1.49
+  },
+  {
+   "t0": 1.49,
+   "text": "arrow by the fuel icon?",
+   "hot": true,
+   "who": "gus",
+   "t1": 2.9
+  },
+  {
+   "t0": 2.9,
+   "text": "Easy!",
+   "who": "gus",
+   "t1": 3.2
+  },
+  {
+   "t0": 3.2,
+   "text": "It points to the snacks!",
+   "hot": true,
+   "who": "gus",
+   "t1": 4.657
+  },
+  {
+   "t0": 7.0,
+   "text": "Actually...",
+   "hot": true,
+   "who": "nana",
+   "t1": 8.3
+  },
+  {
+   "t0": 8.3,
+   "text": "It shows which",
+   "who": "nana",
+   "t1": 8.86
+  },
+  {
+   "t0": 8.86,
+   "text": "side your fuel",
+   "who": "nana",
+   "t1": 9.6
+  },
+  {
+   "t0": 9.6,
+   "text": "door is on.",
+   "hot": true,
+   "who": "nana",
+   "t1": 10.951
+  },
+  {
+   "t0": 11.7,
+   "text": "So the little",
+   "who": "gus",
+   "t1": 11.98
+  },
+  {
+   "t0": 11.98,
+   "text": "hose shows it too!",
+   "hot": true,
+   "who": "gus",
+   "t1": 13.5
+  },
+  {
+   "t0": 13.5,
+   "text": "Nope.",
+   "who": "nana",
+   "t1": 13.9
+  },
+  {
+   "t0": 13.9,
+   "text": "The hose means nothing.",
+   "who": "nana",
+   "t1": 15.44
+  },
+  {
+   "t0": 15.44,
+   "text": "Only the arrow.",
+   "hot": true,
+   "who": "nana",
+   "t1": 16.519
+  },
+  {
+   "t0": 17.6,
+   "text": "Got it on",
+   "who": "gus",
+   "t1": 17.86
+  },
+  {
+   "t0": 17.86,
+   "text": "the first try!",
+   "hot": true,
+   "who": "gus",
+   "t1": 19.174
+  },
+  {
+   "t0": 19.8,
+   "text": "Fine! Then",
+   "who": "gus",
+   "t1": 20.18
+  },
+  {
+   "t0": 20.18,
+   "text": "I'll make my own arrow.",
+   "hot": true,
+   "who": "gus",
+   "t1": 21.645
+  },
+  {
+   "t0": 23.4,
+   "text": "Wait. Why does a",
+   "who": "gus",
+   "t1": 24.0
+  },
+  {
+   "t0": 24.0,
+   "text": "tape measure hook wobble?",
+   "hot": true,
+   "who": "gus",
+   "t1": 25.679
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.1,
+   "t1": 1.64,
+   "text": "Gus! No, no, no!"
+  },
+  {
+   "t0": 1.05,
+   "t1": 3.318,
+   "text": "Why is there an arrow by the fuel icon?"
+  },
+  {
+   "t0": 2.9,
+   "t1": 4.657,
+   "text": "Easy! It points to the snacks!"
+  },
+  {
+   "t0": 7.0,
+   "t1": 8.468,
+   "text": "Actually..."
+  },
+  {
+   "t0": 8.3,
+   "t1": 10.951,
+   "text": "It shows which side your fuel door is on."
+  },
+  {
+   "t0": 11.7,
+   "t1": 13.561,
+   "text": "So the little hose shows it too!"
+  },
+  {
+   "t0": 13.5,
+   "t1": 16.519,
+   "text": "Nope. The hose means nothing. Only the arrow."
+  },
+  {
+   "t0": 17.6,
+   "t1": 19.174,
+   "text": "Got it on the first try!"
+  },
+  {
+   "t0": 19.8,
+   "t1": 21.645,
+   "text": "Fine! Then I'll make my own arrow."
+  },
+  {
+   "t0": 23.4,
+   "t1": 25.679,
+   "text": "Wait. Why does a tape measure hook wobble?"
+  }
+ ]
+}

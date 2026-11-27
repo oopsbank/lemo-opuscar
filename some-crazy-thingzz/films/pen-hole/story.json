@@ -1,0 +1,164 @@
+{
+ "title": "Peephole",
+ "dur": 25.0,
+ "caps": [
+  {
+   "t0": 0.12,
+   "text": "Why does my pen",
+   "who": "gus",
+   "t1": 0.62
+  },
+  {
+   "t0": 0.62,
+   "text": "have a side hole?",
+   "hot": true,
+   "who": "gus",
+   "t1": 1.8
+  },
+  {
+   "t0": 1.8,
+   "text": "Easy!",
+   "who": "gus",
+   "t1": 2.14
+  },
+  {
+   "t0": 2.14,
+   "text": "It's for peeping",
+   "hot": true,
+   "who": "gus",
+   "t1": 2.64
+  },
+  {
+   "t0": 2.64,
+   "text": "at the ink!",
+   "who": "gus",
+   "t1": 3.715
+  },
+  {
+   "t0": 6.2,
+   "text": "Actually...",
+   "hot": true,
+   "who": "nana",
+   "t1": 7.6
+  },
+  {
+   "t0": 7.6,
+   "text": "When ink flows out,",
+   "who": "nana",
+   "t1": 8.74
+  },
+  {
+   "t0": 8.74,
+   "text": "air has to get in.",
+   "hot": true,
+   "who": "nana",
+   "t1": 10.308
+  },
+  {
+   "t0": 10.4,
+   "text": "One hole?",
+   "who": "nana",
+   "t1": 10.86
+  },
+  {
+   "t0": 10.86,
+   "text": "It glugs.",
+   "hot": true,
+   "who": "nana",
+   "t1": 12.228
+  },
+  {
+   "t0": 12.4,
+   "text": "Add a second hole,",
+   "who": "nana",
+   "t1": 13.14
+  },
+  {
+   "t0": 13.14,
+   "text": "and it flows.",
+   "hot": true,
+   "who": "nana",
+   "t1": 14.61
+  },
+  {
+   "t0": 15.4,
+   "text": "The pen's hole",
+   "who": "nana",
+   "t1": 16.02
+  },
+  {
+   "t0": 16.02,
+   "text": "does the same",
+   "who": "nana",
+   "t1": 16.74
+  },
+  {
+   "t0": 16.74,
+   "text": "for the ink.",
+   "hot": true,
+   "who": "nana",
+   "t1": 17.962
+  },
+  {
+   "t0": 19.6,
+   "text": "Fine.",
+   "who": "gus",
+   "t1": 19.92
+  },
+  {
+   "t0": 19.92,
+   "text": "I'll check with",
+   "who": "gus",
+   "t1": 20.3
+  },
+  {
+   "t0": 20.3,
+   "text": "the other eye.",
+   "hot": true,
+   "who": "gus",
+   "t1": 21.368
+  }
+ ],
+ "lines": [
+  {
+   "t0": 0.12,
+   "t1": 1.975,
+   "text": "Why does my pen have a side hole?"
+  },
+  {
+   "t0": 1.8,
+   "t1": 3.715,
+   "text": "Easy! It's for peeping at the ink!"
+  },
+  {
+   "t0": 6.2,
+   "t1": 7.668,
+   "text": "Actually..."
+  },
+  {
+   "t0": 7.6,
+   "t1": 10.308,
+   "text": "When ink flows out, air has to get in."
+  },
+  {
+   "t0": 10.4,
+   "t1": 12.228,
+   "text": "One hole? It glugs."
+  },
+  {
+   "t0": 12.4,
+   "t1": 14.61,
+   "text": "Add a second hole, and it flows."
+  },
+  {
+   "t0": 15.4,
+   "t1": 17.962,
+   "text": "The pen's hole does the same for the ink."
+  },
+  {
+   "t0": 19.6,
+   "t1": 21.368,
+   "text": "Fine. I'll check with the other eye."
+  }
+ ]
+}
