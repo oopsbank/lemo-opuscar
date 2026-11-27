@@ -79,7 +79,7 @@ for e in E['ev']:
 bed = lp(brown(DUR + .3), 600) * .03
 add(buf, bed, 0, 1, -.2); add(buf, bed[::-1].copy(), 0, 1, .2)
 for t in np.arange(.5, DUR, 1.0):
-    if 6.65 < t < 7.25: continue   # the WRONG silence
+    if 7.68 < t < 8.42: continue   # the WRONG silence
     add(buf, hp(clack(5.0, .3), 2500), t, .03, .5)
 
 buf += vbuf

@@ -5,10 +5,16 @@ export const CAP = { font: 'Baloo2', size: 92, y: .64, outline: 13, hot: '#ffd84
 
 export function capAt(groups, t) { for (const c of groups) if (t >= c.t0 && t < c.t1) return c; return null; }
 
-export function drawCaps(g, groups, t, W, H) {
+const SLOTS = [CAP.y, .74, .54, .44];   // first slot whose band misses every keep-clear box
+function capY(H, keep, w, W) {
+  const hit = y => keep.some(k => k.y1 > y - CAP.size * .75 && k.y0 < y + CAP.size * .75 && k.x1 > (W - w) / 2 && k.x0 < (W + w) / 2);
+  for (const s of SLOTS) if (!hit(H * s)) return H * s;
+  return H * SLOTS[1];
+}
+export function drawCaps(g, groups, t, W, H, keep = []) {
   const c = capAt(groups, t); if (!c) return null;
   const k = clamp((t - c.t0) / .12), s = 1.18 - .18 * back(k, 2.2) + (k >= 1 ? 0 : 0);
-  const x = W / 2, y = H * CAP.y;
+  g.font = `800 ${CAP.size}px ${CAP.font}`; const x = W / 2, y = capY(H, keep, Math.min(W * .86, g.measureText(c.text).width + CAP.outline * 2), W);
   g.save(); g.translate(x, y); g.scale(s, s);
   g.font = `800 ${CAP.size}px ${CAP.font}`; const fit = Math.min(1, (W * .86) / (g.measureText(c.text).width + CAP.outline * 2)); g.scale(fit, fit);   // long groups shrink to stay inside the frame
   g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round'; g.miterLimit = 2;

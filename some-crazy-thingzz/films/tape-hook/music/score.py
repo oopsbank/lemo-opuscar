@@ -12,10 +12,14 @@ from core.audio.sfx import SR
 S.seed(23)
 # the shots were blocked on an old clock and retimed (main.js WARP: new0,new1,old0,old1); W maps an old time to the film's clock
 WARP = [[0,1.4,0,1.4],[1.4,3.35,1.4,3.1],[3.35,5.35,3.1,4.7],[5.35,6.1,4.7,5.45],[6.1,6.7,5.45,6.05],[6.7,7.25,6.05,6.6],[7.25,8.4,6.6,7.75],[8.4,10.85,7.75,10.2],[10.85,15.95,10.2,14.75],[15.95,17.0,14.75,15.75],[17.0,19.6,15.75,18.2],[19.6,21.4,18.2,20.1],[21.4,24.0,20.1,22.85],[24.0,26.61,22.85,25.8]]
-def W(t):
+def W1(t):
     for a, b, c, d in WARP:
         if t <= d: return a + (t - c) * (b - a) / (d - c)
     return t + WARP[-1][1] - WARP[-1][3]
+# second retime (slower voices): [previous film clock, film clock] anchors, same as main.js W2
+W2A = [[0, 0], [0.12, 0.12], [1.75, 1.92], [1.8, 2.17], [3.312, 3.738], [3.4, 4.026], [5.2, 5.916], [5.4, 6.316], [6.381, 7.353], [7.25, 8.422], [8.368, 9.54], [8.45, 9.822], [10.667, 12.044], [10.9, 12.477], [13.808, 15.563], [13.85, 15.805], [16.003, 18.075], [16.05, 18.322], [17.306, 19.799], [17.5, 20.193], [19.59, 22.386], [21.5, 24.496], [22.556, 25.598], [24.6, 27.842], [25.793, 29.186], [26.61, 30.003]]
+def W2(t): return float(np.interp(t, [a for a, b in W2A], [b for a, b in W2A]))
+def W(t): return W2(W1(t))
 B = .5
 DUR = json.load(open(os.path.join(os.path.dirname(__file__), '..', 'story.json')))['dur']
 ev = []
@@ -37,7 +41,7 @@ def shuffle(t0, t1, prog, v=.7, riff=True):
 # —— A: the shuffle under the glue and the bet (0.5 – 5.65) ——
 shuffle(.5, W(5.6), ['Bb', 'Eb', 'Bb', 'F7'])
 for b, p, d in [(1, 'F5', .5), (1.5 + .16, 'D5', .5), (2, 'Bb4', .5), (3, 'C5', .5), (3.5 + .16, 'D5', 1), (5, 'Eb5', .5), (5.5 + .16, 'G5', .5), (6, 'Bb5', 1), (9, 'A5', .5), (9.5 + .16, 'F5', .5), (10, 'C5', 1)]:
-    n(b * B, 'clarinet_stac', p, d * B, .5, -.25)
+    n(W2(b * B), 'clarinet_stac', p, d * B, .5, -.25)
 for k, p in enumerate(['F2', 'E2', 'Eb2', 'D2', 'Db2']): n(W(4.95) + k * .12, 'tuba_stac', p, .14, .55, 0)   # the fall into the CLUNK
 n(W(5.65), 'clash', 'short', None, .3, .1)
 # —— the "Actually…" sting (6.6) ——

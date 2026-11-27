@@ -1,4 +1,4 @@
-// "Glue Time" — why does a tape measure hook wobble? (Toon on Set, 1080×1920, 24 fps). Page contract: window.READY, window.render(t), window.DUR, window.TEXTS, window.EV.
+// "Glue Time" (Tape-Measure Hook) — why does a tape measure hook wobble? (Toon on Set, 1080×1920, 24 fps). Page contract: window.READY, window.render(t), window.DUR, window.TEXTS, window.EV.
 // Cast (fixed for the channel): Gus, the confidently wrong one; Nana, the one who knows. Skeleton: myth vs real (a bet). Opening: (c) macro of the odd detail.
 // Debug: ?fast (no supersampling) · ?ssaa=1.5 · ?nocap · ?dur=1
 import * as THREE from 'three';
@@ -186,7 +186,7 @@ function ring(P, t, t0, R0 = 70, col = '#ff3b30') {
   const k = clamp((t - t0) / .3); if (k <= 0) return; const c = proj(P);
   og.save(); og.strokeStyle = col; og.lineWidth = 14; og.lineCap = 'round'; og.shadowColor = 'rgba(0,0,0,.35)'; og.shadowBlur = 8;
   og.beginPath(); const a0 = -2.2; for (let a = 0; a <= Math.PI * 2.15 * ss(k); a += .05) { const w = 1 + .05 * Math.sin(a * 3); const x = c[0] + Math.cos(a0 + a) * R0 * w, y = c[1] + Math.sin(a0 + a) * R0 * .8 * w; a === 0 ? og.moveTo(x, y) : og.lineTo(x, y); }
-  og.stroke(); og.restore();
+  og.stroke(); og.restore(); keep(c[0] - R0 * 1.1, c[1] - R0 * .9, c[0] + R0 * 1.1, c[1] + R0 * .9);
 }
 function title(t) {   // the question, slammed in big at the top in the first second, gone by 1.4 s
   if (t > 1.4) return;
@@ -217,15 +217,18 @@ function speed(t, t0, dur) {
 }
 function pow(txt, x, y, t, t0, dur, col = '#ffd84a', rot = -.12, size = 120) {
   const k = t - t0; if (k < 0 || k > dur) return;
+  keep(x - txt.length * size * .32, y - size * .65, x + txt.length * size * .32, y + size * .65);
   const sc = k < .1 ? lerp(1.5, 1, ei(k / .1)) : 1 + .03 * Math.sin(k * 30);
   og.save(); og.translate(x, y); og.rotate(rot); og.scale(sc, sc); og.globalAlpha = Math.min(1, (dur - k) / .15);
   og.font = `800 ${size}px Baloo2`; og.textAlign = 'center'; og.textBaseline = 'middle'; og.lineJoin = 'round'; og.lineWidth = size * .22; og.strokeStyle = '#1c1418'; og.strokeText(txt, 0, 0); og.fillStyle = col; og.fillText(txt, 0, 0);
   og.restore();
 }
 function label(txt, x, y, col = '#ffffff', size = 76, a = 1) {
+  if (a > 0) keep(x - txt.length * size * .3, y - size * .6, x + txt.length * size * .3, y + size * .6);
   og.save(); og.globalAlpha = a; og.font = `800 ${size}px Baloo2`; og.textAlign = 'center'; og.textBaseline = 'middle'; og.lineJoin = 'round'; og.lineWidth = size * .24; og.strokeStyle = '#1c1418'; og.strokeText(txt, x, y); og.fillStyle = col; og.fillText(txt, x, y); og.restore();
 }
 function arrow(x0, y0, x1, y1, col, a = 1, lw = 18) {
+  if (a > 0) keep(Math.min(x0, x1) - 30, Math.min(y0, y1) - 30, Math.max(x0, x1) + 30, Math.max(y0, y1) + 30);
   og.save(); og.globalAlpha = a; og.strokeStyle = '#1c1418'; og.lineCap = 'round'; og.lineJoin = 'round';
   const ang = Math.atan2(y1 - y0, x1 - x0), hd = 34;
   for (const [c, w] of [['#1c1418', lw + 12], [col, lw]]) { og.strokeStyle = c; og.lineWidth = w; og.beginPath(); og.moveTo(x0, y0); og.lineTo(x1, y1); og.moveTo(x1 - Math.cos(ang - .5) * hd, y1 - Math.sin(ang - .5) * hd); og.lineTo(x1, y1); og.lineTo(x1 - Math.cos(ang + .5) * hd, y1 - Math.sin(ang + .5) * hd); og.stroke(); }
@@ -257,9 +260,14 @@ function bracket(xa, xb, y, col, txt, a = 1) {   // a dimension bracket with a l
 const WARP = [[0, 1.4, 0, 1.4], [1.4, 3.35, 1.4, 3.1], [3.35, 5.35, 3.1, 4.7], [5.35, 6.1, 4.7, 5.45], [6.1, 6.7, 5.45, 6.05], [6.7, 7.25, 6.05, 6.6], [7.25, 8.4, 6.6, 7.75], [8.4, 10.85, 7.75, 10.2], [10.85, 15.95, 10.2, 14.75], [15.95, 17.0, 14.75, 15.75], [17.0, 19.6, 15.75, 18.2], [19.6, 21.4, 18.2, 20.1], [21.4, 24.0, 20.1, 22.85], [24.0, 26.61, 22.85, 25.8]];
 const warp = t => { for (const [n0, n1, o0, o1] of WARP) if (t < n1) return o0 + (Math.max(t, n0) - n0) / (n1 - n0) * (o1 - o0); return 25.8; };
 const warpInv = o => { for (const [n0, n1, o0, o1] of WARP) if (o < o1) return +(n0 + (o - o0) / (o1 - o0) * (n1 - n0)).toFixed(3); return 26.6; };
-let texts = [];
+// second retime (slower voices, breathing room between lines): [film clock, previous film clock] anchors
+const W2 = [[0, 0], [0.12, 0.12], [1.75, 1.92], [1.8, 2.17], [3.312, 3.738], [3.4, 4.026], [5.2, 5.916], [5.4, 6.316], [6.381, 7.353], [7.25, 8.422], [8.368, 9.54], [8.45, 9.822], [10.667, 12.044], [10.9, 12.477], [13.808, 15.563], [13.85, 15.805], [16.003, 18.075], [16.05, 18.322], [17.306, 19.799], [17.5, 20.193], [19.59, 22.386], [21.5, 24.496], [22.556, 25.598], [24.6, 27.842], [25.793, 29.186], [26.61, 30.003]];
+const lin = (x, P, i, j) => { for (let k = 1; k < P.length; k++) if (x <= P[k][i] || k === P.length - 1) { const [a, b] = [P[k - 1], P[k]]; return a[j] + (x - a[i]) / ((b[i] - a[i]) || 1) * (b[j] - a[j]); } };
+const w2 = tn => lin(tn, W2, 1, 0), w2inv = to => +lin(to, W2, 0, 1).toFixed(3);
+let texts = [], KEEP = [];   // KEEP: screen boxes the captions must stay clear of (rings, labels, POWs)
+const keep = (x0, y0, x1, y1) => KEEP.push({ x0, y0, x1, y1 });
 function render(tn) {
-  TNEW = tn; const t = warp(tn);
+  TNEW = tn; const t = warp(w2(tn));
   const S = shotAt(t), u = t - S.t0, tc = on12(t);
   setProps(t, S);
   const C = S.cam(u);
@@ -276,7 +284,7 @@ function render(tn) {
   post.dof.focus = C.focus; post.dof.aper = C.aper * .45; post.dof.maxCoc = 18;
   post.composer.render();
   og.clearRect(0, 0, W, H);
-  texts = [];
+  texts = []; KEEP = [];
   const N = S.name;
   if (N === 'macro0') { title(t); ring(hookTip(K.tapeG), t, 0, 80); pow('CLACK!', W * .78, H * .5, t, 0, .5, '#ffffff', .12, 96); pow('CLACK!', W * .74, H * .55, t, .6, .5, '#ffd84a', -.1, 96); }
   if (N === 'glue') { const p = proj(hookTip(K.tapeG)); pow('SQUIRT!', p[0] + 40, p[1] - 260, t, 2.5, .9, '#9be0ff', -.1); }
@@ -310,7 +318,7 @@ function render(tn) {
   if (N === 'fit') { const c = proj(cubby()); if (t > 18.9) { pow('PERFECT FIT!', W * .5, c[1] - 360, t, 18.9, 1.2, '#7be07b', -.06, 108); pow('DING!', W * .75, c[1] - 520, t, 18.9, .7, '#ffd84a', .1, 96); } confetti(t, 18.9); }
   if (N === 'unglue') { if (t > 20.9 && t < 21.75) pow('YANK!', W * .3, H * .32, t, 20.9, .7, '#ffffff', -.12, 100); speed(t, 21.6, .2); burst(W * .42, H * .3, t, 21.75, '#ffd84a'); pow('THWACK!', W * .5, H * .22, t, 21.75, .9, '#ff6a50', -.08, 130); }
   if (N === 'loop') { if (t > 25.0) ring(hookTip(K.tapeG), t, 25.0, 80); if (t > 23.4 && t < 24.9) pow('CLACK!', W * .78, H * .5, t, 23.4, .5, '#ffffff', .12, 96); }
-  if (!QS.has('nocap')) drawCaps(og, STORY.caps, Math.max(tn, STORY.caps[0]?.t0 ?? 0), W, H);
+  if (!QS.has('nocap')) drawCaps(og, STORY.caps, Math.max(tn, STORY.caps[0]?.t0 ?? 0), W, H, KEEP);
 }
 const EV = [
   { t: 0, type: 'clack' }, { t: .3, type: 'clack' }, { t: .6, type: 'clack' }, { t: .9, type: 'clack' }, { t: 1.4, type: 'whoosh' }, { t: 2.5, type: 'squirt' }, { t: 4.1, type: 'pop' },
@@ -318,7 +326,7 @@ const EV = [
   { t: 14.8, type: 'pop' }, { t: 15.9, type: 'tick' }, { t: 18.35, type: 'slide' }, { t: 18.9, type: 'ding' }, { t: 18.9, type: 'cheer' }, { t: 20.9, type: 'zip', dur: .65 }, { t: 21.6, type: 'zipback' }, { t: 21.75, type: 'thwack' },
   { t: 23.4, type: 'clack' }, { t: 23.7, type: 'clack' }, { t: 24.0, type: 'clack' }, { t: 24.3, type: 'clack' }, { t: 24.6, type: 'clack' },
 ];
-EV.forEach(e => { e.t = warpInv(e.t); });
+EV.forEach(e => { e.t = w2inv(warpInv(e.t)); });
 window.render = render; window.DUR = QS.has('dur') ? +QS.get('dur') : STORY.dur; window.TEXTS = () => texts; window.EV = EV;
 window.DBG = { scene, camera, post, K, cards, L, SHOTS };
 render(0);
