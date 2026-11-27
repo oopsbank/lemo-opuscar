@@ -7,13 +7,14 @@ const LIB = process.env.LIB || path.resolve(path.dirname(fileURLToPath(import.me
 const { openDemo } = await import(path.join(LIB, 'core/render/page.mjs'));
 const DEMO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+const [VW, VH] = opt('--size', '1080x1920').split('x').map(Number);
 const A = +args[0], B = +args[1], FPS = +opt('--fps', 60), WK = +opt('--workers', 3), Q = opt('--q', 'ss=1');
 const out = path.resolve(opt('--out', path.join(DEMO, 'out', `part_${A}_${B}.mp4`)));
 const tmp = path.join(DEMO, 'out', `tmp_${A}_${B}`); fs.mkdirSync(tmp, { recursive: true });
 const F0 = Math.round(A * FPS), F1 = Math.round(B * FPS), TOTAL = F1 - F0, per = Math.ceil(TOTAL / WK), t0 = Date.now();
 await Promise.all([...Array(WK)].map(async (_, w) => {
   const a = F0 + w * per, b = Math.min(F1, a + per); if (a >= b) return;
-  const { browser, page } = await openDemo(DEMO, { q: Q, w: 1080, h: 1920 });
+  const { browser, page } = await openDemo(DEMO, { q: Q, w: VW, h: VH });
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '14', '-pix_fmt', 'yuv420p', path.join(tmp, `seg_${w}.mp4`)]);
   for (let f = a; f < b; f++) {

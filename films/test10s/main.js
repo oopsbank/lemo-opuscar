@@ -13,6 +13,7 @@ import { seg, ss, lerp } from '/core/lib.js';
 
 const Q = new URLSearchParams(location.search);
 const SS = +(Q.get('ss') ?? 2);
+const SC = +(Q.get('res') ?? 1080) / 1080, RW = Math.round(W * SC), RH = Math.round(H * SC);   // ?res=720 renders natively at 720×1280
 export const DUR = 10.0;
 const DURS = await fetch('voices/dur.json').then(r => r.json()).catch(() => ({}));
 export const VO = [
@@ -26,15 +27,16 @@ const talking = (t, id) => { const v = VO.find(o => o.id === id); return t >= v.
 
 await overlayReady();
 const ov = document.getElementById('ov'), g = ov.getContext('2d');
+ov.width = RW; ov.height = RH; ov.style.width = RW + 'px'; ov.style.height = RH + 'px';
 const renderer = new THREE.WebGLRenderer({ antialias: false, preserveDrawingBuffer: true });
-renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.setPixelRatio(1); renderer.setSize(RW, RH);
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.15;
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.getElementById('stage').appendChild(renderer.domElement);
-renderer.domElement.style.width = W + 'px'; renderer.domElement.style.height = H + 'px';
+renderer.domElement.style.width = RW + 'px'; renderer.domElement.style.height = RH + 'px';
 const camera = new THREE.PerspectiveCamera(40, W / H, .05, 400);
 const set = buildOffice();
-const post = makePost(renderer, set.scene, camera, W, H, { ssaa: SS });
+const post = makePost(renderer, set.scene, camera, RW, RH, { ssaa: SS });
 const V = post.vig.uniforms;
 
 // —— the set at 3×: carpet (54 px tiles, 4 m per 324 px texture), the sign; the old help desk hidden ——
@@ -114,9 +116,9 @@ window.render = t => {
   renderer.toneMappingExposure = 1.08;
   post.bloom.strength = .5; post.bloom.radius = .7; post.bloom.threshold = .9;
   const subj = new THREE.Vector3(-2.88, 1.0, 2.3);
-  post.dof.tiltAmt = 5; post.dof.tiltC = .5; post.dof.tiltF = .4; post.dof.tiltW = .3; post.dof.focus = camera.position.distanceTo(subj); post.dof.maxCoc = 5;
+  post.dof.tiltAmt = 5 * SC; post.dof.tiltC = .5; post.dof.tiltF = .4; post.dof.tiltW = .3; post.dof.focus = camera.position.distanceTo(subj); post.dof.maxCoc = 5 * SC;
   post.composer.render();
-  g.clearRect(0, 0, W, H);
+  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, RW, RH); g.setTransform(SC, 0, 0, SC, 0, 0);
   caption(t);
 };
 window.READY = true;
