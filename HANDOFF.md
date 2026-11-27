@@ -56,14 +56,17 @@ Each folder holds `TREATMENT.md` (structure, shot list, beat sheet, cue map, sou
 
 ## 6. Ideas for the next films
 
-Topics offered to the user and not yet made:
-- **Night-shift baker**: the oven glow at 4 a.m., a flour explosion, the cat asleep in a tray, a raccoon steals bread, the first customer buys the one burnt loaf.
-- **Tiny-inn receptionist**: a snowy mountain inn with a knight, a duck, a ghost who wants another room, and the grandma again. A good place for a running cameo.
-- **Mail carrier**: a snowy village; a goat eats the parcel, the wind steals the letters, a guard dog, the right house but the wrong person.
-- **Night-market noodle vendor**: red lanterns, a sudden downpour, a monkey steals the chopsticks, an order that's not on the menu, a pot that boils over.
-- **Campsite ranger**: a pine forest and campfire, a bear steals the marshmallows, the tent blows away, fireflies taken for ghosts, and in the morning the bear is sitting in your chair.
+**Production is stopped (27 Nov 2026, the user via the manager)** after Job #8. Don't start Job #9 until the manager or the user asks.
 
-Series ideas: recurring cameos (the grandma, the seagull, the dog, the bear) and a "Pixel Life" end-card line; vary the structure each time (the rule book was film 1, the countdown film 2; next could be a day cycle, a party of three, or an overworld map).
+Next, in order (from `ideas/pixel-life.md` on branch `ideas`, the ranking table; #1 Hotel, #2 Returns, #3 Barista, #5 Mall Santa and #7 IT Help Desk are made):
+1. **Job #9 Flight Attendant** (★ #8): already named in Job #8's last line ("Fired. Go be a flight attendant."), so make it next. A narrow aisle set (seat rows, overhead bins, galley, trolley, windows with clouds); gags: the overhead bin that won't close, the smoker in first class, the trolley jammed in turbulence. Use opening type **(a)** or **(c)** (#7 was (b), #8 (d)) and a skeleton not used yet (not "three, each bigger", "the prop comes alive", "disaster first", "chain reaction"), e.g. **a countdown to landing** with the seat-belt sign as the clock, or **pick a side** kept to one twist. ≤ 35 s.
+2. **Lighthouse Keeper** (#4): "You had one job"; the style's best storm and light look.
+3. **Restaurant Server** (★ #6): the reservation saga, the 3-hour coffee, the birthday song at the wrong table.
+4. **Wizard's Cleaner** (#9), **Zookeeper** (#10), **Vet Receptionist** (#11), **Dog Walker** (#12), **Librarian** (#13).
+
+Older offers not yet made: night-shift baker, tiny-inn receptionist, mail carrier, campsite ranger (the night-market noodle vendor is a food job: skip it, food and delivery are off-limits).
+
+Series: keep the recurring hero, the Customer, the Manager and the Cat; the last line of each film names the next job; rotate the opening type and the skeleton (log them in §8).
 
 ## 7. Rules added on 27 Nov 2026 (from the manager, for the user)
 - **Length (27 Nov, from the manager): 35 s or less** (target 32–35 s). Cut set-up, not gags. This overrides the 40–45 s in the content playbook.
