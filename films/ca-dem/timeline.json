@@ -1,0 +1,34 @@
+{
+  "dur": 75.0,
+  "fps": 24,
+  "bpm": 80,
+  "shots": [
+    { "id": "store", "a": 0.0, "b": 8.25 },
+    { "id": "paper", "a": 8.25, "b": 21.75 },
+    { "id": "shrug", "a": 21.75, "b": 30.0 },
+    { "id": "enter", "a": 30.0, "b": 42.0 },
+    { "id": "flicker", "a": 42.0, "b": 54.75 },
+    { "id": "under", "a": 54.75, "b": 65.0 },
+    { "id": "phone", "a": 65.0, "b": 75.0 }
+  ],
+  "boxes": [
+    { "id": "start", "who": "", "a": 5.5, "b": 8.25, "cps": 30, "text": "00:00 - Bắt đầu ca trực.", "blip": "sys" },
+    { "id": "nam", "who": "NAM", "a": 24.2, "b": 29.8, "cps": 26, "text": "Lại trò đùa nhảm nhí của thằng ca chiều...", "blip": "nam" },
+    { "id": "sms1", "who": "Thằng ca chiều", "a": 65.6, "b": 72.6, "cps": 34, "text": "Ê quên dặn, tờ giấy dưới máy là của thằng biến thái hôm qua viết...", "blip": "sms" },
+    { "id": "sms2", "who": "Thằng ca chiều", "a": 69.0, "b": 72.6, "cps": 40, "text": "ĐỪNG CHUI XUỐNG GẦM QUẦY. NÓ TRỐN Ở DƯỚI ĐÓ.", "blip": "sms" }
+  ],
+  "paper": [
+    { "a": 10.0, "cps": 22, "text": "QUY TẮC CA ĐÊM:", "red": true },
+    { "a": 11.4, "cps": 24, "text": "1. Không bán đồ ăn nóng sau 12h." },
+    { "a": 14.6, "cps": 24, "text": "2. Khách mặc áo mưa vàng đứng ở kệ cuối: ĐỪNG NHÌN." },
+    { "a": 17.8, "cps": 24, "text": "3. Đèn tủ đông nháy 3 lần: CHUI XUỐNG GẦM QUẦY NGAY." }
+  ],
+  "t": {
+    "yawn": 1.6, "clock": 5.0, "beep": 5.5, "look": 7.0, "dark": 8.25, "paperUp": 9.0, "paperOut": 21.2,
+    "q": 22.0, "pocket": 23.0, "wipe": 24.0,
+    "door": 30.0, "inside": 31.0, "excl": 33.0, "atShelf": 36.0,
+    "sweat": 43.5, "fl1": 45.0, "fl2": 49.5, "fl3": 54.75, "eyesWide": 53.2, "dive": 54.3,
+    "stepsA": 56.0, "bootsStop": 59.5, "silenceEnd": 62.5, "blink": 63.5,
+    "buzz": 65.0, "ting1": 65.5, "ting2": 69.0, "eyesOpen": 70.5, "glitch": 72.6, "static": 72.75, "black": 74.6
+  }
+}

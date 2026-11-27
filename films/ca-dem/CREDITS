@@ -1,0 +1,4 @@
+CA ĐÊM (00:00) — script by the user; picture, type, music and sound made in code.
+Style: 16-bit Pixel RPG (Lemo-Opuscar styles/pixel-rpg), vertical 180×320 ×6, 24 fps, with a light CRT layer at the user's request.
+Pixel font: original (from the style's font.js), Vietnamese marks composed in code. No voices (typed dialog boxes), no AI images.
+Music and sound: synthesised chiptune and foley (mix.py).
