@@ -21,17 +21,21 @@ export function drawChar(T, sp, pose, o) {
 
   // —— legs and shoes ——
   for (const [hx, f, s] of [[-9, p.lf, -1], [9, p.rf, 1]]) {
-    T.line(limb([hx, HIP + 4], [f[0], f[1] - 4], s * (p.legBend ?? 2)), lb);
+    { const P = limb([hx, HIP + 4], [f[0], f[1] - 4], s * (p.legBend ?? 2)); T.line(P, lb * 2.1); T.line(P, lb * 2.1 - lw * 1.3, sp.pants ?? '#3a3a48'); }
     T.shape(ell(f[0] + s * 5, f[1] - 3.5, 9.5, 5.5, 24), { fill: sp.shoes ?? '#2a2226', lw: lw * .7 });
   }
   T.push(); T.translate(0, HIP); T.rotate(p.lean); T.translate(0, -HIP);
   // —— arms behind the body ——
   const arms = () => {
     for (const [sx, h, b] of [[-17, p.lh, p.bendL], [17, p.rh, p.bendR]]) {
-      T.line(limb([sx, SH + 6], h, b), lb);
+      { const P = limb([sx, SH + 6], h, b), n = P.length, cut = Math.round(n * .55);
+        T.line(P, lb * 1.9); T.line(P.slice(cut - 1), lb * 1.9 - lw * 1.3, SKIN); T.line(P.slice(0, cut), lb * 1.9 - lw * 1.3, sp.shirt);   // a sleeve, then a skin forearm, inked
+        T.line([P[cut - 1], P[cut]], lb * 1.9 - lw * 1.3, shade(sp.shirt, .85)); }
       const pr = sx > 0 ? p.rprop : p.lprop;
       if (pr) drawGolfProp(T, pr, h, lw);
-      T.dot(h[0], h[1], lb * .95);
+      { const r = 4.6;   // a round cartoon hand with a thumb, not a dot
+        T.shape(ell(h[0] + (sx > 0 ? -r * .75 : r * .75), h[1] - r * .35, r * .48, r * .4, 16), { fill: SKIN, lw: lw * .8 });
+        T.shape(ell(h[0], h[1], r, r * .92, 24), { fill: SKIN, lw: lw * .8, shade: () => T.fillOnly(ell(h[0] + (sx > 0 ? r * .45 : -r * .45), h[1] + r * .35, r * .7, r * .55, 16), SKIN_SH) }); }
     }
   };
   if (p.armsBack) arms();
@@ -267,11 +271,11 @@ function capShape(T, lw, tape, cx = 0, cy = 0, s = 1.8) {   // upright, hole at 
   }
   T.pop();
 }
-const TUBE = { L: 64, B: 12, r: 6.4, waist: -16, rw: 5.0 };   // local: grip at y = 0, bottom end at +B, top end at −(L − B); waist = the narrow "throat"
-const tubeR = y => { const d = (y - TUBE.waist) / 9; return TUBE.r - (TUBE.r - TUBE.rw) * Math.exp(-d * d); };
+const TUBE = { L: 90, B: 16, r: 8.2, waist: -24, rw: 6.0 };   // local: grip at y = 0, bottom end at +B, top end at −(L − B); waist = the narrow "throat"
+const tubeR = y => { const d = (y - TUBE.waist) / 12; return TUBE.r - (TUBE.r - TUBE.rw) * Math.exp(-d * d); };
 function wall(side) { const pts = []; for (let y = TUBE.B; y >= TUBE.B - TUBE.L; y -= 2) pts.push([side * tubeR(y), y]); return pts; }
 const STUDY = {
-  cap(T, pr, lw) { capShape(T, lw, pr.tape, 0, -10, 1.8); },
+  cap(T, pr, lw) { capShape(T, lw, pr.tape, 0, -12, 2.2); },
   fan(T, pr, lw) {   // handle in the fist, the head along −y; blades spin when pr.on
     T.shape(rr(-2.2, -4, 4.4, 14, 1.8), { fill: '#ff7ab0', lw: lw * .55, shade: () => T.fillOnly(rr(.6, -4, 1.6, 14, 0), '#e05a92') });
     T.dot(0, 2, Math.max(1, .9 * T.zoom()), '#ffffff');
@@ -285,7 +289,7 @@ const STUDY = {
     // the paper strip taped at the top end: hangs over the rim; lifts and flutters when air comes out
     const air = pr.air ?? 0, tt = pr.t ?? 0, strip = [];
     for (let i = 0; i <= 10; i++) { const k = i / 10, len = 16 * k;
-      const hang = [TUBE.r + 1 + Math.sin(k * 2) * .6, top + 2 + len], up = [2 + Math.sin(tt * 26 + k * 7) * 2.6 * k, top - 1 - len];
+      const len2 = 24 * k, hang = [TUBE.r + 1 + Math.sin(k * 2) * .6, top + 2 + len2], up = [2 + Math.sin(tt * 26 + k * 7) * 4 * k, top - 1 - len2];
       strip.push([lerp(hang[0], up[0], air), lerp(hang[1], up[1], air)]); }
     T.line(strip, lw * 2.6, INK); T.line(strip, lw * 1.6, '#fff6d8');
     // glass body (behind), then the cap inside, then the front walls and rims
@@ -295,15 +299,15 @@ const STUDY = {
         const squeeze = Math.exp(-Math.pow((y - (pr.capY ?? TUBE.waist)) / 7, 2)), x = lane * tubeR(y) * 1.4 * (1 - squeeze * .95);
         g.save(); g.globalAlpha = air * Math.sin(ph * Math.PI); T.line([[x, y + 2.4], [x, y - 2.4]], lw * .9, '#ffffff'); g.restore(); }
     }
-    if (pr.capY != null) capShape(T, lw, pr.tape, 0, pr.capY, 1.8);
+    if (pr.capY != null) capShape(T, lw, pr.tape, 0, pr.capY, 2.2);
     T.line(wall(-1), lw * .75); T.line(wall(1), lw * .75);
     T.line([[-TUBE.r * .55, TUBE.B - 6], [-TUBE.r * .55, top + 6]], lw * .5, 'rgba(255,255,255,.8)');   // a highlight
     T.shape(ell(0, top, TUBE.r, 1.6, 28), { fill: 'rgba(220,240,255,.5)', lw: lw * .6 });
     T.shape(arc(0, TUBE.B, TUBE.r, 1.6, 0, Math.PI, 16), { fill: false, closed: false, lw: lw * .6 });
     // the THROAT tag: a paper label taped to the tube, sticking out to the side
-    const sd = pr.tagSide ?? 1, tx = sd > 0 ? TUBE.r - 1 : -TUBE.r + 1 - 30, ty = top + 10;
-    T.shape(rr(tx, ty, 30, 11, 1.2), { fill: '#fffdf4', lw: lw * .6 });
-    T.shape(rr(sd > 0 ? tx - 1.5 : tx + 27.5, ty + 2.5, 4, 6, 0), { fill: 'rgba(235,248,255,.8)', lw: lw * .3 });
-    const [a, b, c, d, e, f] = T.M; g.save(); g.setTransform(a, b, c, d, e, f); g.font = '800 8.6px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#d8232a'; g.fillText('THROAT', tx + 15, ty + 6.2); g.restore();
+    const sd = pr.tagSide ?? 1, TW = 32, tx = sd > 0 ? TUBE.r - 1 : -TUBE.r + 1 - TW, ty = top + 14;
+    T.shape(rr(tx, ty, TW, 13, 1.4), { fill: '#fffdf4', lw: lw * .6 });
+    T.shape(rr(sd > 0 ? tx - 2 : tx + TW - 3, ty + 3, 5, 7, 0), { fill: 'rgba(235,248,255,.8)', lw: lw * .3 });
+    const [a, b, c, d, e, f] = T.M; g.save(); g.setTransform(a, b, c, d, e, f); g.font = '800 10.4px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#d8232a'; g.fillText('THROAT', tx + TW / 2, ty + 7.4); g.restore();
   },
 };

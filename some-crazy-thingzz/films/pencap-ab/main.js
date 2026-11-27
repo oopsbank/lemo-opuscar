@@ -71,15 +71,15 @@ const MOUTH = [-2, -127];
 // a point in Nana's drawing (cm, feet at 0, up = −y) → world (her card faces the camera; good enough for framing)
 const nanaPt = (x, y) => V(N0.x + x / 100 * nana.scale, -y / 100 * nana.scale, N0.z);
 // Nana's tube grips (left hand): at her side, and lifted with the bottom end at her mouth (A only)
-const GRIP_SIDE = [-38, -100], GRIP_MOUTH = [-2, -141];
-const TUBE_WAIST = -16, TUBE_TOP = -52;   // in the tube's own frame (see cast.js TUBE)
+const GRIP_SIDE = [-34, -92], GRIP_MOUTH = [-2, -146];
+const TUBE_WAIST = -24, TUBE_TOP = -74;   // in the tube's own frame (see cast.js TUBE)
 
 const SHOTS = [
   { t0: 0, t1: 3.2, name: 'whistle',   // Gus blows across the cap like a whistle, then shows it off: "Pen caps have a hole so they're whistles!"
     cam: u => ({ pos: LV(V(-.27, 1.42, 1.0), V(-.27, 1.42, .92), ss(u / 3.2)), look: V(-.27, 1.3, -.55), fov: 34, focus: 1.5, aper: 45 }),
     set(t) { gus.visible = true; nana.visible = false; gus.pos.copy(G0);
       const show = ei(seg(t, .32, .6));
-      const hand = [lerp(MOUTH[0] + 2, -44, show), lerp(MOUTH[1] + 22, -138, show)];
+      const hand = [lerp(MOUTH[0] + 2, -24, show), lerp(MOUTH[1] + 24, -104, show)];
       gus.pose = { armsFront: show < .5, lh: hand, bendL: 10, lprop: { kind: 'cap', big: true }, rh: [30, -84], brows: 'up', look: show < .5 ? [-.2, .9] : [-.6, -.3], turn: show * .15,
         mouth: show < .5 ? 'o' : 'grin', open: show < .5 ? .08 : .3, sq: 1 + (t < .32 ? .03 * Math.sin(t * 40) : 0), blink: blink(t, 1), ...(t > .35 ? (talk('gus', t) ?? {}) : {}) }; } },
   { t0: 3.2, t1: 6.3, name: 'enter',   // Nana walks in shaking her head: "Nope, Gus." — "Then what's it for?"
@@ -87,55 +87,55 @@ const SHOTS = [
     set(t) { gus.visible = nana.visible = true; gus.pos.copy(G0);
       const walk = eo(seg(t, 3.2, 3.75)); nana.pos.set(lerp(.95, .3, walk), 0, -.55);
       const shake = t > 3.3 && t < 4.35 ? Math.sin((t - 3.3) * 15) : 0;
-      nana.pose = { lh: [-30, -76], rh: [30, -76], bendL: 12, bendR: -12, lf: walk < 1 ? [-13 + Math.sin(t * 22) * 6, -3] : [-13, -3], rf: walk < 1 ? [13 - Math.sin(t * 22) * 6, -3] : [13, -3], bob: walk < 1 ? -Math.abs(Math.sin(t * 22)) * 2 : 0,
+      nana.pose = { armsFront: true, lh: [-30, -76], rh: [30, -76], bendL: 12, bendR: -12, lf: walk < 1 ? [-13 + Math.sin(t * 22) * 6, -3] : [-13, -3], rf: walk < 1 ? [13 - Math.sin(t * 22) * 6, -3] : [13, -3], bob: walk < 1 ? -Math.abs(Math.sin(t * 22)) * 2 : 0,
         brows: 'skeptic', mouth: 'flat', look: [-.9, -.1] , turn: -.3 + shake * .25, tilt: shake * .06, blink: blink(t, 2.6), ...(talk('nana', t) ?? {}) };
       const ask = ei(seg(t, 4.45, 4.75));
-      gus.pose = { lh: [lerp(-44, -44, ask), lerp(-138, -112, ask)], bendL: 10, lprop: { kind: 'cap', big: true }, rh: [lerp(30, 44, ask), lerp(-84, -110, ask)], bendR: -10,
+      gus.pose = { lh: [-30, lerp(-104, -100, ask)], bendL: 10, lprop: { kind: 'cap', big: true }, rh: [lerp(30, 44, ask), lerp(-84, -110, ask)], bendR: -10,
         brows: t < 4.45 ? 'worried' : 'up', mouth: t < 4.45 ? 'frown' : 'flat', look: [1, -.1], turn: .3, blink: blink(t, 1), ...(talk('gus', t) ?? {}) }; } },
   { t0: 6.3, t1: VB ? 11.0 : 11.0, name: 'tube',   // Nana holds up the clear tube with its THROAT tag: "Pretend this tube is a throat."
-    cam: u => ({ pos: LV(V(.2, 1.2, 1.15), V(.2, 1.2, 1.05), ss(u / 4.7)), look: V(.2, 1.12, -.55), fov: 36, focus: 1.65, aper: 45 }),
+    cam: u => { const P = nanaPt(-26, -126); return { pos: P.clone().add(V(.02, .04, 2.3 - .1 * ss(u / 4.7))), look: P, fov: 38, focus: 2.2, aper: 45 }; },
     set(t) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
       const up = eo(seg(t, 6.3, 6.6)), pt = ei(seg(t, 6.9, 7.2));
-      nana.pose = { lh: [GRIP_SIDE[0], lerp(-70, GRIP_SIDE[1], up)], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t }, rh: [lerp(30, -14, pt), lerp(-76, -112, pt)], bendR: -16,
+      nana.pose = { armsFront: true, lh: [GRIP_SIDE[0], lerp(-70, GRIP_SIDE[1], up)], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t }, rh: [lerp(30, -30, pt), lerp(-76, -118, pt)], bendR: -16,
         brows: 'neutral', mouth: 'smile', look: [-.3, -.1], turn: -.1, blink: blink(t, 2), ...(talk('nana', t) ?? {}) }; } },
   ...(VB ? [{ t0: 11.0, t1: 12.2, name: 'tape',   // B: the cap, wrapped in a band of clear tape so it fits the tube snugly (close on her hand)
-    cam: u => { const P = nanaPt(-20, -152); return { pos: P.clone().add(V(0, 0, .42 - .03 * ss(u / 1.2))), look: P, fov: 34, focus: .42, aper: 30 }; },
+    cam: u => { const P = nanaPt(6, -142); return { pos: P.clone().add(V(0, .02, .9 - .04 * ss(u / 1.2))), look: P, fov: 34, focus: .9, aper: 30 }; },
     set(t) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
-      nana.pose = { lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t }, rh: [-20, -142], bendR: -16, rprop: { kind: 'cap', tape: true, ang: Math.sin(t * 5) * .12 },
+      nana.pose = { armsFront: true, lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t }, rh: [8, -118], bendR: -16, rprop: { kind: 'cap', tape: true, ang: Math.sin(t * 5) * .12 },
         brows: 'neutral', mouth: 'smile', look: [-.5, -.4], turn: -.1, ...(talk('nana', t) ?? {}) }; } }] : []),
   { t0: VB ? 12.2 : 11.0, t1: 13.4, name: 'drop',   // both: Nana drops the cap into the tube; it sticks at the narrow part; Gus jumps
-    cam: u => ({ pos: LV(V(.05, 1.3, 1.65), V(.05, 1.3, 1.55), ss(u / 2.4)), look: V(.05, 1.12, -.5), fov: 40, focus: 2.1, aper: 50 }),
-    set(t) { gus.visible = nana.visible = true; gus.pos.copy(G0); nana.pos.copy(N0);
-      const tD = 12.1, fall = clamp((t - tD) / .28), capY = t < tD ? null : lerp(TUBE_TOP - 18, TUBE_WAIST, fall * fall) - (fall >= 1 ? 1.5 * Math.exp(-(t - tD - .28) * 14) * Math.sin((t - tD - .28) * 40) : 0);
+    cam: u => ({ pos: LV(V(-.05, 1.3, 1.75), V(-.05, 1.3, 1.65), ss(u / 2.4)), look: V(-.05, 1.15, -.5), fov: 42, focus: 2.2, aper: 50 }),
+    set(t) { gus.visible = nana.visible = true; gus.pos.set(-.45, 0, -.55); nana.pos.copy(N0);
+      const tD = 12.1, fall = clamp((t - tD) / .28), capY = t < tD ? null : lerp(TUBE_TOP - 40, TUBE_WAIST, fall * fall) - (fall >= 1 ? 1.5 * Math.exp(-(t - tD - .28) * 14) * Math.sin((t - tD - .28) * 40) : 0);
       const lift = ei(seg(t, VB ? 12.2 : 11.1, (VB ? 12.2 : 11.1) + .35));
-      nana.pose = { lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY, tape: VB }, rh: [lerp(-20, -38, lift), lerp(-142, -172, lift)], bendR: -16,
+      nana.pose = { armsFront: true, lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY, tape: VB }, rh: [lerp(8, GRIP_SIDE[0], lift), lerp(-118, -185, lift)], bendR: -16,
         rprop: t < tD ? { kind: 'cap', big: true, tape: VB } : null, brows: 'neutral', mouth: 'flat', look: [-.4, -.6], turn: -.15, blink: blink(t, 2), ...(talk('nana', t) ?? {}) };
-      if (t >= tD) Object.assign(nana.pose, { rh: [lerp(-38, -12, ei(seg(t, tD + .3, tD + .7))), lerp(-172, -110, ei(seg(t, tD + .3, tD + .7)))] });
+      if (t >= tD) Object.assign(nana.pose, { rh: [lerp(GRIP_SIDE[0], 20, ei(seg(t, tD + .3, tD + .7))), lerp(-185, -100, ei(seg(t, tD + .3, tD + .7)))] });
       const jump = t > 12.4 && t < 12.85 ? Math.sin((t - 12.4) / .45 * Math.PI) : 0;
       gus.pose = { lh: [-34, -84], rh: [34, -84], bendL: 10, bendR: -10, lprop: null, brows: t > 12.4 ? 'shock' : 'up', mouth: t > 12.4 ? 'o' : 'flat', open: .5, look: [1, -.4], turn: .3, bob: -jump * 14, sq: 1 + jump * .05, blink: blink(t, 1) };
       if (jump > 0) Object.assign(gus.pose, { lh: [-46, -146], rh: [46, -146] }); } },
   { t0: 13.4, t1: 15.4, name: 'stuck',   // close on the tube: "…it can get stuck here."
-    cam: u => { const P = nanaPt(GRIP_SIDE[0], GRIP_SIDE[1] + TUBE_WAIST); return { pos: P.clone().add(V(0, .01, .5 - .04 * ss(u / 2))), look: P, fov: 34, focus: .5, aper: 30 }; },
+    cam: u => { const P = nanaPt(GRIP_SIDE[0] - 4, GRIP_SIDE[1] + TUBE_WAIST - 8); return { pos: P.clone().add(V(0, .01, 1.05 - .05 * ss(u / 2))), look: P, fov: 34, focus: 1.05, aper: 30 }; },
     set(t) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
-      nana.pose = { lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: VB }, rh: [-12, -110], bendR: -16, brows: 'neutral', mouth: 'flat', look: [-.4, -.4], turn: -.15, ...(talk('nana', t) ?? {}) }; } },
+      nana.pose = { armsFront: true, lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: VB }, rh: [20, -100], bendR: -16, brows: 'neutral', mouth: 'flat', look: [-.4, -.4], turn: -.15, ...(talk('nana', t) ?? {}) }; } },
   { t0: 15.4, t1: 17.5, name: 'blow',   // A: she lifts the tube to her mouth and blows · B: she switches on a mini fan under the tube
     cam: u => ({ pos: LV(V(.2, 1.28, 1.35), V(.2, 1.28, 1.25), ss(u / 2.1)), look: V(.2, 1.2, -.55), fov: 36, focus: 1.85, aper: 45 }),
     set(t) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
       const air = clamp((t - 16.95) / .2);
       if (!VB) {
         const lift = ei(seg(t, 16.45, 16.9)), g = [lerp(GRIP_SIDE[0], GRIP_MOUTH[0], lift), lerp(GRIP_SIDE[1], GRIP_MOUTH[1], lift)];
-        nana.pose = { armsFront: lift > .5, lh: g, bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, air }, rh: [30, -76], bendR: -12, brows: 'neutral', mouth: 'flat', look: [-.3, -.2], turn: -.1, blink: blink(t, 2), ...(talk('nana', t) ?? {}) };
+        nana.pose = { armsFront: true, lh: g, bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, air }, rh: [30, -76], bendR: -12, brows: 'neutral', mouth: 'flat', look: [-.3, -.2], turn: -.1, blink: blink(t, 2), ...(talk('nana', t) ?? {}) };
         if (t > 16.9) Object.assign(nana.pose, { mouth: 'o', open: .1, sq: 1.02, brows: 'up' });
       } else {
         const fan = ei(seg(t, 16.3, 16.75));
-        nana.pose = { lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: true, air }, rh: [lerp(30, GRIP_SIDE[0], fan), lerp(-76, GRIP_SIDE[1] + 30, fan)], bendR: -14,
+        nana.pose = { armsFront: true, lh: [...GRIP_SIDE], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: true, air }, rh: [lerp(30, GRIP_SIDE[0], fan), lerp(-76, GRIP_SIDE[1] + 36, fan)], bendR: -14,
           rprop: fan > 0 ? { kind: 'fan', on: t > 16.95, spin: t * 30 } : null, brows: 'neutral', mouth: 'flat', look: [-.4, .3], turn: -.1, blink: blink(t, 2), ...(talk('nana', t) ?? {}) };
       } } },
   { t0: 17.5, t1: 20.0, name: 'air',   // close on the tube: air squeezes through the cap's hole; the paper strip at the top flutters
-    cam: u => { const g = VB ? GRIP_SIDE : GRIP_MOUTH, P = nanaPt(g[0], g[1] + (TUBE_WAIST + TUBE_TOP - 12) / 2); return { pos: P.clone().add(V(0, .01, .78 - .04 * ss(u / 2.5))), look: P, fov: 34, focus: .78, aper: 30 }; },
+    cam: u => { const g = VB ? GRIP_SIDE : GRIP_MOUTH, P = nanaPt(g[0] - 4, g[1] + (TUBE_WAIST + TUBE_TOP - 20) / 2); return { pos: P.clone().add(V(0, .01, 1.2 - .05 * ss(u / 2.5))), look: P, fov: 34, focus: 1.2, aper: 30 }; },
     set(t) { gus.visible = false; nana.visible = true; nana.pos.copy(N0);
       const pr = { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: VB, air: 1 };
-      nana.pose = VB ? { lh: [...GRIP_SIDE], bendL: 14, lprop: pr, rh: [GRIP_SIDE[0], GRIP_SIDE[1] + 30], bendR: -14, rprop: { kind: 'fan', on: true, spin: t * 30 }, brows: 'neutral', mouth: 'flat', look: [-.4, -.6], turn: -.1 }
+      nana.pose = VB ? { armsFront: true, lh: [...GRIP_SIDE], bendL: 14, lprop: pr, rh: [GRIP_SIDE[0], GRIP_SIDE[1] + 36], bendR: -14, rprop: { kind: 'fan', on: true, spin: t * 30 }, brows: 'neutral', mouth: 'flat', look: [-.4, -.6], turn: -.1 }
         : { armsFront: true, lh: [...GRIP_MOUTH], bendL: 14, lprop: pr, rh: [30, -76], bendR: -12, brows: 'up', mouth: 'o', open: .1, sq: 1.02, look: [-.2, -.8], turn: -.1 }; } },
   { t0: 20.0, t1: 23.3, name: 'hole',   // the answer, held still: the hole in a real cap, an arrow at it
     cam: () => ({ pos: HOLE0.clone().add(V(.02, .06, .075)), look: HOLE0.clone().add(V(0, -.012, 0)), fov: 34, focus: .1, aper: 26 }),
@@ -148,7 +148,7 @@ const SHOTS = [
         brows: t < 25.3 ? 'worried' : 'neutral', mouth: 'flat', look: t < 25.3 ? [-.8, .3] : [1, -.1], turn: t < 25.3 ? -.15 : .3, blink: blink(t, 1), ...(talk('gus', t) ?? {}) };
       if (t > 25.9) Object.assign(gus.pose, { lh: [-12, -88], mouth: talk('gus', t) ? gus.pose.mouth : 'smile' });
       const nod = t > 26.85 && t < 28.6 ? Math.sin((t - 26.85) * 9) : 0;
-      nana.pose = { lh: [-34, -80], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: VB, ang: .5 }, rh: [30, -76], bendR: -12,
+      nana.pose = { armsFront: true, lh: [-34, -80], bendL: 14, lprop: { kind: 'throat', tagSide: -1, t, capY: TUBE_WAIST, tape: VB, ang: .5 }, rh: [30, -76], bendR: -12,
         brows: 'neutral', mouth: 'smile', look: [-.9, .05 + nod * .35], turn: -.3, bob: Math.abs(nod) * 1.5, blink: blink(t, 2.6), ...(talk('nana', t) ?? {}) }; } },
 ];
 const shotAt = t => SHOTS.find(s => t >= s.t0 && t < s.t1) ?? SHOTS[SHOTS.length - 1];
@@ -161,7 +161,7 @@ function setProps(t, S) {
 
 // —— overlays ——
 function proj(P) { const p = P.clone().project(camera); return [(p.x + 1) / 2 * W, (1 - p.y) / 2 * H]; }
-function words(lines, t, t0, t1, y = H * .2, size = 104) {   // the one text layer: a headline or a label, slammed in, held, gone
+function words(lines, t, t0, t1, y = H * .14, size = 104) {   // the one text layer: a headline or a label, slammed in, held, gone
   if (t < t0 || t >= t1) return;
   const k = t - t0, s = k < .09 ? lerp(1.08, 1, ei(clamp(k / .09))) : 1 + .02 * Math.exp(-(k - .18) * 8) * Math.cos((k - .18) * 30), out = clamp((t1 - t) / .12);
   og.save(); og.translate(W / 2, y); og.scale(s, s); og.globalAlpha = out; og.rotate(-.02);
