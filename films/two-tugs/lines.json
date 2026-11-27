@@ -57,14 +57,14 @@
  },
  {
   "id": "v10",
-  "text": "Two metres. Stopped.",
+  "text": "It stopped two metres out. Each tug pulls sixty tonnes.",
   "voice": "am_michael",
   "speed": 0.95,
-  "asr": "2 meters stopped."
+  "asr": "It stopped 2 meters out. Each tug pulls 60 tons."
  },
  {
   "id": "v11",
-  "text": "Red or blue: who did more?",
+  "text": "Red or blue? Next: tunnel or bridge.",
   "voice": "am_michael",
   "speed": 0.95
  }

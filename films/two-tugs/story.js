@@ -1,7 +1,7 @@
 // Two Tugs, One Giant Ship — one timeline (film seconds). The ship drifts toward the quay; two tugs on lines hold it off.
 import { clamp, seg, lerp, eio, monotone } from '/core/lib.js';
 
-export const DUR = 30.5;
+export const DUR = 32.4;
 export const SHIP = { x: 60, len: 184, beam: 28, half: 14 };
 export const QZ = 792;   // the quay edge
 // distance (m) from the quay edge to the ship's side at the bow and at the stern
@@ -31,8 +31,8 @@ export const VO = [
   { id: 'v7', t: 17.2, text: 'Blue is back on.' },
   { id: 'v8', t: 19.4, text: 'Both of you. Full power!' },
   { id: 'v9', t: 22.6, text: 'Four metres… three…' },
-  { id: 'v10', t: 25.6, text: 'Two metres. Stopped.' },
-  { id: 'v11', t: 27.2, text: 'Red or blue: who did more?' },
+  { id: 'v10', t: 25.6, text: 'It stopped two metres out. Each tug pulls sixty tonnes.' },
+  { id: 'v11', t: 29.55, text: 'Red or blue? Next: tunnel or bridge.' },
 ];
 export const SHOTS = [
   { id: 'open', t0: 0, t1: 2.5 }, { id: 'race', t0: 2.5, t1: 8 }, { id: 'pull', t0: 8, t1: 11.5 }, { id: 'snap', t0: 11.5, t1: 14 },

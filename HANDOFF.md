@@ -140,3 +140,11 @@ From ideas/pocket-city.md #6, series **Will It Survive? #1**. Planned (not built
 | All Green | Close → Pull-out (car at the lens) | the pink car racing into the junction under a green light, ~40% of height, sharp; pull-up 1.15–1.85 s | EVERY LIGHT / IS GREEN | "Every light turned green. Engine 9 is trapped." (horn on frame 0) |
 | Two Tugs | Chase → Reveal (hero from behind) | the red tug from behind and low, bow wash, the giant ship ahead; pull-out 1.15–1.9 s to the high view of ship + quay | THIS SHIP / WON'T STOP | "This giant ship won't stop. Pick a tug!" (ship horn on frame 0) |
 Rules applied: HUD fades in at 1.0 s, map/meters ≥ 1.8 s; first 2 s nearly sharp (`sharp(t)` band + low aperture), music enters after 0.4 s, loop seam dives back to the frame-0 shot in the last 0.55 s.
+
+### Skeletons (CONTENT_PLAYBOOK.md on `ideas`; rotate, never twice in a row)
+| Film | Skeleton | Twist (~55%) | Payoff line | Last line / next |
+|---|---|---|---|---|
+| Storm Surge | Checklist race | (none) | "It held." | question |
+| All Green | One rule changed | (weak: the untangle runs backwards) | "Gridlock starts with one car stuck in a junction." | question (playbook applied only to the opening; render was under way) |
+| Two Tugs | Pick a side | blue's line snaps (37%), then the sailboat forces red to let go (45–60%) | "It stopped two metres out. Each tug pulls sixty tonnes." | "Red or blue? Next: tunnel or bridge." |
+Next film: Tunnel or Bridge? (re-ranked #2): use a different skeleton from Pick a Side if possible, e.g. "Result first" or "Chain reaction".
