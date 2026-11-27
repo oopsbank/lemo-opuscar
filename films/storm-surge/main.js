@@ -141,7 +141,7 @@ function drawOverlay(t) {
   }
 }
 
-window.DUR = DUR;
+window.DUR = DUR; window.SCENE = scene;
 window.render = (t) => {
   t = clamp(t, 0, DUR - 1e-4);
   U.time.value = elapsed(t) / 60 + t * .4;         // cloud shadows drift with the clock (and a little with film time)

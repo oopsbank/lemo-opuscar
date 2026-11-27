@@ -139,7 +139,7 @@ function drawOverlay(t) {
   }
 }
 
-window.DUR = DUR;
+window.DUR = DUR; window.SCENE = scene;
 window.render = (t) => {
   t = clamp(t, 0, DUR - 1e-4);
   U.time.value = t * 1.5;
