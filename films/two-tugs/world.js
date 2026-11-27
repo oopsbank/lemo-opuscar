@@ -305,7 +305,12 @@ export function buildWorld(scene, opts = {}) {
   // water: sea and canal (turquoise, sky-reflective, slight ripple normal from noise)
   const waterMat = patchCloud(new THREE.MeshStandardMaterial({ color: '#3f97a6', roughness: .14, metalness: .1 }), `
     { float n = c_n(vWP.xz * .12 + uTime * .3) * .5 + c_n(vWP.xz * .5 - uTime * .5) * .5; diffuseColor.rgb *= .86 + .26 * n;
-      float deep = smoothstep(${QUAY.edge.toFixed(1)}, ${(QUAY.edge + 260).toFixed(1)}, vWP.z); diffuseColor.rgb = mix(diffuseColor.rgb, vec3(.07,.42,.58), deep * .7); }`); waterMat.defines = { NOSNOW: '' };
+      float deep = smoothstep(${QUAY.edge.toFixed(1)}, ${(QUAY.edge + 260).toFixed(1)}, vWP.z); diffuseColor.rgb = mix(diffuseColor.rgb, vec3(.07,.42,.58), deep * .7);
+      // golden-hour ripples: darker troughs and bright glints, so open water is never a flat sheet
+      float rp = c_n(vWP.xz * vec2(.55, 1.6) + vec2(uTime * .25, -uTime * .4)) * .6 + c_n(vWP.xz * vec2(1.4, 3.6) - uTime * .7) * .4;
+      diffuseColor.rgb *= .84 + .3 * smoothstep(.3, .7, rp);
+      float gl = pow(max(0., c_n(vWP.xz * vec2(.7, 1.8) + uTime * .5) - .68) / .32, 3.);
+      diffuseColor.rgb += vec3(1., .86, .6) * gl * .7 * uLit; }`); waterMat.defines = { NOSNOW: '' };
   const sea = new THREE.Mesh(new THREE.PlaneGeometry(4000, 3000), waterMat); sea.rotation.x = -Math.PI / 2; sea.position.set(0, -.9, QUAY.edge + 1500); sea.receiveShadow = true; scene.add(sea);
   const canal = new THREE.Mesh(new THREE.PlaneGeometry(EXT.x1 - EXT.x0 + 600, CANAL.z1 - CANAL.z0), waterMat); canal.rotation.x = -Math.PI / 2; canal.position.set(0, CANAL.y + .2, (CANAL.z0 + CANAL.z1) / 2); canal.receiveShadow = true; scene.add(canal);
   // far hills beyond the town (north, west, east) so the horizon isn't a hard edge

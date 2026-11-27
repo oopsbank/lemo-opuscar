@@ -54,6 +54,15 @@ export function makeShip(scene) {
   const PC = ['#e8463a', '#2f6fd0', '#f4f1ea', '#f2b72e', '#3f9a5a', '#e27fb0', '#1f2a3a', '#8bc6e8', '#f07f2c'], rnd = mulberry(4);
   for (let i = 0; i < n; i++) { M.compose(P.set(-70 + rnd() * 120, WL + 28, (rnd() < .5 ? -1 : 1) * (B / 2 - 3.5 - rnd() * 1.2)), Q.identity(), Sc.set(1, 1, 1)); pm.setMatrixAt(i, M); pm.setColorAt(i, C.set(PC[Math.floor(rnd() * PC.length)])); }
   g.add(pm);
+  // deck chairs, parasols and cabanas on the open decks (no bare white roofs)
+  const chairs = [], paras = [], rnd2 = mulberry(12);
+  for (const [x0, x1, y, w] of [[-80, 50, WL + 28.05, B - 9], [30, 70, WL + 25.05, B - 8], [-90, -60, WL + 25.05, B - 8], [62, 78, WL + 22.05, B - 8]]) {
+    for (let x = x0; x < x1; x += 2.2) for (let z = -w / 2; z < w / 2; z += 2.6) { if (rnd2() < .35) continue; if (x > -42 && x < -14 && Math.abs(z) < 5) continue; chairs.push([x, y, z]); if (rnd2() < .18) paras.push([x, y, z]); }
+  }
+  const cm = new THREE.InstancedMesh(new THREE.BoxGeometry(1.8, .35, .8).translate(0, .3, 0), mat('#ffffff'), chairs.length); cm.castShadow = true;
+  chairs.forEach(([x, y, z], i) => { M.compose(P.set(x, y, z), Q.identity(), Sc.set(1, 1, 1)); cm.setMatrixAt(i, M); cm.setColorAt(i, C.set(['#2f6fd0', '#f4f1ea', '#f2b72e', '#d8342a'][i % 4])); }); g.add(cm);
+  const pmm = new THREE.InstancedMesh(new THREE.ConeGeometry(1.4, .5, 8).translate(0, 2.3, 0), mat('#ffffff'), Math.max(1, paras.length)); pmm.castShadow = true;
+  paras.forEach(([x, y, z], i) => { M.compose(P.set(x, y, z), Q.identity(), Sc.set(1, 1, 1)); pmm.setMatrixAt(i, M); pmm.setColorAt(i, C.set(['#d8342a', '#f4f1ea', '#2c9a7a', '#f2b72e'][i % 4])); }); g.add(pmm);
   return { g, draw(t) { const p = shipPose(t); g.position.set(p.x, 0, p.z); g.rotation.y = p.yaw; g.position.y = Math.sin(t * .6) * .08; } };
 }
 

@@ -5,6 +5,7 @@ import { clamp, lerp, seg, ss, eio, eo, ei } from '/core/lib.js';
 import { buildWorld, U } from './world.js';
 import { DUR, T, VO, shotAt, speedAt, dBow, dStern, pullRed, pullBlue, workShare, SHIP, QZ } from './story.js';
 import { makeDressing } from './dressing.js';
+import { makeHarbour } from './harbour.js';
 import { EXCL, makeShip, makeTugs, makeSailboat, makeFoam, makeQuayCrowd, makeCat, shipPoint, shipPose } from './actors.js';
 
 const W = innerWidth || 1080, H = innerHeight || 1920, QS = new URLSearchParams(location.search);
@@ -46,7 +47,7 @@ function setSun(focus, azDeg, elDeg, span) {
 }
 
 buildWorld(scene, { excl: EXCL });
-const dressing = makeDressing(scene);
+const dressing = makeDressing(scene), harbour = makeHarbour(scene);
 const ship = makeShip(scene), tugs = makeTugs(scene), sail = makeSailboat(scene), foam = makeFoam(scene), crowd = makeQuayCrowd(scene);
 const cat = makeCat(scene); ship.g.add(cat); cat.position.set(56, -.9 + 33.1, 3); cat.rotation.y = 1.2;   // asleep on the bridge roof
 scene.traverse(o => { if (o.isInstancedMesh) o.frustumCulled = false; });
@@ -70,14 +71,14 @@ const BOTH = P(V(40, 0, 870), 0, 58, 320, 36);
 const REAL = P(V(66, 0, 797), 282, 30, 115, 33);
 function shotCam(t) {
   const sh = shotAt(t), u = seg(t, sh.t0, sh.t1);
-  let p, subj, band = { w: .07, amp: 36, mix: .68 }, aper = 5600, sunEl = 22, span = 220;
+  let p, subj, band = { w: .1, amp: 26, mix: .62 }, aper = 5600, sunEl = 22, span = 220;
   if (sh.id === 'open') { const tp = tugs.pose.red.pos, CL = P(tp.clone().setY(2), 192, 20, 46, 32); const k = eio(seg(t, 1.15, 1.9)); p = mixP(CL, OPEN2, k); subj = tp.clone().setY(2).lerp(shipPoint(t, 40, 4, SHIP.half), k); span = lerp(60, 200, k); band = sharp(t); aper = lerp(700, 5600, ss(seg(t, 1.6, 2.4))); }
   else if (sh.id === 'race') { p = mixP(OPEN2, RACE, eio(seg(t, 2.5, 4.5))); subj = shipPoint(t, 0, 2, SHIP.half + 30); span = 320; band = { w: .1, amp: 30, mix: .6 }; }
   else if (sh.id === 'pull') { p = mixP(RACE, PULL, eio(seg(t, 8, 9.4))); subj = tugs.pose.red ? tugs.pose.red.pos.clone().setY(1) : V(140, 1, 900); span = 180; }
-  else if (sh.id === 'snap') { p = P(SNAP.look, SNAP.az, SNAP.pitch, SNAP.dist - 10 * eio(u), SNAP.fov); subj = shipPoint(t, -78, 4, SHIP.half + 4); span = 160; band = { w: .065, amp: 38, mix: .7 }; }
+  else if (sh.id === 'snap') { p = P(SNAP.look, SNAP.az, SNAP.pitch, SNAP.dist - 10 * eio(u), SNAP.fov); subj = shipPoint(t, -78, 4, SHIP.half + 4); span = 160; band = { w: .065, amp: 28, mix: .64 }; }
   else if (sh.id === 'sail') { p = P(SAIL.look, SAIL.az, SAIL.pitch, SAIL.dist, SAIL.fov); subj = sail.pos().clone().setY(2); span = 200; }
   else if (sh.id === 'both') { p = mixP(SAIL, BOTH, eio(seg(t, 19, 20.6))); subj = shipPoint(t, 0, 2, SHIP.half + 20); span = 320; band = { w: .1, amp: 30, mix: .6 }; }
-  else if (sh.id === 'real') { p = mixP(BOTH, REAL, eio(seg(t, 21.5, 23))); p.dist *= 1 - .05 * eio(seg(t, 23, 26)); subj = V(66, 1, QZ + 2); span = 160; band = { w: .065, amp: 38, mix: .7 }; aper = 6200; }
+  else if (sh.id === 'real') { p = mixP(BOTH, REAL, eio(seg(t, 21.5, 23))); p.dist *= 1 - .05 * eio(seg(t, 23, 26)); subj = V(66, 1, QZ + 2); span = 160; band = { w: .065, amp: 28, mix: .64 }; aper = 6200; }
   else { p = mixP(REAL, OPEN, eio(seg(t, 27, DUR - .55))); { const d = ei(seg(t, DUR - .55, DUR)); if (d > 0) { const tp = tugs.pose.red.pos; p = mixP(p, P(tp.clone().setY(2), 192, 20, 46, 32), d); } } subj = V(66, 1, QZ + 2).lerp(shipPoint(t, 20, 6, -SHIP.half), eio(seg(t, 27, DUR))); }
   return { pos: orbit(p.look, p.az, p.pitch, p.dist), look: p.look, fov: p.fov, up: V(0, 1, 0), band, aper, sunAz: p.az + 25, sunEl, span, subj };
 }
@@ -143,12 +144,12 @@ window.DUR = DUR; window.SCENE = scene;
 window.render = (t) => {
   t = clamp(t, 0, DUR - 1e-4);
   U.time.value = t * 1.5;
-  ship.draw(t); tugs.draw(t); sail.draw(t); dressing.draw(t, 0, 1e9); crowd.draw(t, gap(t));
+  ship.draw(t); tugs.draw(t); sail.draw(t); dressing.draw(t, 0, 1e9); harbour.draw(t); crowd.draw(t, gap(t));
   const c = shotCam(t);
   if (QS.has('cam')) { const v = QS.get('cam').split(',').map(Number); c.pos = V(v[0], v[1], v[2]); c.look = V(v[3], v[4], v[5]); c.fov = v[6]; c.subj = c.look.clone(); c.span = 400; c.aper = 30000; }
   camera.position.copy(c.pos); camera.up.copy(c.up); camera.lookAt(c.look); camera.fov = c.fov; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
   foam.draw(t, tugs);
-  const dof = post.dof; dof.focus = camera.position.distanceTo(c.subj); dof.aper = c.aper; dof.maxCoc = 34;
+  const dof = post.dof; dof.focus = camera.position.distanceTo(c.subj); dof.aper = c.aper; dof.maxCoc = 26;
   Object.assign(dof.band, { y: clamp(toScreenY(c.subj), .12, .88), w: c.band.w, amp: c.band.amp, mix: c.band.mix });
   if (QS.has('nodof')) dof.maxCoc = 0;
   setSun(c.look, c.sunAz, c.sunEl, c.span);
