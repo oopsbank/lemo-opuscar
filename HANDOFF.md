@@ -192,3 +192,27 @@ AI notes to send with every film (true for this pipeline):
   6. tennis-ball fuzz.
 
   The backlog's rules: one object per film; no vehicles-in-town (Pocket City's lane) and no job comedies (Pixel Life's lane); no UFO/alien or pizza/delivery.
+
+## 9. Opening-type log (retention playbook, ideas/RETENTION_PLAYBOOK.md §6)
+
+Rotate the opening types and never use the previous film's type:
+- (a) Gus mid-wrong-action;
+- (b) Nana stopping him;
+- (c) a macro of the odd detail;
+- (d) result first.
+
+| Film | Opening type | Frame 0 | First line (Gus, ≤ 8 words, from 0.12 s) |
+|---|---|---|---|
+| Golf Dimples | (c) object macro (pre-playbook) | ball ECU + sandpaper, narrator | narrator: "Why do golf balls have dimples?" |
+| Tennis Fuzz | (c) object macro (pre-playbook) | ball ECU + shaver, narrator | narrator: "Why do tennis balls have fuzz?" |
+| Pen Caps | **(a) mid-wrong-action** | Gus CU tooting the cap, hole ringed, headline | "Why do pen caps have a hole?" |
+| Pen Hole (side hole) | **(d) result first** | Gus CU with a blue ink ring, shocked, pen ringed, headline | "Why does my pen have a side hole?" |
+| next | (b) or (c) | | |
+
+Playbook rules now built into every film:
+- **Headline:** one bold line on frame 0 (Baloo 800, ~112 px, y ≈ 380–460), gone by 1.5 s.
+- **Voice:** Gus asks the question himself (no narrator).
+- **Timing:** a second shot by 1.5 s; WRONG by ~5.4 s; "Actually…" by ~6.3 s.
+- **Sound:** a hit on frame 0; the music enters at 0.5 s.
+- **Length:** about 25 s.
+- **Retiming:** the films are blocked on an older clock and retimed with a WARP table in main.js.
