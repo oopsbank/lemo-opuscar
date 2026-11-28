@@ -76,8 +76,8 @@ function leoBack(t, hitK) {
   L.poly([[bx - 62, 320], [bx - 48, by - 10], [bx + 48, by - 12], [bx + 70, 320]], (X, Y) => { const v = (X - bx) / 60; return v > .5 ? C.u1 : v < -.5 ? C.u3 : bayer(X, Y) < .05 ? C.u3 : C.u2; });
   L.cap([[bx - 30, by + 6], [bx + 40, 320]], 4, [C.mustard, C.mustard, C.y2]);   // the strap
   L.rect(bx - 60, by + 30, 26, 44, C.mustard); L.rect(bx - 58, by + 32, 22, 4, C.y2);   // the backpack side
-  const hand = hitK > 0 ? [150 - 4 * (1 - hitK), 170 + 3 * (1 - hitK)] : [bx + 64, by + 40];
-  L.cap([[bx + 40, by + 2], [bx + 76 + (hitK > 0 ? 12 : 0), by - 26 + (hitK > 0 ? 0 : 50)], hand], 9, HOOD);
+  const hand = hitK > 0 ? [164 - 3 * (1 - hitK), 170 + 2 * (1 - hitK)] : [bx + 64, by + 40];
+  L.cap(hitK > 0 ? [[bx + 40, by + 2], [bx + 90, by - 40], [hand[0] - 8, hand[1] + 4]] : [[bx + 40, by + 2], [bx + 76, by + 24], hand], 9, HOOD);
   L.ell(hand[0], hand[1], 7, 6, (nx, ny) => S3(nx, ny, SKIN));
   L.ell(bx, by - 26, 34, 18, (nx, ny) => S3(nx, ny, HOOD));   // the hood bunched on the shoulders
   L.ell(bx + 2, by - 50, 26, 28, (nx, ny) => S3(nx, ny, [C.h1, C.h1, C.h2]));   // the back of his head
@@ -111,22 +111,25 @@ function leoLow(t, up, pry) {
   L.ell(x - 2, y - 146, 12, 12, (nx, ny) => S3(nx, ny, SKIN)); L.rect(x - 9, y - 140, 16, 4, C.s1);   // chin from below, looking up
   L.ell(x - 2, y - 154, 13, 8, (nx, ny, X, Y) => Y < y - 151 ? C.h1 : null);
   L.cap([[x - 24, y - 122], [x - 44, y - 96], [x - 48, y - 70]], 7, HOOD);   // the other hand grips the rail
-  const reach = up > 30, jig = pry ? (step(t, 10) % 2) * 3 : 0, hx = reach ? x + 30 + jig : x + 44, hy = reach ? Math.max(40, y - 210) : y - 76;
+  const reach = up > 30, jig = pry ? (step(t, 12) % 2 ? 6 : -2) : 0, hx = reach ? x + 30 + jig : x + 44, hy = reach ? Math.max(40, y - 210) : y - 76;
   L.cap(reach ? [[x + 24, y - 124], [x + 34, y - 160], [hx, hy + 10]] : [[x + 24, y - 124], [x + 40, y - 100], [hx, hy + 10]], 7, HOOD);
-  L.ell(hx, hy + 6, 6, 6, (nx, ny) => S3(nx, ny, SKIN)); L.rect(hx - 1, hy - 12, 3, 16, C.w4); L.rect(hx - 2, hy + 2, 5, 6, C.r2);   // the screwdriver
+  L.ell(hx, hy + 6, 6, 6, (nx, ny) => S3(nx, ny, SKIN)); L.rect(hx - 1, hy - 20 + (pry ? -4 : 0), 3, 24, C.w4); L.rect(hx, hy - 20 + (pry ? -4 : 0), 1, 24, C.n9); L.rect(hx - 3, hy + 2, 7, 8, C.r2);   // the screwdriver
   L.outline(C.ink); L.over(fb);
 }
 // top-down on the cabin roof (shot 5); 'throw' raises the arm
 function leoTop(t, x, y, pose) {
   const L = layer();
-  L.rect(x - 8, y + 2, 16, 12, C.mustard); L.rect(x - 7, y + 3, 14, 2, C.y2);
-  L.ell(x, y, 13, 8, (nx, ny) => S3(nx, ny, HOOD));
-  const ax = pose === 'throw' ? x + 10 : x + 13, ay = pose === 'throw' ? y - 22 : y + 6;
-  L.cap([[x - 11, y], [x - 15, y + 8]], 4, HOOD); L.cap([[x + 11, y], [ax, ay]], 4, HOOD); L.ell(ax, ay, 3, 3, (nx, ny) => S3(nx, ny, SKIN));
-  L.ell(x, y - 3, 7, 7, (nx, ny) => nx + ny < -.6 ? C.h2 : C.h1);
-  L.outline(C.ink); L.over(fb); return [ax, ay];
+  L.rect(x - 12, y + 3, 24, 18, C.mustard); L.rect(x - 10, y + 5, 20, 3, C.y2);
+  L.ell(x, y, 19, 12, (nx, ny) => S3(nx, ny, HOOD));
+  let ax = x + 19, ay = y + 9;   // the throwing hand
+  if (pose === 'windup') { ax = x + 22; ay = y + 22; } else if (pose === 'throw') { ax = x + 14; ay = y - 34; }
+  L.cap([[x - 16, y], [x - 22, y + 12]], 6, HOOD); L.cap([[x + 16, y], [(x + 16 + ax) / 2 + 4, (y + ay) / 2], [ax, ay]], 6, HOOD); L.ell(ax, ay, 4.5, 4.5, (nx, ny) => S3(nx, ny, SKIN));
+  L.ell(x, y - 4, 11, 11, (nx, ny) => nx + ny < -.6 ? C.h2 : C.h1);
+  for (const [a, b] of [[-6, -14], [2, -16], [8, -12]]) L.poly([[x + a - 3, y - 10], [x + a + 3, y - 10], [x + a, y + b]], C.h1);
+  L.outline(C.ink); L.over(fb);
+  if (pose === 'throw') for (let k = 0; k < 10; k++) { const u = k / 10, px = lerp(x + 22, ax, u) + Math.sin(u * Math.PI) * 10, py = lerp(y + 22, ay, u); fb.px(px, py, C.n8); }   // the swing arc
+  return [ax, ay];
 }
-
 // ———————————————— the cabin (front view) ————————————————
 function cabinFront(t, o) {
   fb.rect(0, 0, W, H, C.w1);
@@ -158,7 +161,8 @@ window.render = t => {
     const y = t < TT.slam ? lerp(258, 158, fl) + Math.sin(t * 9) * 2 : lerp(158, 258, slam);
     leoFront(t, 90, Math.round(y), t < TT.slam + .12 ? (t > TT.floatA ? 'float' : 'stand') : 'slam');
     handrail(step(t, 24) % 2);
-    sh = t < TT.slam ? 3 : t < TT.slam + .5 ? 5 * (1 - seg(t, TT.slam, TT.slam + .5)) + 2 : 2;
+    for (let k = 0; k < 8; k++) sparks(166, 104, t, k * .45, 18, 40);
+    sh = t < TT.slam ? 5 : t < TT.slam + .5 ? 8 * (1 - seg(t, TT.slam, TT.slam + .5)) + 3 : 3;
     banner(['WARNING:', 'CABLE SNAP - FREE FALL'], 54, C.r3, step(t, 4) % 2 ? C.r3 : C.r1);
     if (step(t, 8) % 2 === 0) lut = LUTS.red;
     voBox(TL.vo[0], t);
@@ -241,9 +245,9 @@ window.render = t => {
     fb.rect(0, wl, W, H - wl, (x, y) => y === wl ? (Math.sin(x * .4 + t * 6) > .3 ? C.rain3 : C.rain2) : bayer(x, y) < .12 ? C.rain2 : C.rain1);
     for (let i = 0; i < 7; i++) { const ex = 12 + i * 24 + Math.round(Math.sin(t * 1.5 + i) * 4), ey = wl + 6 + (i % 3) * 12 + Math.round(Math.sin(t * 2 + i * 2) * 2), op = step(t + i * .3, 1.2) % 5 !== 0; if (op) { fb.rect(ex, ey, 3, 2, C.eye); fb.rect(ex + 6, ey, 3, 2, C.eye); } }
     if (t > TT.climb) for (let i = 0; i < 4; i++) { const hx = 40 + i * 32, r = ss(TT.climb + i * .4, TT.climb + 1.2 + i * .4, t), top = wl - 14 * r - Math.sin(t * 5 + i) * 4; fb.cap([[hx, wl + 4], [hx + 3, top]], 3, [C.v1, C.v1, C.v2]); for (let k = 0; k < 3; k++) fb.px(hx - 2 + k * 2, top - 3, C.eye); }
-    for (const p of TT.pry) sparks(110, 26, t, p, 6, 10, [C.w4, C.y4, C.n9]);
+    for (const p of TT.pry) { sparks(110, 26, t, p + .25, 12, 34, [C.w4, C.y5, C.n9]); const a = t - p - .25; if (a > 0 && a < .7) { fb.rect(110 + a * 40, 26 + a * a * 200, 2, 2, C.w4); } }
     if (popped) lut = LUTS.blue;
-    banner(['OXYGEN: 35% - FLOODING'], 58, C.r3, C.r3, t >= TT.oxygen && step(t, 3) % 2 === 0);
+    banner(['OXYGEN: ' + Math.round(lerp(35, 15, seg(t, TT.oxygen, 39.5))) + '% - FLOODING'], 58, C.r3, step(t, 3) % 2 ? C.r3 : C.r1, t >= TT.oxygen);
     voBox(TL.vo[1], t);
     sh = t >= TT.pop && t < TT.pop + .3 ? 3 : t >= TT.hatch && t < TT.hatch + .3 ? 2 : 0;
   } else if (shot.id === 'shaft') {
@@ -271,9 +275,9 @@ window.render = t => {
       Ls.rect(sx - 5, sy + 28, 2, 4, C.eye); Ls.rect(sx + 3, sy + 28, 2, 4, C.eye);   // fangs
       Ls.outline(C.ink); Ls.over(fb);
     }
-    const pose = t >= TT.flareLit && t < TT.throw + .25 ? 'throw' : 'stand', [hx, hy] = leoTop(t, 84, 236, pose);
+    const pose = t >= TT.throw - .05 && t < TT.throw + .35 ? 'throw' : t >= TT.throw - .45 && t < TT.throw - .05 ? 'windup' : 'stand', [hx, hy] = leoTop(t, 84, 238, pose);
     // the flare: lit in his hand, thrown, a red burst
-    if (t >= TT.flareLit && t < TT.throw) { fb.ell(hx, hy, 26, 26, (nx, ny, x, y) => bayer(x, y) < .4 * (1 - nx * nx - ny * ny) * (.7 + .3 * (step(t, 12) % 2)) ? C.ph1 : null); fb.rect(hx - 1, hy - 7, 3, 7, C.r2); fb.rect(hx - 1, hy - 9, 3, 3, C.ph2); }
+    if (t >= TT.flareLit && t < TT.throw + .05) { fb.ell(hx, hy, 26, 26, (nx, ny, x, y) => bayer(x, y) < .4 * (1 - nx * nx - ny * ny) * (.7 + .3 * (step(t, 12) % 2)) ? C.ph1 : null); fb.rect(hx - 1, hy - 7, 3, 7, C.r2); fb.rect(hx - 1, hy - 9, 3, 3, C.ph2); }
     if (t >= TT.throw && t < TT.hit) { const u = seg(t, TT.throw, TT.hit), fx = lerp(hx, sx, u), fy = lerp(hy, sy + 20, u); for (let k = 0; k < 8; k++) fb.px(lerp(hx, fx, k / 8), lerp(hy, fy, k / 8), k % 2 ? C.ph1 : C.ph2); fb.ell(fx, fy, 3, 3, C.ph2); fb.ell(fx, fy, 14, 14, (nx, ny, x, y) => bayer(x, y) < .35 * (1 - nx * nx - ny * ny) ? C.ph1 : null); }
     if (t >= TT.hit) { sparks(sx, sy + 20, t, TT.hit, 30, 60, [C.ph2, C.ph1, C.y5]); if (t < TT.hit + .1) fb.rect(0, 0, W, H, (x, y) => bayer(x, y) < .5 ? C.ph2 : null); }
     if (t >= TT.hit && t < TT.hit + 2.4) bigText('CRITICAL HIT!', 90, Math.round(100 - seg(t, TT.hit, TT.hit + 2.4) * 20), y => y < 3 ? C.y5 : y < 5 ? C.y4 : C.ph1, C.ink);

@@ -1,5 +1,5 @@
 [
- {"id": "v1", "text": "No, no, no! Not tonight!", "voice": "am_liam", "speed": 1.1},
- {"id": "v2", "text": "Up! Gotta reach the roof hatch!", "voice": "am_liam", "speed": 1.05},
- {"id": "v3", "text": "Wait... I never left?", "voice": "am_liam", "speed": 0.85}
+ {"id": "v1", "text": "No! No, no, no! Not tonight!", "voice": "am_liam", "speed": 1.25},
+ {"id": "v2", "text": "Up! Gotta reach... the roof hatch!", "voice": "am_liam", "speed": 1.2},
+ {"id": "v3", "text": "Wait... I never left?", "voice": "am_liam", "speed": 0.8}
 ]
