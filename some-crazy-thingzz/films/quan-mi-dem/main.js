@@ -367,8 +367,8 @@ shot(27.2, 31, 'inspect', t => ({ pos: V(.06, 1.32, .4), look: V(.05, 1.3, -.5),
 shot(31, 34, 'nod', t => ({ pos: V(2.5, 1.75, 1.9), look: V(.2, 1.75, .25), fov: 42, focus: 2.8, aper: 3 }));
 shot(34, 36.6, 'toss', t => ({ pos: V(-.85, 1.72, .7), look: V(.02, 1.78, -.45), fov: 52, focus: 1.45, aper: 3 }));
 shot(36.6, 39.2, 'land', t => ({ pos: PREP.clone().add(V(.25, .42, .5)), look: PREP.clone().add(V(0, .05, 0)), fov: 36, focus: .7, aper: 10 }));
-shot(39.2, 42.2, 'ladle', t => ({ pos: V(-.4, 1.55, .5), look: V(-.42, 1.15, -.14), fov: 40, focus: .75, aper: 10 }));
-shot(42.2, 44.8, 'jar', t => ({ pos: V(.12, 1.25, .38), look: V(.1, 1.2, -.12), fov: 36, focus: .5, aper: 12 }));
+shot(39.2, 42.2, 'ladle', t => ({ pos: V(-.22, 1.8, .85), look: V(-.32, 1.25, -.12), fov: 50, focus: 1.15, aper: 5 }));
+shot(42.2, 44.8, 'jar', t => ({ pos: V(.26, 1.45, .58), look: V(.1, 1.22, -.2), fov: 44, focus: .85, aper: 7 }));
 shot(44.8, 47.4, 'seed', t => ({ pos: PREP.clone().add(V(.15, .36, .38)), look: PREP.clone().add(V(0, .06, 0)), fov: 34, focus: .55, aper: 12 }));
 shot(47.4, 50.2, 'glow', t => ({ pos: V(.2, 1.2, .75 - .1 * seg(t, 47.4, 50)), look: V(.0, 1.3, -.4), fov: 40, focus: 1.15, aper: 8 }));
 shot(50.2, 63.2, 'ots', t => { const k = ss(seg(t, 56, 59)); return { pos: V(-.5, 1.65 + .1 * k, -.7), look: V(.25, 1.95 + .35 * k, 1.1), fov: 50 + 4 * k, focus: 1.95, aper: 5 }; });
