@@ -50,7 +50,7 @@ const PR = (s, x, y = 0) => { const cyc = COMB_TOP - COMB_BOT; let si = COMB_BOT
 const T = { suck: 2.3, frz0: 3.25, frz1: 4.0, aglet: 4.55, catch: 5.15, rub2: 6.0, pat: 6.45,
   board: 20.5, slip: 23.0, hop: 25.0, lean: 25.8, giggle: 26.6, squeeze: 27.6, bite: 30.9, bite2: 31.6, fight: 33.0, momUp: 35.0, boots: 35.6,
   teeth: 37.0, turn: 39.0, mono: 39.6, crack: 42.0, jump: 42.25, button: 44.0, stop: 44.1, run: 46.0, pull: 46.9, sploink: 48.0, land: 48.9,
-  truth1: 50.6, truth2: 53.2, blup: 56.4, soft: 57.0, tear: 61.0, spray: 62.6, morning: 65.0, flip: 66.9, stare: 68.9, cam: 69.7, loop: 71.0 };
+  truth1: 50.6, truth2: 53.2, blup: 56.4, soft: 57.0, tear: 60.5, spray: 63.3, morning: 65.0, flip: 66.9, stare: 68.9, cam: 69.7, loop: 71.0 };
 const VEL = .85;
 // escalator offset: frozen during the freeze frame, halts at the red button, runs again next morning
 function offAt(t) {
@@ -182,7 +182,7 @@ mesh(new THREE.CircleGeometry(3.2, 40).rotateX(-Math.PI / 2), phys('#8fc9e8', { 
 for (const [x, z, s, c] of [[5.5, -10, 1.3, '#f58fb6'], [-7.8, -4, 1.0, '#7ad6c9'], [7.5, -3, .8, '#f5b56e']]) mesh(new THREE.SphereGeometry(s, 24, 16), phys(c, { roughness: .35, clearcoat: .5 }), V(x, s * .5 - .3, z)).scale.set(1, .6, 1);
 
 // the billboard above the top of the escalator — and the X sprayed over it later
-const BB = V(0, 21.5, AC.z + AR - 4.6);
+const BB = V(0, 24.2, AC.z + AR - 4.6);
 function drawDuke(g, x, y, s) {   // a little Duke for posters: black patent oxford, monocle, a wink
   g.save(); g.translate(x, y, s > 0 ? 0 : 0); g.scale(s, s);
   g.fillStyle = '#0d0d12'; g.beginPath(); g.ellipse(0, 0, 150, 62, 0, 0, Math.PI * 2); g.fill(); g.fillRect(-150, 10, 70, 48);
@@ -272,8 +272,8 @@ const sqBody = new THREE.Group(); SQ.add(sqBody);   // squash & stretch here
 const sqToe = new THREE.Group(); sqToe.position.set(0, 0, -.26); sqBody.add(sqToe);   // the whole clog hangs from its heel so it can stretch toe-first (taffy)
 mesh(shoeGeo(.52, .27, .3, .21, .86, .6), rubber, V(0, .03, .26), sqToe);
 mesh(new THREE.BoxGeometry(.3, .035, .54), phys('#e8c81f', { roughness: .5 }), V(0, .018, .26), sqToe);
-for (let i = 0; i < 8; i++) { const x = ((i % 4) - 1.5) * .06, z = .38 + (i < 4 ? 0 : .07);
-  const h = mesh(new THREE.CircleGeometry(.016, 12), new THREE.MeshBasicMaterial({ color: '#a88f0c' }), V(x, .245 - (i < 4 ? .0 : .03), z), sqToe, false); h.rotation.x = -Math.PI / 2 + (i < 4 ? .5 : .9); }
+for (let i = 0; i < 11; i++) { const r = i < 4 ? 0 : i < 8 ? 1 : 2, x = r === 2 ? ((i - 8) - 1) * .07 : ((i % 4) - 1.5) * .065, z = .36 + r * .065;
+  const h = mesh(new THREE.CircleGeometry(.024, 14), new THREE.MeshBasicMaterial({ color: '#5e4c00' }), V(x, .25 - r * .035, z), sqToe, false); h.rotation.x = -Math.PI / 2 + .5 + r * .3; }
 const strap = mesh(new THREE.TorusGeometry(.13, .02, 10, 24, Math.PI), rubber, V(0, .15, .06), sqToe); strap.rotation.set(0, Math.PI / 2, -.35);
 const sqEyes = [-1, 1].map(s => makeEye(sqBody, V(s * .068, .27, .1), .06, rubber));
 const tear = mesh(new THREE.SphereGeometry(.022, 12, 8), phys('#bfe9ff', { roughness: .02, transmission: .0, transparent: true, opacity: .85, clearcoat: 1 }), V(.1, .26, .16), sqBody, false); tear.visible = false;
@@ -373,17 +373,19 @@ const SHOTS = []; const shot = (t0, t1, name, cam) => SHOTS.push({ t0, t1, name,
 const sD0 = t => sDuke(t);
 // 0–2 ECU at tread level beside the bristles: Duke rubbing his flank on them, the gap beyond
 const ecuCam = (s, x, t) => ({ pos: PX(s + 1.7, x - .15, .2), look: PX(s, x + .05, .24), fov: 34, focus: 1.7, aper: 7 });
-shot(0, 2.0, 'ecu', t => ecuCam(sD0(t), 1.15, t));
+shot(0, 2.0, 'open', t => { const s = sD0(t), k = eo(seg(t, 0, 2)); return { pos: LV(PR(s + 3.2, -.3, 1.9), PR(s + 1.6, .55, 1.05), k), look: LV(PR(s + .2, .9, .25), PR(s, 1.15, .3), k), fov: 44, focus: lerp(3.6, 1.9, k), aper: 4 }; });
 shot(2.0, 4.0, 'snap', t => { const tt = Math.min(t, T.frz0), s = sD0(tt), k = eo(seg(tt, 2.0, 2.2)), sh = tt > T.suck ? Math.exp(-(tt - T.suck) * 5) * .06 : 0;
   const pos = PX(s + 1.0, .7, .62).add(V((hash(Math.floor(tt * 48)) - .5) * sh, (hash(Math.floor(tt * 48) + 3) - .5) * sh, 0)), end = PX(s - .25, 1.72, .02), mid = PX(s, 1.45, .35);
   return { pos, look: LV(LV(mid, end, k), PX(s, 1.45, .55), ss(seg(tt, T.suck, 2.75))), fov: lerp(42, lerp(20, 38, ss(seg(tt, T.suck, 2.8))), k), focus: 1.25, aper: 6 }; });
 shot(4.0, 7.0, 'ms', t => { const s = sD0(t); return { pos: PX(s - .3, -.95, .6), look: PX(s, 1.05, .32), fov: 44, focus: 2.1, aper: 4 }; });
 // 7–15 crane up along the escalator to the dome, then turn round to see the whole city
 const CR0 = () => { const s = sD0(7); return [PX(s - .3, -.95, .6), PX(s, 1.05, .32)]; };
-shot(7, 15, 'crane', t => { const [p0, l0] = CR0(), k = eio(seg(t, 7, 12.6)), r = eio(seg(t, 11.2, 14.8));
+shot(7, 10.2, 'crane', t => { const [p0, l0] = CR0(), k = eio(seg(t, 7, 9.6)), r = eio(seg(t, 8.8, 10.2));
   const pos = new THREE.CatmullRomCurve3([p0, PX(5, -1.0, 2.6), PX(12, -.8, 5.5), PX(19, -.6, 8), V(-.5, 22, 22), V(0, 25, 24)]).getPointAt(k);
   const lookFwd = LV(l0, PX(L + 4, 0, 4), k), lookBack = V(0, 1, -4);
   return { pos, look: LV(lookFwd, lookBack, r).add(V(0, 0, 0)), fov: lerp(44, 62, k), focus: 30, aper: lerp(4, .6, k) }; });
+shot(10.2, 12.6, 'bill', t => ({ pos: BB.clone().add(V(lerp(-4.2, 3.6, eio(seg(t, 10.2, 12.6))), -1.2, -12.5)), look: BB.clone().add(V(lerp(-4.6, 3.9, eio(seg(t, 10.2, 12.6))), -.4, 0)), fov: 42, focus: 12.5, aper: 1.5 }));
+shot(12.6, 15, 'rubbers', t => { const k = seg(t, 12.6, 15); return { pos: PX(9.5 + k * .8, -.2, 2.4), look: PX(7.8 + k * .8, 1.3, .4), fov: 44, focus: 2.6, aper: 3.5 }; });
 // 15–22: Squish and Mom at the foot of the escalator
 const FOOT = V(-.25, 0, COMB_BOT - 1.3);
 shot(15, 17.2, 'low', t => ({ pos: FOOT.clone().add(V(1.0, .16, -1.6)), look: FOOT.clone().add(V(-.1, .32, .2)), fov: 40, focus: 1.8, aper: 6 }));
@@ -393,7 +395,9 @@ shot(19.9, 22, 'board', t => ({ pos: FOOT.clone().add(V(1.3, .55, -1.4)), look: 
 // 22–30 the temptation
 shot(22, 25, 'ride', t => { const s = sqv(t); return { pos: PX(s + 5.2, -1.0, 2.1), look: PX(s + 1.2, .3, .3), fov: 40, focus: 4.4, aper: 3 }; });
 shot(25, 27.4, 'top', t => { const s = sSquish(t); return { pos: PX(s - .5, .3, 3.6), look: PX(s + .2, .5, 0), fov: 46, focus: 3.5, aper: 3 }; });
-shot(27.4, 30.0, 'toe', t => { const s = sSquish(t); return { pos: PX(s + .8, .35, 1.0), look: PX(s, 1.55, .1), fov: 36, focus: 1.6, aper: 6 }; });
+shot(27.4, 28.9, 'toe', t => { const s = sSquish(t); return { pos: PX(s + .8, .35, 1.0), look: PX(s, 1.55, .1), fov: 36, focus: 1.6, aper: 6 }; });
+// 28.9–30 the slit between the step and the skirt, glowing
+shot(28.9, 30.0, 'slit', t => { const s = sSquish(t), k = seg(t, 28.9, 30); return { pos: PR(s + 1.0 + .1 * k, .75, 1.7), look: PR(s + 1.0, 1.84, -.02), fov: 32, focus: 2.0, aper: 6 }; });
 // 30–42 the gap
 shot(30.0, 31.6, 'gap', t => { const s = sSquish(t); return { pos: PX(s + .55, .7, .85), look: PX(s, 1.72, .04), fov: 30, focus: 1.35, aper: 7, shake: .3 }; });
 shot(31.6, 33.0, 'face', t => { const s = sSquish(t); return { pos: PX(s + .35, 1.05, .95), look: PX(s, 1.45, .25), fov: 40, focus: .85, aper: 8, shake: .5 }; });
@@ -403,7 +407,7 @@ shot(37.0, 39.0, 'teeth', t => { const s = sSquish(t); return { pos: PX(s + 2.4,
 shot(39.0, 42.0, 'duke', t => { const s = sDuke(t); return { pos: PX(s + .9, .2, .55), look: PX(s, .7, .3), fov: 40, focus: 1.0, aper: 7, shake: .6 }; });
 // 42–50 the red button
 shot(42.0, 43.4, 'jump', t => { const s = sDuke(T.crack); return { pos: PX(COMB_TOP + 2.6, -1.2, 1.5), look: LV(PX(s, .9, .3), BTN.clone().add(V(0, .7, 0)), ss(seg(t, 42.4, 43.4))), fov: 44, focus: 3.5, aper: 3 }; });
-shot(43.4, 44.6, 'button', t => ({ pos: BTN.clone().add(V(-.95, 1.05, .85)), look: BTN.clone().add(V(0, .75, 0)), fov: 36, focus: 1.5, aper: 6, shake: t > T.button ? 1.2 * Math.exp(-(t - T.button) * 4) : 0 }));
+shot(43.4, 44.6, 'button', t => ({ pos: BTN.clone().add(V(-2.0, 1.7, 2.1)), look: BTN.clone().add(V(0, 1.0, 0)), fov: 44, focus: 3.0, aper: 3, shake: t > T.button ? 1.2 * Math.exp(-(t - T.button) * 4) : 0 }));
 shot(44.6, 46.0, 'stopwide', t => ({ pos: PX(6, -5.5, 7.5), look: PX(12, .2, .5), fov: 52, focus: 9, aper: 1.5 }));
 shot(46.0, 47.8, 'pull', t => { const s = sSquish(t); return { pos: PX(s + 1.5, .55, 1.05), look: PX(s, 1.15, .2), fov: 44, focus: 1.8, aper: 5 }; });
 shot(47.8, 50.0, 'sploink', t => { const s = sSquish(t); return { pos: PX(s + 3.0, -.3, 1.8), look: PX(s, .5, .5), fov: 46, focus: 3.3, aper: 3 }; });
@@ -411,8 +415,8 @@ shot(47.8, 50.0, 'sploink', t => { const s = sSquish(t); return { pos: PX(s + 3.
 shot(50.0, 56.0, 'truth', t => { const k = eio(seg(t, 52.6, 56)), s = sSquish(t); return { pos: LV(PX(s + 5.5, -.9, 2.8), PX(s + 1.2, .9, .8), k), look: LV(PX(s, .5, .3), PX(s, 1.65, .3), k), fov: lerp(46, 40, k), focus: lerp(5.5, 1.2, k), aper: lerp(2, 6, k) }; });
 shot(56.0, 60.0, 'soft', t => { const q = SQ.position, k = eio(seg(t, 56, 60)); return { pos: q.clone().add(V(.05, lerp(.95, .7, k), lerp(1.6, 1.15, k))), look: q.clone().add(V(0, .16, 0)), fov: 38, focus: lerp(1.85, 1.35, k), aper: 7 }; });
 // 60–65 fixing the city
-shot(60.0, 62.4, 'sign', t => ({ pos: SIGN.clone().add(V(.9, 1.5, -3.0)), look: SIGN.clone().add(V(.2, 1.55, 0)), fov: 40, focus: 3.0, aper: 4 }));
-shot(62.4, 65.0, 'board2', t => ({ pos: BB.clone().add(V(2, -5, -14)), look: BB.clone().add(V(0, -.5, 0)), fov: 44, focus: 14, aper: 1.5 }));
+shot(60.0, 63.3, 'sign', t => ({ pos: SIGN.clone().add(V(.25, 1.65, -4.3)), look: SIGN.clone().add(V(0, 1.65, 0)), fov: 40, focus: 4.3, aper: 2.5 }));
+shot(63.3, 65.0, 'board2', t => ({ pos: BB.clone().add(V(2, -5, -14)), look: BB.clone().add(V(0, -.5, 0)), fov: 44, focus: 14, aper: 1.5 }));
 // 65–72 next morning, the loop
 shot(65.0, 71.0, 'morning', t => { const s = sqv(t); return { pos: PX(s + 6.5, 0, 2.6), look: PX(s - .6, .2, .2), fov: 46, focus: 6.8, aper: 2 }; });
 shot(71.0, 72.1, 'loopecu', t => { const s = sFlip(t); return { pos: PR(s + 1.3, .65, 1.25), look: PR(s, 1.25, .5), fov: 38, focus: 1.5, aper: 6 }; });
@@ -532,6 +536,7 @@ function setScene(t) {
   if (t < 15) { fluff.push({ sd: 1, s: dS ?? 0, w: .6, amt: t > T.rub2 && t < T.pat ? 1 : t > T.pat && t < T.pat + .3 ? .2 : .25 + .1 * Math.sin(t * 7.5) }); }
   else if (t < T.turn) fluff.push({ sd: 1, s: sDuke(t), w: .6, amt: .25 });
   if (t > T.lean && t < T.land) { const s = sSquish(t); fluff.push({ sd: 1, s, w: .7, amt: t < T.squeeze ? .9 : t < T.bite ? .6 : t < 44.2 ? 1 + .3 * Math.sin(t * 30) : .4 }); }
+  if (t > 28.7 && t < 30.1) fluff.push({ sd: 1, s: sSquish(t) + 1.0, w: .5, amt: 1.4 * ss(seg(t, 28.8, 29.2)) });
   if (t > T.truth1 && t < T.morning) fluff.push({ sd: 1, s: sSquish(t), w: 2, amt: -.15 * ss(seg(t, 50.5, 52)) });
   if (t > T.flip) { const s = sFlip(t); fluff.push({ sd: 1, s, w: .6, amt: .5 + .3 * Math.sin(t * 8) }); }
   for (const c of CR) if (c.esc && c.rub && t < T.morning) fluff.push({ sd: Math.sign(c.x || 1), s: stepS(c.i % NSTEP), w: .5, amt: .3 });
@@ -548,12 +553,12 @@ function setScene(t) {
   if (t > 30 && t < 65) mood.hide = [sqv(t) - 2.5, sqv(t) + 5];
   placeCrowd(t, mood);
   // —— gap breathing, alarm, button ——
-  for (const g of gapGlow) g.g.material.opacity = (.12 + .1 * Math.sin(t * 2 + g.s)) * (1 + 2.5 * danger) * (t > T.stop && t < T.morning ? .4 : 1);
+  for (const g of gapGlow) g.g.material.opacity = (.12 + .1 * Math.sin(t * 2 + g.s)) * (1 + 6 * Math.max(danger, ss(seg(t, 28.9, 29.4)) * (1 - ss(seg(t, 30.0, 30.4)))) * (1 + 1.5 * ss(seg(t, 28.9, 29.4)) * (t < 30.4 ? 1 : 0) * Math.max(0, 1 - Math.abs(g.s - sSquish(t) - 1.0) / 1.5))) * (t > T.stop && t < T.morning ? .4 : 1);
   button.position.y = BTN.y + .75 - (t > T.button ? .06 * Math.exp(-(t - T.button) * 3) + .03 : 0);
   alarm.position.copy(BTN.clone().add(V(Math.cos(t * 6) * 3, 2.2, Math.sin(t * 6) * 3)));
   alarm.intensity = danger * (t < T.stop ? 25 : 8) * (.5 + .5 * Math.sin(t * 12));
   alarmLamp.material.color.set(danger > .05 ? (Math.sin(t * 12) > 0 ? '#ff3a1a' : '#5a0a05') : '#5a0a05');
-  if (squished) { gapLight.position.copy(PX(sSquish(t), 1.8, -.05)); gapLight.intensity = 3 * danger; } else gapLight.intensity = 0;
+  if (squished) { gapLight.position.copy(PX(sSquish(t), HALF + .02, -.2)); gapLight.intensity = 2.2 * danger; } else gapLight.intensity = 0;
   // —— light & colour: honey morning → steel blue + red sweep → warm → bright ——
   const cool = danger;
   sun.color.set('#ffd9a0').lerp(new THREE.Color('#7f9cc9'), cool * .8); sun.intensity = lerp(1.7, .9, cool) + morning * .4;
@@ -569,7 +574,7 @@ function setScene(t) {
   { const k = seg(t, T.tear, T.tear + .7); poster.rotation.set(-k * 2.2, Math.PI, k * .8); poster.position.copy(SIGN.clone().add(V(-k * 1.2, 1.555 + k * 1.4 - k * k * 2.2, -.1 - k * 1.5))); poster.visible = k < 1; }
   // sun & shadow follow the subject
   const focusP = S.cam(t).look; sun.target.position.copy(focusP); sun.position.copy(focusP).add(V(-3, 9, -4)); sun.target.updateMatrixWorld();
-  const big = ['crane', 'stopwide', 'board2', 'ots'].includes(S.name); Object.assign(sun.shadow.camera, big ? { left: -14, right: 14, top: 14, bottom: -14 } : { left: -4, right: 4, top: 4, bottom: -4 }); sun.shadow.camera.updateProjectionMatrix();
+  const big = ['crane', 'stopwide', 'board2', 'ots', 'bill', 'sign'].includes(S.name); Object.assign(sun.shadow.camera, big ? { left: -14, right: 14, top: 14, bottom: -14 } : { left: -4, right: 4, top: 4, bottom: -4 }); sun.shadow.camera.updateProjectionMatrix();
   return S;
 }
 
@@ -592,10 +597,13 @@ function stamp(t) {   // a red rubber stamp slammed down + a red arrow at the br
 }
 function drawTexts(t) {
   texts = []; stamp(t);
+  textBox(["YOU'VE BEEN USING", 'THESE WRONG.'], t, 0.0, T.frz0 - .02, 330, 92, '#ffffff', false);
+  textBox(["THE BRUSHES AREN'T", 'THE DANGER.'], t, 31.7, 35.0, 360, 80);
+  textBox(['THE GAP IS.'], t, 32.6, 35.0, 520, 96, '#ff5a3d');
   textBox(["ESCALATOR BRUSHES", "AREN'T FOR", "SHINING SHOES."], t, T.truth1, T.truth2 - .1, 520, 82);
   textBox(['THEY KEEP YOUR FEET', 'AWAY FROM THE GAP.'], t, T.truth2, 56.0, 520, 82, '#ffe066');
   textBox(['SOFT RUBBER SHOES', 'GET PULLED IN', 'MORE EASILY.'], t, T.soft, 60.0, 430, 78);
-  textBox(['SEND THIS TO THE FRIEND', 'WHO DOES THIS.'], t, T.cam + .1, 71.0, 470, 76, '#ffe066');
+  textBox(['SEND THIS TO THE FRIEND', 'WHO DOES THIS.'], t, 65.4, 71.0, 470, 76, '#ffe066');
 }
 
 // ———————————————————————————— render ————————————————————————————

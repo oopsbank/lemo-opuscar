@@ -106,6 +106,10 @@ for e in EVS:
     elif ty == 'spray': add(buf, spray(d), t, .3, .3)
     elif ty == 'turn': [add(buf, clack(rng.uniform(.9, 1.3), 1), t + rng.uniform(0, .08), .08, rng.uniform(-.8, .8)) for _ in range(40)]
 
+# even out the quiet stretches (the city ride, the truth): a smooth gain lift before the limiter
+tt = np.arange(N) / SR
+def bump(t0, t1, db, r=.6): return 1 + (10 ** (db / 20) - 1) * np.clip(np.minimum((tt - t0) / r, (t1 - tt) / r), 0, 1)
+buf *= (bump(6.0, 14.6, 3.5) * bump(50.3, 60.3, 5.0) * bump(68.9, 72.3, 4.0))[:, None]
 for c in range(2): buf[:, c] = limit(buf[:, c], .62)
 sf.write(os.path.join(OUT, 'mix.wav'), buf, SR)
 print('mix →', os.path.join(OUT, 'mix.wav'), f'{len(buf) / SR:.1f}s, peak {np.abs(buf).max():.2f}')
