@@ -19,7 +19,7 @@ function win(x, y, w, h, border, fill = C.ink) { fb.rect(x + 1, y, w - 2, h, C.i
 function banner(lines, y, col, border, show = true) { if (!show) return; const w = Math.max(...lines.map(l => textW(l))) + 14, x = Math.round((W - w) / 2), h = lines.length * LINE_H + 6; win(x, y, w, h, border); lines.forEach((l, i) => text(fb, l, x + 7, y + 1 + i * LINE_H, col, null)); }
 function nameTag(x, y, who, col = C.n9) { const w = textW(who) + 10; fb.rect(x, y, w, 14, C.ink); fb.rect(x + 1, y + 1, w - 2, 12, col); fb.rect(x + 2, y + 2, w - 4, 10, C.ink); text(fb, who, x + 5, y - 3, col); }
 function box(b, t, o = {}) {
-  const lines = wrap(b.text, 152), h = Math.max(30, lines.length * LINE_H + 12), Y = o.y ?? 316 - h;
+  const lines = wrap(b.text, 152), h = Math.max(30, lines.length * LINE_H + 12), Y = o.y ?? 214;
   win(6, Y, 168, h, o.border ?? C.n9); nameTag(10, Y - 11, b.who, o.tag ?? C.n9);
   const n = Math.floor(Math.max(0, t - b.a) * b.cps); let used = 0;
   lines.forEach((ln, i) => {
@@ -77,7 +77,7 @@ function leoBack(t, hitK) {
   L.poly([[bx - 62, 320], [bx - 48, by - 10], [bx + 48, by - 12], [bx + 70, 320]], (X, Y) => { const v = (X - bx) / 60; return v > .5 ? C.u1 : v < -.5 ? C.u3 : bayer(X, Y) < .05 ? C.u3 : C.u2; });
   L.cap([[bx - 30, by + 6], [bx + 40, 320]], 4, [C.mustard, C.mustard, C.y2]);   // the strap
   L.rect(bx - 60, by + 30, 26, 44, C.mustard); L.rect(bx - 58, by + 32, 22, 4, C.y2);   // the backpack side
-  const hand = hitK > 0 ? [164 - 3 * (1 - hitK), 170 + 2 * (1 - hitK)] : [bx + 64, by + 40];
+  const hand = hitK > 0 ? [150 - 3 * (1 - hitK), 170 + 2 * (1 - hitK)] : [bx + 64, by + 40];
   L.cap(hitK > 0 ? [[bx + 40, by + 2], [bx + 90, by - 40], [hand[0] - 8, hand[1] + 4]] : [[bx + 40, by + 2], [bx + 76, by + 24], hand], 9, HOOD);
   L.ell(hand[0], hand[1], 7, 6, (nx, ny) => S3(nx, ny, SKIN));
   L.ell(bx, by - 26, 34, 18, (nx, ny) => S3(nx, ny, HOOD));   // the hood bunched on the shoulders
@@ -186,13 +186,13 @@ window.render = t => {
       for (let k = 0; k < 4; k++) { const cx = ex + side * 2, cy = y0 - 3 + k * 2; fb.line(cx, cy, cx + side * 4, cy + 2, C.eye); }
     }
     // the button panel on the right, sparking on each hit
-    fb.rect(160, 120, 18, 80, C.ink); fb.rect(161, 121, 16, 78, C.w3); fb.ell(169, 170, 6, 6, C.ink); fb.ell(169, 170, 5, 5, (nx, ny) => S3(nx, ny, [C.r1, C.r2, C.r3])); text(fb, '>|<', 160, 150, C.ink);
+    fb.rect(144, 120, 20, 80, C.ink); fb.rect(145, 121, 18, 78, C.w3); fb.ell(154, 170, 6, 6, C.ink); fb.ell(154, 170, 5, 5, (nx, ny) => S3(nx, ny, [C.r1, C.r2, C.r3])); text(fb, '>|<', 145, 150, C.ink);
     const h = lastHit(t), hk = h && t - h < .25 ? 1 - (t - h) / .25 : 0;
-    for (const hh of TT.hits) sparks(164, 170, t, hh, 16, 26);
+    for (const hh of TT.hits) sparks(152, 170, t, hh, 16, 26);
     leoBack(t, hk);
     sh = hk > .6 ? 2 : 0;
-    banner(['FLOOR: B13 - VOID HALLWAY'], 8, C.n9, C.n9, t >= 6.0);
-    const b = B('close'); if (t >= b.a && t < b.b) box(b, t, { tag: C.u4 });
+    banner(['FLOOR: B13 - VOID HALLWAY'], 36, C.n9, C.n9, t >= 6.0);
+    voBox(TL.vo[1], t);
   } else if (shot.id === 'guard') {
     // left: the cabin in section; right: the hallway; floor line y 236
     fb.rect(0, 0, W, H, C.n1);
@@ -223,7 +223,7 @@ window.render = t => {
     const pose = t >= TT.lever ? 'lever' : t >= TT.sprayOut ? 'spray' : 'lean';
     leoSide(t, pose === 'lever' ? 26 : 36, 236, pose);
     if (t >= TT.spray && t < TT.sprayEnd + .6) for (let i = 0; i < 60; i++) { const age = (t - TT.spray) - i * .025; if (age < 0 || age > 1.2) continue; const px = 66 + age * 70 + hash(i, 1) * 10, py = 176 + (hash(i, 2) - .5) * age * 40; fb.px(px, py, age < .5 ? C.n9 : C.n7); if (age < .8) fb.px(px + 1, py, C.n8); }
-    banner(['ITEM USED: PEPPER SPRAY'], 22, C.y4, C.y4, t >= TT.spray && t < TT.spray + 2.4);
+    banner(['ITEM USED: PEPPER SPRAY'], 36, C.y4, C.y4, t >= TT.spray && t < TT.spray + 2.4);
     const g = B('ghost'); if (t >= g.a && t < g.b) box(g, t, { ghost: true, border: C.r2, tag: C.r3 });
     sh = t >= TT.slamDoor && t < TT.slamDoor + .5 ? 4 * (1 - seg(t, TT.slamDoor, TT.slamDoor + .5)) + .5 : 0;
   } else if (shot.id === 'flood') {
@@ -240,7 +240,7 @@ window.render = t => {
     else { fb.rect(96, 14, 26, 18, C.n1); fb.rect(122, 4, 4, 30, C.w3); }
     fb.rect(10, 186, 160, 5, C.w4); fb.rect(10, 190, 160, 2, C.w1);   // the handrail
     // the water: rising, black, eyes floating, hands reaching
-    const wl = Math.round(lerp(312, 246, ss(27, 32, t)));
+    const wl = Math.round(lerp(312, 238, ss(TT.floodA, TT.floodA + 3.2, t)));
     const climbU = ss(TT.climb, TT.climb + 1.4, t);
     leoLow(t, climbU * 70, TT.pry.some(p => t >= p && t < p + .5));
     fb.rect(0, wl, W, H - wl, (x, y) => y === wl ? (Math.sin(x * .4 + t * 6) > .3 ? C.rain3 : C.rain2) : bayer(x, y) < .12 ? C.rain2 : C.rain1);
@@ -248,9 +248,10 @@ window.render = t => {
     if (t > TT.climb) for (let i = 0; i < 4; i++) { const hx = 40 + i * 32, r = ss(TT.climb + i * .4, TT.climb + 1.2 + i * .4, t), top = wl - 14 * r - Math.sin(t * 5 + i) * 4; fb.cap([[hx, wl + 4], [hx + 3, top]], 3, [C.v1, C.v1, C.v2]); for (let k = 0; k < 3; k++) fb.px(hx - 2 + k * 2, top - 3, C.eye); }
     for (const p of TT.pry) { sparks(110, 26, t, p + .25, 12, 34, [C.w4, C.y5, C.n9]); const a = t - p - .25; if (a > 0 && a < .7) { fb.rect(110 + a * 40, 26 + a * a * 200, 2, 2, C.w4); } }
     if (popped) lut = LUTS.blue;
-    banner(['OXYGEN: ' + Math.round(lerp(35, 15, seg(t, TT.oxygen, 39.5))) + '% - FLOODING'], 58, C.r3, step(t, 3) % 2 ? C.r3 : C.r1, t >= TT.oxygen);
-    voBox(TL.vo[1], t);
-    sh = t >= TT.pop && t < TT.pop + .3 ? 3 : t >= TT.hatch && t < TT.hatch + .3 ? 2 : 0;
+    if (t >= TT.oxygen) { const ox = Math.round(lerp(35, 6, seg(t, TT.oxygen, TT.hatch + .6))), lines = ['OXYGEN: ' + ox + '% - FLOODING'], w = textW(lines[0]) + 14, x = Math.round((W - w) / 2); win(x, 58, w, LINE_H + 6, step(t, 3) % 2 ? C.eye : C.ph1, C.ph1); text(fb, lines[0], x + 7, 59, C.eye, null); }
+    if (t >= TT.grab) { const g = ss(TT.grab, TT.grab + .3, t), gx = 66, gy = Math.round(lerp(wl + 10, 262 - climbU * 70 - 6, g)); fb.cap([[gx - 6, wl + 20], [gx, gy + 14]], 6, [C.v1, C.v1, C.v2]); fb.ell(gx + 2, gy + 6, 9, 7, C.v1); for (let k = 0; k < 4; k++) fb.line(gx - 5 + k * 4, gy, gx - 6 + k * 4, gy - 7, C.eye); }
+    voBox(TL.vo[2], t);
+    sh = t >= TT.pop && t < TT.pop + .3 ? 3 : t >= TT.grab && t < TT.grab + .4 ? 4 : t >= TT.hatch && t < TT.hatch + .3 ? 2 : 0;
   } else if (shot.id === 'shaft') {
     // looking straight down the shaft: walls streaming up past the cabin roof; rails sparking
     const sp = t * 520;
@@ -262,7 +263,7 @@ window.render = t => {
     fb.rect(108, 160, 26, 18, C.w1); fb.ell(121, 169, 7, 7, (nx, ny) => S3(nx, ny, STEEL)); fb.line(121, 169, 121, 150, C.w4); fb.line(118, 150, 124, 140, C.w4);   // the pulley, the snapped cable
     for (let k = 0; k < 4; k++) { const s0 = Math.floor(t * 18) / 18 - k * .06; sparks(28, 170 + k * 26, t, s0, 14, 40); sparks(152, 180 + k * 26, t, s0 + .015, 14, 40); }
     // the spider: crawling down from the top, legs on the walls; recoils after the hit
-    const app = ease(seg(t, TT.spiderIn, TT.throw)), rec = ss(TT.hit, TT.hit + 1.8, t), sy = Math.round(lerp(-70, 64, app) - rec * 90), sx = 90 + Math.round(Math.sin(t * 2) * 6);
+    const app = ease(seg(t, TT.spiderIn, TT.throw)), rec = ss(TT.hit, TT.hit + 1.8, t), sy = Math.round(lerp(-28, 64, app) - rec * 90), sx = 90 + Math.round(Math.sin(t * 2) * 6);
     if (t >= TT.spiderIn) {
       const Ls = layer(), hitF = t >= TT.hit && t < TT.hit + .6 && step(t, 12) % 2;
       for (let i = 0; i < 8; i++) {
@@ -282,7 +283,7 @@ window.render = t => {
     if (t >= TT.throw && t < TT.hit) { const u = seg(t, TT.throw, TT.hit), fx = lerp(hx, sx, u), fy = lerp(hy, sy + 20, u); for (let k = 0; k < 8; k++) fb.px(lerp(hx, fx, k / 8), lerp(hy, fy, k / 8), k % 2 ? C.ph1 : C.ph2); fb.ell(fx, fy, 3, 3, C.ph2); fb.ell(fx, fy, 14, 14, (nx, ny, x, y) => bayer(x, y) < .35 * (1 - nx * nx - ny * ny) ? C.ph1 : null); }
     if (t >= TT.hit) { sparks(sx, sy + 20, t, TT.hit, 30, 60, [C.ph2, C.ph1, C.y5]); if (t < TT.hit + .1) fb.rect(0, 0, W, H, (x, y) => bayer(x, y) < .5 ? C.ph2 : null); }
     if (t >= TT.hit && t < TT.hit + 2.4) bigText('CRITICAL HIT!', 90, Math.round(100 - seg(t, TT.hit, TT.hit + 2.4) * 20), y => y < 3 ? C.y5 : y < 5 ? C.y4 : C.ph1, C.ink);
-    banner([t >= TT.b99 ? 'DEPTH: B98 -> B99' : 'DEPTH: B98 -> ...'], 6, t >= TT.b99 && step(t, 4) % 2 ? C.r3 : C.n9, C.n9, t >= 40.5);
+    banner([t >= TT.b99 ? 'DEPTH: B98 -> B99' : 'DEPTH: B98 -> ...'], 36, t >= TT.b99 && step(t, 4) % 2 ? C.r3 : C.n9, C.n9, t >= TT.shaftA + .2);
     sh = t >= TT.hit && t < TT.hit + .6 ? 4 : 1;
   } else if (shot.id === 'lever') {
     fb.rect(0, 0, W, H, (x, y) => (x * 3 + y) % 13 === 0 ? C.w3 : C.w2);
@@ -294,8 +295,8 @@ window.render = t => {
     fb.ell(gx, gy, 12, 10, (nx, ny) => S3(nx, ny, SKIN)); for (let k = 0; k < 4; k++) fb.line(gx - 10, gy - 6 + k * 4, gx + 8, gy - 5 + k * 4, C.s2);
     if (t >= TT.pull) { for (let k = 0; k < 6; k++) sparks(px, py, t, TT.pull + k * .08, 24, 70); }
     sh = t >= TT.pull ? 4 : 0;
-    if (t >= TT.white) lut = whiteLut(seg(t, TT.white, 55.0));
-    if (t >= 55.0) lut = whiteLut(1);
+    if (t >= TT.white) lut = whiteLut(seg(t, TT.white, TT.exitA - .2));
+    if (t >= TT.exitA - .2) lut = whiteLut(1);
   } else if (shot.id === 'exit') {
     if (t >= TT.static) { if (t >= TT.black) { fb.clear(C.ink); out.present(fb, LUT.full); out.show(0); return; } staticNoise(t); out.present(fb, LUT.full); out.show(1); return; }
     const looped = t >= TT.loop, glitch = t >= TT.glitchSign && t < TT.loop;
@@ -317,9 +318,9 @@ window.render = t => {
     Lk.rect(lx - 14, ly - 8, 12, 8, C.n1); Lk.rect(lx + 2, ly - 8, 12, 8, C.n1); Lk.ell(lx, ly - hgt + 6, 9, 10, C.n1);
     Lk.cap([[lx - 12, ly - hgt + 20], [lx - 20, ly - hgt + 40]], 4, [C.n1, C.n1, C.n1]); Lk.cap([[lx + 12, ly - hgt + 20], [lx + 20, ly - hgt + 40]], 4, [C.n1, C.n1, C.n1]);
     Lk.over(fb);
-    voBox(TL.vo[2], t);
+    voBox(TL.vo[3], t);
     if (t >= TT.cut) { out.present(fb, LUT.full); out.post(u => { const f = step(t, 24); for (let y = 0; y < H; y++) { const s = hash(y >> 3, f) < .5 ? Math.round((hash(y >> 2, f, 3) - .5) * 70) : 0; if (!s) continue; const row = u.slice(y * W, y * W + W); for (let x = 0; x < W; x++) u[y * W + x] = row[((x - s) % W + W) % W]; } }); out.show(1); return; }
-    if (t < 55.5) lut = whiteLut(1 - seg(t, 55.2, 55.5));
+    if (t < TT.exitA + .3) lut = whiteLut(1 - seg(t, TT.exitA, TT.exitA + .3));
   }
   shift(...shakeXY(t, sh));
   crtNoise(t, 1);

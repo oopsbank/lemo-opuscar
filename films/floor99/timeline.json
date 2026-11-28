@@ -1,5 +1,5 @@
 {
-  "dur": 65.0,
+  "dur": 45.85,
   "fps": 24,
   "bpm": 140,
   "shots": [
@@ -16,32 +16,32 @@
     {
       "id": "b13",
       "a": 5.5,
-      "b": 15
+      "b": 10.25
     },
     {
       "id": "guard",
-      "a": 15,
-      "b": 27
+      "a": 10.25,
+      "b": 17.85
     },
     {
       "id": "flood",
-      "a": 27,
-      "b": 40
+      "a": 17.85,
+      "b": 24.85
     },
     {
       "id": "shaft",
-      "a": 40,
-      "b": 53
+      "a": 24.85,
+      "b": 33.85
     },
     {
       "id": "lever",
-      "a": 53,
-      "b": 55.2
+      "a": 33.85,
+      "b": 36.05
     },
     {
       "id": "exit",
-      "a": 55.2,
-      "b": 65
+      "a": 36.05,
+      "b": 45.85
     }
   ],
   "vo": [
@@ -51,32 +51,28 @@
       "sub": "No! No, no, no! Not tonight!"
     },
     {
+      "id": "v4",
+      "t": 8.0,
+      "sub": "CLOSE! COME ON, CLOSE!"
+    },
+    {
       "id": "v2",
-      "t": 31.2,
+      "t": 19.2,
       "sub": "Up! Gotta reach... the roof hatch!"
     },
     {
       "id": "v3",
-      "t": 61.75,
+      "t": 42.6,
       "sub": "Wait... I never left?"
     }
   ],
   "boxes": [
     {
-      "id": "close",
-      "who": "LEO",
-      "a": 8.0,
-      "b": 12.5,
-      "cps": 28,
-      "text": "CLOSE! COME ON, CLOSE!",
-      "blip": "leo"
-    },
-    {
       "id": "ghost",
       "who": "???",
-      "a": 19.5,
-      "b": 23.0,
-      "cps": 7,
+      "a": 11.9,
+      "b": 14.7,
+      "cps": 9,
       "text": "H-E-L-P... M-E...",
       "blip": "ghost"
     }
@@ -91,45 +87,44 @@
       7.0,
       7.8,
       8.6,
-      9.4,
-      10.2,
-      11.0,
-      11.8,
-      12.6,
-      13.4
+      9.4
     ],
-    "doorsOpen": 15.0,
-    "turnA": 17.0,
-    "turnB": 21.0,
-    "sprayOut": 22.5,
-    "spray": 23.0,
-    "sprayEnd": 24.6,
-    "lever": 25.0,
-    "slamDoor": 25.6,
-    "oxygen": 28.0,
-    "pop": 30.0,
-    "climb": 32.0,
+    "guardA": 10.25,
+    "doorsOpen": 10.25,
+    "turnA": 10.7,
+    "turnB": 12.2,
+    "sprayOut": 13.9,
+    "spray": 14.3,
+    "sprayEnd": 15.5,
+    "lever": 15.9,
+    "slamDoor": 16.4,
+    "floodA": 17.85,
+    "oxygen": 18.1,
+    "pop": 18.8,
+    "climb": 19.8,
     "pry": [
-      34.2,
-      35.0,
-      35.8,
-      36.6,
-      37.4
+      21.2,
+      21.8,
+      22.4
     ],
-    "hatch": 38.5,
-    "spiderIn": 42.0,
-    "flareLit": 47.5,
-    "throw": 48.8,
-    "hit": 49.35,
-    "b99": 51.0,
-    "pull": 53.6,
-    "white": 54.4,
-    "ting": 56.0,
-    "kneel": 56.4,
-    "glitchSign": 60.0,
-    "loop": 61.5,
-    "cut": 63.9,
-    "static": 64.0,
-    "black": 64.8
+    "grab": 22.9,
+    "hatch": 23.7,
+    "shaftA": 24.85,
+    "spiderIn": 25.1,
+    "flareLit": 28.7,
+    "throw": 30.0,
+    "hit": 30.55,
+    "b99": 32.2,
+    "leverA": 33.85,
+    "pull": 34.45,
+    "white": 35.25,
+    "exitA": 36.05,
+    "ting": 36.85,
+    "kneel": 37.25,
+    "glitchSign": 40.85,
+    "loop": 42.35,
+    "cut": 44.75,
+    "static": 44.85,
+    "black": 45.65
   }
 }

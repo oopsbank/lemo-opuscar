@@ -45,22 +45,28 @@ def section(a, b, bass=None, drums=0, lead=None, arp=None, g=1.0):
             if t >= b: continue
             dd = min(d * B, b - t); put(mus, echo(sq(hz(m), dd, .125) * adsr(dd, .005, .04) * .07 * g), t, pan=.2)
 AM = [45, 45, 41, 43]   # A F G
-section(4.7, 15.0, bass=AM, drums=1)
+section(4.7, T['guardA'], bass=AM, drums=1)
 for h in T['hits']: put(mus, sq(hz(70), .12, .5) * adsr(.12) * .08 + sq(hz(71), .12, .5) * adsr(.12) * .06, h)   # dissonant stabs
 # the hallway: a detuned drone pad
-d = 27 - 15.2; x = t_(d); pad = (sq(hz(45), d, .5) * .3 + sq(hz(45) * 1.006, d, .5) * .3 + sq(hz(52) * .996, d, .25) * .2) * np.clip(x / 2, 0, 1) * np.clip((d - x) / .3, 0, 1)
-pad = lp(pad, 1200) * .09; pad[int((T['turnA'] - 15.2) * SR):int((T['turnB'] - 15.2) * SR)] *= .25; put(mus, pad, 15.2)
-section(27.2, 30.0, bass=AM, arp=[[57, 60, 64], [53, 57, 60]])
-section(31.0, 40.0, bass=AM, drums=1, arp=[[57, 60, 64, 69], [53, 57, 60, 65], [55, 59, 62, 67], [52, 56, 59, 64]])
+d = T['floodA'] - T['guardA'] - .2; x = t_(d); pad = (sq(hz(45), d, .5) * .3 + sq(hz(45) * 1.006, d, .5) * .3 + sq(hz(52) * .996, d, .25) * .2) * np.clip(x / 2, 0, 1) * np.clip((d - x) / .3, 0, 1)
+pad = lp(pad, 1200) * .09; pad[int((T['turnA'] - T['guardA'] - .2) * SR):int((T['turnB'] - T['guardA'] - .2) * SR)] *= .25; put(mus, pad * 1.8, T['guardA'] + .2)
+# the hallway bed: a low hum and a slow heartbeat so it never drops out
+d = T['floodA'] - T['guardA']; xx = t_(d); put(fx, (np.sin(2 * np.pi * 50 * xx) * .5 + np.sin(2 * np.pi * 100 * xx) * .3) * np.clip(xx / .3, 0, 1) * .06, T['guardA'])
+t0 = T['guardA'] + .3
+while t0 < T['floodA'] - .2:
+    for dt, g in ((0, 1), (.15, .6)): dd = .18; y = np.sin(2 * np.pi * 52 * t_(dd) * (1 - .3 * t_(dd) / dd)) * env_exp(dd, .05); put(fx, lp(y, 220) * g * .55, t0 + dt)
+    t0 += .8
+section(T['floodA'] + .2, T['pop'], bass=AM, arp=[[57, 60, 64], [53, 57, 60]])
+section(T['pop'] + .8, T['shaftA'], bass=AM, drums=1, arp=[[57, 60, 64, 69], [53, 57, 60, 65], [55, 59, 62, 67], [52, 56, 59, 64]])
 riff = [(0, 69, .5), (.5, 72, .5), (1, 76, .5), (1.5, 74, .5), (2, 72, 1), (3, 71, 1), (4, 69, .5), (4.5, 72, .5), (5, 77, .5), (5.5, 76, .5), (6, 74, 2)]
 lead = [(bt + rep * 8, m, d) for rep in range(4) for bt, m, d in riff]
-section(40.0, 53.6, bass=AM, drums=2, arp=[[57, 60, 64, 69], [53, 57, 60, 65], [55, 59, 62, 67], [52, 56, 59, 64]], lead=lead)
-mus[int(T['pull'] * SR):int(55.2 * SR)] = 0
+section(T['shaftA'], T['pull'], bass=AM, drums=2, arp=[[57, 60, 64, 69], [53, 57, 60, 65], [55, 59, 62, 67], [52, 56, 59, 64]], lead=lead)
+mus[int(T['pull'] * SR):int(T['exitA'] * SR)] = 0
 # relief: a warm C major pad, then it detunes down into the loop
-d = T['cut'] - 55.4; x = t_(d); det = 1 - .06 * np.clip((x - (T['glitchSign'] - 55.4)) / 3, 0, 1)
+E0 = T['exitA'] + .2; d = T['cut'] - E0; x = t_(d); det = 1 - .06 * np.clip((x - (T['glitchSign'] - E0)) / 3, 0, 1)
 warm = sum(np.sin(2 * np.pi * np.cumsum(hz(m) * det) / SR) for m in (60, 64, 67, 72)) / 4 * np.clip(x / 1, 0, 1) * np.clip((d - x) / .05, 0, 1)
-crushed = np.round(warm * 6) / 6; mixk = np.clip((x - (T['glitchSign'] - 55.4)) / 2, 0, 1); warm = warm * (1 - mixk) + crushed * mixk
-put(mus, warm * .14, 55.4)
+crushed = np.round(warm * 6) / 6; mixk = np.clip((x - (T['glitchSign'] - E0)) / 2, 0, 1); warm = warm * (1 - mixk) + crushed * mixk
+put(mus, warm * .3, E0)
 
 # —— foley ——
 d = 4.0; x = t_(d); put(fx, (sq(np.where((x * 2.5) % 1 < .5, 880, 660), d, .5) * .5) * .1, 0)   # the siren WEE-WOO
@@ -71,34 +77,35 @@ put(fx, (lp(noise(.4), 300) * env_exp(.4, .06) + np.sin(2 * np.pi * 60 * t_(.4))
 put(fx, bp(noise(.3), 300, 3000) * env_exp(.3, .05) * .5, T['b13'])   # the jolt at B13
 for i in range(40):   # claws scraping metal
     tt = 5.6 + i * .23 + (i % 3) * .05
-    if tt > 15: break
+    if tt > T['guardA']: break
     d = .16; xx = t_(d); put(fx, bp(sq(2600 + 400 * np.sin(2 * np.pi * 30 * xx), d, .3), 1500, 7000) * np.sin(np.pi * xx / d) * .11, tt, pan=(i % 5 - 2) * .2)
 for h in T['hits']:   # the button TẠCH and its sparks
     put(fx, (hp(noise(.04), 2000) * env_exp(.04, .006) + sq(1600, .04, .5) * env_exp(.04, .01) * .3) * .5, h, pan=.4)
     put(fx, hp(noise(.3), 3000) * (np.random.default_rng(int(h * 10)).random(len(t_(.3))) > .9) * env_exp(.3, .1) * .3, h + .02, pan=.4)
-xx = np.arange(int(12 * SR)) / SR; put(fx, (bp(sq(120, 12, .5), 100, 3000) * .5 * (1 + .5 * np.sin(2 * np.pi * 7 * xx))) * .03, 15)   # neon buzz
+dg = T['floodA'] - T['guardA']; xx = np.arange(int(dg * SR)) / SR; put(fx, (bp(sq(120, dg, .5), 100, 3000) * .5 * (1 + .5 * np.sin(2 * np.pi * 7 * xx))) * .06, T['guardA'])   # neon buzz
 for k in range(int((T['turnB'] - T['turnA']) / .25)): put(fx, bp(noise(.08), 300, 1500) * env_exp(.08, .03) * .15, T['turnA'] + k * .25)   # the neck creaking
 for k in range(12):   # the ghost's text: low, wobbly blips
-    tt = 19.5 + (k + 1) / 7 * 2
-    if tt < 23: put(fx, sq(220 + 40 * np.sin(k), .09, .5) * adsr(.09) * .06, tt)
+    gb = [b for b in TL['boxes'] if b['id'] == 'ghost'][0]; tt = gb['a'] + (k + 1) / gb['cps']
+    if tt < gb['b']: put(fx, sq(220 + 40 * np.sin(k), .09, .5) * adsr(.09) * .06, tt)
 put(fx, hp(noise(1.6), 2500) * np.clip(t_(1.6) / .05, 0, 1) * np.clip((1.6 - t_(1.6)) / .2, 0, 1) * .6, T['spray'])   # XÌÌÌ
 put(fx, sq(80, .2, .5) * env_exp(.2, .05) * .4, T['lever']); put(fx, hp(noise(.05), 1500) * env_exp(.05, .01) * .4, T['lever'])   # the lever clunk
 put(fx, (lp(noise(.6), 400) * env_exp(.6, .1) + np.sin(2 * np.pi * 55 * t_(.6)) * env_exp(.6, .15) + hp(noise(.6), 1500) * env_exp(.6, .03) * .5) * 1.8, T['slamDoor'])   # RẦM
 d = 1.4; xx = t_(d); put(fx, echo(sum(np.sin(2 * np.pi * f * xx) * env_exp(d, tau) for f, tau in ((310, .5), (523, .3), (877, .2))) * .35), T['slamDoor'] + .01)   # the metal ring
-d = 13; xx = t_(d); put(fx, lp(noise(d), 1400) * np.clip(xx / 1.5, 0, 1) * (1 + .4 * np.sin(2 * np.pi * .7 * xx)) * .38, 27)   # water rushing
+d = T['shaftA'] - T['floodA']; xx = t_(d); put(fx, lp(noise(d), 1400) * np.clip(xx / .8, 0, 1) * (1 + .4 * np.sin(2 * np.pi * .7 * xx)) * .38, T['floodA'])
+put(fx, (lp(noise(.5), 700) * env_exp(.5, .1) + hp(noise(.5), 2500) * env_exp(.5, .05) * .6) * .9, T['grab'])   # the hand bursting out of the water   # water rushing
 put(fx, (hp(noise(.3), 1500) * env_exp(.3, .03) + lp(noise(.3), 300) * env_exp(.3, .05)) * .8, T['pop'])   # the light POPS
 for p in T['pry']: put(fx, (bp(noise(.06), 1500, 6000) * env_exp(.06, .01) + sq(900, .06, .3) * env_exp(.06, .01) * .3) * .4, p)   # CẠCH
 put(fx, (sq(140, .35, .5) * env_exp(.35, .08) + hp(noise(.35), 1200) * env_exp(.35, .05)) * .4, T['hatch'])   # the hatch clang
-d = 13.6; xx = t_(d); put(fx, bp(noise(d), 600, 4000) * (1 + .5 * np.sin(2 * np.pi * 1.3 * xx)) * .26, 40)   # the wind whistling up the shaft
-for k in range(int(13.5 * 9)): put(fx, hp(noise(.03), 4000) * env_exp(.03, .005) * .06, 40 + k / 9, pan=(-.7 if k % 2 else .7))   # rail sparks
+d = T['pull'] - T['shaftA']; xx = t_(d); put(fx, bp(noise(d), 600, 4000) * (1 + .5 * np.sin(2 * np.pi * 1.3 * xx)) * .26, T['shaftA'])   # the wind whistling up the shaft
+for k in range(int((T['leverA'] - T['shaftA']) * 9)): put(fx, hp(noise(.03), 4000) * env_exp(.03, .005) * .06, T['shaftA'] + k / 9, pan=(-.7 if k % 2 else .7))   # rail sparks
 def screech(d):
     x = t_(d); f = 900 + 500 * np.sin(2 * np.pi * 11 * x) + 300 * x / d
     return bp(sq(f, d, .3) + noise(d) * .5, 600, 6000) * np.sin(np.pi * x / d)
 def growl(d):
     x = t_(d); f = 70 + 25 * np.sin(2 * np.pi * 3 * x); saw = 2 * ((np.cumsum(f) / SR) % 1) - 1
     return lp(np.tanh(3 * (saw + .6 * noise(d))), 900) * np.sin(np.pi * x / d) ** .5
-for tt, d, g in ((T['spiderIn'], 1.6, .5), (44.6, 1.2, .5), (46.4, 1.4, .55), (T['hit'] + .1, 2.0, .7)): put(fx, growl(d) * g, tt)
-put(fx, screech(1.2) * .25, T['spiderIn'] + .3); put(fx, screech(1.0) * .2, 45.5)
+for tt, d, g in ((T['spiderIn'], 1.6, .5), (T['spiderIn'] + 1.8, 1.2, .5), (T['spiderIn'] + 3.4, 1.4, .55), (T['hit'] + .1, 2.0, .7)): put(fx, growl(d) * g, tt)
+put(fx, screech(1.2) * .25, T['spiderIn'] + .3); put(fx, screech(1.0) * .2, T['spiderIn'] + 2.6)
 d = T['hit'] - T['flareLit'] + .4; put(fx, hp(noise(d), 2500) * (1 + .6 * np.random.default_rng(3).random(len(t_(d)))) * .12, T['flareLit'])   # the flare fizz
 put(fx, bp(noise(.4), 400, 3000) * np.sin(np.pi * t_(.4) / .4) * .3, T['throw'])
 put(fx, (lp(noise(.5), 500) * env_exp(.5, .08) + hp(noise(.5), 2000) * env_exp(.5, .05)) * .9, T['hit']); put(fx, screech(1.6) * .35, T['hit'] + .05)
@@ -128,16 +135,16 @@ for v in TL['vo']:
     if x.ndim > 1: x = x.mean(1)
     if sr != SR: x = resample_poly(x, SR, sr)
     x = x / (np.abs(x).max() + 1e-9)
-    if v['id'] == 'v1':   # panicked: gasping in, a trembling, pushed voice, panting out
+    if v['id'] in ('v1', 'v4'):   # panicked: gasping in, a trembling, pushed voice, panting out
         x = grit(shaky(x, 9, .35), 3) * .85; put(vo, breath(.3, True, .35), v['t'] - .32); put(vo, breath(.25, True, .3), v['t'] + len(x) / SR + .05); put(vo, breath(.3, False, .25), v['t'] + len(x) / SR + .35)
     elif v['id'] == 'v2':   # through gritted teeth: grit, tighter, a sharp breath before
         x = grit(hp(x, 180), 4) * .8; put(vo, breath(.22, True, .35), v['t'] - .26); put(vo, breath(.3, False, .2), v['t'] + len(x) / SR + .1)
     else:   # a horrified whisper: noise excited through the voice's envelope, a trace of the voice underneath
-        x = whisper(x) * .55 + lp(x, 900) * .08; put(vo, breath(.5, True, .18), v['t'] - .55)
+        x = whisper(x) * 1.0 + lp(x, 900) * .12; put(vo, breath(.5, True, .18), v['t'] - .55)
     put(vo, x, v['t']); s0 = int(v['t'] * SR); vmask[s0:s0 + len(x)] = 1
 from scipy.ndimage import uniform_filter1d
 duck = 1 - .5 * uniform_filter1d(vmask, int(.2 * SR))
-mus[int(22.0 * SR):int(27.6 * SR)] = 0
+mus[int((T['sprayOut'] - .4) * SR):int((T['floodA'] + .3) * SR)] = 0
 out = (mus * .6 + fx) * duck[:, None] + vo
 out[int(T['black'] * SR):] = 0
 out = np.stack([limit(out[:, 0], .75), limit(out[:, 1], .75)], 1); out[int(T['black'] * SR):] = 0
