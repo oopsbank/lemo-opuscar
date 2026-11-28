@@ -160,8 +160,8 @@ const lampLight = new THREE.PointLight('#ff9a48', 3.2, 7, 1.6); lampLight.positi
 const lanternGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: softTex, color: '#ff9a48', transparent: true, opacity: .55, depthWrite: false, blending: THREE.AdditiveBlending })); lanternGlow.scale.set(1.1, 1.1, 1); lanternGlow.position.copy(LANT); cart.add(lanternGlow);
 const signTex = canvasTex(1024, 300, (g, w, h) => { g.fillStyle = '#7a4524'; g.fillRect(0, 0, w, h); g.fillStyle = '#8d5330'; for (let i = 0; i < 4; i++) g.fillRect(0, i * 75 + 4, w, 68);
   g.strokeStyle = '#3e1f0c'; g.lineWidth = 14; g.strokeRect(7, 7, w - 14, h - 14);
-  g.font = '800 104px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#3a1a08'; g.fillText('Mở cửa đến bình minh', w / 2 + 3, h / 2 + 10); g.fillStyle = '#ffd9a0'; g.fillText('Mở cửa đến bình minh', w / 2, h / 2 + 6); });
-const signGlowTex = canvasTex(1024, 300, (g, w, h) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, h); g.font = '800 104px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#ffb860'; g.fillText('Mở cửa đến bình minh', w / 2, h / 2 + 6); });
+  g.font = '800 104px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#3a1a08'; g.fillText('Open Until Dawn', w / 2 + 3, h / 2 + 10); g.fillStyle = '#ffd9a0'; g.fillText('Open Until Dawn', w / 2, h / 2 + 6); });
+const signGlowTex = canvasTex(1024, 300, (g, w, h) => { g.fillStyle = '#000'; g.fillRect(0, 0, w, h); g.font = '800 104px Baloo2'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#ffb860'; g.fillText('Open Until Dawn', w / 2, h / 2 + 6); });
 const signMat = std('#ffffff', { map: signTex, emissive: '#ffffff', emissiveMap: signGlowTex, emissiveIntensity: 0, roughness: .7 });
 const sign = new THREE.Group(); sign.position.set(.3, 2.4, .74); cart.add(sign);
 mesh(new THREE.BoxGeometry(.8, .235, .03), [woodDark, woodDark, woodDark, woodDark, signMat, woodDark], V(0, 0, 0), sign);
