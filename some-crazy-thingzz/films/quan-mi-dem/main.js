@@ -269,7 +269,10 @@ const guest = new THREE.Group(); scene.add(guest);
 const gu = {};
 { const hips = new THREE.Group(); guest.add(hips); gu.hips = hips;
   const torso = new THREE.Group(); hips.add(torso); gu.torso = torso;
-  mesh(new THREE.SphereGeometry(.5, 32, 24), gMat, V(0, .62, 0), torso).scale.set(1.05, 1.45, .85); mesh(new THREE.SphereGeometry(.36, 24, 16), gMat, V(0, 1.08, .02), torso).scale.set(1.35, .8, .9);
+  // one smooth pear body flowing from the hips through round shoulders into a short neck (no seams for the rim light to catch)
+  { const prof = [[0, -.04], [.3, -.02], [.46, .14], [.55, .42], [.56, .66], [.53, .88], [.46, 1.04], [.32, 1.16], [.2, 1.26], [.17, 1.36], [0, 1.42]];
+    const pts = new THREE.SplineCurve(prof.map(([r, y]) => new THREE.Vector2(r, y))).getPoints(48); pts[0].x = 0; pts[pts.length - 1].x = 0;
+    mesh(new THREE.LatheGeometry(pts, 48), gMat, V(0, 0, 0), torso).scale.set(1.02, 1, .84); }
   const head = new THREE.Group(); head.position.set(0, 1.32, .06); torso.add(head); gu.head = head;
   mesh(new THREE.SphereGeometry(.31, 28, 20), gMat, V(0, 0, 0), head).scale.set(1, .95, .95);
   // long horns: chains of spheres that taper as they curve up and back
@@ -278,9 +281,10 @@ const gu = {};
   gu.eyeMat = new THREE.MeshBasicMaterial({ color: '#7fe8ff' });
   gu.eyes = []; for (const s of [-1, 1]) { const e = mesh(new THREE.SphereGeometry(.055, 16, 10), gu.eyeMat, V(s * .11, .03, .27), head, false); e.scale.set(1.15, .4, .4); e.rotation.z = -s * .18; gu.eyes.push(e); }
   gu.eyeGlow = []; for (const s of [-1, 1]) { const g = new THREE.Sprite(new THREE.SpriteMaterial({ map: softTex, color: '#7fe8ff', transparent: true, opacity: .55, depthWrite: false, blending: THREE.AdditiveBlending })); g.position.set(s * .11, .03, .3); g.scale.set(.22, .14, 1); head.add(g); gu.eyeGlow.push(g); }
-  gu.arms = []; for (const s of [-1, 1]) { const sh = new THREE.Group(); sh.position.set(s * .5, 1.0, 0); torso.add(sh);
-    mesh(new THREE.CapsuleGeometry(.15, .45, 8, 16), gMat, V(0, -.35, 0), sh); const hand = mesh(new THREE.SphereGeometry(.16, 18, 12), gMat, V(0, -.68, 0), sh); hand.scale.set(1, .85, 1.1);
+  gu.arms = []; for (const s of [-1, 1]) { const sh = new THREE.Group(); sh.position.set(s * .44, .98, 0); torso.add(sh);
+    mesh(new THREE.CapsuleGeometry(.15, .45, 8, 16), gMat, V(0, -.35, 0), sh).scale.set(1.15, 1, 1.1); const hand = mesh(new THREE.SphereGeometry(.16, 18, 12), gMat, V(0, -.68, 0), sh); hand.scale.set(1, .85, 1.1);
     gu.arms.push({ sh, arm: sh.children[0], hand, L: .68, s }); }
+  mesh(new THREE.SphereGeometry(.24, 20, 14), gMat, V(0, .02, 0), hips).scale.set(1.6, .8, 1.15);   // a soft seat that joins the thighs to the body
   gu.legs = []; for (const s of [-1, 1]) { const hp = new THREE.Group(); hp.position.set(s * .22, 0, 0); hips.add(hp);
     const th = mesh(new THREE.CapsuleGeometry(.19, .34, 8, 16), gMat, V(0, -.27, 0), hp); const kn = new THREE.Group(); kn.position.set(0, -.52, 0); hp.add(kn);
     mesh(new THREE.CapsuleGeometry(.17, .32, 8, 16), gMat, V(0, -.25, 0), kn); mesh(new THREE.SphereGeometry(.17, 14, 10), gMat, V(0, -.5, .08), kn).scale.set(1, .6, 1.5);
@@ -361,16 +365,16 @@ shot(10, 22, 'arrive', t => ({ pos: V(-2.9, 1.95, 4.9), look: V(.35, 1.4, .7), f
 shot(22, 27.2, 'pay', t => ({ pos: V(-.45, 1.5, -.28 + .04 * seg(t, 22, 27)), look: V(.22, 1.2, .5), fov: 46, focus: 1.0, aper: 5 }));
 shot(27.2, 31, 'inspect', t => ({ pos: V(.06, 1.32, .4), look: V(.05, 1.3, -.5), fov: 40, focus: .9, aper: 8 }));
 shot(31, 34, 'nod', t => ({ pos: V(2.5, 1.75, 1.9), look: V(.2, 1.75, .25), fov: 42, focus: 2.8, aper: 3 }));
-shot(34, 36.6, 'toss', t => ({ pos: V(.85, 1.3, .3), look: V(-.05, 1.62, -.45), fov: 46, focus: 1.6, aper: 5 }));
+shot(34, 36.6, 'toss', t => ({ pos: V(-.85, 1.72, .7), look: V(.02, 1.78, -.45), fov: 52, focus: 1.45, aper: 3 }));
 shot(36.6, 39.2, 'land', t => ({ pos: PREP.clone().add(V(.25, .42, .5)), look: PREP.clone().add(V(0, .05, 0)), fov: 36, focus: .7, aper: 10 }));
 shot(39.2, 42.2, 'ladle', t => ({ pos: V(-.4, 1.55, .5), look: V(-.42, 1.15, -.14), fov: 40, focus: .75, aper: 10 }));
 shot(42.2, 44.8, 'jar', t => ({ pos: V(.12, 1.25, .38), look: V(.1, 1.2, -.12), fov: 36, focus: .5, aper: 12 }));
 shot(44.8, 47.4, 'seed', t => ({ pos: PREP.clone().add(V(.15, .36, .38)), look: PREP.clone().add(V(0, .06, 0)), fov: 34, focus: .55, aper: 12 }));
 shot(47.4, 50.2, 'glow', t => ({ pos: V(.2, 1.2, .75 - .1 * seg(t, 47.4, 50)), look: V(.0, 1.3, -.4), fov: 40, focus: 1.15, aper: 8 }));
 shot(50.2, 63.2, 'ots', t => { const k = ss(seg(t, 56, 59)); return { pos: V(-.5, 1.65 + .1 * k, -.7), look: V(.25, 1.95 + .35 * k, 1.1), fov: 50 + 4 * k, focus: 1.95, aper: 5 }; });
-shot(63.2, 66.2, 'eyes', t => ({ pos: V(.2, 1.92, -.05 + .08 * seg(t, 63.2, 66)), look: V(.2, 1.9, 1.05), fov: 34, focus: .85, aper: 8 }));
+shot(63.2, 66.2, 'eyes', t => ({ pos: V(.2, 1.85, -.5 + .12 * seg(t, 63.2, 66)), look: V(.2, 1.95, 1.1), fov: 40, focus: 1.6, aper: 5 }));
 shot(66.2, 69.2, 'leave', t => ({ pos: V(-2.9, 1.95, 4.9), look: V(.9, 1.4, 1.6), fov: 46, focus: 5, aper: 3 }));
-shot(69.2, 71.8, 'gem', t => ({ pos: V(.6, 1.38, .62), look: V(.15, 1.15, .1), fov: 40, focus: .7, aper: 8 }));
+shot(69.2, 71.8, 'gem', t => ({ pos: V(.3, 1.62, 1.55), look: V(.14, 1.25, .1), fov: 32, focus: 1.5, aper: 5 }));
 shot(71.8, 75.1, 'lamp', t => { const k = eio(seg(t, 72.6, 75)); return { pos: LV(V(.2, 1.75, 2.1), V(-1.2, 2.9, 8.2), k), look: LV(V(.75, 1.75, .5), V(-.2, 1.0, 0), k), fov: lerp(38, 44, k), focus: lerp(1.7, 8, k), aper: lerp(6, 2, k) }; });
 function LV(a, b, u) { return a.clone().lerp(b, u); }
 const shotAt = t => SHOTS.find(s => t >= s.t0 && t < s.t1) ?? SHOTS[SHOTS.length - 1];
@@ -470,7 +474,7 @@ function setScene(t) {
   else if (t < T.lift) { bowl.position.copy(LV(PREP, SERVE, ss(seg(t, T.serve + .1, T.serve + 1)))); bowl.rotation.set(0, 0, 0); }
   else if (t < T.standup) { const hd = gu.head.getWorldPosition(new THREE.Vector3()), up = gBowl ?? 0;
     bowl.position.copy(LV(SERVE, hd.clone().add(V(0, -.3, -.22)), up)); bowl.rotation.set(-up * (t > T.slurp ? .9 + .2 * Math.sin(t * 3) : .3), 0, 0); }
-  else { bowl.position.copy(SERVE); bowl.rotation.set(0, 0, 0); }
+  else { bowl.position.copy(t < 69.2 ? SERVE : V(.66, 1.05, .45)); bowl.rotation.set(0, 0, 0); }
   bowlBroth.visible = t > T.ladle + .7 && t < 70; bowlBroth.scale.setScalar(t < T.slurp ? 1 : lerp(1, .6, seg(t, T.slurp, 56.3))); bowlBroth.position.y = .02 + (t < T.ladle + 1.6 ? .03 * seg(t, T.ladle + .7, T.ladle + 1.6) : .03) - (t > T.slurp ? .03 * seg(t, T.slurp, 56.3) : 0);
   // noodles: in the cook's hands → tossed in a glowing arc → into the bowl; eaten during the slurp
   noodles.visible = t >= T.toss - .2 && t < 56.3;
@@ -511,7 +515,7 @@ function setScene(t) {
   if (t < T.lamp - .9) { gem.position.copy(t < 70.4 ? ST1.clone().add(V(0, .02 * gk, 0)) : HR.clone().add(V(0, .02, .03))); gem.rotation.y = t * 1.2; gem.scale.setScalar(gk * (1 + .15 * Math.sin(t * 5))); }
   else if (t < T.lamp) { const k = seg(t, T.lamp - .9, T.lamp), a0 = V(.72, 1.25, -.2); gem.position.copy(LV(a0, LANT.clone().add(V(0, -.15, 0)), k)).add(V(0, Math.sin(k * Math.PI) * .45, 0)); gem.rotation.y = t * 8; gem.scale.setScalar(1); }
   else { gem.position.copy(LANT); gem.scale.setScalar(1 - ss(seg(t, T.lamp, T.lamp + .35))); }
-  gemLight.intensity = gem.visible ? 1.2 * gk : 0;
+  gemLight.intensity = gem.visible ? .6 * gk : 0;
   // the lantern blazes once the gem is inside; the sign lights up
   const blaze = ss(seg(t, T.lamp + .1, T.lamp + .8)), flick = 1 + .05 * Math.sin(t * 13) * Math.sin(t * 4.1);
   lanternMat.emissiveIntensity = (1.1 + 3.4 * blaze + .9 * Math.exp(-Math.max(0, t - T.lamp - .3) * 3) * (t > T.lamp + .1 ? 1 : 0)) * flick;
