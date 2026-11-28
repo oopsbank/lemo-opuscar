@@ -3,7 +3,7 @@
 import { W, H, T, FB, layer, LUT, darkLut, lutMap, whiteLut, loveLut, makeOut, bayer, hash, clamp, lerp, ss, seg } from './px.js';
 import { text, textW, wrap, charCount, LINE_H } from './font.js';
 
-const TL = await fetch('timeline.json').then(r => r.json()), TT = TL.t, DUR = TL.dur;
+const TL = await fetch('timeline.json').then(r => r.json()), TT = TL.t, DUR = TL.dur, LV = TL.levels.map(l => l.a), CZ = TL.clockZero;
 const fb = new FB(), out = makeOut(document.getElementById('out'));
 const step = (t, f) => Math.floor(t * f), ease = x => x * x * (3 - 2 * x), eo = x => 1 - (1 - x) * (1 - x);
 // palette names
@@ -42,7 +42,7 @@ function menu(m, t) {
   text(fb, '▶', 11 + jit, Y + 3 + cur * LINE_H, K.wh);
 }
 function card(s, t, a, glitch = false) {   // the level card sliding in
-  const u = seg(t, a, a + .25), out = seg(t, a + 1.0, a + 1.25); if (u <= 0 || out >= 1) return;
+  const u = seg(t, a, a + .25), out = seg(t, a + 1.8, a + 2.05); if (u <= 0 || out >= 1) return;
   const x = Math.round(lerp(-120, 90, eo(u)) + out * 220), y = 56;
   if (glitch) { big(s, x - 2, y, 2, K.cr2, null); big(s, x + 2, y, 2, K.cy3, null); }
   big(s, x + (glitch ? (hash(step(t, 12)) - .5) * 8 : 0), y, 2, y2 => y2 < 3 ? K.au5 : y2 < 5 ? K.au4 : K.au3, K.wd1);
@@ -50,9 +50,9 @@ function card(s, t, a, glitch = false) {   // the level card sliding in
 function plusG(s, t, a, x = 140, y = 70) { const u = seg(t, a, a + 1.3); if (u <= 0 || u >= 1) return; big(s, x, Math.round(y - u * 14), 1, K.au4, K.au1); }
 
 // ———————————————— HUD ————————————————
-const heartsAt = t => { if (t < TT.rewind) return 0; if (t < 7.0) return Math.min(4, Math.floor((t - TT.rewind) / .3)); let h = 4; if (t >= TT.heart5) h = 5; for (const b of [TT.break1, TT.break2, TT.break3, TT.break4, TT.break5]) if (t >= b) h--; return Math.max(0, h); };
-const goldAt = t => { if (t < TT.rewind) return 999999; if (t < 7.0) return Math.round(999999 * (1 - ease(seg(t, TT.rewind, 6.9)))); if (t >= TT.montage) return Math.round(lerp(555100, 999999, ease(seg(t, TT.montage, TT.achievement)))); let g = 0; if (t >= TT.plus100 + .9) g = 100; if (t >= TT.plus5k) g = 5100; if (t >= TT.plus50k) g = 55100; if (t >= TT.plus500k) g = 555100; return g; };
-const timeLeft = t => Math.max(0, Math.ceil(60 - Math.max(0, t - TL.clockStart) - 1e-6));
+const heartsAt = t => { if (t < TT.rewind) return 0; if (t < TT.lv1) return Math.min(4, Math.floor((t - TT.rewind) / .3)); let h = 4; if (t >= TT.heart5) h = 5; for (const b of [TT.break1, TT.break2, TT.break3, TT.break4, TT.break5]) if (t >= b) h--; return Math.max(0, h); };
+const goldAt = t => { if (t < TT.rewind) return 999999; if (t < TT.lv1) return Math.round(999999 * (1 - ease(seg(t, TT.rewind, TT.lv1 - .1)))); if (t >= TT.montage) return Math.round(lerp(555100, 999999, ease(seg(t, TT.montage, TT.achievement)))); let g = 0; if (t >= TT.plus100 + .9) g = 100; if (t >= TT.plus5k) g = 5100; if (t >= TT.plus50k) g = 55100; if (t >= TT.plus500k) g = 555100; return g; };
+const timeLeft = t => Math.max(0, Math.ceil(60 * (1 - seg(t, TL.clockStart, CZ)) - 1e-6));   // 60 game-seconds from clockStart to the cut line
 function heart(x, y, state, t, breakT) {   // full / empty / breaking / half
   const P = ['..##.##..', '.#######.', '#########', '#########', '.#######.', '..#####..', '...###...', '....#....'];
   const broken = breakT !== null && t >= breakT, k = broken ? seg(t, breakT, breakT + .45) : 0;
@@ -183,7 +183,7 @@ function hospital(t, o = {}) {
   if (o.time) timeFig(o.time.x, o.time.y ?? by + 32, o.time.h ?? 128, { sand: o.time.sand, look: o.time.look });
 }
 function lv1(t) {   // a sunny hill, kite, the town, TIME as a tiny dot on the far hill
-  const [y0, y1] = SCENE, cam = (t - 7) * 6;
+  const [y0, y1] = SCENE, cam = (t - TT.lv1) * 6;
   fb.gradV(0, y0, W, 70, [K.sky2, K.sky2, K.sky3, K.sky4]);
   for (let i = 0; i < 4; i++) { const cx = ((i * 60 - cam * .2) % 240 + 240) % 240 - 30; fb.ell(cx, y0 + 14 + i * 5, 16, 5, K.c9); }
   for (let i = 0; i < 9; i++) { const hx = ((i * 24 - cam * .4) % 220 + 220) % 220 - 20, hh = 12 + (i % 3) * 5; fb.rect(hx, y0 + 70 - hh, 16, hh, K.c8); fb.poly([[hx - 2, y0 + 70 - hh], [hx + 18, y0 + 70 - hh], [hx + 8, y0 + 62 - hh]], K.rd2); fb.rect(hx + 11, y0 + 58 - hh, 3, 6, K.c6); const sm = (t * 6 + i * 3) % 10; fb.px(hx + 12 + sm * .4, y0 + 56 - hh - sm, K.c8); }
@@ -211,13 +211,13 @@ function lv2(t) {   // school gate at sunset; Max waves; TIME under the lamp pos
   const [y0, y1] = SCENE;
   fb.gradV(0, y0, W, 80, [K.ne1, K.ne2, K.or2, K.or3]);
   fb.rect(0, y0 + 60, W, 30, K.c2); for (let i = 0; i < 8; i++) fb.rect(i * 24, y0 + 64, 18, 26, K.c3);
-  const bus = ((t - 15) * 70) % 400 - 120; fb.rect(bus, y0 + 70, 60, 20, K.au3 === 0 ? 0 : K.or1); fb.rect(bus + 4, y0 + 73, 50, 7, K.c7);
+  const bus = ((t - LV[1]) * 70) % 400 - 120; fb.rect(bus, y0 + 70, 60, 20, K.au3 === 0 ? 0 : K.or1); fb.rect(bus + 4, y0 + 73, 50, 7, K.c7);
   fb.rect(150, y0 + 40, 2, 52, K.c1); fb.rect(146, y0 + 38, 10, 4, K.c1); fb.ell(151, y0 + 44, 10, 12, (nx, ny, x, y) => bayer(x, y) < .25 * (1 - nx * nx - ny * ny) ? K.or4 : null);
   timeFig(158, y0 + 92, 42, { sand: .7, eyeDx: -1 });   // hidden #2: as tall as a man, half in shadow
   fb.rect(0, y0 + 92, W, 4, K.c5); fb.rect(0, y0 + 96, W, y1 - y0 - 96, (x, y) => bayer(x, y) < .3 ? K.c4 : K.c3);
   fb.rect(6, y0 + 50, 6, 56, K.wd1); fb.rect(4, y0 + 46, 50, 6, K.wd2); text(fb, 'SCHOOL', 8, y0 + 40, K.c9);
   fb.rect(170, y0 + 20, 3, 140, K.c1);   // the pole in the foreground
-  const bike = ((t - 15) * 120) % 500 - 100; if (bike > -20 && bike < 200) { fb.line(bike, y1 - 22, bike + 20, y1 - 22, K.c1); fb.ell(bike, y1 - 18, 5, 5, K.c1); fb.ell(bike + 20, y1 - 18, 5, 5, K.c1); for (let k = 1; k < 8; k++) fb.px(bike - k * 3, y1 - 24, K.c4); }
+  const bike = ((t - LV[1]) * 120) % 500 - 100; if (bike > -20 && bike < 200) { fb.line(bike, y1 - 22, bike + 20, y1 - 22, K.c1); fb.ell(bike, y1 - 18, 5, 5, K.c1); fb.ell(bike + 20, y1 - 18, 5, 5, K.c1); for (let k = 1; k < 8; k++) fb.px(bike - k * 3, y1 - 24, K.c4); }
   const g = seg(t, TT.greyMax, TT.dustMax), gone = seg(t, TT.dustMax, TT.dustMax + .6);
   if (gone < 1) person(t, 60, y1 - 8, 40, { style: 'spiky', hair: [K.hb2, K.hb3, K.au3 === 0 ? 0 : K.hb3], top: [K.sky1, K.sky2, K.sky3], legs: [K.c3, K.c4, K.c5], pose: t < TT.greyMax ? 'wave' : 'wave', face: 'smile', grey: g, gone,
     extra: (L, X, B, u) => { L.poly([[X(-9), B(36)], [X(-5), B(38)], [X(-3), B(4)], [X(-7), B(2)]], K.or3); } });
@@ -365,7 +365,7 @@ window.render = t => {
     hud(t);
     if (t < TT.fly + .35) { const z = [4, 2, 1][Math.min(2, Math.floor((t - TT.fly) / .12))]; if (z > 1) { const src = fb.d.slice(); for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) fb.d[y * W + x] = src[Math.floor(90 + (x - 90) / z + (120 - 120 / z) * 0) + Math.floor(120 + (y - 120) / z) * W]; } }
   } else if (t < TT.lv1) {   // rewind
-    if (t < TT.rewind) { fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], K.c1); timeFig(90, SCENE[1] + 10, 160, { sand: .95, look: 1 }); if (step(t, 6) % 3 === 0) fb.px(92, SCENE[1] + 10 - 160 * .91, K.wh); }
+    if (t < TT.rewind) { fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], K.c1); timeFig(90, SCENE[1] + 10, 160, { sand: .95, look: 1, rim: true }); if (step(t, 6) % 3 === 0) fb.px(92, SCENE[1] + 10 - 160 * .91, K.wh); }
     else {
       const ages = [70, 50, 30, 6], k = Math.min(3, Math.floor((t - TT.rewind) / .35));
       hospital(t, { rewind: true, time: { x: 128, h: 128, sand: .9 } });
@@ -373,26 +373,26 @@ window.render = t => {
       person(t, 90, 168, [44, 42, 40, 24][k], { style: ['white', 'salt', 'short', 'bowl'][k], skin: k < 2 ? OLDSKIN : SKIN, top: [K.c4, K.c5, K.c6], scarf: true, face: 'neutral' });
       for (let i = 0; i < 6; i++) { const y = SCENE[0] + ((i * 31 + t * 200) % (SCENE[1] - SCENE[0])); for (let x = 0; x < W; x++) if (hash(x >> 2, i, step(t, 24)) < .5) fb.px(x, y, K.c8); }
       text(fb, '◀◀ REWIND', 6, SCENE[0] + 2, K.wh, K.c0);
-      const p = seg(t, TT.rewind, 6.9); win(10, 176, 160, 18, K.wh, K.nv1); fb.rect(13, 189, Math.round(154 * p), 3, K.au4); text(fb, 'LOADING MEMORIES...', 14, 172, K.wh);
+      const p = seg(t, TT.rewind, TT.lv1 - .1); win(10, 176, 160, 18, K.wh, K.nv1); fb.rect(13, 189, Math.round(154 * p), 3, K.au4); text(fb, 'LOADING MEMORIES...', 14, 172, K.wh);
       glitch = 2;
     }
     hud(t);
-  } else if (t < TT.lv1 + 8) { lv1(t); hud(t); card('LV.1 - AGE 6', t, TT.lv1); if (t >= TT.heart5 && t < TT.heart5 + 1) big('+♥', 30, Math.round(56 - (t - TT.heart5) * 10), 2, K.pk1, K.c0); }
-  else if (t < 22) { lv2(t); hud(t); card('LV.2 - AGE 16', t, 15); sh = t >= TT.break1 && t < TT.break1 + .2 ? 2 : 0; }
-  else if (t < 29) { lv3(t); hud(t); card('LV.3 - AGE 30', t, 22); }
-  else if (t < 36) { lv4(t); hud(t); card('LV.4 - AGE 41', t, 29); }
-  else if (t < TT.montage) { lv5(t); hud(t); card('LV.5 - AGE 55', t, 36, true); if (t >= 39.0 && t < 39.6) glitch = 2; sh = t >= TT.slamDoor && t < TT.slamDoor + .3 ? 3 : 0; }
+  } else if (t < LV[1]) { lv1(t); hud(t); card('LV.1 - AGE 6', t, TT.lv1); if (t >= TT.heart5 && t < TT.heart5 + 1) big('+♥', 30, Math.round(56 - (t - TT.heart5) * 10), 2, K.pk1, K.c0); }
+  else if (t < LV[2]) { lv2(t); hud(t); card('LV.2 - AGE 16', t, LV[1]); sh = t >= TT.break1 && t < TT.break1 + .2 ? 2 : 0; }
+  else if (t < LV[3]) { lv3(t); hud(t); card('LV.3 - AGE 30', t, LV[2]); }
+  else if (t < LV[4]) { lv4(t); hud(t); card('LV.4 - AGE 41', t, LV[3]); }
+  else if (t < TT.montage) { lv5(t); hud(t); card('LV.5 - AGE 55', t, LV[4], true); if (t >= TL.menus[4].move[0] && t < TL.menus[4].confirm) glitch = 2; sh = t >= TT.slamDoor && t < TT.slamDoor + .3 ? 3 : 0; }
   else if (t < TT.save) { montage(t); hud(t); }
   else if (t < TT.shop) {   // SAVE
     hospital(t, { time: { x: 24, h: 128, sand: .2 }, gold: 0 }); hud(t);
-    if (t < 46.6) { const r = seg(t, TT.save, 46.5); fb.cap([[70, 190], [lerp(70, 100, r), lerp(190, 120, r)]], 7, OLDSKIN); for (let f = 0; f < 4; f++) fb.cap([[lerp(70, 100, r) - 6 + f * 4, lerp(190, 120, r) - 4], [lerp(70, 100, r) - 7 + f * 4, lerp(190, 120, r) - 14]], 2, OLDSKIN); }
+    if (t < TL.menus[5].a) { const r = seg(t, TT.save, TL.menus[5].a - .1); fb.cap([[70, 190], [lerp(70, 100, r), lerp(190, 120, r)]], 7, OLDSKIN); for (let f = 0; f < 4; f++) fb.cap([[lerp(70, 100, r) - 6 + f * 4, lerp(190, 120, r) - 4], [lerp(70, 100, r) - 7 + f * 4, lerp(190, 120, r) - 14]], 2, OLDSKIN); }
     if (t >= TT.error) { win(14, 100, 152, 46, K.cr3, K.cr1); text(fb, 'ERROR: THIS GAME', 90 - textW('ERROR: THIS GAME') / 2, 104, K.wh); text(fb, 'HAS NO SAVE FILE.', 90 - textW('HAS NO SAVE FILE.') / 2, 120, K.wh); sh = t < TT.error + .17 ? 3 : 0; }
   } else if (t < TT.free) {   // SHOP: SOLD OUT ×3, gold pouring out uselessly
     const pile = Math.round(lerp(0, 160, seg(t, TT.buys[0], TT.free)));
     hospital(t, { time: { x: 24, h: 128, sand: .1 }, gold: pile }); lut = loveLut(0); hud(t);
     shopMenu(t); TT.buys.forEach((b, i) => stamp(t, b, 90 + (i - 1) * 6, 112 + i * 6)); TT.buys.forEach(b => { if (t >= b && t < b + .15) sh = 3; });
     for (let i = 0; i < 40; i++) { const u = ((t * .8 + hash(i, 1)) % 1), x = 120 + hash(i, 2) * 50, y = lerp(30, SCENE[1], u); if (t > TT.buys[0]) fb.ell(x, y, 2, 1.5, K.au4); }
-    if (t >= 50.0 && t < 50.4) { fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], K.c1); fb.ell(90, 120, 46, 50, (nx, ny) => S3(nx, ny, OLDSKIN)); fb.ell(86, 86, 46, 22, (nx, ny, x, y) => y < 92 ? K.hw2 : null); for (const ex of [72, 108]) { fb.rect(ex - 6, 112, 12, 8, K.c9); fb.rect(ex - 1, 113, 3, 4, K.c0); } fb.rect(130, 96, 3, 6, K.sd2); fb.rect(80, 146, 20, 4, K.c0); }
+    if (t >= TT.buys[0] + .7 && t < TT.buys[0] + 1.1) { fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], K.c1); fb.ell(90, 120, 46, 50, (nx, ny) => S3(nx, ny, OLDSKIN)); fb.ell(86, 86, 46, 22, (nx, ny, x, y) => y < 92 ? K.hw2 : null); for (const ex of [72, 108]) { fb.rect(ex - 6, 112, 12, 8, K.c9); fb.rect(ex - 1, 113, 3, 4, K.c0); } fb.rect(130, 96, 3, 6, K.sd2); fb.rect(80, 146, 20, 4, K.c0); }
   } else if (t < TT.calling) {   // FREE: the list scrolls one row; the last item glows; he presses it
     hospital(t, { time: { x: 24, h: 128, sand: .06 }, gold: 160 }); lut = loveLut(0); fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], (x, y) => bayer(x, y) < .55 ? K.c0 : null); hud(t);
     const top = shopMenu(t, ease(seg(t, TT.free, TT.free + .8)), t >= TT.free + .8), cy = top + (t < TT.free + 1.2 ? 2 : 3) * 22, tr = step(t, 10) % 2;
@@ -400,13 +400,13 @@ window.render = t => {
   } else if (t < TT.pickup) {   // CALLING: the phone, then his eye with one tear; the clock grows
     if (t < TT.ecuEye) phoneUI(t);
     else { fb.rect(0, SCENE[0], W, SCENE[1] - SCENE[0], K.c1); fb.ell(90, 120, 80, 60, (nx, ny) => S3(nx, ny, OLDSKIN)); fb.ell(90, 114, 30, 14, K.c9); fb.ell(92, 114, 12, 12, K.c2); fb.ell(92, 114, 6, 6, K.c0); fb.rect(88, 110, 3, 3, K.wh); fb.rect(60, 98, 60, 4, K.hw1); const tu = seg(t, TT.ecuEye + .3, TT.pickup); fb.rect(118, Math.round(lerp(122, 168, tu)), 2, 3, K.sd2); fb.px(118, Math.round(lerp(122, 168, tu)), K.wh); }
-    hud(t); const g = ss(56, TT.pickup, t); if (g > 0 && t >= 57) { const tl = timeLeft(t); big('00:0' + tl, 90, 168, Math.round(2 + g * 3), step(t, 4) % 2 ? K.cr3 : K.cr2, K.cr1); }
+    hud(t); const g = ss(TT.calling, TT.pickup, t); if (g > 0 && t >= TT.calling + 1) { const tl = timeLeft(t); big('00:0' + tl, 90, 168, Math.round(2 + g * 3), step(t, 4) % 2 ? K.cr3 : K.cr2, K.cr1); }
   } else if (t < TT.zero) { phoneUI(t); hud(t); }
   else if (t < TT.gameOver) {   // 00:00: the hook's frame again; the line is cut; everything freezes grey; flatline
     const tf = Math.min(t, TT.zero + 1.0);
-    hospital(tf, { time: { x: 24, h: 128, sand: 0 }, gold: 160, phone: true, flat: t >= TT.zero + 1.0, lightning: t < TT.zero + 1.0 }); hud(Math.min(t, 63.0)); lut = t >= TT.zero + 1.0 ? loveLut(0) : loveLut(.5);
+    hospital(tf, { time: { x: 24, h: 128, sand: 0 }, gold: 160, phone: true, flat: t >= TT.zero + 1.0, lightning: t < TT.zero + 1.0 }); hud(Math.min(t, CZ)); lut = t >= TT.zero + 1.0 ? loveLut(0) : loveLut(.5);
   } else if (t < TT.twist) {   // GAME OVER
-    hospital(TT.zero + 1.0, { time: { x: 24, h: 128, sand: 0 }, gold: 160, phone: true, flat: true, lightning: false }); hud(63.0);
+    hospital(TT.zero + 1.0, { time: { x: 24, h: 128, sand: 0 }, gold: 160, phone: true, flat: true, lightning: false }); hud(CZ);
     lut = darkLut(.75, true);
     const drop = seg(t, TT.gameOver, TT.gameOver + .5), bounce = Math.abs(Math.sin(drop * Math.PI * 2.5)) * (1 - drop) * 20;
     big('GAME OVER', 90, Math.round(lerp(-30, 96, ease(Math.min(1, drop * 1.4))) - bounce), 3, K.cr3, K.c0);

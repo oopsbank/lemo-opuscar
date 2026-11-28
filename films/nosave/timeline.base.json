@@ -1,0 +1,42 @@
+{
+  "dur": 75.0, "fps": 24, "clockStart": 3.0, "clockZero": 63.0,
+  "levels": [
+    { "id": "lv1", "a": 7.0, "card": "LV.1 - AGE 6", "bpm": 90 },
+    { "id": "lv2", "a": 15.0, "card": "LV.2 - AGE 16", "bpm": 110 },
+    { "id": "lv3", "a": 22.0, "card": "LV.3 - AGE 30", "bpm": 130 },
+    { "id": "lv4", "a": 29.0, "card": "LV.4 - AGE 41", "bpm": 150 },
+    { "id": "lv5", "a": 36.0, "card": "LV.5 - AGE 55", "bpm": 150 }
+  ],
+  "boxes": [
+    { "id": "die", "who": "", "a": 0.45, "b": 2.0, "cps": 30, "text": "YOU WILL DIE IN 60 SECONDS.", "style": "sys" },
+    { "id": "time1", "who": "TIME", "a": 4.2, "b": 5.6, "cps": 32, "text": "LET'S SEE HOW YOU SPENT IT.", "style": "time" },
+    { "id": "mom", "who": "MOM", "a": 8.0, "b": 10.0, "cps": 30, "text": "Wanna fly the kite with me, Leo?" },
+    { "id": "tip", "who": "", "a": 13.0, "b": 15.0, "cps": 30, "text": "TIP: EVERY CHOICE COSTS TIME.", "style": "tip" },
+    { "id": "max", "who": "MAX", "a": 16.0, "b": 18.0, "cps": 30, "text": "Beach trip this weekend? Everyone's going!" },
+    { "id": "vm", "who": "1 VOICEMAIL", "a": 26.0, "b": 29.0, "cps": 34, "text": "MOM: \"Just wanted to hear your voice, sweetie.\"" },
+    { "id": "lily", "who": "LILY", "a": 30.0, "b": 31.0, "cps": 34, "text": "Daddy you promised!! Front row ⭐" },
+    { "id": "mia", "who": "MIA", "a": 37.0, "b": 38.0, "cps": 34, "text": "We waited for you, Leo. For years." },
+    { "id": "time2", "who": "TIME", "a": 51.6, "b": 53.0, "cps": 30, "text": "SOLD OUT. YOU SPENT IT ALL.", "style": "time" },
+    { "id": "dad", "who": "LILY", "a": 60.6, "b": 62.0, "cps": 12, "text": "...Dad?" },
+    { "id": "sorry", "who": "LEO", "a": 62.2, "b": 64.0, "cps": 7, "text": "I'm so—", "cutAt": 63.0 }
+  ],
+  "menus": [
+    { "a": 10.0, "b": 11.0, "opts": ["YES!", "NO"], "pick": 0, "move": [], "confirm": 10.7 },
+    { "a": 18.0, "b": 19.0, "opts": ["GO WITH MAX", "PART-TIME JOB"], "pick": 1, "move": [18.45], "confirm": 18.8 },
+    { "a": 24.0, "b": 25.0, "opts": ["ANSWER", "DECLINE"], "pick": 1, "move": [24.3], "confirm": 24.6 },
+    { "a": 31.0, "b": 32.0, "opts": ["GO TO HER SHOW", "BOARD FLIGHT"], "pick": 1, "move": [31.3], "confirm": 31.6 },
+    { "a": 38.0, "b": 40.0, "opts": ["STOP HER", "WORK"], "pick": 1, "move": [39.0, 39.12, 39.24, 39.36, 39.48], "confirm": 39.6, "auto": true },
+    { "a": 46.6, "b": 47.4, "opts": ["SAVE", "SHOP"], "pick": 0, "move": [], "confirm": 47.0 }
+  ],
+  "t": {
+    "punch": 0.2, "fly": 2.0, "flip": 3.0, "cuTime": 4.0, "rewind": 5.6, "lv1": 7.0, "scarf": 11.0, "heart5": 11.4, "ecu1": 13.6,
+    "plus100": 19.0, "greyMax": 19.0, "dustMax": 19.9, "break1": 21.0, "flash1": 21.3,
+    "ring": 23.0, "cuPhone": 23.0, "plus5k": 24.6, "frame": 27.0, "break2": 27.8, "flash2": 28.3,
+    "plus50k": 31.6, "timeSeat": 33.0, "bow": 34.0, "break3": 34.9, "flash3": 35.3,
+    "ecuHands": 39.6, "plus500k": 40.2, "slamDoor": 40.4, "break4": 40.6, "flash4": 41.0,
+    "montage": 42.0, "achievement": 44.4, "break5": 44.6, "silence": 45.0, "matchCut": 45.5,
+    "save": 46.0, "error": 47.1, "shop": 48.0, "buys": [49.3, 50.3, 51.2], "free": 53.0, "freeSel": 55.3,
+    "calling": 56.0, "ecuEye": 58.0, "pickup": 60.0, "zero": 62.0, "gameOver": 64.0, "contYes": 65.8, "noCont": 66.2,
+    "twist": 67.0, "turn": 67.6, "push": 68.6, "line1": 69.0, "line2": 70.6, "end": 72.0, "crtOff": 73.8, "off": 74.6
+  }
+}
