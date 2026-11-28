@@ -377,6 +377,13 @@ shot(66.2, 69.2, 'leave', t => ({ pos: V(-2.9, 1.95, 4.9), look: V(.9, 1.4, 1.6)
 shot(69.2, 71.8, 'gem', t => ({ pos: V(.3, 1.62, 1.55), look: V(.14, 1.25, .1), fov: 32, focus: 1.5, aper: 5 }));
 shot(71.8, 75.1, 'lamp', t => { const k = eio(seg(t, 72.6, 75)); return { pos: LV(V(.2, 1.75, 2.1), V(-1.2, 2.9, 8.2), k), look: LV(V(.75, 1.75, .5), V(-.2, 1.0, 0), k), fov: lerp(38, 44, k), focus: lerp(1.7, 8, k), aper: lerp(6, 2, k) }; });
 function LV(a, b, u) { return a.clone().lerp(b, u); }
+// ?alt — extra shots for the short (TikTok) cut: the stone pushed into the middle of the frame, and an ending that pushes back into the pot (loops to the first frame)
+if (QS.has('alt')) {
+  SHOTS.unshift({ t0: 23.0, t1: 27.2, name: 'stone', cam: t => ({ pos: V(-.45, 1.5, -.26), look: V(.12, 1.16, .3), fov: 44, focus: .75, aper: 5 }) });
+  const lampShot = SHOTS.find(s => s.name === 'lamp'), A = lampShot.cam(73.4);
+  SHOTS.unshift({ t0: 73.4, t1: 75.1, name: 'loop', cam: t => { const k = eio(seg(t, 73.4, 74.95)), P0 = PULL.getPointAt(0), L0 = POT.clone().add(V(0, .34, 0));
+    return { pos: LV(A.pos, P0, k), look: LV(A.look, L0, ss(seg(t, 73.4, 74.6))), fov: lerp(A.fov, 34, k), focus: lerp(A.focus, P0.distanceTo(L0), k), aper: lerp(A.aper, 6, k) }; } });
+}
 const shotAt = t => SHOTS.find(s => t >= s.t0 && t < s.t1) ?? SHOTS[SHOTS.length - 1];
 
 // camera shake after each heavy step and the sit-down
@@ -554,7 +561,7 @@ function render(t) {
   C.pos = C.pos.clone().add(V(Math.sin(t * .7) * dr + (hash(Math.floor(t * 24)) - .5) * sh, Math.sin(t * .93 + 1) * dr * .7 + (hash(Math.floor(t * 24) + 7) - .5) * sh, 0));
   camera.fov = C.fov; camera.position.copy(C.pos); camera.lookAt(C.look); camera.updateProjectionMatrix(); camera.updateMatrixWorld();
   post.dof.focus = C.focus; post.dof.aper = C.aper; post.dof.maxCoc = 14;
-  post.vig.uniforms.fade.value = clamp(t / .6) * clamp((75 - t) / 1.0);
+  post.vig.uniforms.fade.value = QS.has('alt') ? 1 : clamp(t / .6) * clamp((75 - t) / 1.0);   // the short cut loops: no fades
   post.composer.render();
   og.clearRect(0, 0, W, H); texts = [];
 }
