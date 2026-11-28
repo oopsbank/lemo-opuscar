@@ -1,14 +1,11 @@
 Domino (Miniature Chaos) — a Tilt-Shift Miniature short for Pocket City (YouTube Shorts, 1080×1920), from the user's own script
 
 Picture
-- Everything is procedural three.js code in this folder (town, hospital, tunnel portals, drawbridge, two ambulances, camper, sailboat, traffic, set dressing in dressing.js, harbour.js and actors.js, race plate and route map, the yellow cat). No image assets, no footage, no image or video generator.
+- Everything is procedural three.js code in this folder (the toy town, scaffold, pigeon, buckets, red car, hydrant, scooter, tower crane, pipes, traffic, 1,400 balls, lamp posts, bakery and cake, police car, plaza in world.js, dressing.js, harbour.js and actors.js). No image assets, no footage, no image or video generator.
 - Post-processing adapted from an MIT-licensed tilt-shift pass (post.js); geometry helper geo.js (MIT).
 
-Fonts
-- Overpass & Overpass Mono — Delve Withrington, Dave Bailey, Thomas Jockin (Red Hat) — SIL Open Font License 1.1 (fonts/OFL-Overpass.txt)
-
 Voice
-- Kokoro-82M text-to-speech (voice am_michael), Apache-2.0, via kokoro-onnx (synthetic voice). Lines checked with faster-whisper (MIT).
+- None (a wordless film).
 
 Music (original composition, music/score.py)
 - Samples (CC0): VS Chamber Orchestra: Community Edition (Versilian Studios), Versilian Community Sample Library (Versilian Studios)

@@ -1,0 +1,18 @@
+Midnight Crossing (Chuyến tàu lúc 00:00) — a Tilt-Shift Miniature short for Pocket City (YouTube Shorts, 1080×1920), from the user's own script
+
+Picture
+- Everything is procedural three.js code in this folder (the street, level crossing, apartment blocks, store, people, cars, the ghost train, the shadow, rain, steam and reflections in scene.js and actors.js). No image assets, no footage, no image or video generator.
+- Post-processing adapted from an MIT-licensed tilt-shift pass (post.js); geometry helper geo.js (MIT).
+
+Voice
+- None (a wordless film).
+
+Music (original composition, music/score.py)
+- Piano: "Salamander Grand Piano V3" by Alexander Holm, licensed under CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/)
+- Samples (CC0): VS Chamber Orchestra: Community Edition (Versilian Studios), Versilian Community Sample Library (Versilian Studios)
+
+Sound effects
+- All synthesized in mix.py (no recorded samples).
+
+Software
+- three.js (MIT), playwright-core (Apache-2.0), FFmpeg (LGPL/GPL), numpy/scipy (BSD), soundfile (BSD), soxr (LGPL)
