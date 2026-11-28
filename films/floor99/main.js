@@ -30,7 +30,7 @@ function box(b, t, o = {}) {
   });
 }
 // VO as a dialog box (the subtitle), typed to the length of the line
-function voBox(v, t) { const d = DURS[v.id] || 1.5; if (t < v.t - .1 || t > v.t + d + 1.0) return; box({ who: 'LEO', text: v.sub, a: v.t, cps: charCount(v.sub) / Math.max(.6, d * .9) }, t, { tag: C.u4 }); }
+function voBox(v, t) { const d = DURS[v.id] || 1.5; if (t < v.t - .1 || t > v.t + d + 1.0) return; box({ who: 'LEO', text: v.sub, a: v.t, cps: charCount(v.sub) / Math.max(.5, d * .55) }, t, { tag: C.u4 }); }
 // big ×2 outlined text
 function bigText(s, cx, y, col, outline = C.ink) { const L = new FB(W, 20); L.d.fill(T); text(L, s, 0, 0, col); const w = textW(s), x0 = Math.round(cx - w); for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [1, 1], [1, -1], [-1, 1], [0, 2], [1, 2], [-1, 2]]) for (let yy = 0; yy < 20; yy++) for (let xx = 0; xx < w; xx++) if (L.d[yy * W + xx] !== T) fb.rect(x0 + xx * 2 + dx, y + yy * 2 + dy, 2, 2, outline); for (let yy = 0; yy < 20; yy++) for (let xx = 0; xx < w; xx++) { const c = L.d[yy * W + xx]; if (c !== T) fb.rect(x0 + xx * 2, y + yy * 2, 2, 2, typeof col === 'function' ? col(yy) : c); } }
 function shift(dx, dy) { if (!dx && !dy) return; const src = fb.d.slice(); fb.clear(C.ink); for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const X = x - dx, Y = y - dy; if (X >= 0 && Y >= 0 && X < W && Y < H) fb.d[y * W + x] = src[Y * W + X]; } }
@@ -47,7 +47,8 @@ function leoFront(t, x, y, pose) {
     L.cap([[x - 8, y - 20], [x - 16, y - 8], [x - 12, y]], 6, JEAN); L.cap([[x + 8, y - 20], [x + 16, y - 8], [x + 12, y]], 6, JEAN);
     L.ell(x, y - 34, 20, 18, (nx, ny) => S3(nx, ny, HOOD)); L.line(x - 12, y - 48, x + 10, y - 22, C.ph1 === 0 ? 0 : C.mustard);
     L.cap([[x - 18, y - 40], [x - 28, y - 22], [x - 26, y - 6]], 5, HOOD); L.cap([[x + 18, y - 40], [x + 28, y - 22], [x + 26, y - 6]], 5, HOOD);
-    L.ell(x, y - 58, 13, 13, (nx, ny) => S3(nx, ny, SKIN)); L.ell(x, y - 64, 14, 9, (nx, ny, X, Y) => Y < y - 61 ? C.h1 : null);
+    L.ell(x, y - 58, 13, 13, (nx, ny) => S3(nx, ny, SKIN)); L.ell(x, y - 64, 14, 9, (nx, ny, X, Y) => Y < y - 61 ? (nx + ny < -.8 ? C.h2 : C.h1) : null);
+    for (const [a, b] of [[-11, -4], [-4, -8], [5, -6], [12, -2]]) L.poly([[x + a - 3, y - 66], [x + a + 3, y - 66], [x + a + b * .4, y - 76]], C.h1);
     L.rect(x - 6, y - 58, 3, 2, C.ink); L.rect(x + 3, y - 58, 3, 2, C.ink); L.rect(x - 3, y - 51, 6, 2, C.r1);
   } else {
     const up = pose === 'float';
@@ -123,7 +124,7 @@ function leoTop(t, x, y, pose) {
   L.ell(x, y, 19, 12, (nx, ny) => S3(nx, ny, HOOD));
   let ax = x + 19, ay = y + 9;   // the throwing hand
   if (pose === 'windup') { ax = x + 22; ay = y + 22; } else if (pose === 'throw') { ax = x + 14; ay = y - 34; }
-  L.cap([[x - 16, y], [x - 22, y + 12]], 6, HOOD); L.cap([[x + 16, y], [(x + 16 + ax) / 2 + 4, (y + ay) / 2], [ax, ay]], 6, HOOD); L.ell(ax, ay, 4.5, 4.5, (nx, ny) => S3(nx, ny, SKIN));
+  L.cap([[x - 16, y], [x - 22, y + 12]], 6, HOOD); L.cap([[x + 16, y], [(x + 16 + ax) / 2 + 6, (y + ay) / 2], [ax, ay]], 7.5, HOOD); L.ell(ax, ay, 4.5, 4.5, (nx, ny) => S3(nx, ny, SKIN));
   L.ell(x, y - 4, 11, 11, (nx, ny) => nx + ny < -.6 ? C.h2 : C.h1);
   for (const [a, b] of [[-6, -14], [2, -16], [8, -12]]) L.poly([[x + a - 3, y - 10], [x + a + 3, y - 10], [x + a, y + b]], C.h1);
   L.outline(C.ink); L.over(fb);
@@ -275,7 +276,7 @@ window.render = t => {
       Ls.rect(sx - 5, sy + 28, 2, 4, C.eye); Ls.rect(sx + 3, sy + 28, 2, 4, C.eye);   // fangs
       Ls.outline(C.ink); Ls.over(fb);
     }
-    const pose = t >= TT.throw - .05 && t < TT.throw + .35 ? 'throw' : t >= TT.throw - .45 && t < TT.throw - .05 ? 'windup' : 'stand', [hx, hy] = leoTop(t, 84, 238, pose);
+    const pose = t >= TT.throw - .15 && t < TT.throw + .5 ? 'throw' : t >= TT.throw - .75 && t < TT.throw - .15 ? 'windup' : 'stand', [hx, hy] = leoTop(t, 84, 238, pose);
     // the flare: lit in his hand, thrown, a red burst
     if (t >= TT.flareLit && t < TT.throw + .05) { fb.ell(hx, hy, 26, 26, (nx, ny, x, y) => bayer(x, y) < .4 * (1 - nx * nx - ny * ny) * (.7 + .3 * (step(t, 12) % 2)) ? C.ph1 : null); fb.rect(hx - 1, hy - 7, 3, 7, C.r2); fb.rect(hx - 1, hy - 9, 3, 3, C.ph2); }
     if (t >= TT.throw && t < TT.hit) { const u = seg(t, TT.throw, TT.hit), fx = lerp(hx, sx, u), fy = lerp(hy, sy + 20, u); for (let k = 0; k < 8; k++) fb.px(lerp(hx, fx, k / 8), lerp(hy, fy, k / 8), k % 2 ? C.ph1 : C.ph2); fb.ell(fx, fy, 3, 3, C.ph2); fb.ell(fx, fy, 14, 14, (nx, ny, x, y) => bayer(x, y) < .35 * (1 - nx * nx - ny * ny) ? C.ph1 : null); }

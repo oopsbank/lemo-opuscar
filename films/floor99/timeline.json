@@ -57,7 +57,7 @@
     },
     {
       "id": "v3",
-      "t": 62.0,
+      "t": 61.75,
       "sub": "Wait... I never left?"
     }
   ],
@@ -119,8 +119,8 @@
     "hatch": 38.5,
     "spiderIn": 42.0,
     "flareLit": 47.5,
-    "throw": 48.6,
-    "hit": 49.2,
+    "throw": 48.8,
+    "hit": 49.35,
     "b99": 51.0,
     "pull": 53.6,
     "white": 54.4,
