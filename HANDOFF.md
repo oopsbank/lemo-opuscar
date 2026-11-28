@@ -1,6 +1,6 @@
 # Handoff: Pocket City (tilt-shift Shorts)
 
-> **READ THIS FIRST (fourth session, last update 27 Nov 2026 ~21:30 UTC). PRODUCTION IS STOPPED again: after the stop, the manager asked for ONE Police Chase film and the user asked for their own script, Domino. Both are delivered. Do not start a new film until the manager or the user asks.** See "Fourth session: after the stop" at the very end; it supersedes older notes where they differ.
+> **READ THIS FIRST (fourth session, last update 27 Nov 2026 ~21:30 UTC). PRODUCTION IS STOPPED again: after the stop, the manager asked for ONE Police Chase film and the user asked for their own script, Domino. All are delivered (plus the user's second script, Midnight Crossing). Do not start a new film until the manager or the user asks.** See "Fourth session: after the stop" at the very end; it supersedes older notes where they differ.
 
 For a new Claude Code session that knows nothing about the earlier work. Written by the first production session (2026-11-26), updated at the end of the second (2026-11-27, 01:50 Vietnam time). Five films so far.
 
@@ -253,9 +253,13 @@ After the stop, the rendered outputs in the container were deleted (sources and 
 |---|---|---|---|---|
 | Police Chase (manager's request; CLARITY rules, `ideas/CLARITY_AUDIT.md`) | `pocket-city_police-chase_*` (commit ea8bc40) | 31.5 s | Headline "Stop that car!" over the race car / Causal chase → arrest held | density 33% (over target: low road-level shots); frame 0 104/68/–/20.8; speech 13/13 |
 | Domino (Miniature Chaos) (user's own wordless script, 60 s) | `pocket-city_domino_*` (commit 5651c4d) | 60.0 s | In-world close-up (pigeon on the scaffold) / Chain reaction → 4 s hold → loop tease | density 3% (worst 17%); frame 0 135/39/142/10.1; −14.0 LUFS; black only 58.3–60 s (intended) |
+| Midnight Crossing / Chuyến tàu lúc 00:00 (user's own wordless script, 65 s, night horror) | `pocket-city_midnight-crossing_*` (commit e15a508) | 65.0 s | Locked night diorama wide / calm → signal → anomaly → payoff → after-image hook | density 3% (worst 33% at 62 s, the blurred glance); frame 0 62/42/176/3.2 (night); −14.1 LUFS; score uses the Salamander piano: the CC BY 3.0 credit must be in the description |
 
 Lessons:
 - **A background task is killed at 2 h.** A 60 s film at 1080×1920 on SwiftShader takes ~10 s/frame/worker (2 workers ≈ 2 h for 1,440 frames), and `core/render/video.mjs` deletes its segments when it is killed. Render in chunks instead: a small frame-range script (open the demo with `core/render/page.mjs` `openDemo`, `render(f/24)`, screenshot, pipe to ffmpeg) for 0–360/360–720 in parallel, then 720–1080/1080–1440, then `ffmpeg -f concat -c copy`. Each pair takes ~1 h.
 - `mux.sh` needs ffmpeg ≥7; the system has 6.1. The BtbN static build in the scratchpad goes away between sessions: download it again (the user allowed it).
 - Police Chase: cold viewers missed the raised bridge and the hands-up until a STOP sign on the leaf, a skid shot facing the bridge and a closer arrest were added. Ask a cold subagent (C12) before rendering.
 - Domino: a camera path made of keyframes (`films/domino/main.js` KEYS) with a still hold works well for a long chain; build a low plaza instead of buildings on the camera side of a junction so the road stays visible.
+
+- Midnight Crossing (`films/midnight`) is its own small diorama (scene.js), not the shared town: night lighting (hemisphere + moon + a shadow-casting street-lamp spot, point lights for the cart, vending machine, store, signals, neon), reflections on the wet road faked with additive "glint" sprites placed where the camera ray to each light's mirror image meets the road (`makeFX` in actors.js), rain streaks brighter inside the lamp cone, and a custom ink-ribbon shadow. About 6 s/frame on SwiftShader with 2 chunks in parallel (≈40 min per 780 frames).
+- Sample licences: `piano` is Salamander (CC BY 3.0): put the credit line in the YouTube description. `S.credits([...])` prints the lines.
