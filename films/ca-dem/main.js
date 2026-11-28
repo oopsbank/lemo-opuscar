@@ -42,7 +42,7 @@ const FOOT = [];   // wet footprints: {x, y, t}
 function store(t, o) {
   // back wall, posters, the clock
   fb.rect(0, 0, W, 24, (x, y) => y > 20 ? C.n1 : bayer(x, y) < .2 ? C.n3 : C.n2);
-  fb.rect(14, 5, 22, 12, C.v2); fb.rect(15, 6, 20, 10, C.v3); text(fb, 'SALE', 16, 2, C.r3); fb.rect(44, 6, 16, 11, C.n4); fb.rect(46, 8, 12, 3, C.f3); fb.rect(46, 12, 8, 2, C.n7);
+  fb.rect(14, 5, 22, 12, C.v2); fb.rect(15, 6, 20, 10, C.v3); text(fb, '-50%', 16, 2, C.r3); fb.rect(44, 6, 16, 11, C.n4); fb.rect(46, 8, 12, 3, C.f3); fb.rect(46, 12, 8, 2, C.n7);
   const cx = 150, cy = 11; fb.ell(cx, cy, 8, 8, C.ink); fb.ell(cx, cy, 7, 7, (nx, ny) => nx + ny < -.8 ? C.n9 : C.n8); for (let k = 0; k < 12; k++) fb.px(cx + Math.sin(k / 6 * Math.PI) * 5.5, cy - Math.cos(k / 6 * Math.PI) * 5.5, C.n5);
   const mAng = t < TT.clock ? -Math.PI / 30 : 0; fb.line(cx, cy, cx + Math.sin(mAng) * 5, cy - Math.cos(mAng) * 5, C.ink); fb.line(cx, cy, cx, cy - 3, C.ink); fb.px(cx, cy, C.r3);
   if (Math.abs(t - TT.clock) < .3) fb.px(cx + 1, cy - 6, C.n9);
