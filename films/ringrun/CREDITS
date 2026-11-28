@@ -1,0 +1,17 @@
+The Ring Run — a Tilt-Shift Miniature short for Pocket City (YouTube Shorts, 1080×1920), from the user's script
+
+Picture
+- Everything is procedural three.js code in this folder (the three-tier town, hotel, market street, tram 7, canal, bridge, chapel and clock tower, the groom, pigeon, flower girl, fisherman, guests, the ring and its golden trail). No image assets, no footage, no image or video generator.
+- Post-processing adapted from an MIT-licensed tilt-shift pass (post.js); geometry helper geo.js (MIT).
+
+Voice
+- None (a wordless film).
+
+Music (original composition, in mix.py)
+- Samples (CC0): FreePats project (freepats.zenvoid.org), VS Chamber Orchestra: Community Edition (Versilian Studios), Versilian Community Sample Library (Versilian Studios)
+
+Sound effects
+- All synthesized in mix.py (no recorded samples).
+
+Software
+- three.js (MIT), playwright-core (Apache-2.0), FFmpeg (LGPL/GPL), numpy/scipy (BSD), soundfile (BSD), soxr (LGPL)
