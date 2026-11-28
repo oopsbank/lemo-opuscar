@@ -19,6 +19,13 @@ for i, c in enumerate(cuts):
     ramp = np.linspace(0, 1, 2 * X)[:, None]; piece[:2 * X] *= ramp; piece[-2 * X:] *= ramp[::-1]
     o = int(round(f0 * SR)) - X; lo = max(0, o); hi = min(N, o + n); out[lo:hi] += piece[lo - o:hi - o]
     if i: add(out, whoosh(.35, .05), max(0, f0 - .12), 1, 0)
+# the first seconds must grab: a loud alarm bell under the opening and a siren rising in from 1.4 s
+tt = np.arange(N) / SR
+def sg(t, a, b): return np.clip((t - a) / (b - a), 0, 1)
+ring = (np.sign(np.sin(2 * np.pi * 1650 * tt)) * (np.sin(2 * np.pi * 24 * tt) > 0) * .5 + np.sin(2 * np.pi * 3300 * tt) * .3) * (np.mod(tt - .45, 1.0) < .75)
+ring = bp(ring, 800, 5000) * sg(tt, .45, .5) * (1 - sg(tt, 8.5, 9.5)) * .09
+f = 820 + 260 * np.sign(np.sin(2 * np.pi * .9 * tt)); sir = lp(np.tanh(2.2 * np.sin(np.cumsum(2 * np.pi * f / SR))), 3200) * sg(tt, 1.4, 2.6) * (1 - sg(tt, 8.5, 9.6)) * .06
+out[:, 0] += ring + sir * .7; out[:, 1] += ring * .85 + sir
 def tone(f, d, v): t = t_(d); return np.sin(2 * np.pi * f * t) * np.minimum(1, t / .005) * np.minimum(1, (d - t) / .03) * v
 for t0 in (0.02, 33.25): add(out, tone(2000, .1, .08), t0, 1, 0); add(out, tone(2000, .1, .08), t0 + .16, 1, 0)
 r = int(.05 * SR); out[-r:] *= np.linspace(1, 0, r)[:, None]
