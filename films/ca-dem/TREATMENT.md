@@ -3,6 +3,7 @@
 Style: **16-bit Pixel RPG** (`styles/pixel-rpg`), set **vertical 9:16**:
 - a 180×320 indexed framebuffer, scaled ×6 to 1080×1920;
 - 24 fps; sprites step at 8–12 fps;
+- **On-screen language: English** (the user's choice after the first cut; the script was written in Vietnamese and translated);
 - **75 s**;
 - Vietnamese on screen.
 

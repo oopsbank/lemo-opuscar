@@ -4,7 +4,7 @@ import os, sys, json, unicodedata, numpy as np, soundfile as sf
 HERE = os.path.dirname(os.path.abspath(__file__)); LIB = os.path.abspath(os.path.join(HERE, '../..'))
 sys.path.insert(0, os.path.join(LIB, 'core/audio'))
 from sfx import SR, t_, env_exp, bp, lp, hp, noise, norm, limit
-TL = json.load(open(os.path.join(HERE, 'timeline.json'))); T = TL['t']; DUR = TL['dur']; N = int(DUR * SR)
+TL = json.load(open(os.path.join(HERE, os.environ.get('TIMELINE', 'timeline.json')))); T = TL['t']; DUR = TL['dur']; N = int(DUR * SR)
 mus = np.zeros((N, 2)); fx = np.zeros((N, 2)); amb = np.zeros((N, 2)); rng = np.random.default_rng(5)
 def put(bus, x, at, g=1.0, pan=0.0):
     s = int(round(at * SR)); x = np.asarray(x, float) * g
@@ -147,4 +147,4 @@ for a, b in ((T['bootsStop'], T['silenceEnd']), (T['black'], DUR)): out[int(a * 
 out = np.stack([limit(out[:, 0], .75), limit(out[:, 1], .75)], 1)
 for a, b in ((T['bootsStop'], T['silenceEnd']), (T['black'], DUR)): out[int(a * SR):int(b * SR)] = 0
 os.makedirs(os.path.join(HERE, 'out'), exist_ok=True)
-sf.write(os.path.join(HERE, 'out', 'mix_raw.wav'), out, SR, subtype='PCM_24'); print('ok', out.shape)
+sf.write(os.path.join(HERE, 'out', os.environ.get('MIXOUT', 'mix_raw.wav')), out, SR, subtype='PCM_24'); print('ok', out.shape)
